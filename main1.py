@@ -5,13 +5,17 @@ from PrintEnvelopes.getFilePath import getFilePath
 from PrintEnvelopes.printEnvelopes import printFromCsv
 from edlib import InputLoop
 from PrintEnvelopes.readGmail import EmailToCSV
+from csv import DictReader
 import datetime
 import pandas as pd
 import math
+import pygame
+import sys
 import io
 import os
 import re
 import csv
+import numpy as np
 # pyinstaller --onefile main.py
 
 class Color:
@@ -27,76 +31,133 @@ class Color:
     ORANGE = (255, 165, 0)
     WHITE = (255, 255, 255)
 
+class Game:
+    def __init__(self, filePath):
+        pygame.init()
+        self.SCREEN_WIDTH = 1600
+        self.SCREEN_HEIGHT = 700
+        self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
+        self.clock = pygame.time.Clock()
+        self.colors = Color()
+        self.fontSize = 20
+        self.myFont = pygame.font.SysFont("freesansbold", self.fontSize)
+        start(self, filePath)
+        while True:
+            update(self)
+            draw(self)
+            self.clock.tick(60)
 
-def start(filePath):
+def start(game, filePath):
+    game.MTGCards = []
+    game.NUM_CARDS_ROW = 10
+    game.filePath = filePath
     currentCardPricesFilePath = getFilePath()
-    currentCardPricesDf = pd.read_csv(currentCardPricesFilePath)
+    game.currentCardPricesDf = pd.read_csv(currentCardPricesFilePath)
     os.remove(currentCardPricesFilePath)
 
-    print("Finding Cards")
-    shipType = 'normal'
-    newCards = pd.read_csv(filePath)
+def draw(game):
+    game.screen = pygame.display.set_mode((game.SCREEN_WIDTH, game.SCREEN_HEIGHT))
+    game.screen.fill(game.colors.GREY)
+    xDistance = 155
+    yDistance = 300
+    ySperation = 15
+    cardAttributes = ['quantity', 'lot', 'name', 'set', 'condition']
+    cardAttributesShort = ['Qty: ', 'Lot: ', '', '', '']
+    for i in range(min(game.NUM_CARDS_ROW, len(game.MTGCards))):
+        for j in range(len(cardAttributes)):
+            drawText(game, cardAttributesShort[j]  + str(game.MTGCards[i][cardAttributes[j]]), ySperation + xDistance * i, ySperation * (j + 1))
+        game.screen.blit(game.MTGCards[i]['image'], (ySperation + xDistance * i, ySperation * (len(cardAttributesShort) + 1)))
+    
+    if len(game.MTGCards) > game.NUM_CARDS_ROW:
+        for i in range(game.NUM_CARDS_ROW, len(game.MTGCards)):
+            for j in range(len(cardAttributes)):
+                drawText(game, cardAttributesShort[j] + str(game.MTGCards[i][cardAttributes[j]]), ySperation + xDistance * (i - game.NUM_CARDS_ROW), ySperation * (j + 1) + yDistance)
+            game.screen.blit(game.MTGCards[i]['image'], (ySperation + xDistance * (i - game.NUM_CARDS_ROW), ySperation * (len(cardAttributesShort) + 1) + yDistance))
+    pygame.display.update()
 
-    for j in range(len(newCards.index) - 1):       
-        for column in newCards.columns:
-            if column == 'Card Name' or column == 'Product Name':
-                if column == 'Card Name':
-                    shipType = 'direct'
-                newCards = newCards.rename(columns={column: 'Name'})
-            elif column == 'Set Name':
-                newCards = newCards.rename(columns={column: 'Set'})
-
-        MTGCard = {
-            'name': newCards["Name"][j],
-            'set': newCards["Set"][j],
-            'condition': newCards["Condition"][j],
-            'quantity': int(newCards["Quantity"][j])
-        }
-        print(MTGCard)
-
-        for x in range(MTGCard['quantity']):
-            inventory = pd.read_csv("inventory.csv")
-            newCards.loc[0, "Quantity"] = str(int(MTGCard['quantity']) - 1)
-            index = None
-            for i in range(len(inventory["Name"])):
-                if inventory["Name"][i] == MTGCard['name'] and inventory["Set"][i] == MTGCard['set']:
-                    if MTGCard['condition'][-4:] == "Foil":
-                        if inventory["Foil"][i] == "Foil":
-                            index = i
-                    else:
-                        if inventory["Condition"][i] == MTGCard['condition']:
-                            index = i
-            if index == None:
-                price = 0
-                MTGCard['lot'] = -1
-            else:
-                inventory.loc[index, "Quantity"] = str(int(inventory["Quantity"][index]) - 1)
-                currentCardPricesDf = currentCardPricesDf
-                inventoryCondition = inventory["Condition"][index]
-                if inventory["Foil"][index] == "Foil":
-                    inventoryCondition += " Foil"
-                if inventory["Language"][index] != "English":
-                    inventoryCondition += " - " + inventory["Language"][index]
-                df = currentCardPricesDf[currentCardPricesDf["Product Name"] == inventory["Name"][index]]
-                df = df[df["Set Name"] == inventory["Set"][index]]
-                df = df[df["Condition"] == inventoryCondition]
-                cardIndex = df.index.values[0]
-                price = float(currentCardPricesDf["TCG Marketplace Price"][cardIndex])
-                MTGCard['lot'] = int(math.floor(float(inventory["Lot"][index])))
-                if int(inventory["Quantity"][index]) <= 0:
-                    inventory = inventory.drop([index])
-            
-            newRow = {'Name': MTGCard['name'], 'Set': MTGCard['set'], 'Condition': MTGCard['condition'], 'Lot': MTGCard['lot'],
-                        'Price': price, 'Date': date.today(), 'shipType': shipType}
-            
-            salesFileName = "sales.csv"
-            sales = pd.read_csv(salesFileName)
-            sales = pd.concat([sales, pd.DataFrame.from_records([newRow])])
-            sales.to_csv(salesFileName, index=False)
-            inventory.to_csv("inventory.csv", index=False)
+def update(game):
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            os.remove(game.filePath)
+            sys.exit()
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+            print("Finding Cards")
+            shipType = 'normal'
         
-    print('Complete')
-    os.remove(filePath)
+            for j in range(game.NUM_CARDS_ROW * 2):
+                newCards = pd.read_csv(game.filePath)
+                for column in newCards.columns:
+                    if column == 'Card Name' or column == 'Product Name':
+                        if column == 'Card Name':
+                            shipType = 'direct'
+                        newCards = newCards.rename(columns={column: 'Name'})
+                    elif column == 'Set Name':
+                        newCards = newCards.rename(columns={column: 'Set'})
+
+                if len(newCards.index) <= 0 or newCards["Quantity"][0] != newCards["Quantity"][0]:
+                    print('Complete')
+                    break
+
+                MTGCard = {
+                    'name': newCards["Name"][0],
+                    'set': newCards["Set"][0],
+                    'condition': newCards["Condition"][0],
+                    'quantity': int(newCards["Quantity"][0])
+                }
+
+                for x in range(MTGCard['quantity']):
+                    inventory = pd.read_csv("inventory.csv")
+                    newCards.loc[0, "Quantity"] = str(int(MTGCard['quantity']) - 1)
+                    index = None
+                    for i in range(len(inventory["Name"])):
+                        if inventory["Name"][i] == MTGCard['name'] and inventory["Set"][i] == MTGCard['set']:
+                            if MTGCard['condition'][-4:] == "Foil":
+                                if inventory["Foil"][i] == "Foil":
+                                    index = i
+                            else:
+                                if inventory["Condition"][i] == MTGCard['condition']:
+                                    index = i
+                    if index == None:
+                        price = 0
+                        MTGCard['lot'] = -1
+                    else:
+                        inventory.loc[index, "Quantity"] = str(int(inventory["Quantity"][index]) - 1)
+                        currentCardPricesDf = game.currentCardPricesDf
+                        # price = float(currentCardPricesDf["TCG Marketplace Price"])
+                        inventoryCondition = inventory["Condition"][index]
+                        if inventory["Foil"][index] == "Foil":
+                            inventoryCondition += " Foil"
+                        if inventory["Language"][index] != "English":
+                            inventoryCondition += " - " + inventory["Language"][index]
+                        # priceIndex = np.where(currentCardPricesDf["Product Name"] == inventory["Name"][index] and currentCardPricesDf["Set Name"] == inventory["Set"][index] and currentCardPricesDf["Condition"] == inventoryCondition)[0][0]
+                        # priceIndex = currentCardPricesDf.loc[(currentCardPricesDf["Product Name"] == inventory["Name"][index]) & (currentCardPricesDf["Set Name"] == inventory["Set"][index]) & (currentCardPricesDf["Condition"] == inventoryCondition)]
+                        df = currentCardPricesDf[currentCardPricesDf["Product Name"] == inventory["Name"][index]]
+                        df = df[df["Set Name"] == inventory["Set"][index]]
+                        df = df[df["Condition"] == inventoryCondition]
+                        cardIndex = df.index.values[0]
+                        price = float(currentCardPricesDf["TCG Marketplace Price"][cardIndex])
+                        # price = float(currentCardPricesDf["TCG Marketplace Price"][priceIndex])
+                        # price = float(inventory["Price"][index][1:])
+                        MTGCard['lot'] = int(math.floor(float(inventory["Lot"][index])))
+                        if int(inventory["Quantity"][index]) <= 0:
+                            inventory = inventory.drop([index])
+                    
+                    newRow = {'Name': MTGCard['name'], 'Set': MTGCard['set'], 'Condition': MTGCard['condition'], 'Lot': MTGCard['lot'],
+                                'Price': price, 'Date': date.today(), 'shipType': shipType}
+                    
+                    salesFileName = "sales.csv"
+                    sales = pd.read_csv(salesFileName)
+                    sales = pd.concat([sales, pd.DataFrame.from_records([newRow])])
+                    sales.to_csv(salesFileName, index=False)
+                    inventory.to_csv("inventory.csv", index=False)
+                
+                # MTGCard['image'] = get_image(MTGCard['name'], MTGCard['set'])
+                newCards = newCards.drop([0])
+                newCards.to_csv(game.filePath, index=False)
+                # game.MTGCards.append(MTGCard)
+                if len(game.MTGCards) > game.NUM_CARDS_ROW * 2:
+                    game.MTGCards.pop(0)
+                draw(game)
 
 def fixData():
     sales = pd.read_csv("sales.csv")
@@ -192,7 +253,15 @@ def addLot(lotStr, filePath):
 
     newColumn = []
     for x in csvFile.index:
-        newColumn.append(lotStr)
+        newColumn.append(lotStr) 
+        # print(csvFile['Name'][x])
+        # print(csvFile["Quantity"][x])
+        # print(csvFile["Set"][x])
+        # print(csvFile["Printing"][x])
+        # print(csvFile["Condition"][x])
+        # print(csvFile["Language"][x])
+        # print(csvFile["SKU"][x])
+        # print(csvFile["Price Each"][x])
         csvFile["Price Each"][x] = '$' + str((float(csvFile["Price Each"][x][1:]) * 1))
     csvFile["Lot"] = newColumn
 
@@ -200,6 +269,7 @@ def addLot(lotStr, filePath):
     for x in csvFile.index:
         newRow = {'Quantity': csvFile["Quantity"][x], 'Name': csvFile["Name"][x], 'Set': csvFile["Set"][x], 'Foil': csvFile["Printing"][x],
             'Condition': csvFile["Condition"][x], 'Language': csvFile["Language"][x], 'SKU': csvFile["SKU"][x], 'Price': csvFile["Price Each"][x], "Lot": csvFile["Lot"][x]}
+        # inventory = inventory.append(newRow, ignore_index=True)
         inventory = pd.concat([inventory, pd.DataFrame([newRow])], ignore_index=True)
     inventory.to_csv("inventory.csv", index = False)
     csvFile.to_csv(filePath, index = False)
@@ -229,8 +299,7 @@ def get_image(card_name, set_name):
             image_url = card.image_url if card.image_url is not None else image_url
             break
 
-    # image_str = urlopen(image_url).read()
-    image_str = urlopen(image_url)
+    image_str = urlopen(image_url).read()
     image_file = io.BytesIO(image_str)  # create a file object (stream)
     image = pygame.image.load(image_file)
     image = pygame.transform.scale(image, (150, 210))
@@ -337,8 +406,7 @@ def FindAndPrintTCGPlayerSales(directory):
     pullSheetFileName = "TCGplayer_PullSheet"
     pullSheetFilePath = GetLastFile(directory, pullSheetFileName)
     pd.set_option("display.max_columns", 9)
-    # game = Game(pullSheetFilePath)
-    start(pullSheetFilePath)
+    game = Game(pullSheetFilePath)
 
 def FindCardsInNewAndInventory():
     fileName = getFilePath()
@@ -374,7 +442,4 @@ commands = [
     {'text': 'Calculate "profits.csv"','action': getProf},
     {'text': 'Change Prices','action': change_prices}
 ]
-# InputLoop(commands)
-pullSheetFileName = "TCGplayer_PullSheet"
-pullSheetFilePath = GetLastFile(DIRECTORY, pullSheetFileName)
-start(pullSheetFilePath)
+InputLoop(commands)
