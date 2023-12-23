@@ -362,7 +362,7 @@ def GetLastFile(dir_path, file_name_prefix):
     # If no file was found, return None
     return lastFile
 
-DIRECTORY = "C:\\Users\\Eddie\\Downloads"
+DIRECTORY = "C:\\Users\\ferna\\Downloads"
 
 commands = [
     {'text': 'Get cards from email then add to inventory then create email.csv', 'action': AddInvetoryAndChangeHeaders,},
@@ -374,7 +374,4 @@ commands = [
     {'text': 'Calculate "profits.csv"','action': getProf},
     {'text': 'Change Prices','action': change_prices}
 ]
-# InputLoop(commands)
-pullSheetFileName = "TCGplayer_PullSheet"
-pullSheetFilePath = GetLastFile(DIRECTORY, pullSheetFileName)
-start(pullSheetFilePath)
+InputLoop(commands)
