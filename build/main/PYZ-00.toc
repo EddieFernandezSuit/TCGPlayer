@@ -1,5 +1,8 @@
 ('C:\\Users\\ferna\\Downloads\\TCGPlayer\\build\\main\\PYZ-00.pyz',
  [('PrintEnvelopes', '-', 'PYMODULE'),
+  ('PrintEnvelopes.config',
+   'C:\\Users\\ferna\\Downloads\\TCGPlayer\\PrintEnvelopes\\config.py',
+   'PYMODULE'),
   ('PrintEnvelopes.getFilePath',
    'C:\\Users\\ferna\\Downloads\\TCGPlayer\\PrintEnvelopes\\getFilePath.py',
    'PYMODULE'),

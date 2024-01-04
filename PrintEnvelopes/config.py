@@ -1,1 +1,1 @@
-path = 'C:\\Users\\ferna\\Downloads\\TCGPlayer\\'
+path = 'C:\\Users\\ferna\\Downloads\\TCGPlayer\\PrintEnvelopes\\'
