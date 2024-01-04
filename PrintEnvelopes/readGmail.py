@@ -4,6 +4,7 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
+import config
 
 def nth_repl_all(s, sub, repl, nth):
     find = s.find(sub)
@@ -32,7 +33,8 @@ def EmailToCSV():
         'https://www.googleapis.com/auth/gmail.modify']
         # 'https://www.googleapis.com/auth/gmail.labels']
     
-    DIR_PATH = os.path.dirname(os.path.realpath(__file__)) + '\\'
+    # DIR_PATH = os.path.dirname(os.path.realpath(__file__)) + '\\'
+    DIR_PATH = config.path
     CREDENTIAL_FILEPATH = DIR_PATH + 'credentials.json'
     TOKEN_FILEPATH = DIR_PATH + 'token.json'
     GETFROMTHISEMAIL = 'Eddie Fernandez <fernandezeddie54@gmail.com>'

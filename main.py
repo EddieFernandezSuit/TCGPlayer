@@ -373,4 +373,5 @@ commands = [
     {'text': 'Calculate "profits.csv"','action': getProf},
     {'text': 'Change Prices','action': change_prices}
 ]
+
 InputLoop(commands)

@@ -289,6 +289,7 @@ missing module named pytest - imported by pandas._testing._io (delayed), pandas.
 missing module named 'matplotlib.table' - imported by pandas.plotting._misc (conditional)
 missing module named 'matplotlib.figure' - imported by pandas.plotting._misc (conditional)
 missing module named 'matplotlib.axes' - imported by pandas.plotting._misc (conditional)
+missing module named config - imported by PrintEnvelopes.printEnvelopes (top-level), PrintEnvelopes.readGmail (top-level)
 missing module named 'oauth2client.locked_file' - imported by googleapiclient.discovery_cache.file_cache (optional)
 missing module named 'oauth2client.contrib' - imported by googleapiclient.discovery_cache.file_cache (optional)
 missing module named 'oauth2client.client' - imported by googleapiclient._auth (optional)

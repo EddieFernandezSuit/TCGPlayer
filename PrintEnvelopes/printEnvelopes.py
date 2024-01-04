@@ -9,10 +9,12 @@ from PrintEnvelopes.getFilePath import getFilePath
 import time
 import os
 import io
+import config
 
 # pyinstaller --onefile print_envelopes.py
 
-DIR_PATH = os.path.dirname(os.path.realpath(__file__)) + '\\'
+DIR_PATH = config.path
+# DIR_PATH = os.path.dirname(os.path.realpath(__file__)) + '\\'
 
 def getCreds():
     SCOPES = ['https://www.googleapis.com/auth/spreadsheets',
