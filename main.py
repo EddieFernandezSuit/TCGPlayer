@@ -27,7 +27,6 @@ class Color:
     ORANGE = (255, 165, 0)
     WHITE = (255, 255, 255)
 
-
 def start(filePath):
     currentCardPricesFilePath = getFilePath()
     currentCardPricesDf = pd.read_csv(currentCardPricesFilePath)

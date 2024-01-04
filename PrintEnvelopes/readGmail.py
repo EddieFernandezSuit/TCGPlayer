@@ -59,6 +59,7 @@ def EmailToCSV():
     try:
         # Call the Gmail API
         service = build('gmail', 'v1', credentials=creds)
+        # results = service.users().messages().list(userId='me', labelIds=['INBOX']).execute()
         results = service.users().messages().list(userId='me', labelIds=['INBOX'], q="is:unread").execute()
         messages = results.get('messages',[])
         if not messages:
@@ -66,7 +67,7 @@ def EmailToCSV():
         else:
             message_count = 0
             for message in messages:
-                msg = service.users().messages().get(userId='me', id=message['id']).execute()                
+                msg = service.users().messages().get(userId='me', id=message['id']).execute()
                 email_data = msg['payload']['headers']
                 for values in email_data:
                     name = values['name']
@@ -75,9 +76,15 @@ def EmailToCSV():
                         if from_name == GETFROMTHISEMAIL:
                             try:
                                 data = msg['payload']['parts'][0]['body']['data']
-                                byte_code = base64.b64decode(data)
+                                data = msg['payload']['parts'][1]['body']['data']
+                                byte_code = base64.urlsafe_b64decode(data)
                                 text = byte_code.decode("utf-8")
-                                text = nth_repl_all(text, "\r\n", "", 2)
+                                # text = nth_repl_all(text, "\r\n", "", 2)
+                                text = text.replace('<div>','')
+                                text = text.replace('</div>','')
+                                text = text.replace('&quot;','"')
+                                text = text.replace('&#39;','\'')
+                                text = text.replace('<br>','\n')
                                 print (text)
                                 with open(csvFilePath, "w") as text_file:
                                     text_file.write(text)
