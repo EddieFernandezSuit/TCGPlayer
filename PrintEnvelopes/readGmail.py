@@ -39,6 +39,7 @@ def EmailToCSV():
     TOKEN_FILEPATH = DIR_PATH + 'token.json'
     GETFROMTHISEMAIL = 'Eddie Fernandez <fernandezeddie54@gmail.com>'
     csvFilePath = DIR_PATH + 'emails.csv'
+    emailCSVFilePath = 'C:\\Users\\ferna\\Downloads\\'
 
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
@@ -88,7 +89,7 @@ def EmailToCSV():
                                 text = text.replace('&#39;','\'')
                                 text = text.replace('<br>','\n')
                                 print (text)
-                                with open(csvFilePath, "w") as text_file:
+                                with open(emailCSVFilePath, "w") as text_file:
                                     text_file.write(text)
                             except BaseException as error:
                                 pass

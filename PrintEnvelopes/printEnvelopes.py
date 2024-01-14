@@ -155,13 +155,14 @@ def createEnvelopeDoc():
                 }
             }
         })
-        REQUESTS['requests'].append({
-            'insertPageBreak': {
-                'endOfSegmentLocation': {
-                    "segmentId": '',
-                }
-            }   
-        })
+        if record != records[-1]:
+            REQUESTS['requests'].append({
+                'insertPageBreak': {
+                    'endOfSegmentLocation': {
+                        "segmentId": '',
+                    }
+                }   
+            })
 
     DOCUMENT = DOCS.documents().batchUpdate(
         documentId=document_id,

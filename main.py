@@ -211,33 +211,6 @@ def removeUnder10Cents():
             csvFile = csvFile.drop([x])
     csvFile.to_csv(filePath, index = False)
 
-def get_image(card_name, set_name):
-    """Get the image of a card from the gatherer website."""
-    card_name = removeParentheses(card_name).rstrip()
-    set_name = removeParentheses(set_name).rstrip()
-    print(set_name)
-    print(card_name)
-    print(type(card_name))
-    print(type(set_name))
-    cards = Card.where(name=card_name).all()
-    print(cards)
-    image_url = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=491806&type=card"
-
-    for card in cards:
-        if card.set_name == set_name:
-            image_url = card.image_url if card.image_url is not None else image_url
-            break
-
-    # image_str = urlopen(image_url).read()
-    image_str = urlopen(image_url)
-    image_file = io.BytesIO(image_str)  # create a file object (stream)
-    image = pygame.image.load(image_file)
-    image = pygame.transform.scale(image, (150, 210))
-    return image
-
-def drawText(game, text, x, y):
-    game.screen.blit(game.myFont.render(str(text), 1, game.colors.BLACK),(x, y))
-
 def findIn(filePath1, filePath2):
     inventory = pd.read_csv(filePath1)
     findCards = pd.read_csv(filePath2)
