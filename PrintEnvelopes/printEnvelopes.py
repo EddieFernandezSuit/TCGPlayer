@@ -9,11 +9,11 @@ from PrintEnvelopes.getFilePath import getFilePath
 import time
 import os
 import io
-import PrintEnvelopes.config
+import config
 
 # pyinstaller --onefile print_envelopes.py
 
-DIR_PATH = PrintEnvelopes.config.path
+DIR_PATH = config.DIRECTORY + "\\TCGPlayer\\PrintEnvelopes\\"
 # DIR_PATH = os.path.dirname(os.path.realpath(__file__)) + '\\'
 
 def getCreds():

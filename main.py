@@ -8,10 +8,10 @@ from PrintEnvelopes.readGmail import EmailToCSV
 import datetime
 import pandas as pd
 import math
-import io
 import os
 import re
 import csv
+import config
 # pyinstaller --onefile main.py
 
 class Color:
@@ -334,7 +334,7 @@ def GetLastFile(dir_path, file_name_prefix):
     # If no file was found, return None
     return lastFile
 
-DIRECTORY = "C:\\Users\\ferna\\Downloads"
+DIRECTORY = config.DIRECTORY
 
 commands = [
     {'text': 'Get cards from email then add to inventory then create email.csv', 'action': AddInvetoryAndChangeHeaders,},

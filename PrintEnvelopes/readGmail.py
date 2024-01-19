@@ -5,6 +5,7 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 import PrintEnvelopes
+import config
 
 def nth_repl_all(s, sub, repl, nth):
     find = s.find(sub)
@@ -34,12 +35,12 @@ def EmailToCSV():
         # 'https://www.googleapis.com/auth/gmail.labels']
     
     # DIR_PATH = os.path.dirname(os.path.realpath(__file__)) + '\\'
-    DIR_PATH = PrintEnvelopes.config.path
-    CREDENTIAL_FILEPATH = DIR_PATH + 'credentials.json'
-    TOKEN_FILEPATH = DIR_PATH + 'token.json'
+    PRINT_ENVELOPES_PATH = config.DIRECTORY + "\\TCGPlayer\\PrintEnvelopes\\"
+    # DIR_PATH = PrintEnvelopes.config.path
+    CREDENTIAL_FILEPATH = PRINT_ENVELOPES_PATH + 'credentials.json'
+    TOKEN_FILEPATH = PRINT_ENVELOPES_PATH + 'token.json'
     GETFROMTHISEMAIL = 'Eddie Fernandez <fernandezeddie54@gmail.com>'
-    csvFilePath = DIR_PATH + 'emails.csv'
-    emailCSVFilePath = 'C:\\Users\\ferna\\Downloads\\'
+    emailCSVFilePath = config.DIRECTORY + '\\new_cards.csv'
 
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
@@ -109,6 +110,6 @@ def EmailToCSV():
     except Exception as error:
         print(f'An error occurred: {error}')
     
-    return csvFilePath
+    return emailCSVFilePath
 
 # EmailToCSV()

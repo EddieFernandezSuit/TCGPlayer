@@ -1,1 +1,0 @@
-path = 'C:\\Users\\ferna\\Downloads\\TCGPlayer\\PrintEnvelopes\\'
