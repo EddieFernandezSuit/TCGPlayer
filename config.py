@@ -1,1 +1,3 @@
-DIRECTORY="C:\\Users\\Eddie Fernandez\\Downloads"
+DOWNLOADS_DIRECTORY="C:\\Users\\ferna\\Downloads"
+DIRECTORY="C:\\Users\\ferna\\Downloads\\Github"
+

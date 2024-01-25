@@ -40,7 +40,7 @@ def EmailToCSV():
     CREDENTIAL_FILEPATH = PRINT_ENVELOPES_PATH + 'credentials.json'
     TOKEN_FILEPATH = PRINT_ENVELOPES_PATH + 'token.json'
     GETFROMTHISEMAIL = 'Eddie Fernandez <fernandezeddie54@gmail.com>'
-    emailCSVFilePath = config.DIRECTORY + '\\new_cards.csv'
+    emailCSVFilePath = config.DOWNLOADS_DIRECTORY + '\\new_cards.csv'
 
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is

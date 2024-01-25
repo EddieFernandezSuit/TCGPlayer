@@ -334,7 +334,7 @@ def GetLastFile(dir_path, file_name_prefix):
     # If no file was found, return None
     return lastFile
 
-DIRECTORY = config.DIRECTORY
+DIRECTORY = config.DOWNLOADS_DIRECTORY
 
 commands = [
     {'text': 'Get cards from email then add to inventory then create email.csv', 'action': AddInvetoryAndChangeHeaders,},
