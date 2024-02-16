@@ -29,15 +29,11 @@ class Color:
 
 def start(filePath):
     currentCardPricesFilePath = getFilePath()
-    salesFileName = "sales.csv"
-    inventoryFileName = 'inventory.csv'
-
-    newCards = pd.read_csv(filePath)
     currentCardPricesDf = pd.read_csv(currentCardPricesFilePath)
-    sales = pd.read_csv(salesFileName)
-    inventory = pd.read_csv(inventoryFileName)
 
+    print("Finding Cards")
     shipType = 'normal'
+    newCards = pd.read_csv(filePath)
 
     if 'Card Name' in newCards.columns:
         shipType = 'direct'
@@ -50,60 +46,56 @@ def start(filePath):
 
     for j in range(len(newCards.index) - 1):
         newCardisFoil = newCards['Condition'][j][-4:] == "Foil"
-
         MTGCard = {
             'name': newCards["Name"][j],
             'set': newCards["Set"][j],
             'condition': newCards['Condition'][j][:-5] if newCardisFoil else newCards["Condition"][j],
             'quantity': int(newCards["Quantity"][j]),
-            'foil': "Foil" if newCardisFoil else "Normal",
-            'lot': -1,
-            'price': 0
+            'foil': "Foil" if newCardisFoil else "Normal"
         }
 
         for x in range(MTGCard['quantity']):
+            inventory = pd.read_csv("inventory.csv")
             newCards.loc[0, "Quantity"] = str(int(MTGCard['quantity']) - 1)
-
-            matchingRows = inventory.loc[(inventory["Name"] == MTGCard['name'])
-                & (inventory["Set"] == MTGCard['set'])
-                & (inventory["Condition"] == MTGCard['condition']) 
-                & (inventory["Foil"] == MTGCard['foil'])]
-
+            
+            matchingRows = inventory.loc[(inventory["Name"] == MTGCard['name']) 
+                and (inventory["Set"] == MTGCard['set']) 
+                and (inventory["Condition"] == MTGCard['condition']) 
+                and (inventory["Foil"] == MTGCard['foil'])]
+            
             index = None if matchingRows.empty else matchingRows.index[0]
-
-            if index != None:
+            if index == None:
+                price = 0
+                MTGCard['lot'] = -1
+            else:
                 inventory.loc[index, "Quantity"] = str(int(inventory["Quantity"][index]) - 1)
                 inventoryCondition = inventory["Condition"][index]
                 if inventory["Foil"][index] == "Foil":
                     inventoryCondition += " Foil"
                 if inventory["Language"][index] != "English":
                     inventoryCondition += " - " + inventory["Language"][index]
-
-                df = currentCardPricesDf[(currentCardPricesDf["Product Name"] == inventory["Name"][index])
-                    & (currentCardPricesDf["Set Name"] == inventory["Set"][index])
-                    & (currentCardPricesDf["Condition"] == inventoryCondition)]
-                
-                if not df.empty:
-                    MTGCard['price'] = float(df["TCG Marketplace Price"].iloc[0])
-                
+                df = currentCardPricesDf[currentCardPricesDf["Product Name"] == inventory["Name"][index]]
+                df = df[df["Set Name"] == inventory["Set"][index]]
+                df = df[df["Condition"] == inventoryCondition]
+                cardIndex = df.index.values[0]
+                price = float(currentCardPricesDf["TCG Marketplace Price"][cardIndex])
                 MTGCard['lot'] = int(math.floor(float(inventory["Lot"][index])))
-
                 if int(inventory["Quantity"][index]) == 0:
                     inventory = inventory.drop([index])
-
+            
             newRow = {'Name': MTGCard['name'], 'Set': MTGCard['set'], 'Condition': MTGCard['condition'], 'Lot': MTGCard['lot'],
-                        'Price': MTGCard['price'], 'Date': date.today(), 'shipType': shipType}
-
+                        'Price': price, 'Date': date.today(), 'shipType': shipType}
+            
+            salesFileName = "sales.csv"
+            sales = pd.read_csv(salesFileName)
             sales = pd.concat([sales, pd.DataFrame.from_records([newRow])])
+            sales.to_csv(salesFileName, index=False)
+            inventory.to_csv("inventory.csv", index=False)
         
-    inventory.to_csv(inventoryFileName, index=False)
-    sales.to_csv(salesFileName, index=False)
+    print('Complete')
 
     os.remove(currentCardPricesFilePath)
     os.remove(filePath)
-
-    print('Complete')
-
 
 def fixData():
     sales = pd.read_csv("sales.csv")
@@ -355,6 +347,6 @@ commands = [
     {'text': 'Change Prices','action': change_prices}
 ]
 
-InputLoop(commands)
+# InputLoop(commands)
 
-# start("C:\\Users\\ferna\\Downloads\\TCGplayer_PullSheet_20240210_150903.csv")
+start("C:\\Users\\ferna\\Downloads\\TCGplayer_PullSheet_20240210_150903.csv")
