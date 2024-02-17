@@ -39,7 +39,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,"Tezzeret, Betrayer of Flesh (Showcase)",Kamigawa: Neon Dynasty,Normal,Near Mint,English,5375109,$3.05,0
 1,Plains (294) Art Card (80/81),Art Series: Kamigawa: Neon Dynasty,Normal,Near Mint,English,5443990,$0.53,0
 1,Plains (293) Art Card (79/81),Art Series: Kamigawa: Neon Dynasty,Normal,Near Mint,English,5443880,$1.52,0
-1,Child of the Pack,Innistrad: Crimson Vow,Foil,Near Mint,English,5276942,$0.51,0
 1,Den of the Bugbear,Adventures in the Forgotten Realms,Normal,Near Mint,English,5048380,$4.43,0
 1,Dollhouse of Horrors,Innistrad: Crimson Vow,Normal,Near Mint,English,5270919,$0.22,0
 1,Howlpack Piper,Innistrad: Crimson Vow,Normal,Near Mint,English,5271414,$1.19,0
@@ -80,7 +79,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,The Wanderer,War of the Spark,Normal,Near Mint,Japanese,4035275,$0.3,0
 1,"Kaya, Bane of the Dead (JP Alternate Art)",War of the Spark,Normal,Near Mint,Japanese,4007813,$0.4,0
 1,Swamp (256),War of the Spark,Foil,Lightly Played,English,4001861,$0.2,0
-1,Soldier Token,War of the Spark,Normal,Near Mint,English,4006467,$0.31,0
 1,Skewer the Critics,Ravnica Allegiance,Normal,Near Mint,English,3944820,$0.77,0
 2,Pyromantic Pilgrim,Dominaria,Normal,Near Mint,English,3634685,$0.34,0
 1,Expel from Orazca,Rivals of Ixalan,Normal,Near Mint,English,3570054,$0.33,0
@@ -143,7 +141,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Howl of the Night Pack,Shadowmoor,Normal,Near Mint,English,116847,$0.3,0
 1,Memory Sluice,Shadowmoor,Normal,Near Mint,English,116886,$0.28,0
 2,Kithkin Rabble,Shadowmoor,Normal,Near Mint,English,116866,$0.19,0
-1,Wildslayer Elves,Shadowmoor,Normal,Near Mint,English,117024,$0.19,0
 1,Mountain (294),Lorwyn,Normal,Lightly Played,English,377200,$0.22,0
 1,Swamp (291),Shadowmoor,Normal,Near Mint,English,116988,$0.48,0
 1,Woodland Guidance,Lorwyn,Foil,Lightly Played,English,840245,$1.33,0
@@ -338,14 +335,12 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Haunted Fengraf,Commander 2014,Normal,Near Mint,English,1271682,$1.61,0
 1,Shriekmaw,Commander 2014,Normal,Near Mint,English,1270955,$0.25,0
 1,Terramorphic Expanse,Commander 2014,Normal,Near Mint,English,1270397,$0.25,0
-1,Thornweald Archer,Commander 2014,Normal,Near Mint,English,1271282,$0.2,0
 1,Terramorphic Expanse,Commander 2013,Normal,Near Mint,English,1140369,$0.22,0
 1,Smoldering Crater,Commander 2013,Normal,Near Mint,English,1140199,$0.21,0
 1,New Benalia,Commander 2013,Normal,Near Mint,English,1139854,$0.23,0
 1,Disciple of Griselbrand,Commander 2013,Normal,Near Mint,English,1139314,$0.25,0
 1,"Jodah, the Unifier",Dominaria United,Normal,Near Mint,English,5776915,$2.8,0
 1,Shivan Devastator,Dominaria United,Normal,Near Mint,English,5727024,$3.29,0
-1,Soul of Windgrace (Showcase),Dominaria United,Foil,Lightly Played,English,5764498,$0.73,0
 1,Temporary Lockdown,Dominaria United,Normal,Near Mint,English,5767636,$1.3,0
 1,"Braids, Conjurer Adept",Double Masters,Normal,Near Mint,English,4507663,$1.18,0
 1,Dromoka's Command (Foil Etched),Double Masters 2022,Foil,Near Mint,English,5696788,$2.18,0
@@ -437,7 +432,7 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 5,Dwarven Soldier (Asplund-Faith),Fallen Empires,Normal,Near Mint,English,116375,$0.2,0
 2,Goblin Grenade (Frazier),Fallen Empires,Normal,Near Mint,English,116388,$0.33,0
 1,Zuran Spellcaster,Ice Age,Normal,Near Mint,English,18817,$0.26,0
-6,Disenchant,Ice Age,Normal,Near Mint,English,18519,$0.22,0
+2,Disenchant,Ice Age,Normal,Near Mint,English,18519,$0.22,0
 1,Balduvian Bears,Ice Age,Normal,Near Mint,English,18466,$0.26,0
 1,Armor Thrull,Fallen Empires,Normal,Near Mint,English,17635,$0.2,0
 2,Order of the Ebon Hand,Fallen Empires,Normal,Near Mint,English,17702,$0.21,0
@@ -474,7 +469,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 3,Orcish Lumberjack,Ice Age,Normal,Near Mint,English,18693,$0.59,0
 2,Malachite Talisman,Ice Age,Normal,Near Mint,English,18657,$0.28,0
 1,Shield of the Ages,Ice Age,Normal,Near Mint,English,18733,$0.23,0
-1,Infinite Hourglass,Ice Age,Normal,Near Mint,English,18613,$0.27,0
 2,Goblin Lyre,Ice Age,Normal,Near Mint,English,18576,$0.33,0
 2,Delif's Cone,Fallen Empires,Normal,Near Mint,English,17644,$0.26,0
 2,Baton of Morale,Ice Age,Normal,Near Mint,English,18472,$0.26,0
@@ -589,7 +583,7 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 2,Reckoner's Bargain,Kamigawa: Neon Dynasty,Normal,Near Mint,English,5412958,$0.26,78
 3,Reinforced Ronin,Kamigawa: Neon Dynasty,Normal,Near Mint,English,5417398,$0.15,78
 1,Roadside Reliquary,Kamigawa: Neon Dynasty,Normal,Near Mint,English,5410318,$0.22,78
-2,Satoru Umezawa Art Card (73/81),Art Series: Kamigawa: Neon Dynasty,Normal,Near Mint,English,5443220,$0.24,78
+1,Satoru Umezawa Art Card (73/81),Art Series: Kamigawa: Neon Dynasty,Normal,Near Mint,English,5443220,$0.24,78
 1,Shambling Ghast,Adventures in the Forgotten Realms,Normal,Near Mint,English,5055208,$0.17,78
 3,Silver-Fur Master,Kamigawa: Neon Dynasty,Normal,Near Mint,English,5375329,$0.15,78
 1,Skullwinder,The List Reprints,Normal,Near Mint,English,5423718,$0.31,78
@@ -601,7 +595,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Spirit-Sister's Call,Kamigawa: Neon Dynasty,Normal,Near Mint,English,5394164,$0.26,78
 1,Swamp (288),Kamigawa: Neon Dynasty,Normal,Near Mint,English,5411308,$0.34,78
 2,"Tameshi, Reality Architect Art Card (53/81) (Gold-Stamped Signature)",Art Series: Kamigawa: Neon Dynasty,Normal,Near Mint,English,5440940,$0.58,78
-1,"Tamiyo, Compleated Sage Art Card",Art Series: Kamigawa: Neon Dynasty,Normal,Near Mint,English,5443550,$0.23,78
 7,Tamiyo's Safekeeping,Kamigawa: Neon Dynasty,Normal,Near Mint,English,5412298,$0.67,78
 1,Unexpected Windfall,Adventures in the Forgotten Realms,Normal,Near Mint,English,5075004,$0.98,78
 1,Unnerve,Urza's Saga,Normal,Near Mint,English,20546,$0.18,78
@@ -609,7 +602,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Wiretapping Art Card (Gold-Stamped Signature),Art Series: Streets of New Capenna,Normal,Near Mint,English,5555238,$0.18,78
 1,You Find Some Prisoners,Adventures in the Forgotten Realms,Normal,Near Mint,English,5056733,$0.16,78
 1,"Ao, the Dawn Sky Art Card (46/81) (Gold-Stamped Signature)",Art Series: Kamigawa: Neon Dynasty,Normal,Near Mint,English,5440140,$0.74,78
-1,"Raiyuu, Storm's Edge (Showcase)",Kamigawa: Neon Dynasty,Normal,Near Mint,English,5383461,$0.98,78
 1,An Offer You Can't Refuse,Streets of New Capenna,Normal,Near Mint,English,5486393,$3.34,78
 1,Ulvenwald Mysteries,The List Reprints,Normal,Near Mint,English,4585665,$0.24,78
 1,Black Dragon (Borderless),Adventures in the Forgotten Realms,Normal,Near Mint,English,5050035,$0.22,78
@@ -637,7 +629,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 2,Moon-Blessed Cleric,Adventures in the Forgotten Realms,Foil,Near Mint,English,5047780,$5.33,78
 1,Plains (283),Kamigawa: Neon Dynasty,Foil,Near Mint,English,5410763,$0.16,78
 1,Generous Visitor,Kamigawa: Neon Dynasty,Foil,Near Mint,English,5383616,$0.9,78
-1,Gloomshrieker,Kamigawa: Neon Dynasty,Foil,Near Mint,English,5385668,$0.23,78
 1,Silver-Fur Master (Showcase),Kamigawa: Neon Dynasty,Foil,Near Mint,English,5375424,$0.27,78
 1,Nezumi Prowler,Kamigawa: Neon Dynasty,Foil,Near Mint,English,5384958,$0.16,78
 1,Containment Construct,Kamigawa: Neon Dynasty,Foil,Near Mint,English,5423383,$3.1,78
@@ -687,7 +678,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 2,Rhythm of the Wild,Ravnica Allegiance,Normal,Near Mint,English,3944380,$5.67,80
 1,Daxos the Returned,Commander 2015,Normal,Near Mint,English,3003883,$5.59,80
 1,Enchantress's Presence,Onslaught,Normal,Near Mint,English,23026,$5.49,80
-2,Elvish Champion,8th Edition,Foil,Near Mint,English,47367,$5.45,80
 1,Choice of Damnations,Saviors of Kamigawa,Normal,Moderately Played,English,342519,$5.42,80
 1,Birds of Paradise,Magic 2012 (M12),Normal,Near Mint,English,474900,$5.09,80
 2,Joraga Warcaller,Worldwake,Normal,Near Mint,English,382561,$5.02,80
@@ -726,7 +716,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Rhys the Exiled,Morningtide,Normal,Near Mint,English,115781,$2.75,80
 1,Forest - Unglued,Unglued,Normal,Heavily Played,English,348301,$2.71,80
 1,Lord of Extinction,Ultimate Masters,Normal,Near Mint,English,3904514,$2.7,80
-1,Forest (155),Mirrodin Besieged,Foil,Near Mint,English,414700,$2.66,80
 1,"Sakiko, Mother of Summer",Betrayers of Kamigawa,Normal,Lightly Played,English,373966,$2.66,80
 1,Sanguine Bond,Commander 2013,Normal,Near Mint,English,1140074,$2.58,80
 1,Selesnya Signet,Modern Masters 2017,Normal,Near Mint,English,3317357,$2.57,80
@@ -939,7 +928,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Esper Charm,Commander 2018,Normal,Near Mint,English,3808218,$0.45,80
 1,Halimar Depths,Commander 2018,Normal,Near Mint,English,3808838,$0.45,80
 1,Foil,Ultimate Masters,Normal,Near Mint,English,3914440,$0.45,80
-1,Zurgo Bellstriker,Dragons of Tarkir,Normal,Near Mint,English,2736696,$0.45,80
 1,Crib Swap,Commander 2018,Normal,Near Mint,English,3808568,$0.45,80
 1,Fog Bank,Iconic Masters,Foil,Near Mint,English,3467647,$0.45,80
 10,Angel Token,Zendikar,Normal,Lightly Played,English,1163091,$0.45,80
@@ -1030,7 +1018,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,"Teyo, the Shieldmage",War of the Spark,Normal,Near Mint,English,3990152,$0.3,80
 1,Aladdin's Lamp,Fourth Edition,Normal,Near Mint,English,15767,$0.3,80
 1,Gaea's Blessing,Dominaria,Normal,Near Mint,English,3614499,$0.3,80
-1,Goblin Diplomats,Duel Decks: Merfolk vs. Goblins,Normal,Near Mint,English,3528506,$0.3,80
 1,Arcane Sanctum,Commander 2018,Normal,Near Mint,English,3808658,$0.29,80
 1,Zephid's Embrace,Urza's Saga,Normal,Near Mint,English,20586,$0.29,80
 1,Hobblefiend,Core Set 2021,Foil,Near Mint,English,4470030,$0.29,80
@@ -1259,7 +1246,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,"Aminatou, the Fateshifter (Commander 2018)",Oversize Cards,Foil,Damaged,English,3824608,$0.0,80
 1,Colossal Skyturtle,Kamigawa: Neon Dynasty,Normal,Near Mint,English,5412848,$0.2,78
 1,Royal Assassin (Retro Frame),Dominaria Remastered,Normal,Near Mint,English,6794896,$0.44,78
-1,Rith's Grove,Dominaria Remastered,Foil,Near Mint,English,6788890,$0.27,78
 1,Discover the Impossible Art Card,Art Series: Kamigawa: Neon Dynasty,Normal,Near Mint,English,5439645,$0.26,78
 1,"Yoshimaru, Ever Faithful Art Card",Art Series: Kamigawa: Neon Dynasty,Normal,Near Mint,English,5435610,$0.15,78
 1,Spirit (002) // Human Monk (010) Double-sided Token,Kamigawa: Neon Dynasty,Foil,Near Mint,English,5459063,$0.18,78
@@ -1339,7 +1325,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,"Teferi, Temporal Pilgrim (Borderless)",The Brothers' War,Normal,Near Mint,English,6674257,$5.25,81
 1,Siege Rhino,Secret Lair: 30th Anniversary Countdown Kit,Normal,Near Mint,English,6665789,$0.53,81
 1,Vedalken Infiltrator,Modern Horizons 2,Foil,Near Mint,English,4974461,$0.07,81
-1,"Keiga, the Tide Star",Champions of Kamigawa,Normal,Near Mint,English,24120,$2.29,81
 1,Patron Wizard,The List Reprints,Normal,Near Mint,English,4582215,$2.33,81
 1,Patron of the Moon,Betrayers of Kamigawa,Normal,Near Mint,English,24385,$2.76,81
 1,Seal of Removal,Modern Horizons 2,Foil,Near Mint,English,4974241,$0.14,81
@@ -1359,7 +1344,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Incendiary Flow,FNM Promos,Foil,Near Mint,English,3289046,$0.24,81
 1,Artisan of Kozilek,Duel Decks: Zendikar vs. Eldrazi,Normal,Near Mint,English,2949328,$0.76,81
 1,Worn Powerstone,Commander 2014,Normal,Near Mint,English,1271577,$0.5,81
-1,Collective Defiance,Eldritch Moon,Normal,Near Mint,English,3157689,$0.6,81
 1,Artisan of Kozilek,Commander 2014,Normal,Near Mint,English,1270382,$0.53,81
 1,Portal to Phyrexia (Extended Art),The Brothers' War,Normal,Near Mint,English,6693513,$32.08,81
 1,Blade of the Bloodchief,Zendikar,Normal,Near Mint,English,315252,$4.05,81
@@ -1449,12 +1433,10 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 5,Polluted Mire,Urza's Saga,Normal,Moderately Played,English,338218,$0.18,81
 3,Slippery Karst,Urza's Saga,Normal,Moderately Played,English,338277,$0.08,81
 2,Smoldering Crater,Urza's Saga,Normal,Moderately Played,English,338279,$0.14,81
-6,Bubbling Muck,Urza's Destiny,Normal,Moderately Played,English,337410,$1.99,81
+2,Bubbling Muck,Urza's Destiny,Normal,Moderately Played,English,337410,$1.99,81
 1,Reflex Sliver,Planar Chaos,Normal,Moderately Played,English,344322,$0.15,81
-1,Cloud of Faeries,Urza's Legacy,Normal,Moderately Played,English,337554,$0.23,81
 1,Unearth,Urza's Legacy,Normal,Moderately Played,English,337666,$0.48,81
 4,Surge of Thoughtweft,Lorwyn,Normal,Moderately Played,English,345177,$0.18,81
-1,Fire-Belly Changeling,Lorwyn,Normal,Moderately Played,English,345021,$0.21,81
 1,Read the Bones,Time Spiral: Remastered,Normal,Heavily Played,English,4803119,$0.0,81
 1,Flameblast Dragon,Shards of Alara,Normal,Lightly Played,English,378157,$0.24,81
 1,Hull Breach,Commander,Normal,Moderately Played,English,473221,$1.15,81
@@ -1473,7 +1455,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Ghastly Conscription,Commander 2016,Normal,Lightly Played,English,3246520,$0.24,81
 1,"Vorosh, the Hunter",Commander,Normal,Lightly Played,English,473562,$0.61,81
 1,Mortify,Commander,Normal,Lightly Played,English,473782,$0.22,81
-1,Swamp (560),Secret Lair Drop Series,Foil,Near Mint,English,5162192,$0.91,81
 1,Firestorm - 1998 Brian Selden (WTH),World Championship Decks,Normal,Near Mint,English,3633258,$0.0,81
 1,Mountain (571),Secret Lair Drop Series,Foil,Near Mint,English,5282628,$0.41,81
 1,Island (550),Secret Lair Drop Series,Foil,Near Mint,English,5462576,$1.14,81
@@ -1493,7 +1474,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Pristine Talisman,New Phyrexia,Normal,Near Mint,English,416757,$0.15,0
 1,Quick Sliver,Premium Deck Series: Slivers,Foil,Near Mint,English,399403,$4.06,0
 1,Hibernation Sliver,Premium Deck Series: Slivers,Foil,Lightly Played,English,844645,$2.39,0
-1,Spined Sliver,Premium Deck Series: Slivers,Foil,Lightly Played,English,844659,$0.45,0
 1,Manaweft Sliver,Magic 2014 (M14),Normal,Near Mint,English,1124715,$0.6,0
 2,Diffusion Sliver,Magic 2015 (M15),Normal,Near Mint,English,1231703,$0.61,0
 2,Spectral Sliver,Legions,Normal,Near Mint,Japanese,2243287,$0.0,0
@@ -1669,7 +1649,7 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Eldrazi // Elemental (0037) Double-Sided Token,Commander Masters,Normal,Near Mint,English,7344025,$0.25,82
 1,Servo // Construct (0041) Double-Sided Token,Commander Masters,Normal,Near Mint,English,7341684,$0.28,82
 1,Goblin Digging Team,The Dark,Normal,Near Mint,English,17562,$0.23,82
-4,Cosmic Rebirth,March of the Machine: The Aftermath,Normal,Near Mint,English,7141557,$0.15,82
+3,Cosmic Rebirth,March of the Machine: The Aftermath,Normal,Near Mint,English,7141557,$0.15,82
 1,Cosmic Rebirth (Showcase),March of the Machine: The Aftermath,Normal,Near Mint,English,7147316,$0.17,82
 1,Steward of Valeron,Shards of Alara,Normal,Near Mint,English,251616,$0.16,82
 4,Tidehollow Strix,Shards of Alara,Normal,Near Mint,English,251562,$0.15,82
@@ -1690,7 +1670,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 2,Gleam of Battle,Dragon's Maze,Normal,Near Mint,English,1077232,$0.22,82
 2,Thought Erasure,The List Reprints,Normal,Near Mint,English,4275465,$0.15,82
 1,Spiritmonger,Dominaria Remastered,Normal,Near Mint,English,6789905,$0.02,82
-1,Clutch of the Undercity,The List Reprints,Normal,Near Mint,English,5682324,$0.18,82
 1,Flower // Flourish,Guilds of Ravnica,Normal,Near Mint,English,3850595,$0.04,82
 1,Mistmeadow Witch (CMA),The List Reprints,Normal,Near Mint,English,4275620,$0.15,82
 2,Esper Charm,The List Reprints,Normal,Near Mint,English,4268398,$0.41,82
@@ -1703,19 +1682,17 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Undercity's Embrace,Ravnica Allegiance,Normal,Near Mint,English,3959653,$0.02,82
 1,Knight of Malice,Dominaria,Normal,Near Mint,English,3613919,$0.2,82
 2,Cast Down,Dominaria,Normal,Near Mint,English,3624704,$0.27,82
-3,Parasitic Impetus,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5643714,$0.17,82
+1,Parasitic Impetus,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5643714,$0.17,82
 1,Whisper of the Dross,Phyrexia: All Will Be One,Foil,Near Mint,English,6964924,$0.89,82
 1,Faceless Butcher,Dominaria Remastered,Normal,Near Mint,English,6793606,$0.06,82
 1,Terror,Dominaria Remastered,Normal,Near Mint,English,6800754,$0.03,82
 8,Phyrexian Ghoul,Dominaria Remastered,Normal,Near Mint,English,6810876,$0.01,82
 1,Viscera Seer,Commander Legends,Normal,Near Mint,English,4659839,$0.46,82
-2,Sovereign's Bite,Core Set 2019,Normal,Near Mint,English,3760367,$0.18,82
 1,Sleeper's Guile,Urza's Legacy,Normal,Near Mint,English,19882,$0.19,82
 2,"Aragorn, Company Leader",Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Normal,Near Mint,English,7211883,$0.22,82
 1,Creeping Chill,Guilds of Ravnica,Normal,Near Mint,English,3850017,$0.2,82
 1,Vampire Opportunist,War of the Spark,Normal,Near Mint,English,4006702,$0.03,82
 1,Revenge of Ravens,Throne of Eldraine,Normal,Near Mint,English,4197290,$0.48,82
-1,Warlock Class,Adventures in the Forgotten Realms,Normal,Near Mint,English,5071005,$0.23,82
 1,Necromantic Summons,Magic Origins,Normal,Near Mint,English,2899662,$0.15,82
 1,Nantuko Husk,Magic Origins,Normal,Near Mint,English,2900005,$0.1,82
 1,Flesh-Eater Imp,Mirrodin Besieged,Normal,Near Mint,English,414555,$0.18,82
@@ -1723,7 +1700,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 6,Warchanter of Mogis,Born of the Gods,Normal,Near Mint,English,1166506,$0.49,82
 3,Markov Baron,March of the Machine: The Aftermath,Normal,Near Mint,English,7142117,$0.22,82
 1,Bump in the Night,Innistrad,Normal,Near Mint,English,505112,$0.33,82
-1,Altar's Reap,Magic 2014 (M14),Normal,Near Mint,English,1125574,$0.07,82
 2,Dusk Legion Zealot,Rivals of Ixalan,Normal,Near Mint,English,3568187,$0.16,82
 1,Trespasser's Curse,Amonkhet,Normal,Near Mint,English,3329386,$0.67,82
 1,Lord of the Accursed,Amonkhet,Normal,Near Mint,English,3327480,$0.39,82
@@ -1800,7 +1776,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 3,Rancid Rats,Shadows over Innistrad,Normal,Near Mint,English,3103066,$0.32,82
 4,Olivia's Bloodsworn,Shadows over Innistrad,Normal,Near Mint,English,3098951,$0.15,82
 1,Ravenous Rats,10th Edition,Normal,Near Mint,English,6487,$0.12,82
-1,Sovereign's Bite,Core Set 2019,Normal,Near Mint,English,3760367,$0.17,82
 3,Alms of the Vein,Shadows over Innistrad,Normal,Near Mint,English,3102206,$0.24,82
 2,Tormented Soul,Magic 2013 (M13),Normal,Near Mint,English,939149,$0.19,82
 1,Vampiric Rites,Battle for Zendikar,Normal,Near Mint,English,2957796,$0.24,82
@@ -1839,7 +1814,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 2,Merfolk Mistbinder,Rivals of Ixalan,Normal,Near Mint,English,3568217,$0.28,82
 1,Atzocan Seer,Rivals of Ixalan,Normal,Near Mint,English,3568117,$0.45,82
 1,Dryad Militant,Return to Ravnica,Normal,Near Mint,English,1043185,$0.0,82
-1,Defense of the Heart Art Card,Art Series: Wilds of Eldraine,Normal,Near Mint,English,7407556,$0.19,82
 2,Eriette of the Charmed Apple Art Card,Art Series: Wilds of Eldraine,Normal,Near Mint,English,7407364,$0.2,82
 1,Primal Vigor Art Card,Art Series: Wilds of Eldraine,Normal,Near Mint,English,7407521,$0.24,82
 1,Beast Token Art Card,Art Series: Wilds of Eldraine,Normal,Near Mint,English,7407349,$0.19,82
@@ -1913,7 +1887,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Cathartic Pyre,Innistrad: Midnight Hunt,Normal,Near Mint,English,5181322,$0.29,82
 1,Young Blue Dragon,Commander Legends: Battle for Baldur's Gate,Foil,Near Mint,English,5641749,$0.21,82
 4,Absorb Identity,Kaldheim,Normal,Near Mint,English,4693422,$0.15,82
-1,Saw It Coming,Kaldheim,Normal,Near Mint,English,4709598,$0.18,82
 1,Mercurial Transformation,Strixhaven: School of Mages,Foil,Near Mint,English,4870263,$0.14,82
 4,Behold the Multiverse,Kaldheim,Normal,Near Mint,English,4706562,$0.2,82
 1,Combat Research,Dominaria United,Normal,Near Mint,English,5776995,$0.2,82
@@ -1939,7 +1912,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 7,"Vitu-Ghazi, the City-Tree",Commander: Adventures in the Forgotten Realms,Normal,Near Mint,English,5102494,$0.12,82
 1,Simic Growth Chamber,Commander: Adventures in the Forgotten Realms,Normal,Near Mint,English,5103444,$0.22,82
 9,Mortuary Mire,Commander: Adventures in the Forgotten Realms,Normal,Near Mint,English,5101089,$2.72,82
-3,Mishra's Factory,Commander: Adventures in the Forgotten Realms,Normal,Near Mint,English,5104194,$0.08,82
 3,Halimar Depths,Commander: Adventures in the Forgotten Realms,Normal,Near Mint,English,5104144,$0.46,82
 4,Tranquil Thicket,Commander 2021,Normal,Near Mint,English,4894639,$0.15,82
 5,Simic Growth Chamber,Commander 2021,Normal,Near Mint,English,4894539,$0.27,82
@@ -1957,7 +1929,7 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 2,Shambling Ghast,Adventures in the Forgotten Realms,Normal,Near Mint,English,5055208,$0.35,82
 2,Tragic Slip,Dark Ascension,Normal,Near Mint,English,764488,$0.28,82
 2,Tribute to Hunger,Innistrad,Normal,Near Mint,English,505849,$0.14,82
-3,Falkenrath Noble,Innistrad,Normal,Near Mint,English,505869,$0.32,82
+2,Falkenrath Noble,Innistrad,Normal,Near Mint,English,505869,$0.32,82
 2,Curse of Shallow Graves,Commander 2013,Normal,Near Mint,English,1137205,$0.82,82
 1,Disciple of Griselbrand,Innistrad,Normal,Near Mint,English,505961,$0.17,82
 3,Diregraf Ghoul,Innistrad,Normal,Near Mint,English,500393,$0.11,82
@@ -1977,13 +1949,12 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Fleshbag Marauder,Commander Legends,Normal,Near Mint,English,4640246,$0.16,82
 1,Ambition's Cost,Commander 2020,Normal,Near Mint,English,4387905,$0.16,82
 4,Liliana's Triumph,War of the Spark,Normal,Near Mint,English,3989972,$0.2,82
-5,Sovereign's Bite,Core Set 2019,Normal,Near Mint,English,3760367,$0.17,82
+4,Sovereign's Bite,Core Set 2019,Normal,Near Mint,English,3760367,$0.17,82
 3,Mindwrack Harpy,Theros Beyond Death,Normal,Near Mint,English,4303603,$0.23,82
 7,Abnormal Endurance,Core Set 2019,Normal,Near Mint,English,3761323,$0.12,82
 1,Faith of the Devoted,Commander 2019,Normal,Near Mint,English,4162191,$0.22,82
 1,Arms of Hadar,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5642084,$0.14,82
 11,Parasitic Impetus,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5643714,$0.16,82
-1,Ghoulish Procession,Innistrad: Midnight Hunt,Normal,Near Mint,English,5171276,$0.17,82
 2,Spread the Sickness,Mirrodin Besieged,Normal,Near Mint,English,413837,$0.11,82
 1,Mold Shambler,Zendikar,Normal,Near Mint,English,315358,$0.16,82
 1,Hell-Bent Raider,Torment,Normal,Lightly Played,English,371810,$0.12,82
@@ -1993,7 +1964,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Dwarven Soldier (Alexander),Fallen Empires,Normal,Near Mint,English,17653,$0.18,82
 5,Norritt,Ice Age,Normal,Near Mint,English,18685,$0.23,82
 11,Barbed Sextant,Ice Age,Normal,Near Mint,English,18471,$0.16,82
-1,"Novijen, Heart of Progress",Dissension,Normal,Near Mint,English,25503,$0.29,82
 1,Sludge Strider,Conflux,Normal,Near Mint,English,255366,$0.15,82
 1,Ray of Erasure,Ice Age,Normal,Near Mint,English,18715,$0.16,82
 1,Circle of Protection: Red,Ice Age,Normal,Near Mint,English,18500,$0.17,82
@@ -2020,7 +1990,7 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 2,Balduvian Rage,Coldsnap,Normal,Lightly Played,English,375173,$0.2,82
 1,Swashbuckler Extraordinaire,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5627847,$0.17,82
 12,Reckless Barbarian,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5636444,$0.18,82
-7,Carnelian Orb of Dragonkind,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5622841,$0.26,82
+5,Carnelian Orb of Dragonkind,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5622841,$0.26,82
 12,Patron of the Arts,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5636144,$0.14,82
 2,Street Urchin,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5621301,$0.06,82
 1,Inspired Tinkering,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5635144,$0.27,82
@@ -2060,7 +2030,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 2,Fiery Cannonade,Ixalan,Normal,Near Mint,English,3470970,$0.15,82
 1,Spiteful Prankster,Jumpstart,Normal,Near Mint,English,4477972,$0.26,82
 1,Ancestral Anger,Innistrad: Crimson Vow,Normal,Near Mint,English,5290473,$0.24,82
-1,Gleeful Demolition,Phyrexia: All Will Be One,Normal,Near Mint,English,6942396,$0.94,82
 3,Temur Battle Rage,Fate Reforged,Normal,Near Mint,English,1279085,$0.21,82
 1,Reckless Handling,March of the Machine: The Aftermath,Foil,Near Mint,English,7140362,$0.16,82
 3,Reckless Handling (Showcase),March of the Machine: The Aftermath,Normal,Near Mint,English,7144591,$0.15,82
@@ -2081,9 +2050,7 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 2,Blazing Salvo,Odyssey,Normal,Near Mint,English,22255,$0.16,82
 1,Enslaved Dwarf,Torment,Normal,Near Mint,English,22474,$0.3,82
 4,Stingmoggie,Morningtide,Normal,Near Mint,English,115799,$0.15,82
-1,Gleeful Demolition,Phyrexia: All Will Be One,Normal,Near Mint,English,6942396,$0.94,82
 1,Wrenn's Resolve,March of the Machine,Normal,Near Mint,English,7088943,$1.16,82
-1,Goblin Matron (Retro Frame),Dominaria Remastered,Normal,Near Mint,English,6860196,$0.09,82
 3,Empty the Warrens,Dominaria Remastered,Normal,Near Mint,English,6796016,$0.09,82
 1,Empty the Warrens (Retro Frame),Dominaria Remastered,Normal,Near Mint,English,6799704,$0.07,82
 4,Guttersnipe,Core Set 2019,Normal,Near Mint,English,3761513,$0.19,82
@@ -2101,14 +2068,13 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Tower Defense,Gatecrash,Normal,Near Mint,English,1067892,$0.25,82
 1,Animist's Might,March of the Machine: The Aftermath,Foil,Near Mint,English,7140042,$0.1,82
 3,Seal of Primordium,Planar Chaos,Normal,Lightly Played,English,375848,$0.28,82
-2,Elves of Deep Shadow,Ravnica: City of Guilds,Normal,Near Mint,English,25037,$1.05,82
+1,Elves of Deep Shadow,Ravnica: City of Guilds,Normal,Near Mint,English,25037,$1.05,82
 2,Rimehorn Aurochs,Coldsnap,Normal,Near Mint,English,25701,$0.15,82
 4,Stampeding Rhino,Magic 2012 (M12),Normal,Near Mint,English,470779,$0.2,82
 1,Sprouting Vines,Commander 2013,Normal,Near Mint,English,1140259,$0.25,82
 1,Restore,Commander 2013,Normal,Near Mint,English,1137270,$0.24,82
 1,Curse of Predation,Commander 2013,Normal,Near Mint,English,1137110,$0.4,82
 1,Harmonize,Commander 2013,Normal,Near Mint,English,1139559,$0.37,82
-1,Moonmist,Innistrad,Normal,Near Mint,English,500374,$0.29,82
 1,Thelon's Curse,Fallen Empires,Normal,Near Mint,English,17722,$0.47,82
 1,Thallid (Myrfors),Fallen Empires,Normal,Near Mint,English,116435,$0.19,82
 1,Abundant Growth,Avacyn Restored,Normal,Near Mint,English,871047,$0.4,82
@@ -2151,15 +2117,14 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Experiment One,Gatecrash,Normal,Near Mint,English,1066734,$0.13,82
 3,Forced Adaptation,Gatecrash,Normal,Near Mint,English,1067990,$0.2,82
 1,Tail Swipe,Dominaria United,Normal,Near Mint,English,5769730,$0.23,82
-1,Reclamation Sage (248),Commander Legends,Normal,Near Mint,English,4654633,$0.12,82
 1,"Mowu, Loyal Companion",War of the Spark,Normal,Near Mint,English,3990304,$0.15,82
 1,Outland Liberator (Showcase),Innistrad: Midnight Hunt,Normal,Near Mint,English,5184957,$0.23,82
 1,Hound Tamer (Showcase),Innistrad: Midnight Hunt,Normal,Near Mint,English,5179570,$0.05,82
 1,Tiger-Tribe Hunter,Adventures in the Forgotten Realms,Normal,Near Mint,English,5055768,$0.02,82
 2,Prosperous Innkeeper,Adventures in the Forgotten Realms,Normal,Near Mint,English,4948737,$0.91,82
-8,"Wilson, Refined Grizzly",Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5610443,$0.13,82
+7,"Wilson, Refined Grizzly",Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5610443,$0.13,82
 4,Nature's Lore,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5637044,$2.19,82
-2,Draconic Muralists,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5635044,$0.17,82
+1,Draconic Muralists,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5635044,$0.17,82
 4,Giant Ankheg,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5636544,$0.16,82
 7,Overwhelming Encounter,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5637244,$0.17,82
 5,Lurking Green Dragon,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5636644,$0.15,82
@@ -2174,7 +2139,7 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 2,Chaplain's Blessing,Shadows over Innistrad,Normal,Near Mint,English,3102306,$0.21,82
 1,Congregate,Dominaria Remastered,Normal,Near Mint,English,6796446,$0.06,82
 1,Femeref Archers,Mirage,Normal,Near Mint,English,12271,$0.19,82
-4,Quirion Elves,Mirage,Normal,Near Mint,English,13231,$0.21,82
+3,Quirion Elves,Mirage,Normal,Near Mint,English,13231,$0.21,82
 2,Mulch,Innistrad,Normal,Near Mint,English,505946,$0.09,82
 3,Oran-Rief Recluse,Duel Decks: Jace vs. Vraska,Normal,Near Mint,English,1170491,$0.22,82
 2,Glistener Elf,New Phyrexia,Normal,Lightly Played,English,418186,$0.46,82
@@ -2215,7 +2180,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Wandering Stream,Invasion,Normal,Near Mint,English,21193,$0.21,82
 1,Verduran Emissary,Invasion,Normal,Near Mint,English,21181,$0.21,82
 1,Treefolk Healer,Invasion,Normal,Near Mint,English,21158,$0.22,82
-1,Quirion Elves,Invasion,Normal,Near Mint,English,21058,$0.22,82
 2,Nessian Courser,Future Sight,Normal,Near Mint,English,26428,$0.17,82
 1,Howl of the Night Pack,Shadowmoor,Normal,Near Mint,English,116847,$0.25,82
 1,Overgrown Battlement,Rise of the Eldrazi,Normal,Near Mint,English,385286,$0.24,82
@@ -2253,7 +2217,7 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 3,Fog,Magic 2014 (M14),Normal,Near Mint,English,1098264,$0.15,82
 1,Kalonian Tusker,Magic 2014 (M14),Normal,Near Mint,English,1098404,$0.16,82
 1,"Gilanra, Caller of Wirewood",Commander Legends,Normal,Near Mint,English,4656828,$0.12,82
-2,Reclamation Sage (248),Commander Legends,Normal,Near Mint,English,4654633,$0.11,82
+1,Reclamation Sage (248),Commander Legends,Normal,Near Mint,English,4654633,$0.11,82
 1,"Numa, Joraga Chieftain",Commander Legends,Normal,Near Mint,English,4636276,$0.08,82
 1,Prized Unicorn,Core Set 2020,Normal,Near Mint,English,4125615,$1.46,82
 1,Oakenform,Core Set 2020,Normal,Near Mint,English,4125545,$0.2,82
@@ -2315,21 +2279,17 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Sheoldred's Edict,Phyrexia: All Will Be One,Normal,Near Mint,English,6934829,$3.52,82
 2,"Grunn, the Lonely King",Dominaria,Normal,Near Mint,English,3614549,$0.21,82
 1,Grow from the Ashes,Dominaria,Normal,Near Mint,English,3637125,$0.27,82
-3,Llanowar Visionary,Core Set 2021,Normal,Near Mint,English,4441812,$0.23,82
+2,Llanowar Visionary,Core Set 2021,Normal,Near Mint,English,4441812,$0.23,82
 2,Cultivate,Core Set 2021,Normal,Near Mint,English,4446622,$0.68,82
 7,Colossal Dreadmaw,Core Set 2021,Normal,Near Mint,English,4459306,$0.02,82
-13,Jewel Thief,Streets of New Capenna,Normal,Near Mint,English,5512187,$0.09,82
+12,Jewel Thief,Streets of New Capenna,Normal,Near Mint,English,5512187,$0.09,82
 7,Courier's Briefcase,Streets of New Capenna,Normal,Near Mint,English,5487390,$0.05,82
 2,Back from the Brink,Innistrad,Normal,Near Mint,English,505964,$0.21,0
 1,Yahenni's Expertise,Aether Revolt,Normal,Near Mint,English,3254401,$0.24,0
 1,Village Rites,Kaldheim,Normal,Near Mint,English,4709818,$0.28,0
 3,Goldvein Pick,Kaldheim,Normal,Near Mint,English,4722074,$0.14,0
 1,"Egon, God of Death",Kaldheim,Foil,Near Mint,English,4717812,$0.27,0
-1,Elvish Warmaster,Kaldheim,Normal,Near Mint,English,4704937,$0.91,0
 1,Draugr Necromancer,Kaldheim,Normal,Near Mint,English,4711468,$0.2,0
-1,Binding the Old Gods,Kaldheim,Normal,Near Mint,English,4704302,$0.38,0
-1,Harald Unites the Elves,Kaldheim,Normal,Near Mint,English,4717697,$0.14,0
-1,"Sarulf, Realm Eater (Showcase)",Kaldheim,Normal,Near Mint,English,4694847,$0.21,0
 1,Forest (296),Shadows over Innistrad,Normal,Near Mint,English,3099321,$0.1,0
 1,Troll Warrior Token,Kaldheim,Normal,Near Mint,English,4763063,$0.27,0
 1,Replicated Ring Token,Kaldheim,Normal,Near Mint,English,4763283,$0.47,0
@@ -2356,7 +2316,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Azorius Chancery,Commander: Innistrad: Crimson Vow,Normal,Near Mint,English,5302168,$0.15,85
 1,Hotshot Mechanic,Kamigawa: Neon Dynasty,Normal,Near Mint,English,5377425,$0.12,85
 1,Reckoner's Bargain,Kamigawa: Neon Dynasty,Normal,Near Mint,English,5412958,$0.41,85
-1,Invigorating Hot Spring,Kamigawa: Neon Dynasty,Normal,Near Mint,English,5413728,$0.14,85
 1,Generous Visitor,Kamigawa: Neon Dynasty,Normal,Near Mint,English,5383611,$0.13,85
 1,Reinforced Ronin,Kamigawa: Neon Dynasty,Normal,Near Mint,English,5417398,$0.15,85
 1,Prosperous Thief (Showcase),Kamigawa: Neon Dynasty,Normal,Near Mint,English,5399741,$0.14,85
@@ -2373,7 +2332,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 1,Prairie Stream,Commander: Innistrad: Crimson Vow,Normal,Near Mint,English,5301918,$0.18,85
 2,Temple of the False God,Commander: Innistrad: Crimson Vow,Normal,Near Mint,English,5302568,$0.11,85
 1,Sailors' Bane,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5628922,$0.1,85
-4,Copy Token,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5662574,$0.25,85
 1,Dragon Token,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5663074,$0.25,85
 1,Treasure Token,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5663269,$0.1,85
 2,Boar Token,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5662619,$0.12,85
@@ -2384,7 +2342,6 @@ Quantity,Name,Set,Foil,Condition,Language,SKU,Price,Lot
 2,Soldier Token,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5663024,$0.16,85
 1,Far Traveler,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5607632,$0.11,85
 1,Nimblewright Schematic,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5641144,$0.1,85
-1,"Erinis, Gloom Stalker",Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5606291,$0.09,85
 1,Sharpshooter Elf,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5614154,$0.11,85
 1,Construct Token,Commander Legends: Battle for Baldur's Gate,Normal,Near Mint,English,5662854,$0.13,85
 1,Mountain (278),Streets of New Capenna,Normal,Near Mint,English,5466353,$0.23,85
