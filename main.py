@@ -12,7 +12,8 @@ import os
 import re
 import csv
 import config
-# pyinstaller --onefile main.py
+
+# python -m PyInstaller main.py
 
 class Color:
     GREY = (150, 150, 150)
@@ -317,7 +318,6 @@ def FindAndPrintTCGPlayerSales(directory):
     pullSheetFileName = "TCGplayer_PullSheet"
     pullSheetFilePath = GetLastFile(directory, pullSheetFileName)
     pd.set_option("display.max_columns", 9)
-    # game = Game(pullSheetFilePath)
     start(pullSheetFilePath)
 
 def FindCardsInNewAndInventory():
