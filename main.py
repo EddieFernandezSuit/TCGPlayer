@@ -345,7 +345,7 @@ def GetLastFile(dir_path, file_name_prefix):
 DIRECTORY = config.DOWNLOADS_DIRECTORY
 
 commands = [
-    {'text': 'Get cards from email then add to inventory then create email.csv', 'action': AddInvetoryAndChangeHeaders,},
+    {'text': 'Get cards from email then add to inventory then create email.csv', 'action': AddInvetoryAndChangeHeaders},
     {'text': 'Find and Print TCGPlayer Sales', 'action': lambda: FindAndPrintTCGPlayerSales(DIRECTORY)},
     {'text': 'Remove cards worth less than $0.10 market price from a selected file','action': removeUnder10Cents},
     {'text': 'Find cards that are in a selected file and in "inventory.csv"','action': FindCardsInNewAndInventory},
