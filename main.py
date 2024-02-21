@@ -1,5 +1,3 @@
-from mtgsdk import Card
-from urllib.request import urlopen
 from datetime import date
 from PrintEnvelopes.getFilePath import getFilePath
 from PrintEnvelopes.printEnvelopes import printFromCsv
@@ -12,8 +10,12 @@ import os
 import re
 import csv
 import config
+import numpy
 
 # python -m PyInstaller main.py
+
+def moeny_to_float(s):
+    return float(s.strip('$'))
 
 class Color:
     GREY = (150, 150, 150)
@@ -28,7 +30,7 @@ class Color:
     ORANGE = (255, 165, 0)
     WHITE = (255, 255, 255)
 
-def start(filePath):
+def update_inventory_and_sales(filePath):
     currentCardPricesFilePath = getFilePath()
     salesFileName = "sales.csv"
     inventoryFileName = 'inventory.csv'
@@ -38,10 +40,7 @@ def start(filePath):
     sales = pd.read_csv(salesFileName)
     inventory = pd.read_csv(inventoryFileName)
 
-    shipType = 'normal'
-
-    if 'Card Name' in newCards.columns:
-        shipType = 'direct'
+    shipType = 'direct' if 'Card Name' in newCards.columns else 'normal'
 
     newCards = newCards.rename(columns={
         'Card Name': 'Name',
@@ -50,61 +49,52 @@ def start(filePath):
     })
 
     for j in range(len(newCards.index) - 1):
-        newCardisFoil = newCards['Condition'][j][-4:] == "Foil"
+        quantity = int(newCards["Quantity"][j])
 
-        MTGCard = {
-            'name': newCards["Name"][j],
-            'set': newCards["Set"][j],
-            'condition': newCards['Condition'][j][:-5] if newCardisFoil else newCards["Condition"][j],
-            'quantity': int(newCards["Quantity"][j]),
-            'foil': "Foil" if newCardisFoil else "Normal",
-            'lot': -1,
-            'price': 0
+        salesNewRow = {
+            'Name': newCards["Name"][j],
+            'Set': newCards["Set"][j],
+            'Condition': newCards['Condition'][j],
+            'Lot': -1,
+            'Price': 0,
+            'Date': date.today(),
+            'ShipType': shipType
         }
 
-        for x in range(MTGCard['quantity']):
-            newCards.loc[0, "Quantity"] = str(int(MTGCard['quantity']) - 1)
+        newCardisFoil = newCards['Condition'][j][-4:] == "Foil"
+        seperatedCondition = newCards['Condition'][j][:-5] if newCardisFoil else newCards["Condition"][j]
+        seperatedFoil = "Foil" if newCardisFoil else "Normal"
 
-            matchingRows = inventory.loc[(inventory["Name"] == MTGCard['name'])
-                & (inventory["Set"] == MTGCard['set'])
-                & (inventory["Condition"] == MTGCard['condition']) 
-                & (inventory["Foil"] == MTGCard['foil'])]
+        for _ in range(quantity):
+            filteredCurrentCardPrices = currentCardPricesDf[(currentCardPricesDf["Product Name"] == salesNewRow['Name'])
+                & (currentCardPricesDf["Set Name"] == salesNewRow['Set'])
+                & (currentCardPricesDf["Condition"] == salesNewRow['Condition'])]
+            
+            if not filteredCurrentCardPrices.empty:
+                salesNewRow['Price'] = float(filteredCurrentCardPrices["TCG Marketplace Price"].iloc[0])
 
-            index = None if matchingRows.empty else matchingRows.index[0]
+            matchingRows = inventory.loc[(inventory["Name"] == salesNewRow['Name'])
+                & (inventory["Set"] == salesNewRow['Set'])
+                & (inventory["Condition"] == seperatedCondition)
+                & (inventory["Foil"] == seperatedFoil)]
+            
+            if not matchingRows.empty:
+                index = matchingRows.index[0]
+                salesNewRow['Lot'] = int(inventory["Lot"][index])
 
-            if index != None:
-                inventory.loc[index, "Quantity"] = str(int(inventory["Quantity"][index]) - 1)
-                inventoryCondition = inventory["Condition"][index]
-                if inventory["Foil"][index] == "Foil":
-                    inventoryCondition += " Foil"
-                if inventory["Language"][index] != "English":
-                    inventoryCondition += " - " + inventory["Language"][index]
-
-                df = currentCardPricesDf[(currentCardPricesDf["Product Name"] == inventory["Name"][index])
-                    & (currentCardPricesDf["Set Name"] == inventory["Set"][index])
-                    & (currentCardPricesDf["Condition"] == inventoryCondition)]
-                
-                if not df.empty:
-                    MTGCard['price'] = float(df["TCG Marketplace Price"].iloc[0])
-                
-                MTGCard['lot'] = int(math.floor(float(inventory["Lot"][index])))
+                inventory.at[index, "Quantity"] -= 1
 
                 if int(inventory["Quantity"][index]) == 0:
                     inventory = inventory.drop([index])
 
-            newRow = {'Name': MTGCard['name'], 'Set': MTGCard['set'], 'Condition': MTGCard['condition'], 'Lot': MTGCard['lot'],
-                        'Price': MTGCard['price'], 'Date': date.today(), 'shipType': shipType}
-
-            sales = pd.concat([sales, pd.DataFrame.from_records([newRow])])
+            sales = pd.concat([sales, pd.DataFrame.from_records([salesNewRow])])
         
     inventory.to_csv(inventoryFileName, index=False)
     sales.to_csv(salesFileName, index=False)
 
     os.remove(currentCardPricesFilePath)
     os.remove(filePath)
-
     print('Complete')
-
 
 def fixData():
     sales = pd.read_csv("sales.csv")
@@ -113,31 +103,6 @@ def fixData():
             sales['Price'][i] = 0
     inv = pd.DataFrame(sales)
     inv.to_csv('sales.csv', index = False, header=True)
-
-def getProf():
-    sales = pd.read_csv("sales.csv")
-    profits = {}
-    highestLotNumber = 79
-
-    for x in range(-1, highestLotNumber):
-        profits[str(x)] = 0
-
-    for x in sales.index:
-        greaterThanDate = datetime.datetime(2022, 11, 13)
-        now = datetime.datetime.now()
-        date = datetime.datetime.strptime(sales["Date"][x], "%Y-%m-%d")
-        if greaterThanDate < date and date < now:
-            profits[str(int(sales["Lot"][x]))] += float(sales["Price"][x])
-    
-    allData = []
-    for key in profits:
-        data = {}
-        data['Lot'] = key
-        data['Profit'] = round(profits[key], 2)
-        allData.append(data)
-
-    dfProfits = pd.DataFrame(allData)
-    dfProfits.to_csv('profits.csv', index=False, header=True)
 
 def replace(addCards):
     addCards["Name"] = addCards["Name"].str.replace(' - C', '')
@@ -173,62 +138,46 @@ def removeParentheses(str):
     return re.sub(r"\([^()]*\)", "", str)
 
 def newHeaders(filePath):
-    csvFile = pd.read_csv(filePath)
-    csvFile = csvFile.rename(columns={"Quantity":"Add to Quantity","Name":"Product Name","Set":"Set Name","SKU":"TCGplayer Id","Price Each":"TCG Marketplace Price"})
+    df = pd.read_csv(filePath)
+    df = df.rename(columns={"Quantity":"Add to Quantity","Name":"Product Name","Set":"Set Name","SKU":"TCGplayer Id","Price Each":"TCG Marketplace Price"}, inplace=True)
     
-    def addEmptyColumns(csvFile, arr):
-        emptyColumn = []
-        for x in csvFile.index:
-            emptyColumn.append('')
-        for x in arr:
-            csvFile[x] = emptyColumn
+    new_cols = ["Product Line", "Title", "Number", "Rarity", "TCG Market Price","TCG Direct Low","TCG Low Price With Shipping","TCG Low Price","Total Quantity","Photo URL"]
+    df = df.assign(**{k:'' for k in new_cols})
 
-    addEmptyColumns(csvFile, ["Product Line", "Title", "Number", "Rarity", "TCG Market Price","TCG Direct Low","TCG Low Price With Shipping","TCG Low Price","Total Quantity","Photo URL"])
-    for x in csvFile.index:
-        csvFile["Product Line"][x] = 'Magic'
-        if csvFile["Printing"][x] != 'Normal':
-            csvFile["Condition"][x] += ' ' + csvFile["Printing"][x]
+    df["Product Line"] = df["Product Line"].apply(lambda x: 'Magic' if x == '' else x)
+    df["Condition"] = df["Condition"].apply(lambda x: x.strip() + ' ' + df["Printing"] if df["Printing"] != 'Normal' else x.strip())
+    df["Condition"] = df["Condition"].apply(lambda x: x.strip() + ' - ' + df["Language"] if df["Language"] != 'English' else x.strip())
+    df["TCG Marketplace Price"] = df["TCG Marketplace Price"].apply(lambda x: x.strip('$'))
 
-        if csvFile["Language"][x] != 'English':
-            csvFile["Condition"][x] += ' - ' + csvFile["Language"][x]
-        csvFile["TCG Marketplace Price"][x] = csvFile["TCG Marketplace Price"][x][1:]
-    
-    csvFile.to_csv(filePath, index = False)
+    df.to_csv(filePath, index=False)
 
 def addLot(lotStr, filePath):
-    csvFile = pd.read_csv(filePath)
-
-    newColumn = []
-    for x in csvFile.index:
-        newColumn.append(lotStr)
-        csvFile["Price Each"][x] = '$' + str((float(csvFile["Price Each"][x][1:]) * 1))
-    csvFile["Lot"] = newColumn
-
+    newCardsDf = pd.read_csv(filePath)
     inventory = pd.read_csv("inventory.csv")
-    for x in csvFile.index:
-        newRow = {'Quantity': csvFile["Quantity"][x], 'Name': csvFile["Name"][x], 'Set': csvFile["Set"][x], 'Foil': csvFile["Printing"][x],
-            'Condition': csvFile["Condition"][x], 'Language': csvFile["Language"][x], 'SKU': csvFile["SKU"][x], 'Price': csvFile["Price Each"][x], "Lot": csvFile["Lot"][x]}
+
+    for x in newCardsDf.index:
+        newCardsDf["Price Each"][x] = float(newCardsDf["Price Each"][x].strip("$"))
+        newRow = {
+            'Quantity': newCardsDf['Quantity'][x],
+            'Name': newCardsDf['Name'][x],
+            'Set': newCardsDf['Set'][x],
+            'Foil': newCardsDf['Printing'][x],
+            'Condition': newCardsDf['Condition'][x],
+            'Language': newCardsDf['Language'][x],
+            'SKU': newCardsDf['SKU'][x],
+            'Price': newCardsDf['Price Each'][x],
+            'Lot': lotStr
+        }
+
         inventory = pd.concat([inventory, pd.DataFrame([newRow])], ignore_index=True)
     inventory.to_csv("inventory.csv", index = False)
-    csvFile.to_csv(filePath, index = False)
 
-def removeUnder10Cents():
+def remove_prices_under_10_cents():
     filePath = getFilePath()
-    csvFile = pd.read_csv(filePath)
-    for x in csvFile.index:
-        if float(csvFile["Price Each"][x][1:]) < .1:
-            csvFile = csvFile.drop([x])
-    csvFile.to_csv(filePath, index = False)
-
-def findIn(filePath1, filePath2):
-    inventory = pd.read_csv(filePath1)
-    findCards = pd.read_csv(filePath2)
-    for x in findCards.index:
-        sum = 0
-        for y in inventory.index:
-            if inventory["Name"][y] == findCards["Name"][x]:
-                sum += int(inventory["Quantity"][y])
-        print(str(sum) + " " + findCards["Name"][x])
+    df = pd.read_csv(filePath)
+    prices = df["Price Each"].strip('$').astype(float)
+    df.drop(df[prices < 0.1].index, inplace=True)
+    df.to_csv(filePath, index=False)
 
 def combine_and_sum_quantity():
     csv_filename = getFilePath()
@@ -269,40 +218,10 @@ def combine_and_sum_quantity():
         writer = csv.writer(csvfile)
         writer.writerows(final_combined)
     return final_combined
-
+    
 def get_clean_data(data):
-    if data == '' :
-        return 1000
-    else:
-        return float(data)
+    return 0.01 if math.isnan(data) or data == '' else float(data)
 
-def change_prices():
-    """Change the prices of the cards in the csv file"""
-    flat_discount = 0
-    percent_discount = 1
-    csv_filename = getFilePath()
-    dict_list = []
-    with open(csv_filename, 'r') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            dict_list.append(row)
-    
-    for row in dict_list:
-        # tcg_low_with_shipping = get_clean_data(row['TCG Low Price With Shipping'])
-        tcg_low = get_clean_data(row['TCG Low Price'])
-        market_price = get_clean_data(row['TCG Market Price'])
-        row['TCG Marketplace Price'] = max((market_price * percent_discount) - flat_discount, tcg_low - .01, .01)
-    
-    with open(csv_filename, 'w', newline='') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=dict_list[0].keys())
-        writer.writeheader()
-        writer.writerows(dict_list)
-
-def remove_lot_2():
-    sales = pd.read_csv('sales.csv')
-    sales.drop('Lot', inplace=True, axis = 1)
-    sales = sales.rename(columns={'Lot2': 'Lot'})
-    sales.to_csv("sales.csv", index=False)
 
 def AddInvetoryAndChangeHeaders():
     emailCSVFilePath = EmailToCSV()
@@ -318,11 +237,15 @@ def FindAndPrintTCGPlayerSales(directory):
     pullSheetFileName = "TCGplayer_PullSheet"
     pullSheetFilePath = GetLastFile(directory, pullSheetFileName)
     pd.set_option("display.max_columns", 9)
-    start(pullSheetFilePath)
+    update_inventory_and_sales(pullSheetFilePath)
 
-def FindCardsInNewAndInventory():
-    fileName = getFilePath()
-    findIn("inventory.csv",fileName)
+def find_matching_cards():
+    filePath1 = "inventory.csv"
+    filePath2 = getFilePath()
+    inventory = pd.read_csv(filePath1, index_col=0)
+    findCards = pd.read_csv(filePath2, index_col=0)
+    matches = inventory.merge(findCards, on="Name", how="inner")
+    print(matches)
 
 def SortCSVByReleaseDate(filePath):
     newCardsdf = pd.read_csv(filePath)
@@ -333,28 +256,42 @@ def SortCSVByReleaseDate(filePath):
 
 def GetLastFile(dir_path, file_name_prefix):
     lastFile = None
-    # Iterate through all the files in the directory
     for file in os.listdir(dir_path):
-        # Check if the file name starts with the input prefix
         if file.startswith(file_name_prefix):
-            # Return the full path of the file
             lastFile = os.path.join(dir_path, file)
-    # If no file was found, return None
     return lastFile
+
+def get_revenue():
+    revenue_df = pd.read_csv("sales.csv")
+    revenue_df['Date'] = pd.to_datetime(revenue_df['Date'])
+    revenue_df = revenue_df[(revenue_df['Date'] > datetime.datetime(2022, 11, 13)) & (revenue_df['Date'] < datetime.datetime.now())]
+    revenue_df = revenue_df.groupby('Lot')['Price'].sum()
+    revenue_df = revenue_df.round(2)
+    revenue_df = revenue_df.reset_index()
+    revenue_df.to_csv('revenue2.csv', index=False, header=True)
+
+def adjust_card_prices(flat_discount: float = 0, percentage: float = 1) -> None:
+    """Change the prices of the cards in the CSV file"""
+    prices_file_name = getFilePath()
+    df = pd.read_csv(prices_file_name)
+    df['TCG Marketplace Price'] = df.apply(lambda row: max(
+        (get_clean_data(row["TCG Market Price"]) * percentage) - flat_discount - 0.01,
+        get_clean_data(row["TCG Low Price"]) - .01,
+        .01
+    ), axis=1)
+    df.to_csv(prices_file_name, index=False)
 
 DIRECTORY = config.DOWNLOADS_DIRECTORY
 
 commands = [
     {'text': 'Get cards from email then add to inventory then create email.csv', 'action': AddInvetoryAndChangeHeaders},
     {'text': 'Find and Print TCGPlayer Sales', 'action': lambda: FindAndPrintTCGPlayerSales(DIRECTORY)},
-    {'text': 'Remove cards worth less than $0.10 market price from a selected file','action': removeUnder10Cents},
-    {'text': 'Find cards that are in a selected file and in "inventory.csv"','action': FindCardsInNewAndInventory},
+    {'text': 'Remove cards worth less than $0.10 market price from a selected file','action': remove_prices_under_10_cents},
+    {'text': 'Find cards that are in a selected file and in "inventory.csv"','action': find_matching_cards},
     {'text': 'Combine duplicate cards in a selected file','action': combine_and_sum_quantity},
-    {'text': 'Remove Lot 2 from selected file and Fix Headers','action': remove_lot_2},
-    {'text': 'Calculate "profits.csv"','action': getProf},
-    {'text': 'Change Prices','action': change_prices}
+    {'text': 'Create "revenue.csv"','action': get_revenue},
+    {'text': 'Change Prices','action': adjust_card_prices}
 ]
 
 InputLoop(commands)
 
-# start("C:\\Users\\ferna\\Downloads\\TCGplayer_PullSheet_20240210_150903.csv")
