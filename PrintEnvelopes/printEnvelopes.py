@@ -13,7 +13,7 @@ import config
 
 # pyinstaller --onefile print_envelopes.py
 
-DIR_PATH = config.DIRECTORY + "\\TCGPlayer\\PrintEnvelopes\\"
+DIR_PATH = config.PROJECT_DIRECTORY + "\\TCGPlayer\\PrintEnvelopes\\"
 # DIR_PATH = os.path.dirname(os.path.realpath(__file__)) + '\\'
 
 def getCreds():
