@@ -35,7 +35,7 @@ def EmailToCSV():
         # 'https://www.googleapis.com/auth/gmail.labels']
     
     # DIR_PATH = os.path.dirname(os.path.realpath(__file__)) + '\\'
-    PRINT_ENVELOPES_PATH = config.DIRECTORY + "\\TCGPlayer\\PrintEnvelopes\\"
+    PRINT_ENVELOPES_PATH = config.PROJECT_DIRECTORY + "\\TCGPlayer\\PrintEnvelopes\\"
     # DIR_PATH = PrintEnvelopes.config.path
     CREDENTIAL_FILEPATH = PRINT_ENVELOPES_PATH + 'credentials.json'
     TOKEN_FILEPATH = PRINT_ENVELOPES_PATH + 'token.json'

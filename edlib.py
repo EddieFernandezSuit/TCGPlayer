@@ -17,9 +17,6 @@ def InputLoop(commands):
 
         commands[choice]['action']()
         print('Action Completed: ' + commands[choice]['text'])
-        
-        print('Goodbye')
-        break
 
 import pygame
 
@@ -32,7 +29,7 @@ class Game:
         self.clock = pygame.time.Clock()
         self.fontSize = 20
         self.myFont = pygame.font.SysFont("freesansbold", self.fontSize)
-        self.start
+        self.start()
         while True:
             self.update()
             self.draw()
