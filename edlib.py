@@ -1,8 +1,11 @@
+import pygame
+
 # Example Command
 # commands = [
 #     { 'text': 'Run Crypto Bela Strategy', 'action': CryptoBelaStrategyV2 },
 #     { 'text': 'Cancel All Open Orders', 'action': lambda: client.cancel_open_orders('BTCUSDT') },
 # ]
+
 def InputLoop(commands):
     commands.append({'text': 'Exit', 'action': ''})
     while True:
@@ -10,15 +13,12 @@ def InputLoop(commands):
             print(f'{i}: {commands[i]["text"]}')
         choice = int(input('Enter Choice: '))
 
-        
         if choice >= len(commands) - 1:
             print('Goodbye')
             break
 
         commands[choice]['action']()
         print('Action Completed: ' + commands[choice]['text'])
-
-import pygame
 
 class Game:
     def __init__(self):
@@ -46,3 +46,17 @@ class Game:
         self.screen.fill(self.colors.GREY)
         pygame.display.update()
         pass
+
+COLORS = {
+    "GREY": (150, 150, 150),
+    "BLACK": (0, 0, 0),
+    "RED": (255, 0, 0),
+    "GREEN": (0, 255, 0),
+    "BLUE": (0, 0, 255),
+    "YELLOW": (255, 255, 0),
+    "CYAN": (0, 255, 255),
+    "PINK": (220, 20, 60),
+    "PURPLE": (138, 43, 226),
+    "ORANGE": (255, 165, 0),
+    "WHITE": (255, 255, 255)
+}
