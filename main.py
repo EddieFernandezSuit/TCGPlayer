@@ -15,26 +15,11 @@ import config
 def moeny_to_float(s):
     return float(s.strip('$'))
 
-class Color:
-    GREY = (150, 150, 150)
-    BLACK = (0, 0, 0)
-    RED = (255, 0, 0)
-    GREEN = (0, 255, 0)
-    BLUE = (0, 0, 255)
-    YELLOW = (255, 255, 0)
-    CYAN = (0, 255, 255)
-    PINK = (220, 20, 60)
-    PURPLE = (138, 43, 226)
-    ORANGE = (255, 165, 0)
-    WHITE = (255, 255, 255)
-
 def fix_data():
-    sales = pd.read_csv("sales.csv")
-    for i, price in enumerate(sales["Price"]):
-        if math.isnan(price):
-            sales['Price'][i] = 0
-    inv = pd.DataFrame(sales)
-    inv.to_csv('sales.csv', index = False, header=True)
+    sales_filename = "sales.csv"
+    sales = pd.read_csv(sales_filename)
+    sales['Price Each'] = sales['Price Each'].fillna(0)
+    sales.to_csv(sales_filename, index=False, header=True)
 
 def replace(addCards):
     for suffix in [' - C', ' - L', ' - R', ' - U', ' - T'] + [' - #' + str(x) for x in reversed(range(500))]:
@@ -45,18 +30,9 @@ def orderSets():
     newCards = pd.read_csv(filePath)
     setOrder = pd.read_csv("setOrder.csv")
 
-    setOrderRows = setOrder.index
-    newCardsRows = newCards.index
-
-    for x in setOrderRows:
-        for y in newCardsRows:
-            if newCards['Set'][y] == setOrder['Set'][x]:
-                newRow = {'Product Line': newCards['Product Line'][y], 'Product Name': newCards['Product Name'][y], 'Condition': newCards['Condition'][y], 'Number': newCards['Number'][y],
-                                'Set': newCards['Set'][y], 'Rarity': newCards['Rarity'][y], 'Quantity': newCards['Quantity'][y], 'Main Photo URL': newCards['Main Photo URL'][y]}
-                newCards = newCards.append(newRow, ignore_index=True)
-
-    for x in newCardsRows:
-        newCards = newCards.drop([x])
+    newCards = pd.merge(newCards, setOrder, on='Set', how='left')
+    newCards = newCards.sort_values('Order')
+    newCards = newCards.drop('Order', axis=1)
 
     newCards.to_csv(filePath, index=False)
 
@@ -64,22 +40,31 @@ def removeParentheses(str):
     return re.sub(r"\([^()]*\)", "", str)
 
 def addLot(lotStr, filePath):
-    newCardsDf = pd.read_csv(filePath)
-    inventory = pd.read_csv("inventory.csv")
-    newCardsDf["Price Each"] = newCardsDf["Price Each"].str.strip("$").astype(float)
-    newCardsDf['Lot'] = lotStr
-    inventory = pd.concat([inventory, newCardsDf], ignore_index=True)
-    inventory.to_csv("inventory.csv", index = False)
+    new_cards_df = pd.read_csv(filePath)
+    inventory_filename = 'inventory.csv'
+    inventory = pd.read_csv(inventory_filename)
+
+    new_cards_df["Price Each"] = new_cards_df["Price Each"].str.strip("$").astype(float)
+    new_cards_df['Lot'] = lotStr
+
+    new_cards_df.loc[new_cards_df['Foil'] == 'Foil', 'Condition'] = new_cards_df['Condition'] + ' Foil'
+    new_cards_df.loc[new_cards_df['Language'] != 'English', 'Condition'] = new_cards_df['Condition'] + ' - ' + new_cards_df['Language']
+
+    inventory = pd.concat([inventory, new_cards_df], ignore_index=True)
+    inventory.to_csv(inventory_filename, index = False)
 
 def update_headers(filePath):
     df = pd.read_csv(filePath)
-    df = df.rename(columns={"Quantity":"Add to Quantity","Name":"Product Name","Set":"Set Name","SKU":"TCGplayer Id","Price Each":"TCG Marketplace Price"}, inplace=True)
+    df = df.rename(columns={"Quantity":"Add to Quantity","Name":"Product Name","Set":"Set Name","SKU":"TCGplayer Id","Price Each":"TCG Marketplace Price"})
     new_cols = ["Product Line", "Title", "Number", "Rarity", "TCG Market Price","TCG Direct Low","TCG Low Price With Shipping","TCG Low Price","Total Quantity","Photo URL"]
-    df = df.assign(**{k:'' for k in new_cols})
-    df["Product Line"] = df["Product Line"].apply(lambda x: 'Magic' if x == '' else x)
-    df["Condition"] = df["Condition"].apply(lambda x: x.strip() + ' ' + df["Printing"] if df["Printing"] != 'Normal' else x.strip())
-    df["Condition"] = df["Condition"].apply(lambda x: x.strip() + ' - ' + df["Language"] if df["Language"] != 'English' else x.strip())
-    df["TCG Marketplace Price"] = df["TCG Marketplace Price"].apply(lambda x: x.strip('$'))
+    # df = df.assign(**{k:'' for k in new_cols})
+    df = pd.concat([df, pd.DataFrame(columns=new_cols)])
+    # df["Product Line"] = df["Product Line"].apply(lambda x: 'Magic' if x == '' else x)
+    df["Product Line"] = df["Product Line"].replace('', 'Magic')
+    df["Condition"] = df["Condition"].apply(lambda x: x + ' ' + df["Printing"] if df["Printing"] != 'Normal' else x)
+    df["Condition"] = df["Condition"].apply(lambda x: x + ' - ' + df["Language"] if df["Language"] != 'English' else x)
+    # df["TCG Marketplace Price"] = df["TCG Marketplace Price"].apply(lambda x: x.strip('$'))
+    df["TCG Marketplace Price"] = df["TCG Marketplace Price"].str.strip('$')
     df.to_csv(filePath, index=False)
 
 def get_clean_data(data):
@@ -122,55 +107,45 @@ def update_inventory_and_sales(directory):
     sales_df = pd.read_csv(salesFileName)
     inventory_df = pd.read_csv(inventoryFileName)
 
-
     shipType = 'direct' if 'Card Name' in cards_df.columns else 'normal'
 
-    cards_df = cards_df.rename(columns={
-        'Card Name': 'Name',
-        'Set Name': 'Set',
-        'Product Name': 'Name'
-    })
+    pricing_df = pricing_df.rename(columns={"Set Name": "Set"})
 
     for j in range(len(cards_df.index) - 1 ):
         quantity = int(cards_df["Quantity"][j])
 
-        salesNewRow = {
-            'Name': cards_df["Name"][j],
-            'Set': cards_df["Set"][j],
-            'Condition': cards_df['Condition'][j],
-            'Lot': -1,
-            'Price': 0,
-            'Date': datetime.date.today(),
-            'ShipType': shipType
-        }
+        sales_new_row = pd.DataFrame({
+            'Product Name': [cards_df["Product Name"][j]],
+            'Set': [cards_df["Set"][j]],
+            'Condition': [cards_df['Condition'][j]],
+            'Lot': [-1],
+            'Price Each': [0],
+            'Date': [datetime.date.today()],
+            'ShipType': [shipType]
+        })
 
-        newCardisFoil = cards_df['Condition'][j][-4:] == "Foil"
-        seperatedCondition = cards_df['Condition'][j][:-5] if newCardisFoil else cards_df["Condition"][j]
-        seperatedFoil = "Foil" if newCardisFoil else "Normal"
-
-        filteredCurrentCardPrices = pricing_df[(pricing_df["Product Name"] == salesNewRow['Name'])
-            & (pricing_df["Set Name"] == salesNewRow['Set'])
-            & (pricing_df["Condition"] == salesNewRow['Condition'])]
+        filtered_current_card_prices = pricing_df[(pricing_df["Product Name"] == sales_new_row['Product Name'].iloc[0])
+            & (pricing_df["Set"] == sales_new_row['Set'].iloc[0])
+            & (pricing_df["Condition"] == sales_new_row['Condition'].iloc[0])]
+        
+        matchingRows = inventory_df.loc[(inventory_df["Product Name"] == sales_new_row['Product Name'].iloc[0])
+            & (inventory_df["Set"] == sales_new_row['Set'].iloc[0])
+            & (inventory_df["Condition"] == sales_new_row['Condition'].iloc[0])]
         
         for _ in range(quantity):
-            if not filteredCurrentCardPrices.empty:
-                salesNewRow['Price'] = float(filteredCurrentCardPrices["TCG Marketplace Price"].iloc[0])
+            if not filtered_current_card_prices.empty:
+                sales_new_row['Price'] = [float(filtered_current_card_prices["TCG Marketplace Price"].iloc[0])]
 
-            matchingRows = inventory_df.loc[(inventory_df["Name"] == salesNewRow['Name'])
-                & (inventory_df["Set"] == salesNewRow['Set'])
-                & (inventory_df["Condition"] == seperatedCondition)
-                & (inventory_df["Foil"] == seperatedFoil)]
-            
             if not matchingRows.empty:
                 index = matchingRows.index[0]
-                salesNewRow['Lot'] = int(inventory_df["Lot"][index])
+                sales_new_row['Lot'] = [int(inventory_df["Lot"][index])]
 
                 inventory_df.at[index, "Quantity"] -= 1
 
                 if int(inventory_df["Quantity"][index]) == 0:
                     inventory_df = inventory_df.drop([index])
 
-            sales_df = pd.concat([sales_df, pd.DataFrame.from_records([salesNewRow])])
+            sales_df = pd.concat([sales_df, sales_new_row])
         
     inventory_df.to_csv(inventoryFileName, index=False)
     sales_df.to_csv(salesFileName, index=False)
@@ -231,4 +206,62 @@ commands = [
     {'text': 'Change Prices','action': adjust_card_prices}
 ]
 
-InputLoop(commands)
+# InputLoop(commands)
+
+
+
+
+def update_inventory_and_sales2(directory):
+    shippingFileName = "_TCGplayer_ShippingExport"
+    pullSheetFileName = "TCGplayer_PullSheet"
+    pricingFileName = "TCGplayer__MyPricing"
+    salesFileName = "sales.csv"
+    inventoryFileName = 'inventory.csv'
+
+    shippingFilePath = get_newest_file_matching_prefix(directory, shippingFileName)
+    pullSheetFilePath = get_newest_file_matching_prefix(directory, pullSheetFileName)
+    pricingFilePath = get_newest_file_matching_prefix(directory, pricingFileName)
+
+    printFromCsv(shippingFilePath)
+
+    cards_df = pd.read_csv(pullSheetFilePath)
+    pricing_df = pd.read_csv(pricingFilePath)
+    sales_df = pd.read_csv(salesFileName)
+    inventory_df = pd.read_csv(inventoryFileName)
+
+    shipType = 'direct' if 'Card Name' in cards_df.columns else 'normal'
+
+    pricing_df = pricing_df.rename(columns={"Set Name": "Set"})
+
+    for j in range(len(cards_df.index) - 1):
+        quantity = int(cards_df["Quantity"][j])
+
+        filtered_current_card_prices = pricing_df[(pricing_df["Product Name"] == cards_df["Product Name"][j])
+                & (pricing_df["Set Name"] == cards_df["Set"][j])
+                & (pricing_df["Condition"] == cards_df['Condition'][j])]
+        
+        matchingRows = inventory_df.loc[(inventory_df["Product Name"] == cards_df["Product Name"][j])
+                & (inventory_df["Set"] == cards_df["Set"][j])
+                & (inventory_df["Condition"] == cards_df['Condition'][j])]
+        
+        for _ in range(quantity):
+            if not filtered_current_card_prices.empty:
+                cards_df.at[j, 'Price'] = float(filtered_current_card_prices["TCG Marketplace Price"].iloc[0])
+
+            if not matchingRows.empty:
+                index = matchingRows.index[0]
+                cards_df.at[j, 'Lot'] = inventory_df.at[index, "Lot"]
+
+                inventory_df.at[index, "Quantity"] -= 1
+
+                if inventory_df.at[index, "Quantity"] == 0:
+                    inventory_df = inventory_df.drop([index])
+
+            sales_df = pd.concat([sales_df, cards_df.iloc[j:j+1]])
+        
+    inventory_df.to_csv(inventoryFileName, index=False)
+    sales_df.to_csv(salesFileName, index=False)
+
+    os.remove(shippingFilePath)
+    os.remove(pullSheetFilePath)
+    os.remove(pricingFilePath)
