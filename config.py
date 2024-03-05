@@ -1,3 +1,3 @@
 DOWNLOADS_DIRECTORY="C:\\Users\\ferna\\Downloads"
-PROJECT_DIRECTORY="C:\\Users\\ferna\\Downloads\\Github"
+PROJECT_DIRECTORY="C:\\Users\\ferna\\Downloads\\Github\\TCGPLAYER\\"
 
