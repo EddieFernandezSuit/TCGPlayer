@@ -1,78 +1,38 @@
-from PrintEnvelopes.getFilePath import getFilePath
-from PrintEnvelopes.printEnvelopes import printFromCsv
-from PrintEnvelopes.readGmail import EmailToCSV
+from print_envelopes.get_file_path import get_file_path
+from print_envelopes.print_envelopes import print_from_csv
+from print_envelopes.read_gmail import email_to_csv
 from edlib import InputLoop
 import datetime
 import pandas as pd
-import math
+import numpy as np
 import os
-import re
-import csv
 import config
 
 # python -m PyInstaller main.py
 
-def moeny_to_float(s):
-    return float(s.strip('$'))
-
-def fix_data():
-    sales_filename = "sales.csv"
-    sales = pd.read_csv(sales_filename)
-    sales['Price Each'] = sales['Price Each'].fillna(0)
-    sales.to_csv(sales_filename, index=False, header=True)
-
-def replace(addCards):
+def replace(add_cards):
     for suffix in [' - C', ' - L', ' - R', ' - U', ' - T'] + [' - #' + str(x) for x in reversed(range(500))]:
-        addCards["Name"] = addCards["Name"].str.replace(suffix, '')
+        add_cards["Name"] = add_cards["Name"].str.replace(suffix, '')
 
-def orderSets():
-    filePath = getFilePath()
-    newCards = pd.read_csv(filePath)
-    setOrder = pd.read_csv("setOrder.csv")
+def order_by_set():
+    new_cards_file_path = get_file_path()
+    set_order_file_path = "data/set_order.csv.csv"
 
-    newCards = pd.merge(newCards, setOrder, on='Set', how='left')
-    newCards = newCards.sort_values('Order')
-    newCards = newCards.drop('Order', axis=1)
+    new_cards = pd.read_csv(new_cards_file_path)
+    set_order = pd.read_csv(set_order_file_path)
 
-    newCards.to_csv(filePath, index=False)
+    new_cards = pd.merge(new_cards, set_order, on='Set', how='left')
+    new_cards = new_cards.sort_values('Order')
+    new_cards = new_cards.drop('Order', axis=1)
+    new_cards.to_csv(new_cards_file_path, index=False)
 
-def removeParentheses(str):
-    return re.sub(r"\([^()]*\)", "", str)
+def get_file_matching_prefix(dir_path, file_name_prefix):
+    matching_files = [file for file in os.listdir(dir_path) if file.startswith(file_name_prefix)]
+    last_file = os.path.join(dir_path, max(matching_files)) if matching_files else None 
+    return last_file
 
-
-def get_clean_data(data):
-    return 0.01 if math.isnan(data) or data == '' else float(data)
-
-def SortCSVByReleaseDate(filePath):
-    newCardsdf = pd.read_csv(filePath)
-    newCardsdf['Set Release Date'] = pd.to_datetime(newCardsdf['Set Release Date'])
-    newCardsdf = newCardsdf.sort_values(by=['Set Release Date'], ascending=False)
-    newCardsdf.to_csv(filePath, index = False)
-
-def get_newest_file_matching_prefix(dir_path, file_name_prefix):
-    lastFile = None
-    for file in os.listdir(dir_path):
-        if file.startswith(file_name_prefix):
-            lastFile = os.path.join(dir_path, file)
-    return lastFile
-
-def addLot(new_cards_df):
-    lot = input('Enter Lot number: ')
-    new_cards_df['Lot'] = lot
-    inventory_filename = 'inventory.csv'
-    inventory = pd.read_csv(inventory_filename)
-    inventory = pd.concat([inventory, new_cards_df], ignore_index=True)
-    inventory.to_csv(inventory_filename, index = False)
-
-def update_headers(new_cards_df):
-    new_cards_df = new_cards_df.rename(columns={"Quantity":"Add to Quantity","Name":"Product Name","Set":"Set Name","SKU":"TCGplayer Id","Price Each":"TCG Marketplace Price"})
-    new_cols = ["Product Line", "Title", "Number", "Rarity", "TCG Market Price","TCG Direct Low","TCG Low Price With Shipping","TCG Low Price","Total Quantity","Photo URL"]
-    new_cards_df = new_cards_df.assign(**{col: '' for col in new_cols})
-    new_cards_df["Product Line"] = new_cards_df["Product Line"].replace('', 'Magic')
-    return new_cards_df
-
-def add_inventory_and_change_headers():
-    email_cards_file_path = EmailToCSV()
+def proccess_new_cards():
+    email_cards_file_path = email_to_csv()
     new_cards_df = pd.read_csv(email_cards_file_path)
 
     def update_condition(row):
@@ -89,7 +49,7 @@ def add_inventory_and_change_headers():
 
     lot = input('Enter Lot number: ')
     new_cards_df['Lot'] = lot
-    inventory_filename = 'inventory.csv'
+    inventory_filename = 'data/inventory.csv'
     inventory = pd.read_csv(inventory_filename)
     inventory = pd.concat([inventory, new_cards_df], ignore_index=True)
     inventory.to_csv(inventory_filename, index = False)
@@ -100,24 +60,18 @@ def add_inventory_and_change_headers():
 
     new_cards_df.to_csv(email_cards_file_path, index=False)
 
-
 def update_inventory_and_sales(directory):
-    shippingFileName = "_TCGplayer_ShippingExport"
-    pullSheetFileName = "TCGplayer_PullSheet"
-    pricingFileName = "TCGplayer__MyPricing"
-    salesFileName = "sales.csv"
-    inventoryFileName = 'inventory.csv'
+    prefixes = ["_TCGplayer_ShippingExport","TCGplayer_PullSheet","TCGplayer__MyPricing"]
 
-    shippingFilePath = get_newest_file_matching_prefix(directory, shippingFileName)
-    pullSheetFilePath = get_newest_file_matching_prefix(directory, pullSheetFileName)
-    pricingFilePath = get_newest_file_matching_prefix(directory, pricingFileName)
+    shipping_file_path, pullsheet_file_path, pricing_file_path = [get_file_matching_prefix(directory, prefix) for prefix in prefixes]
 
-    printFromCsv(shippingFilePath)
+    print_from_csv(shipping_file_path)
 
-    cards_df = pd.read_csv(pullSheetFilePath)
-    pricing_df = pd.read_csv(pricingFilePath)
-    sales_df = pd.read_csv(salesFileName)
-    inventory_df = pd.read_csv(inventoryFileName)
+    inventory_filename = "data/inventory.csv"
+    sales_filename = "data/sales.csv"
+
+    file_paths = [pullsheet_file_path, pricing_file_path, sales_filename, inventory_filename]
+    cards_df, pricing_df, sales_df, inventory_df = [pd.read_csv(file_path) for file_path in file_paths]
 
     pricing_df = pricing_df.rename(columns={'TCG Marketplace Price': 'Price Each', "Set Name": "Set"})
 
@@ -128,7 +82,7 @@ def update_inventory_and_sales(directory):
     new_columns = {'Lot':0,'ShipType':'normal','Date':datetime.date.today()}
     cards_df = cards_df.assign(**new_columns)
 
-    for index, row in cards_df.iterrows():    
+    for index, row in cards_df.iterrows():
         for _ in range(int(quantity_series[index])):
             matching_inventory = inventory_df[(inventory_df["Product Name"] == cards_df["Product Name"][index])
                     & (inventory_df["Set"] == cards_df["Set"][index])
@@ -145,62 +99,65 @@ def update_inventory_and_sales(directory):
 
             sales_df = pd.concat([sales_df, cards_df.iloc[index:index+1]])
         
-    inventory_df.to_csv(inventoryFileName, index=False)
-    sales_df.to_csv(salesFileName, index=False)
+    inventory_df.to_csv(inventory_filename, index=False)
+    sales_df.to_csv(sales_filename, index=False)
 
-    os.remove(shippingFilePath)
-    os.remove(pullSheetFilePath)
-    os.remove(pricingFilePath)
+    os.remove(shipping_file_path)
+    os.remove(pullsheet_file_path)
+    os.remove(pricing_file_path)
 
-def remove_prices_under_10_cents():
-    filePath = getFilePath()
-    df = pd.read_csv(filePath)
-    prices = df["Price Each"].str.replace('$','').astype(float)
+def remove_cards_under_10_cents():
+    cards_file_path = get_file_path()
+    df = pd.read_csv(cards_file_path)
+    prices = df["Price Each"].str.strip('$').astype(float)
     df.drop(df[prices < 0.1].index, inplace=True)
-    df.to_csv(filePath, index=False)
+    df.to_csv(cards_file_path, index=False)
 
 def find_matching_cards():
-    filePath1 = "inventory.csv"
-    filePath2 = getFilePath()
-    inventory = pd.read_csv(filePath1, index_col=0)
-    findCards = pd.read_csv(filePath2, index_col=0)
-    matches = inventory.merge(findCards, on="Name", how="inner")
-    print(matches)
+    inventory_file_path = "data/inventory.csv"
+    cards_file_path = get_file_path()
+
+    inventory_df = pd.read_csv(inventory_file_path)
+    cards_df = pd.read_csv(cards_file_path)
+
+    matching_cards_df = inventory_df.merge(cards_df, on="Name", how="inner")
+    return matching_cards_df
 
 def merge_duplicates():
-    csv_filename = getFilePath()
+    csv_filename = get_file_path()
     df = pd.read_csv(csv_filename)
     df = df.groupby(['Product Name', 'Set Name', 'Printing', 'Condition', 'Language', 'TCGplayer Id', 'TCG Marketplace Price'], as_index=False)['Add to Quantity'].sum()
     df.to_csv(csv_filename, index=False)
     
 def get_revenue():
-    revenue_df = pd.read_csv("sales.csv")
+    revenue_df = pd.read_csv("data/sales.csv")
     revenue_df['Date'] = pd.to_datetime(revenue_df['Date'])
     revenue_df = revenue_df[(revenue_df['Date'] > datetime.datetime(2022, 11, 13)) & (revenue_df['Date'] < datetime.datetime.now())]
     revenue_df = revenue_df.groupby('Lot')['Price'].sum()
     revenue_df = revenue_df.round(2)
-    revenue_df.to_csv('revenue.csv', index=False, header=True)
+    revenue_df.to_csv('data/revenue.csv', index=False, header=True)
 
-def adjust_card_prices(flat_discount: float = 0, percentage: float = 1) -> None:
+def adjust_card_prices(flat_discount: float = 0.01, percentage: float = 1) -> None:
     """Change the prices of the cards in the CSV file"""
-    prices_file_name = getFilePath()
+    prices_file_name = get_file_path()
     df = pd.read_csv(prices_file_name)
-    df['TCG Marketplace Price'] = df.apply(lambda row: max(
-        (get_clean_data(row["TCG Market Price"]) * percentage) - flat_discount - 0.01,
-        get_clean_data(row["TCG Low Price"]) - .01,
-        .01
-    ), axis=1)
+
+    df['TCG Market Price'] = df['TCG Market Price'].fillna(0.01)
+    df['TCG Low Price'] = df['TCG Low Price'].fillna(0.01)
+
+    df['TCG Marketplace Price'] = np.maximum((df["TCG Market Price"] * percentage), df["TCG Low Price"], flat_discount + .01) - flat_discount
+
     df.to_csv(prices_file_name, index=False)
 
 DIRECTORY = config.DOWNLOADS_DIRECTORY
 
 commands = [
-    {'text': 'Get cards from email then add to inventory then create email.csv', 'action': add_inventory_and_change_headers},
+    {'text': 'Get cards from email then add to inventory then create email.csv', 'action': proccess_new_cards},
     {'text': 'Find and Print TCGPlayer Sales', 'action': lambda: update_inventory_and_sales(DIRECTORY)},
-    {'text': 'Remove cards worth less than $0.10 market price from a selected file','action': remove_prices_under_10_cents},
-    {'text': 'Find cards that are in a selected file and in "inventory.csv"','action': find_matching_cards},
+    {'text': 'Remove cards worth less than $0.10 market price from a selected file','action': remove_cards_under_10_cents},
+    {'text': 'Find cards that are in a selected file and in "data/inventory.csv"','action': find_matching_cards},
     {'text': 'Combine duplicate cards in a selected file','action': merge_duplicates},
-    {'text': 'Create "revenue.csv"','action': get_revenue},
+    {'text': 'Create "data/revenue.csv"','action': get_revenue},
     {'text': 'Change Prices','action': adjust_card_prices}
 ]
 

@@ -303,9 +303,9 @@ struct ParquetFactoryOptions {
   /// Example:
   /// partition_base_dir = "/dataset";
   ///
-  /// - "/dataset/US/sales.csv" -> "US/sales.csv" will be given to the partitioning
+  /// - "/dataset/US/data/sales.csv" -> "US/data/sales.csv" will be given to the partitioning
   ///
-  /// - "/home/john/late_sales.csv" -> Will be ignored for partition discovery.
+  /// - "/home/john/late_data/sales.csv" -> Will be ignored for partition discovery.
   ///
   /// This is useful for partitioning which parses directory when ordering
   /// is important, e.g. DirectoryPartitioning.
