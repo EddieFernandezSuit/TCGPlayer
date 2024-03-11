@@ -137,17 +137,25 @@ def get_revenue():
     revenue_df = revenue_df.round(2)
     revenue_df.to_csv('data/revenue.csv', index=False, header=True)
 
-def adjust_card_prices(flat_discount: float = 0.01, percentage: float = 1) -> None:
+def adjust_card_prices(flat_discount: float = 0.02, percentage: float = 0.95):
     """Change the prices of the cards in the CSV file"""
     prices_file_name = get_file_path()
     df = pd.read_csv(prices_file_name)
 
     df['TCG Market Price'] = df['TCG Market Price'].fillna(0.01)
     df['TCG Low Price'] = df['TCG Low Price'].fillna(0.01)
-
-    df['TCG Marketplace Price'] = np.maximum((df["TCG Market Price"] * percentage), df["TCG Low Price"], flat_discount + .01) - flat_discount
+    def calculate_price(row, percentage, flat_discount):
+        return max((row["TCG Market Price"] * percentage) - flat_discount, row["TCG Low Price"] - flat_discount, .01)
+    df['TCG Marketplace Price'] = df.apply(lambda row: calculate_price(row, percentage, flat_discount), axis=1)
 
     df.to_csv(prices_file_name, index=False)
+
+def inventory_value_change_over_time():
+    inventory_file_paths = [get_file_path(), get_file_path()]
+    inventory_dfs = [pd.read_csv(inventory_file_path) for inventory_file_path in inventory_file_paths]
+    individual_values_dfs = [inventory_dfs[0]['Total Quantity'] * inventory_df['TCG Market Price'] for inventory_df in inventory_dfs]
+    total_values = [individual_values_df.aggregate(['sum'])['sum'] for individual_values_df in individual_values_dfs]
+    print(total_values)
 
 DIRECTORY = config.DOWNLOADS_DIRECTORY
 
@@ -158,7 +166,8 @@ commands = [
     {'text': 'Find cards that are in a selected file and in "data/inventory.csv"','action': find_matching_cards},
     {'text': 'Combine duplicate cards in a selected file','action': merge_duplicates},
     {'text': 'Create "data/revenue.csv"','action': get_revenue},
-    {'text': 'Change Prices','action': adjust_card_prices}
+    {'text': 'Change Prices','action': adjust_card_prices},
+    {'text': 'Analyze value change over time', 'action': inventory_value_change_over_time}
 ]
 
 InputLoop(commands)
