@@ -157,6 +157,18 @@ def inventory_value_change_over_time():
     total_values = [individual_values_df.aggregate(['sum'])['sum'] for individual_values_df in individual_values_dfs]
     print(total_values)
 
+def sort_cards():
+    file_path = get_file_path()
+    df = pd.read_csv(file_path)
+    df = df.drop(df.tail(1).index)
+    sets = df['Set']
+    sets = sets.drop_duplicates()
+    print(sets)
+    df.Set = df.Set.astype("category")
+    df.Set = df.Set.cat.set_categories(sets)
+    df = df.sort_values(['Set', 'Product Name'])
+    df.to_csv('new.csv')
+
 DIRECTORY = config.DOWNLOADS_DIRECTORY
 
 commands = [
@@ -167,7 +179,8 @@ commands = [
     {'text': 'Combine duplicate cards in a selected file','action': merge_duplicates},
     {'text': 'Create "data/revenue.csv"','action': get_revenue},
     {'text': 'Change Prices','action': adjust_card_prices},
-    {'text': 'Analyze value change over time', 'action': inventory_value_change_over_time}
+    {'text': 'Analyze value change over time', 'action': inventory_value_change_over_time},
+    {'text': 'Sort cards by set', 'action': sort_cards}
 ]
 
-InputLoop(commands)
+InputLoop(commands, False)
