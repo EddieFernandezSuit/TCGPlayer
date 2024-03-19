@@ -12,7 +12,7 @@ import config
 
 def order_by_set():
     new_cards_file_path = get_file_path()
-    set_order_file_path = "data/set_order.csv.csv"
+    set_order_file_path = config.PROJECT_DIRECTORY + "data/set_order.csv.csv"
 
     new_cards = pd.read_csv(new_cards_file_path)
     set_order = pd.read_csv(set_order_file_path)
@@ -47,7 +47,7 @@ def proccess_new_cards():
     lot = input('Enter Lot number: ')
     new_cards_df['Lot'] = lot
 
-    inventory_filename = 'data/inventory.csv'
+    inventory_filename = config.PROJECT_DIRECTORY + 'data/inventory.csv'
     inventory = pd.read_csv(inventory_filename)
     inventory = pd.concat([inventory, new_cards_df], ignore_index=True)
     inventory.to_csv(inventory_filename, index = False)
@@ -65,8 +65,8 @@ def update_inventory_and_sales(directory):
 
     print_from_csv(shipping_file_path)
 
-    inventory_filename = "data/inventory.csv"
-    sales_filename = "data/sales.csv"
+    inventory_filename = config.PROJECT_DIRECTORY + "data/inventory.csv"
+    sales_filename = config.PROJECT_DIRECTORY + "data/sales.csv"
 
     file_paths = [pullsheet_file_path, pricing_file_path, sales_filename, inventory_filename]
     cards_df, pricing_df, sales_df, inventory_df = [pd.read_csv(file_path) for file_path in file_paths]
@@ -112,7 +112,7 @@ def remove_cards_under_10_cents():
     df.to_csv(cards_file_path, index=False)
 
 def find_matching_cards():
-    inventory_file_path = "data/inventory.csv"
+    inventory_file_path = config.PROJECT_DIRECTORY + "data/inventory.csv"
     cards_file_path = get_file_path()
 
     inventory_df = pd.read_csv(inventory_file_path)
@@ -128,12 +128,12 @@ def merge_duplicates():
     df.to_csv(csv_filename, index=False)
     
 def get_revenue():
-    revenue_df = pd.read_csv("data/sales.csv")
+    revenue_df = pd.read_csv(config.PROJECT_DIRECTORY + "data/sales.csv")
     revenue_df['Date'] = pd.to_datetime(revenue_df['Date'])
     revenue_df = revenue_df[(revenue_df['Date'] > datetime.datetime(2022, 11, 13)) & (revenue_df['Date'] < datetime.datetime.now())]
     revenue_df = revenue_df.groupby('Lot')['Price'].sum()
     revenue_df = revenue_df.round(2)
-    revenue_df.to_csv('data/revenue.csv', index=False, header=True)
+    revenue_df.to_csv(config.PROJECT_DIRECTORY + 'data/revenue.csv', index=False, header=True)
 
 def adjust_card_prices(flat_discount: float = 0.02, percentage: float = 0.95):
     """Change the prices of the cards in the CSV file"""
