@@ -36,7 +36,6 @@ def proccess_new_cards():
     new_cards_df = pd.read_csv(email_cards_file_path)
 
     def update_condition(row):
-        print(row)
         condition = row['Condition']
         if row['Printing'] == 'Foil':
             condition += ' Foil'
@@ -46,9 +45,12 @@ def proccess_new_cards():
     
     new_cards_df['Condition'] = new_cards_df.apply(update_condition, axis=1)
     new_cards_df["Price Each"] = new_cards_df["Price Each"].str.strip("$").astype(float)
+    new_cards_df = new_cards_df.drop('Printing', axis=1)
+    new_cards_df = new_cards_df.drop('Language', axis=1)
 
     lot = input('Enter Lot number: ')
     new_cards_df['Lot'] = lot
+
     inventory_filename = 'data/inventory.csv'
     inventory = pd.read_csv(inventory_filename)
     inventory = pd.concat([inventory, new_cards_df], ignore_index=True)

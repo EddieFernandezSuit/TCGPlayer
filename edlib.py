@@ -6,8 +6,9 @@ import pygame
 #     { 'text': 'Cancel All Open Orders', 'action': lambda: client.cancel_open_orders('BTCUSDT') },
 # ]
 
-def InputLoop(commands, loop = True):
+def InputLoop(commands, repeat = True):
     commands.append({'text': 'Exit', 'action': ''})
+    loop = True
     while loop:
         for i in range(len(commands)):
             print(f'{i}: {commands[i]["text"]}')
@@ -19,6 +20,7 @@ def InputLoop(commands, loop = True):
 
         commands[choice]['action']()
         print('Action Completed: ' + commands[choice]['text'])
+        loop = repeat
 
 
 class Game:
