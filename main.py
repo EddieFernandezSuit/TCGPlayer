@@ -10,10 +10,6 @@ import config
 
 # python -m PyInstaller main.py
 
-def replace(add_cards):
-    for suffix in [' - C', ' - L', ' - R', ' - U', ' - T'] + [' - #' + str(x) for x in reversed(range(500))]:
-        add_cards["Name"] = add_cards["Name"].str.replace(suffix, '')
-
 def order_by_set():
     new_cards_file_path = get_file_path()
     set_order_file_path = "data/set_order.csv.csv"
