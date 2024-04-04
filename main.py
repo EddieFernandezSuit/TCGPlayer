@@ -1,4 +1,4 @@
-from print_envelopes.get_file_path import get_file_path
+from utils import get_file_path
 from print_envelopes.print_envelopes import print_from_csv
 from print_envelopes.read_gmail import email_to_csv
 from edlib import InputLoop
@@ -64,7 +64,6 @@ def update_inventory_and_sales(directory):
     shipping_file_path, pullsheet_file_path, pricing_file_path = [get_file_matching_prefix(directory, prefix) for prefix in prefixes]
 
     print_from_csv(shipping_file_path)
-
     inventory_filename = config.PROJECT_DIRECTORY + "data/inventory.csv"
     sales_filename = config.PROJECT_DIRECTORY + "data/sales.csv"
 
@@ -82,7 +81,7 @@ def update_inventory_and_sales(directory):
 
     for index, row in cards_df.iterrows():
         for _ in range(int(quantity_series[index])):
-            matching_inventory = inventory_df[(inventory_df["Product Name"] == cards_df["Product Name"][index])
+            matching_inventory = inventory_df[(inventory_df["Name"] == cards_df["Product Name"][index])
                     & (inventory_df["Set"] == cards_df["Set"][index])
                     & (inventory_df["Condition"] == cards_df['Condition'][index])]
             
@@ -101,7 +100,6 @@ def update_inventory_and_sales(directory):
     sales_df.to_csv(sales_filename, index=False)
 
     os.remove(shipping_file_path)
-    os.remove(pullsheet_file_path)
     os.remove(pricing_file_path)
 
 def remove_cards_under_10_cents():
