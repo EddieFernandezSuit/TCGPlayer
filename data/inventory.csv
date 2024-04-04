@@ -44,9 +44,7 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,"Jacob Hauken, Inspector",Innistrad: Crimson Vow,Near Mint,5309662,0.51,0
 3,Mirrorhall Mimic,Innistrad: Crimson Vow,Near Mint,5272231,1.04,0
 1,Old Rutstein (Showcase),Innistrad: Crimson Vow,Near Mint Foil,5272496,0.35,0
-1,Vampire Scrivener,Streets of New Capenna,Near Mint Foil,5502923,0.17,0
 4,Runo Stromkirk,Innistrad: Crimson Vow,Near Mint,5256129,0.17,0
-1,"Torens, Fist of the Angels (Showcase)",Innistrad: Crimson Vow,Near Mint Foil,5255449,0.43,0
 1,Volatile Arsonist (Extended Art),Innistrad: Crimson Vow,Near Mint Foil,5264630,1.41,0
 1,Copy Token,Innistrad: Crimson Vow,Near Mint,5312486,1.24,0
 7,Forest (276),Innistrad: Crimson Vow,Near Mint Foil,5267377,0.97,0
@@ -60,7 +58,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 2,By Invitation Only Art Card (Gold-Stamped Signature),Art Series: Innistrad: Crimson Vow,Near Mint,5311341,0.59,0
 1,Sorin the Mirthless (2/81) Art Card,Art Series: Innistrad: Crimson Vow,Near Mint,5310406,0.83,0
 1,Sorin the Mirthless (1/81) Art Card,Art Series: Innistrad: Crimson Vow,Near Mint,5310316,0.26,0
-1,Plains (78/81) Art Card,Art Series: Innistrad: Crimson Vow,Near Mint,5318346,0.66,0
 1,Can't Stay Away (Extended Art),Innistrad: Midnight Hunt,Near Mint Foil,5161902,1.53,0
 1,Faithful Mending,Innistrad: Midnight Hunt,Near Mint Foil,5165626,1.62,0
 1,Outland Liberator,Innistrad: Midnight Hunt,Near Mint,5190067,0.38,0
@@ -80,7 +77,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 2,Pyromantic Pilgrim,Dominaria,Near Mint,3634685,0.34,0
 1,Concealed Courtyard,Kaladesh,Near Mint Foil,3200284,5.85,0
 1,Winding Constrictor,Mystery Booster Cards,Near Mint,4275545,0.43,0
-1,Blossoming Defense,Kaladesh,Near Mint,3202202,0.7,0
 2,Gloomwidow,Shadows over Innistrad,Near Mint Foil,3102641,0.22,0
 1,Imprisoned in the Moon,Eldritch Moon,Near Mint,3158344,1.35,0
 1,Lambholt Pacifist,Shadows over Innistrad,Near Mint,3103586,0.2,0
@@ -130,25 +126,21 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Monstrous Carabid,Alara Reborn,Near Mint,262694,0.15,0
 2,Mistvein Borderpost,Alara Reborn,Near Mint,262791,0.24,0
 2,Wildfield Borderpost,Alara Reborn,Near Mint,262742,0.21,0
-1,Howl of the Night Pack,Shadowmoor,Near Mint,116847,0.3,0
 1,Memory Sluice,Shadowmoor,Near Mint,116886,0.28,0
 2,Kithkin Rabble,Shadowmoor,Near Mint,116866,0.19,0
 1,Mountain (294),Lorwyn,Lightly Played,377200,0.22,0
 1,Swamp (291),Shadowmoor,Near Mint,116988,0.48,0
 1,Woodland Guidance,Lorwyn,Lightly Played Foil,840245,1.33,0
-1,Creeping Mold,10th Edition,Near Mint,5039,0.18,0
 1,Elvish Champion,10th Edition,Near Mint,5247,13.83,0
 1,Celestial Crusader,Time Spiral,Near Mint,25782,0.19,0
 1,Terramorphic Expanse,Time Spiral,Near Mint,25995,0.25,0
 1,Chronozoa,Planar Chaos,Lightly Played,375746,2.0,0
-1,Kavu Predator,Planar Chaos,Lightly Played,375793,0.16,0
 1,Plaxmanta,Dissension,Near Mint,25515,0.17,0
-3,Simic Guildmage,Dissension,Lightly Played,375114,0.19,0
+2,Simic Guildmage,Dissension,Lightly Played,375114,0.19,0
 3,Boros Swiftblade,Ravnica: City of Guilds,Near Mint,24978,0.16,0
 1,Auriok Salvagers,Fifth Dawn,Near Mint,23842,0.25,0
 1,Kami of False Hope,Betrayers of Kamigawa,Near Mint,24349,1.0,0
 1,Magma Jet,Fifth Dawn,Near Mint,23848,0.27,0
-1,Loam Dweller,Betrayers of Kamigawa,Near Mint,24360,0.2,0
 2,Petalmane Baku,Betrayers of Kamigawa,Near Mint,24388,0.25,0
 2,Reach Through Mists,Champions of Kamigawa,Near Mint,24201,0.22,0
 1,Energy Chamber,Fifth Dawn,Moderately Played,341918,0.39,0
@@ -164,7 +156,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Pardic Arsonist,Torment,Near Mint,22532,0.3,0
 1,Island (336),Odyssey,Near Mint,116628,0.48,0
 2,Flailing Soldier,Mercadian Masques,Near Mint,20023,0.37,0
-1,Pious Warrior,Mercadian Masques,Near Mint,20119,0.26,0
 3,Glittering Lion,Prophecy,Near Mint,20774,0.19,0
 1,Shield Mate,Exodus,Near Mint,18296,0.18,0
 4,Soul Charmer,Prophecy,Near Mint,20839,0.24,0
@@ -178,7 +169,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Soltari Priest,Tempest,Near Mint,19239,0.27,0
 1,Warmth,Tempest,Near Mint,19284,0.3,0
 1,Boiling Blood,Weatherlight,Near Mint,19490,0.18,0
-1,Heart of Bogardan,Weatherlight,Near Mint,19540,1.14,0
 1,Fire Whip,Weatherlight,Near Mint,19522,0.2,0
 1,Kaervek's Hex,Mirage,Near Mint,12727,0.19,0
 1,Reign of Chaos,Mirage,Near Mint,13327,0.21,0
@@ -219,7 +209,7 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 2,Seashell Cameo,Invasion,Near Mint,21099,0.24,0
 1,Stronghold Biologist,Nemesis,Near Mint,20711,0.18,0
 6,Squire,The Dark,Near Mint,17614,0.27,0
-2,King Cheetah,Visions,Near Mint,19368,0.25,0
+1,King Cheetah,Visions,Near Mint,19368,0.25,0
 1,Twiddle,7th Edition,Near Mint,17204,0.32,0
 4,Avalanche Riders - 2000 Janosch Kuhn (ULG),World Championship Decks,Near Mint,3636393,0.47,0
 2,Creeping Mold - 2000 Janosch Kuhn (6ED),World Championship Decks,Near Mint,3636418,0.56,0
@@ -228,38 +218,27 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Cursed Land,Fifth Edition,Near Mint,16215,0.38,0
 1,Disenchant,Fifth Edition,Near Mint,16230,0.2,0
 1,Forest (449),Fifth Edition,Near Mint,16279,0.61,0
-1,Air Elemental,Fourth Edition,Near Mint,15765,0.2,0
 3,Blue Ward,Fourth Edition,Near Mint,15800,0.19,0
 1,Bronze Tablet,Fourth Edition,Near Mint,15806,0.24,0
 2,Backfire,Fourth Edition,Near Mint,15783,0.2,0
 2,Black Ward,Fourth Edition,Near Mint,15794,0.19,0
-1,Crumble,Fourth Edition,Near Mint,15836,0.19,0
 2,Crumble,Revised Edition,Near Mint,15517,0.22,0
 1,Dingus Egg,Fourth Edition,Near Mint,15850,0.39,0
 1,Disrupting Scepter,Fourth Edition,Near Mint,15853,0.31,0
-2,Dancing Scimitar,Fourth Edition,Near Mint,15842,0.24,0
-1,Elvish Archers,Fourth Edition,Near Mint,15868,0.38,0
 1,Energy Tap,Fourth Edition,Near Mint,15870,0.2,0
 3,Energy Flux,Fourth Edition,Near Mint,15869,0.25,0
 2,Fireball,Fourth Edition,Near Mint,15880,0.17,0
 2,Gloom,Fourth Edition,Near Mint,15901,0.22,0
 1,Hurricane,Fourth Edition,Near Mint,15921,0.23,0
 2,Instill Energy,Fourth Edition,Near Mint,15925,1.61,0
-4,Keldon Warlord,Fourth Edition,Near Mint,15940,0.2,0
+3,Keldon Warlord,Fourth Edition,Near Mint,15940,0.2,0
 2,Lure,Fourth Edition,Near Mint,15959,0.17,0
 2,Library of Leng,Fourth Edition,Near Mint,15948,1.58,0
-2,Obsianus Golem,Fourth Edition,Near Mint,15988,0.19,0
 2,Ornithopter,Fourth Edition,Near Mint,15992,0.29,0
-1,Prodigal Sorcerer,Fourth Edition,Near Mint,16012,0.21,0
 5,Phantasmal Forces,Fourth Edition,Near Mint,15998,0.18,0
-1,Primal Clay,Fourth Edition,Near Mint,16011,0.28,0
 1,Sindbad,Fourth Edition,Near Mint,16046,0.17,0
-2,The Hive,Fourth Edition,Near Mint,16073,0.24,0
-1,Throne of Bone,Fourth Edition,Near Mint,16077,0.2,0
 1,Twiddle,Fourth Edition,Near Mint,16086,0.25,0
-2,Uthden Troll,Fourth Edition,Near Mint,16093,0.18,0
 1,Volcanic Eruption,Fourth Edition,Near Mint,16098,0.29,0
-2,Wall of Air,Fourth Edition,Near Mint,16099,0.23,0
 1,Wall of Bone,Fourth Edition,Near Mint,16100,0.17,0
 1,Brass Man,Revised Edition,Near Mint,15495,0.25,0
 1,Bottle of Suleiman,Revised Edition,Near Mint,15493,0.73,0
@@ -270,7 +249,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 3,Flashfires,Revised Edition,Near Mint,15559,0.21,0
 1,Fireball,Revised Edition,Near Mint,15557,0.29,0
 1,Gloom,Revised Edition,Near Mint,15572,0.32,0
-1,Granite Gargoyle,Revised Edition,Near Mint,15575,2.78,0
 6,Giant Growth,Revised Edition,Near Mint,15569,0.17,0
 2,Holy Strength,Revised Edition,Near Mint,15584,0.16,0
 2,Living Wall,Revised Edition,Near Mint,15619,0.28,0
@@ -308,14 +286,12 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Temple of the False God (271),Commander Anthology Volume II,Near Mint,3745186,0.3,0
 1,Vivid Crag,Commander Anthology Volume II,Near Mint,3744921,0.49,0
 1,Farhaven Elf,Commander 2018,Near Mint,3808633,0.2,0
-1,Behemoth Sledge,Commander 2017,Near Mint,3449681,0.22,0
 1,Terramorphic Expanse,Commander 2017,Near Mint,3450851,0.22,0
 1,Grab the Reins,Commander 2016,Near Mint,3246554,0.33,0
 1,Terramorphic Expanse,Commander 2016,Near Mint,3247224,0.23,0
 1,Disdainful Stroke,Commander 2016,Near Mint,3246184,0.19,0
 1,Terramorphic Expanse,Commander 2015,Near Mint,3005877,0.2,0
 1,Drifting Meadow,Commander 2015,Near Mint,3005867,0.17,0
-1,Darksteel Citadel,Commander 2014,Near Mint,1271612,0.71,0
 1,Haunted Fengraf,Commander 2014,Near Mint,1271682,1.61,0
 1,Shriekmaw,Commander 2014,Near Mint,1270955,0.25,0
 1,Terramorphic Expanse,Commander 2014,Near Mint,1270397,0.25,0
@@ -336,7 +312,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Stangg,Masters 25,Near Mint Foil,3611205,0.33,0
 1,Mishra's Bauble,Iconic Masters,Near Mint Foil,3466802,2.64,0
 1,Commune with the Gods,Eternal Masters,Near Mint,3146602,0.16,0
-1,Kird Ape,Eternal Masters,Near Mint,3146752,0.17,0
 1,Thunderclap Wyvern,Eternal Masters,Near Mint,3146332,0.21,0
 1,Avacyn's Pilgrim,Modern Masters 2017,Near Mint,3318357,0.26,0
 2,Teleportal,Modern Masters 2017,Near Mint,3319667,0.18,0
@@ -364,20 +339,16 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Griffin Guide,Duel Decks: Ajani vs. Nicol Bolas,Lightly Played,501078,0.25,0
 1,Heroes' Reunion,Archenemy,Lightly Played,405237,0.22,0
 1,Igneous Pouncer,Duel Decks: Ajani vs. Nicol Bolas,Near Mint,500302,0.15,0
-1,Impulse,Duel Decks: Speed vs. Cunning,Near Mint,1254711,0.33,0
 1,Jade Mage,Duel Decks: Ajani vs. Nicol Bolas,Near Mint,500367,0.41,0
 1,Krosan Verge,Archenemy,Near Mint,397617,0.25,0
 1,Magma Jet,Duel Decks: Heroes vs. Monsters,Near Mint,1131060,0.2,0
 1,Nissa's Chosen,Duel Decks: Nissa vs. Ob Nixilis,Near Mint,3197969,0.25,0
-1,Pride of Lions,Duel Decks: Ajani vs. Nicol Bolas,Near Mint,500376,0.24,0
 2,Recumbent Bliss,Duel Decks: Ajani vs. Nicol Bolas,Near Mint,500394,0.16,0
-1,Read the Bones,Duel Decks: Zendikar vs. Eldrazi,Near Mint,2949583,0.34,0
 1,Recoil,Duel Decks: Ajani vs. Nicol Bolas,Near Mint,500316,0.24,0
 1,Sadistic Hypnotist,Duel Decks: Izzet vs. Golgari,Near Mint,1041784,0.63,0
 1,Tendrils of Corruption,Duel Decks: Nissa vs. Ob Nixilis,Near Mint,3198074,0.55,0
 1,Volt Charge,Duel Decks: Heroes vs. Monsters,Near Mint,1132203,0.24,0
 1,Voyager Staff,Duel Decks: Elves vs. Inventors,Near Mint,3624593,1.5,0
-1,Vigor Mortis,Guilds of Ravnica: Guild Kits,Near Mint,3880667,0.26,0
 1,Wax // Wane,Archenemy,Near Mint,397404,0.17,0
 1,Watchwolf,Archenemy,Near Mint,397693,0.24,0
 1,Wild Mongrel,Duel Decks: Garruk vs. Liliana,Near Mint,396972,0.19,0
@@ -401,19 +372,16 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 5,Goblin War Drums (Menges),Fallen Empires,Near Mint,116392,0.21,0
 6,Brassclaw Orcs (Claws),Fallen Empires,Near Mint,116371,0.24,0
 10,Brassclaw Orcs (Horned Helm),Fallen Empires,Near Mint,116370,0.2,0
-8,Goblin War Drums (Frazier),Fallen Empires,Near Mint,17670,0.24,0
 3,Vodalian Mage (Poole),Fallen Empires,Near Mint,116443,0.21,0
 1,Tidal Flats (Sky),Fallen Empires,Near Mint,116441,0.2,0
 1,Vodalian Mage (Hoover),Fallen Empires,Near Mint,116444,0.23,0
-1,Vodalian Soldiers (Ferguson),Fallen Empires,Near Mint,116446,0.24,0
 5,Dwarven Soldier (Asplund-Faith),Fallen Empires,Near Mint,116375,0.2,0
-2,Goblin Grenade (Frazier),Fallen Empires,Near Mint,116388,0.33,0
 1,Zuran Spellcaster,Ice Age,Near Mint,18817,0.26,0
 2,Disenchant,Ice Age,Near Mint,18519,0.22,0
 1,Armor Thrull,Fallen Empires,Near Mint,17635,0.2,0
 2,Order of the Ebon Hand,Fallen Empires,Near Mint,17702,0.21,0
 1,Basal Thrull (Rush),Fallen Empires,Near Mint,116368,0.24,0
-13,Incinerate,Ice Age,Near Mint,18610,0.27,0
+8,Incinerate,Ice Age,Near Mint,18610,0.27,0
 3,Wild Growth,Ice Age,Near Mint,18804,0.31,0
 5,Songs of the Damned,Ice Age,Near Mint,18753,0.75,0
 1,Binding Grasp,Ice Age,Near Mint,18475,0.21,0
@@ -480,7 +448,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Dracovish V,SWSH09: Brilliant Stars,Near Mint,5449928,0.41,77
 1,Nimble Mongoose,Odyssey,Lightly Played,371616,0.25,77
 1,Metallic Rebuke,Double Masters,Lightly Played,4521156,0.23,77
-1,Dwarven Miner,Mirage,Near Mint,12127,1.18,77
 1,Mountain (343),Onslaught,Lightly Played,377260,0.32,77
 1,Ornithopter,Fourth Edition,Moderately Played,333422,0.23,77
 1,Forest (347),Mercadian Masques,Lightly Played,377218,0.31,77
@@ -491,7 +458,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Greater Werewolf,Fifth Edition,Lightly Played,365250,0.22,77
 1,Forest (350),Odyssey,Lightly Played,371693,0.28,77
 1,Forest (350),Mercadian Masques,Moderately Played,337792,0.21,77
-1,Coppercoat Vanguard (Showcase),March of the Machine: The Aftermath,Lightly Played Foil,7148747,0.86,77
 1,Plains (334),Urza's Saga,Lightly Played,369731,0.36,77
 1,Plains (332),Urza's Saga,Lightly Played,377312,0.47,77
 1,Plains (343),Ice Age,Lightly Played,367649,0.38,77
@@ -513,7 +479,7 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Ettin Art Card,Art Series: Adventures in the Forgotten Realms,Near Mint,5112509,0.16,78
 1,Fading Hope,Innistrad: Midnight Hunt,Near Mint,5181060,0.78,78
 1,Faithful Mending,Innistrad: Midnight Hunt,Near Mint,5165621,0.46,78
-7,Feign Death,Adventures in the Forgotten Realms,Near Mint,5059629,1.41,78
+1,Feign Death,Adventures in the Forgotten Realms,Near Mint,5059629,1.41,78
 2,Forest (302) - JP Full Art,Kamigawa: Neon Dynasty,Near Mint,5347309,1.48,78
 1,Goblin Legionnaire,Apocalypse,Near Mint,21402,0.21,78
 1,Helper Card - 3/9,Zendikar Rising,Near Mint,4593808,0.21,78
@@ -535,10 +501,10 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Ninja Token,Kamigawa: Neon Dynasty,Near Mint,5432530,2.9,78
 1,Pestilence Rats,Ice Age,Near Mint,18700,0.36,78
 1,Plains (273),Streets of New Capenna,Near Mint,5465803,0.21,78
-2,Plains (294) - JP Full Art,Kamigawa: Neon Dynasty,Near Mint,5347229,1.51,78
+1,Plains (294) - JP Full Art,Kamigawa: Neon Dynasty,Near Mint,5347229,1.51,78
 3,Plains (294) Art Card (80/81),Art Series: Kamigawa: Neon Dynasty,Near Mint,5443990,0.53,78
 2,Ray of Enfeeblement,Adventures in the Forgotten Realms,Near Mint,5076824,0.15,78
-2,Reckoner's Bargain,Kamigawa: Neon Dynasty,Near Mint,5412958,0.26,78
+1,Reckoner's Bargain,Kamigawa: Neon Dynasty,Near Mint,5412958,0.26,78
 2,Reinforced Ronin,Kamigawa: Neon Dynasty,Near Mint,5417398,0.15,78
 1,Roadside Reliquary,Kamigawa: Neon Dynasty,Near Mint,5410318,0.22,78
 1,Satoru Umezawa Art Card (73/81),Art Series: Kamigawa: Neon Dynasty,Near Mint,5443220,0.24,78
@@ -547,7 +513,7 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Soul Link,Apocalypse,Near Mint,21465,0.23,78
 2,Spell Pierce,Kamigawa: Neon Dynasty,Near Mint,5394319,0.18,78
 1,Spineless Thug,Nemesis,Near Mint,20707,0.18,78
-5,Spirited Companion,Kamigawa: Neon Dynasty,Near Mint,5379346,0.25,78
+4,Spirited Companion,Kamigawa: Neon Dynasty,Near Mint,5379346,0.25,78
 1,Spirit-Sister's Call,Kamigawa: Neon Dynasty,Near Mint,5394164,0.26,78
 1,Swamp (288),Kamigawa: Neon Dynasty,Near Mint,5411308,0.34,78
 2,"Tameshi, Reality Architect Art Card (53/81) (Gold-Stamped Signature)",Art Series: Kamigawa: Neon Dynasty,Near Mint,5440940,0.58,78
@@ -555,7 +521,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Unexpected Windfall,Adventures in the Forgotten Realms,Near Mint,5075004,0.98,78
 1,Unnerve,Urza's Saga,Near Mint,20546,0.18,78
 1,Vampire Socialite,Innistrad: Midnight Hunt,Near Mint,5165202,0.15,78
-1,Wiretapping Art Card (Gold-Stamped Signature),Art Series: Streets of New Capenna,Near Mint,5555238,0.18,78
 1,You Find Some Prisoners,Adventures in the Forgotten Realms,Near Mint,5056733,0.16,78
 1,"Ao, the Dawn Sky Art Card (46/81) (Gold-Stamped Signature)",Art Series: Kamigawa: Neon Dynasty,Near Mint,5440140,0.74,78
 1,An Offer You Can't Refuse,Streets of New Capenna,Near Mint,5486393,3.34,78
@@ -569,7 +534,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Spirit (002) // Construct (006) Double-sided Token,Kamigawa: Neon Dynasty,Near Mint Foil,5458888,0.19,78
 1,Dog Illusion // Vecna Double-sided Token,Adventures in the Forgotten Realms,Near Mint Foil,5134011,0.77,78
 1,Clown Robot (003) // Treasure (012) Double-sided Token,Unfinity,Near Mint Foil,6656362,0.2,78
-1,Devil // Angel Double-sided Token,Adventures in the Forgotten Realms,Near Mint Foil,5133336,0.18,78
 1,Ray of Enfeeblement,Adventures in the Forgotten Realms,Near Mint Foil,5076829,0.43,78
 1,Aberrant Mind Sorcerer,Adventures in the Forgotten Realms,Near Mint Foil,5083483,0.26,78
 1,Owlbear,Adventures in the Forgotten Realms,Near Mint Foil,5057838,0.19,78
@@ -584,7 +548,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 2,Moon-Blessed Cleric,Adventures in the Forgotten Realms,Near Mint Foil,5047780,5.33,78
 1,Plains (283),Kamigawa: Neon Dynasty,Near Mint Foil,5410763,0.16,78
 1,Generous Visitor,Kamigawa: Neon Dynasty,Near Mint Foil,5383616,0.9,78
-1,Silver-Fur Master (Showcase),Kamigawa: Neon Dynasty,Near Mint Foil,5375424,0.27,78
 1,Nezumi Prowler,Kamigawa: Neon Dynasty,Near Mint Foil,5384958,0.16,78
 1,Containment Construct,Kamigawa: Neon Dynasty,Near Mint Foil,5423383,3.1,78
 1,Asari Captain (Showcase),Kamigawa: Neon Dynasty,Near Mint Foil,5379016,0.17,78
@@ -598,7 +561,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Necropotence,Deckmasters Garfield vs Finkel,Near Mint Foil,1168757,74.85,80
 1,"Ulamog, the Ceaseless Hunger",Battle for Zendikar,Lightly Played Foil,2949874,58.73,80
 1,Exquisite Blood,Avacyn Restored,Moderately Played,855121,29.42,80
-1,Grave Pact,8th Edition,Lightly Played,372740,21.66,80
 1,Tezzeret the Seeker,Modern Masters 2015,Near Mint Foil,2878601,20.56,80
 1,Nylea's Colossus,Commander 2018,Near Mint,3808072,12.97,80
 1,Lifeblood Hydra,Commander 2014,Near Mint,1271190,10.1,80
@@ -609,11 +571,9 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Tempt with Vengeance,Commander 2013,Near Mint,1137245,7.79,80
 1,"Venser, the Sojourner",Scars of Mirrodin,Near Mint,393760,7.63,80
 1,Descendants' Path,Avacyn Restored,Near Mint,853285,7.59,80
-1,Elvish Champion,Invasion,Lightly Played,370234,7.24,80
 1,Zur the Enchanter (Commander's Arsenal),Oversize Cards,Near Mint Foil,1274548,6.97,80
 1,Grasp of Fate,Commander 2015,Near Mint,3004462,6.82,80
 1,Seize the Day,Ultimate Masters,Near Mint,3917397,6.62,80
-1,Daybreak Coronet,Modern Masters 2015,Near Mint,2877249,6.35,80
 1,Leyline of Anticipation,Core Set 2020,Near Mint Foil,4095559,6.34,80
 1,"Godo, Bandit Warlord",Champions of Kamigawa,Near Mint,24064,6.21,80
 1,Narset's Reversal,War of the Spark,Near Mint,4005840,6.15,80
@@ -634,7 +594,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Vengevine,Ultimate Masters,Near Mint,3904404,3.88,80
 1,Verduran Enchantress,9th Edition,Near Mint,24932,3.86,80
 1,Wake the Dead,Commander 2014,Near Mint,1269791,3.79,80
-1,"Yuriko, the Tiger's Shadow",Commander 2018,Near Mint,3807992,3.67,80
 1,Delaying Shield,Odyssey,Lightly Played,371375,3.58,80
 1,Isolated Chapel,Dominaria,Near Mint,3613479,3.35,80
 1,Aphetto Alchemist,Onslaught,Near Mint,22784,3.31,80
@@ -651,15 +610,11 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Cephalid Constable,Judgment,Lightly Played,371878,2.8,80
 1,Rhys the Exiled,Morningtide,Near Mint,115781,2.75,80
 1,Forest - Unglued,Unglued,Heavily Played,348301,2.71,80
-1,"Sakiko, Mother of Summer",Betrayers of Kamigawa,Lightly Played,373966,2.66,80
 1,Sanguine Bond,Commander 2013,Near Mint,1140074,2.58,80
-1,Selesnya Signet,Modern Masters 2017,Near Mint,3317357,2.57,80
 1,"Yeva, Nature's Herald",Magic 2013 (M13),Near Mint,936910,2.5,80
 1,Plague Wind,8th Edition,Near Mint,23477,2.42,80
 1,Ghostly Prison,Commander 2019,Near Mint,4155628,2.41,80
-1,Genesis Wave,Scars of Mirrodin,Near Mint,394731,2.35,80
 1,Crumbling Sanctuary,Mercadian Masques,Near Mint,19989,2.35,80
-1,"Ruric Thar, the Unbowed",Ravnica Allegiance: Guild Kits,Near Mint Foil,3961578,2.27,80
 1,Priest of Titania,Urza's Saga,Damaged,322466,2.24,80
 1,Shimmer Myr,Commander 2016,Near Mint,3246609,2.24,80
 1,Kor Spiritdancer,Planechase 2012,Near Mint,933142,2.24,80
@@ -671,7 +626,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Aminatou's Augury,Commander 2018,Near Mint,3808133,2.01,80
 1,Fires of Yavimaya,Archenemy,Near Mint,397246,2.0,80
 1,Ob Nixilis of the Black Oath (Commander 2014),Oversize Cards,Near Mint Foil,1273171,2.0,80
-1,Baneslayer Angel,Core Set 2021,Near Mint,4439425,1.95,80
 1,Slippery Bogle,Ultimate Masters,Near Mint,3914920,1.88,80
 1,Pandemonium,Exodus,Lightly Played,367211,1.87,80
 1,Sanguine Bond,Commander 2021,Near Mint,4902435,1.86,80
@@ -682,7 +636,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,"Garruk, Primal Hunter",Magic 2012 (M12),Near Mint,474796,1.7,80
 1,Apprentice Necromancer,Ultimate Masters,Near Mint,3914780,1.66,80
 1,Pulsemage Advocate,Judgment,Lightly Played,371855,1.66,80
-1,Rancor,Explorers of Ixalan,Near Mint,3542351,1.59,80
 1,Abyssal Persecutor,Commander 2014,Near Mint,1270815,1.56,80
 1,Fulminator Mage,Ultimate Masters,Near Mint Foil,3904649,1.56,80
 1,Instill Energy,Fifth Edition,Moderately Played,333763,1.53,80
@@ -692,14 +645,12 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Forest (271) - Full Art,Battle for Zendikar,Near Mint Foil,2950461,1.45,80
 1,Mayael the Anima (Commander 2013),Oversize Cards,Near Mint Foil,1171096,1.39,80
 1,Rancor,Planechase 2012,Near Mint,933206,1.37,80
-1,Call to the Grave,Magic 2012 (M12),Near Mint,474499,1.33,80
 1,Forgotten Ancient,Scourge,Lightly Played,372462,1.33,80
 1,Chaos Warp,Commander: Adventures in the Forgotten Realms,Near Mint,5099089,1.31,80
 1,Bastion Protector,Commander 2015,Near Mint,3004437,1.27,80
 1,Weatherlight,Dominaria,Near Mint,3634081,1.26,80
 1,Phyrexian Swarmlord,New Phyrexia,Near Mint,417199,1.23,80
 1,"Sydri, Galvanic Genius (Commander 2013)",Oversize Cards,Near Mint Foil,3257087,1.2,80
-1,Hickory Woodlot,Mercadian Masques,Near Mint,20046,1.19,80
 2,Elvish Archdruid,Magic 2011 (M11),Near Mint,391046,1.19,80
 1,Earthquake,Commander Anthology,Near Mint,3371789,1.18,80
 1,"Braids, Conjurer Adept",Planar Chaos,Near Mint,26174,1.17,80
@@ -707,26 +658,21 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 4,Mountain,Theros Beyond Death,Near Mint,4283366,1.16,80
 1,Dark Ritual,Revised Edition,Near Mint,15522,1.16,80
 1,Rat // Zombie Double-sided Token,Commander: Adventures in the Forgotten Realms,Near Mint,5117959,1.12,80
-1,Clone Legion,Dragons of Tarkir,Near Mint,2742449,1.12,80
 1,"Kunoros, Hound of Athreos (Extended Art)",Theros Beyond Death,Near Mint,4289491,1.1,80
 1,Righteous Confluence,Commander 2015,Near Mint,3005402,1.07,80
 1,Rolling Stones,8th Edition,Lightly Played,372641,1.06,80
-1,Argothian Elder,Urza's Saga,Near Mint,20267,1.04,80
 1,Heraldic Banner,Throne of Eldraine,Near Mint,4177925,1.03,80
-1,Night Dealings,Champions of Kamigawa,Near Mint,24171,1.0,80
 1,Necromentia,Core Set 2021,Near Mint,4442147,1.0,80
 1,"Estrid, the Masked (Commander 2018)",Oversize Cards,Near Mint Foil,3824609,1.0,80
 1,Suture Priest,New Phyrexia,Near Mint,416752,0.99,80
 1,Taurean Mauler,Archenemy,Near Mint,396907,0.99,80
 1,"Akroma, Angel of Fury",Planar Chaos,Lightly Played,375728,0.99,80
 1,Balance,Fourth Edition,Moderately Played,333215,0.95,80
-1,"Drana, Liberator of Malakir",Jumpstart,Near Mint,4475321,0.92,80
 1,Master of Waves,Duel Decks: Merfolk vs. Goblins,Near Mint Foil,3528372,0.91,80
 1,Murderous Redcap,Ultimate Masters,Near Mint Foil,3916342,0.91,80
 1,Clot Sliver,Premium Deck Series: Slivers,Lightly Played Foil,844634,0.88,80
 1,Nephalia Drownyard,Innistrad,Near Mint,505150,0.88,80
 1,Blessed Sanctuary,Jumpstart,Near Mint,4476926,0.87,80
-1,Sigil of the Empty Throne,Commander 2015,Near Mint,3005457,0.86,80
 1,Sunbird's Invocation,Ixalan,Near Mint,3457541,0.86,80
 1,Rocky Tar Pit,Mirage,Near Mint,13375,0.85,80
 1,Liege of the Tangle,Scars of Mirrodin,Near Mint,394284,0.84,80
@@ -742,14 +688,12 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Rakdos Signet,Commander: Adventures in the Forgotten Realms,Near Mint,5100089,0.78,80
 1,Mesa Enchantress,Commander 2015,Near Mint,3005227,0.78,80
 1,"Isamaru, Hound of Konda",Jumpstart,Near Mint,4475019,0.77,80
-2,Elvish Archdruid,Magic 2012 (M12),Near Mint,470865,0.76,80
+1,Elvish Archdruid,Magic 2012 (M12),Near Mint,470865,0.76,80
 4,Steel Leaf Champion,Dominaria,Near Mint,3614729,0.76,80
 1,Artisan of Kozilek,Duel Decks: Zendikar vs. Eldrazi,Near Mint,2949328,0.76,80
 1,Lightning Coils,Mirrodin,Near Mint,9255,0.75,80
 1,Blighted Agent,New Phyrexia,Near Mint,417187,0.74,80
-1,Grappling Hook,Commander 2017,Near Mint,3449951,0.73,80
 1,Perplexing Chimera,Born of the Gods,Near Mint,1166086,0.72,80
-1,Primevals' Glorious Rebirth,Dominaria,Near Mint,3613699,0.72,80
 1,Counterspell,Commander Masters,Near Mint,7299579,0.71,80
 1,Rogue's Passage,Commander Masters,Near Mint,7252850,0.71,80
 1,Diabolic Tutor,Magic 2012 (M12),Near Mint,470768,0.71,80
@@ -768,8 +712,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Fungus Sliver,Premium Deck Series: Slivers,Lightly Played Foil,844640,0.65,80
 1,Island,Battlebond,Near Mint,3751569,0.65,80
 1,Boneyard Wurm,Ultimate Masters,Near Mint Foil,3917422,0.65,80
-1,Ezzaroot Channeler,Commander 2021,Near Mint,4900049,0.64,80
-1,Niblis of the Breath,Dark Ascension,Near Mint Foil,764599,0.64,80
 1,Arcane Sanctum,Commander Anthology Volume II,Near Mint,3744206,0.63,80
 1,Ankle Shanker,Unique and Miscellaneous Promos,Lightly Played Foil,1264069,0.63,80
 1,"Kolaghan, the Storm's Fury",Fate Reforged,Near Mint,1277367,0.63,80
@@ -780,18 +722,14 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Sanctum of All,Core Set 2021,Near Mint,4461066,0.6,80
 1,Clone,Onslaught,Near Mint,22716,0.6,80
 1,See the Truth,Core Set 2021,Near Mint,4447268,0.59,80
-1,Celestial Ancient,Commander 2015,Near Mint,3004857,0.58,80
 1,Saruli Gatekeepers,Dragon's Maze,Near Mint Foil,1076514,0.57,80
-1,Halimar Depths,Duel Decks: Jace vs. Vraska,Near Mint,1170281,0.57,80
 1,Basri's Lieutenant,Core Set 2021,Near Mint Foil,4444097,0.57,80
 1,Hellish Rebuke,Commander: Adventures in the Forgotten Realms,Near Mint,5089214,0.56,80
 1,The Elderspell,War of the Spark,Near Mint,4005393,0.56,80
 1,Undermine,Duel Decks: Ajani vs. Nicol Bolas,Near Mint,500356,0.56,80
 1,Loyal Subordinate,Commander 2018,Near Mint,3807480,0.55,80
-2,Transmogrify,Core Set 2021,Near Mint,4449666,0.55,80
 1,"Braids, Cabal Minion",Odyssey,Lightly Played,371475,0.55,80
 1,Goblin Matron,7th Edition,Lightly Played,365964,0.55,80
-1,Artisan of Kozilek,Commander 2014,Near Mint,1270382,0.54,80
 1,Talisman of Resilience,Commander 2021,Near Mint,4902340,0.54,80
 1,Victimize,Urza's Saga,Moderately Played,338327,0.54,80
 1,"Jori En, Ruin Diver",Oath of the Gatewatch,Near Mint,3041970,0.54,80
@@ -807,10 +745,8 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Hooded Blightfang,Core Set 2021,Near Mint,4459636,0.51,80
 2,Aegis Angel,Magic 2012 (M12),Near Mint,474510,0.51,80
 1,Elf Warrior Token,Duel Decks: Elves vs. Goblins,Near Mint,1163300,0.51,80
-1,Feed the Swarm,Commander 2021,Near Mint,4901120,0.5,80
 1,Wayfarer's Bauble,Modern Masters 2015,Near Mint,2880897,0.5,80
 1,Mirari,Commander 2013,Near Mint,1139769,0.5,80
-1,Strata Scythe,Scars of Mirrodin,Near Mint,395016,0.5,80
 1,Simic Signet (215),Commander Anthology Volume II,Near Mint,3745331,0.49,80
 1,Chittering Witch,Commander: Adventures in the Forgotten Realms,Near Mint,5088004,0.49,80
 1,Devil's Play,Innistrad,Lightly Played Foil,838689,0.49,80
@@ -833,7 +769,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 10,Angel Token,Zendikar,Lightly Played,1163091,0.45,80
 1,Rukh Egg,8th Edition,Near Mint,23538,0.44,80
 1,Oath of Teferi,Dominaria,Near Mint,3613679,0.44,80
-1,Unburial Rites,Ultimate Masters,Near Mint Foil,3917062,0.44,80
 1,Swamp (C),Revised Edition,Lightly Played,377349,0.43,80
 1,"Ob Nixilis, the Hate-Twisted",War of the Spark,Near Mint,3989686,0.43,80
 1,Mind Unbound,Magic 2012 (M12),Near Mint,474513,0.43,80
@@ -886,18 +821,14 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Night of Souls' Betrayal,Champions of Kamigawa,Near Mint,24172,0.33,80
 1,Predatory Focus,Guildpact,Near Mint,25355,0.32,80
 1,Faithless Looting,Ultimate Masters,Near Mint,3914080,0.32,80
-1,Raid Bombardment,Ultimate Masters,Near Mint,3917297,0.32,80
 1,Kitchen Finks,Ultimate Masters,Near Mint,3904044,0.32,80
 1,Faithless Looting,Ultimate Masters,Near Mint,3914080,0.32,80
 1,Salt Marsh,Invasion,Lightly Played,370368,0.32,80
-1,Dread Return,Commander 2014,Near Mint,1270865,0.32,80
 1,Vampire Lacerator,Modern Masters 2015,Near Mint Foil,2877334,0.32,80
-1,Wild Ricochet,Commander,Near Mint,471862,0.32,80
 1,Avacyn's Pilgrim,Innistrad,Near Mint,505033,0.31,80
 1,Rampant Growth,Commander: Streets of New Capenna,Near Mint,5546243,0.31,80
 4,Radiant Fountain,Magic 2015 (M15),Near Mint,1227101,0.31,80
 1,Temple of the False God,Duel Decks: Elspeth vs. Kiora,Near Mint,2733221,0.31,80
-1,"Whisper, Blood Liturgist",Dominaria,Near Mint,3614339,0.31,80
 1,Wurmweaver Coil,Ravnica Allegiance: Guild Kits,Near Mint,3972691,0.31,80
 1,Deathforge Shaman,Worldwake,Lightly Played Foil,849847,0.31,80
 1,Universal Automaton,Modern Horizons,Near Mint,4070490,0.3,80
@@ -909,10 +840,9 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,"Teyo, the Shieldmage",War of the Spark,Near Mint,3990152,0.3,80
 1,Aladdin's Lamp,Fourth Edition,Near Mint,15767,0.3,80
 1,Gaea's Blessing,Dominaria,Near Mint,3614499,0.3,80
-1,Arcane Sanctum,Commander 2018,Near Mint,3808658,0.29,80
 1,Zephid's Embrace,Urza's Saga,Near Mint,20586,0.29,80
 1,Hobblefiend,Core Set 2021,Near Mint Foil,4470030,0.29,80
-3,Nyx-Fleece Ram,Journey Into Nyx,Near Mint,1182946,0.29,80
+2,Nyx-Fleece Ram,Journey Into Nyx,Near Mint,1182946,0.29,80
 1,Swamp (346),7th Edition,Lightly Played,377127,0.29,80
 1,Crackling Doom,Khans of Tarkir,Lightly Played,1253873,0.29,80
 1,Animal Magnetism,Onslaught,Near Mint,22994,0.29,80
@@ -924,7 +854,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Elfhame Palace,Invasion,Near Mint,20951,0.28,80
 2,Elfhame Palace,Invasion,Near Mint,20951,0.28,80
 1,Blood Reckoning,Magic 2013 (M13),Near Mint,939016,0.28,80
-1,Spiritual Focus,Mercadian Masques,Near Mint,20193,0.28,80
 1,Telepathy,8th Edition,Near Mint,23427,0.28,80
 1,Nessian Wanderer,Theros Beyond Death,Near Mint Foil,4305686,0.28,80
 1,Champion of Rhonas,Amonkhet,Near Mint,3327100,0.28,80
@@ -934,11 +863,8 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Nivix Barrier,Magic Origins,Near Mint Foil,2900251,0.28,80
 1,Adamant Will,Dominaria,Near Mint Foil,3637080,0.28,80
 1,Polluted Mire,Urza's Saga,Near Mint,20453,0.27,80
-1,Forgotten Cave,Commander 2013,Near Mint,1139474,0.27,80
 1,Empyrean Eagle,Core Set 2020,Near Mint,4092128,0.27,80
-1,Treasure Cruise,Ultimate Masters,Near Mint,3913910,0.27,80
 1,Mind Spring,Duel Decks: Merfolk vs. Goblins,Near Mint,3528397,0.27,80
-1,Solar Blaze,War of the Spark,Near Mint,3999234,0.27,80
 1,Jwar Isle Refuge,Commander 2018,Near Mint,3808888,0.26,80
 1,Breath of Life,Starter 1999,Lightly Played,363520,0.26,80
 2,Shriekmaw,Commander 2014,Near Mint,1270955,0.26,80
@@ -947,16 +873,13 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 2,Battle Mastery,Lorwyn,Near Mint,2335,0.26,80
 1,Plains (233) - Full Art,Zendikar,Near Mint,1135335,0.26,80
 2,The Mirari Conjecture,Dominaria,Near Mint,3614679,0.26,80
-1,Mass Polymorph,Magic 2011 (M11),Lightly Played,391264,0.26,80
 1,"Danitha Capashen, Paragon",Dominaria,Near Mint,3632141,0.26,80
 1,Hinterland Logger,Shadows over Innistrad,Near Mint Foil,3095257,0.26,80
 1,Auramancer,Odyssey,Near Mint,22082,0.25,80
 1,Llanowar Elves,Dominaria,Near Mint,3614579,0.25,80
 4,Sunbond,Born of the Gods,Near Mint,1166156,0.25,80
 2,Archaeomancer,Ultimate Masters,Near Mint,3915567,0.25,80
-1,Archaeomancer,Magic 2013 (M13),Near Mint,934682,0.25,80
 1,Tatterkite,Shadowmoor,Near Mint,116994,0.25,80
-1,Purify,Urza's Legacy,Lightly Played,369142,0.25,80
 1,Story Circle,Mercadian Masques,Near Mint,20204,0.25,80
 1,"Kasmina, Enigmatic Mentor",War of the Spark,Near Mint,4000045,0.25,80
 1,Prodigal Sorcerer,Classic Sixth Edition,Near Mint,16786,0.25,80
@@ -965,7 +888,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Horrifying Revelation,Mirrodin Besieged,Near Mint Foil,414657,0.25,80
 1,Grave Scrabbler,Ultimate Masters,Near Mint Foil,3916602,0.25,80
 1,Precognition Field,Dominaria,Near Mint,3614619,0.25,80
-1,Utter End,Khans of Tarkir,Near Mint,1254032,0.25,80
 3,Elephant Token,Worldwake,Near Mint,1163070,0.25,80
 1,Graypelt Refuge,Duel Decks: Ajani vs. Nicol Bolas,Near Mint,500334,0.24,80
 1,Braidwood Sextant,Urza's Destiny,Near Mint,19641,0.24,80
@@ -989,7 +911,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Forest (Red Tree Leaves),Mirage,Moderately Played,345812,0.23,80
 1,Spider Token,Ultimate Masters,Near Mint,3922392,0.23,80
 1,Citizen Token,Ultimate Masters,Near Mint,3922241,0.23,80
-1,Penumbra Wurm,Ultimate Masters,Near Mint,3917717,0.23,80
 1,Hyena Umbra,Ultimate Masters,Near Mint,3915407,0.23,80
 1,Rise from the Tides,Ultimate Masters,Near Mint,3917977,0.23,80
 1,Dwynen's Elite,Magic Origins,Near Mint,2897307,0.23,80
@@ -1018,15 +939,12 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Stream of Consciousness,Ultimate Masters,Near Mint Foil,3916462,0.22,80
 1,"Jaya, Venerated Firemage",War of the Spark,Near Mint,4001435,0.22,80
 1,Merfolk Skydiver,War of the Spark,Near Mint,3997897,0.21,80
-1,Acidic Slime,Commander,Lightly Played,473589,0.21,80
 1,Sylvan Messenger,Apocalypse,Near Mint,21474,0.21,80
 1,Warped Devotion,8th Edition,Near Mint,23494,0.21,80
 1,Profane Command,Commander 2014,Near Mint,1270935,0.21,80
 1,Burning Anger,Magic 2015 (M15),Near Mint,1226581,0.21,80
-1,Awakening of Vitu-Ghazi,War of the Spark,Near Mint,4002410,0.21,80
 1,Banishing Stroke,Commander 2018,Near Mint,3808473,0.21,80
 1,Decree of Justice,Masters 25,Near Mint,3609046,0.21,80
-1,Burnished Hart,Commander 2014,Near Mint,1271357,0.21,80
 1,Bleeding Edge,War of the Spark,Near Mint Foil,4006782,0.21,80
 1,Bloodfire Mentor,Khans of Tarkir,Near Mint Foil,1258032,0.21,80
 1,Bloodflow Connoisseur,Ultimate Masters,Near Mint Foil,3916112,0.21,80
@@ -1060,8 +978,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 2,Island (281),Theros Beyond Death,Near Mint Foil,4286409,0.19,80
 1,"Chandra, Novice Pyromancer",Core Set 2020,Near Mint,4084732,0.19,80
 1,Assault Suit,Commander 2014,Near Mint,1270196,0.19,80
-1,Pentavus,Mirrodin,Lightly Played,373180,0.19,80
-1,Concentrate,Duel Decks: Merfolk vs. Goblins,Near Mint,3528392,0.19,80
 1,Dispersal Shield,Scourge,Near Mint,23221,0.19,80
 1,Corpse Augur,Commander 2015,Near Mint,3004907,0.18,80
 1,Builder's Blessing,Avacyn Restored,Near Mint,871138,0.18,80
@@ -1080,22 +996,18 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 2,"Tetsuko Umezawa, Fugitive",Dominaria,Near Mint,3614659,0.18,80
 1,Angel // Soldier Double-sided Token,Commander 2018,Near Mint,3827863,0.17,80
 1,Disciple of Griselbrand,Innistrad,Near Mint,505961,0.17,80
-1,Vessel of Endless Rest,Ultimate Masters,Near Mint,3915427,0.17,80
 1,Vivid Grove,Commander 2017,Near Mint,3450881,0.17,80
 1,Thermo-Alchemist,Ultimate Masters,Near Mint,3917517,0.17,80
 1,Thermo-Alchemist,Ultimate Masters,Near Mint,3917517,0.17,80
 1,Demoralize,Odyssey,Near Mint,22261,0.17,80
 1,Swamp (283),Theros Beyond Death,Near Mint Foil,4286444,0.17,80
 1,Stone-Tongue Basilisk,Odyssey,Lightly Played,371634,0.17,80
-1,Adventurous Impulse,Dominaria,Near Mint Foil,3635313,0.17,80
 1,Soul Parry,Scars of Mirrodin,Near Mint Foil,395231,0.17,80
 1,Olivia's Dragoon,Ultimate Masters,Near Mint Foil,3916822,0.17,80
 1,Shacklegeist,Core Set 2021,Near Mint,4460516,0.17,80
-1,"Callaphe, Beloved of the Sea (Showcase)",Theros Beyond Death,Near Mint Foil,4299777,0.17,80
 1,Kheru Bloodsucker,Khans of Tarkir,Near Mint,1258587,0.16,80
 1,Sage Owl,8th Edition,Near Mint,23420,0.16,80
 2,Ooze Token,Ultimate Masters,Near Mint,3922382,0.16,80
-1,Gurmag Angler,Ultimate Masters,Near Mint,3913890,0.16,80
 2,Mountain (285),Theros Beyond Death,Near Mint Foil,4286434,0.16,80
 1,"Samut, Tyrant Smasher",War of the Spark,Near Mint,3990047,0.16,80
 1,Sailor of Means,Rivals of Ixalan,Near Mint Foil,3570179,0.16,80
@@ -1123,13 +1035,10 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Ancient Craving,Duel Decks: Sorin vs. Tibalt,Near Mint,1075615,0.29,0
 1,"Henzie ""Toolbox"" Torre",Commander: Streets of New Capenna,Near Mint,5575554,0.44,0
 1,Smuggler's Buggy,Commander: Streets of New Capenna,Near Mint,5533818,0.21,0
-1,Door to Nothingness,Magic 2013 (M13),Near Mint,938886,0.65,81
 1,Disfigure,Promo Pack: Core Set 2020,Near Mint Foil,4130483,0.34,81
-1,Temple of Silence,Core Set 2021,Near Mint,4447908,0.21,81
 1,Living Death,Masters 25,Near Mint Foil,3608737,9.87,81
 1,Protean Hulk,Masters 25,Near Mint,3608762,7.5,81
 1,Dwarven Miner,Mirage,Near Mint,12127,1.14,81
-1,Arcus Acolyte (Showcase),Modern Horizons 2,Near Mint Foil,4989590,0.1,81
 1,Invoke Despair (Showcase),Kamigawa: Neon Dynasty,Near Mint,5380151,0.44,81
 1,Grand Coliseum,Onslaught,Near Mint,22854,4.28,81
 1,Commander Eesha,Judgment,Near Mint,22563,2.21,81
@@ -1138,13 +1047,10 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Auriok Steelshaper,Mirrodin,Moderately Played,341450,0.73,81
 1,Marble Diamond (Showcase),Commander Legends: Battle for Baldur's Gate,Near Mint Foil,5598324,0.13,81
 1,"Kogla, the Titan Ape",Ikoria: Lair of Behemoths,Near Mint Foil,4364804,1.41,81
-1,Crop Rotation,Double Masters,Near Mint Foil,4503831,1.32,81
 1,Cultivate,Masters 25,Near Mint,3611555,0.58,81
 1,Ecological Appreciation,Strixhaven: School of Mages,Near Mint Foil,4859372,0.78,81
 1,Crop Rotation,Duel Decks: Nissa vs. Ob Nixilis,Near Mint,3197824,1.03,81
 1,Tempting Wurm,Onslaught,Lightly Played,372168,1.62,81
-1,Wren's Run Hydra,Modern Horizons 2,Near Mint Foil,4987117,0.17,81
-1,"Sekki, Seasons' Guide",Saviors of Kamigawa,Near Mint,24589,1.87,81
 1,Maro (718),Secret Lair Drop Series,Near Mint Foil,6735502,0.46,81
 1,"Kogla, the Titan Ape",Ikoria: Lair of Behemoths,Near Mint Foil,4364804,1.41,81
 1,Infernal Tutor,Dissension,Near Mint,25484,6.26,81
@@ -1160,28 +1066,23 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Gravebreaker Lamia,Theros Beyond Death,Near Mint,4301877,0.36,81
 1,Woe Strider (Extended Art),Theros Beyond Death,Near Mint Foil,4293227,11.06,81
 1,Temple of Abandon,Theros Beyond Death,Near Mint,4287880,0.27,81
-1,Captain Rex Nebula,Unfinity,Near Mint Foil,5835711,0.14,81
 1,Oddly Uneven,Unstable,Near Mint Foil,3548132,0.44,81
 1,Hangman,Unstable,Near Mint,3540022,0.19,81
-1,Better Than One,Unstable,Near Mint,3544862,0.15,81
 1,Dr. Julius Jumblemorph,The List Reprints,Near Mint Foil,5835123,0.2,81
 1,Clown Robot (002) // Balloon Double-sided Token,Unfinity,Near Mint Foil,6656105,0.25,81
 1,Mystic Snake,Timeshifted,Near Mint,26102,2.06,81
 1,Ral's Outburst,War of the Spark,Near Mint,4001320,0.05,81
-2,Enter the God-Eternals,War of the Spark,Near Mint,4004319,0.48,81
+1,Enter the God-Eternals,War of the Spark,Near Mint,4004319,0.48,81
 1,Ob Nixilis's Cruelty,War of the Spark,Near Mint,3989696,0.02,81
 1,Silumgar's Command,Commander: Zendikar Rising,Near Mint,4584710,0.16,81
 1,Spirit of the Labyrinth,The List Reprints,Near Mint,5423738,1.54,81
 1,Blast Zone,Secret Lair Series,Near Mint Foil,4942301,0.99,81
 1,Aurelia's Fury,The List Reprints,Near Mint Foil,4347299,1.24,81
-1,Scourge of the Throne,The List Reprints,Near Mint Foil,4347384,4.33,81
-1,Black Knight,Fourth Edition,Near Mint,15791,0.44,81
 1,Necropotence,Fifth Edition,Near Mint,16402,18.49,81
 2,Mission Briefing,Guilds of Ravnica,Near Mint,3848578,0.37,81
 1,Domineering Will,Commander 2014,Near Mint,1270679,0.71,81
 1,Reset,Legends,Near Mint - Italian,2221624,7.89,81
 1,Rushing River,Planeshift,Near Mint Foil,45112,10.21,81
-1,Desertion,Visions,Near Mint,19320,3.06,81
 1,"Thassa, God of the Sea",Theros,Near Mint,1131288,8.53,81
 1,Siege Rhino,Secret Lair: 30th Anniversary Countdown Kit,Near Mint,6665789,0.53,81
 1,Vedalken Infiltrator,Modern Horizons 2,Near Mint Foil,4974461,0.07,81
@@ -1195,32 +1096,24 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 2,Arch of Orazca,Rivals of Ixalan,Near Mint,3568844,0.44,81
 1,Temple of Silence,Core Set 2020,Near Mint,4099259,0.23,81
 1,"Magda, Brazen Outlaw",Kaldheim,Near Mint Foil,4691915,8.51,81
-1,Furycalm Snarl,Strixhaven: School of Mages,Near Mint Foil,4838381,0.39,81
 1,Slag Strider,Modern Horizons 2,Near Mint Foil,4987447,0.13,81
 1,Omen of Fire,Alliances,Near Mint,18124,2.3,81
 1,Incendiary Flow,FNM Promos,Near Mint Foil,3289046,0.24,81
 1,Artisan of Kozilek,Duel Decks: Zendikar vs. Eldrazi,Near Mint,2949328,0.76,81
 1,Worn Powerstone,Commander 2014,Near Mint,1271577,0.5,81
-1,Artisan of Kozilek,Commander 2014,Near Mint,1270382,0.53,81
-1,Blade of the Bloodchief,Zendikar,Near Mint,315252,4.05,81
-1,Weatherlight Compleated,Dominaria United,Near Mint Foil,5762382,0.87,81
 1,Conqueror's Galleon,Ixalan,Near Mint Foil,3463784,2.4,81
 1,Sorin the Mirthless (1/81) Art Card (Gold-Stamped Signature),Art Series: Innistrad: Crimson Vow,Near Mint,5310361,2.58,81
 1,Staff of Domination (Extended Art),Commander Legends,Near Mint,4641016,3.09,81
 1,Nightscape Familiar,Planeshift,Near Mint,21285,0.48,81
-1,Decree of Pain,Commander 2013,Near Mint,1139289,0.9,81
 1,Kitchen Imp (Showcase),Modern Horizons 2,Near Mint Foil,4964401,0.11,81
 1,Infernal Scarring,Core Set 2019,Near Mint,3760317,0.05,81
 1,Diabolic Tutor,Kaladesh,Near Mint Foil,3203757,5.87,81
 1,"Vilis, Broker of Blood",Core Set 2020,Near Mint,4102740,7.9,81
 4,Great Wall,Legends,Near Mint,17843,1.53,81
-1,Instrument of the Bards,Adventures in the Forgotten Realms,Near Mint Foil,5062395,0.26,81
 1,Arborea Pegasus (Showcase),Adventures in the Forgotten Realms,Near Mint Foil,5081125,0.07,81
 1,Instrument of the Bards,Adventures in the Forgotten Realms,Near Mint,5062390,0.16,81
 1,Loyal Warhound (Extended Art),Adventures in the Forgotten Realms,Near Mint,5084193,1.65,81
-1,Hive of the Eye Tyrant (Dungeon Module),Adventures in the Forgotten Realms,Near Mint,5049100,2.8,81
 1,Oswald Fiddlebender,Adventures in the Forgotten Realms,Near Mint Foil,5053723,1.79,81
-1,Oswald Fiddlebender,Adventures in the Forgotten Realms,Near Mint,5053718,1.38,81
 1,Hive of the Eye Tyrant,Adventures in the Forgotten Realms,Near Mint Foil,5046147,3.56,81
 1,Fevered Suspicion (Extended Art),Commander: Adventures in the Forgotten Realms,Near Mint,5117139,1.2,81
 1,Descent into Madness,Avacyn Restored,Near Mint,853407,0.28,81
@@ -1236,7 +1129,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Bladecoil Serpent (Extended Art),The Brothers' War,Near Mint Foil,6715300,0.72,81
 1,Temple of Plenty,Born of the Gods,Near Mint,1163843,0.4,81
 1,Augury Adept,Commander 2013,Lightly Played,1138005,0.24,81
-1,Fell Shepherd,Commander 2013,Lightly Played,1137211,0.2,81
 1,Incite Rebellion,Commander 2014,Near Mint,1271055,0.3,81
 1,Sphinx of Jwar Isle,Commander 2014,Lightly Played - Spanish,2826345,0.0,81
 1,Biomantic Mastery,Commander 2015,Lightly Played,3004783,0.21,81
@@ -1250,19 +1142,17 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Path of Ancestry (Extended Art),Commander Legends,Near Mint,4655423,2.01,81
 1,Coiling Oracle,Conspiracy: Take the Crown,Near Mint Foil,3194810,1.01,81
 1,Vaevictis Asmadi,Chronicles,Near Mint,17504,0.47,81
-2,Ravenous Demon,Prerelease Cards,Near Mint Foil,760392,0.33,81
+1,Ravenous Demon,Prerelease Cards,Near Mint Foil,760392,0.33,81
 1,"Tetsuko Umezawa, Fugitive",Dominaria,Near Mint,3614659,0.16,81
 1,Precognition Field,Dominaria,Near Mint,3614619,0.25,81
 1,Cosmic Epiphany (283),Dominaria United,Near Mint,5748321,0.05,81
 1,Adaptive Automaton,Double Masters,Near Mint,4508927,1.22,81
-1,Burning-Tree Emissary,Double Masters 2022,Near Mint,5710949,0.11,81
 1,Brimstone Volley,Double Masters,Near Mint Foil,4518415,0.11,81
 1,Far // Away,Dragon's Maze,Near Mint,1076681,0.19,81
 1,Lochmere Serpent,Throne of Eldraine,Near Mint Foil,4186223,0.33,81
 1,Cabal Therapy,Eternal Masters,Near Mint,3144712,0.75,81
 1,Geier Reach Sanitarium,Eldritch Moon,Near Mint,3157072,1.1,81
 1,Spirit Token (Black/White),Gatecrash,Near Mint,1162745,0.1,81
-1,Angel Token,Gatecrash,Near Mint,1162710,0.34,81
 2,Assemble the Legion,Gatecrash,Near Mint,1067605,0.25,81
 1,"Razia, Boros Archangel",Guilds of Ravnica: Guild Kits,Near Mint,3888797,0.51,81
 1,Boros Reckoner,Guilds of Ravnica: Guild Kits,Near Mint,3849887,1.01,81
@@ -1272,11 +1162,8 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Spider Token,Innistrad,Near Mint,1162770,0.39,81
 1,Nightmarish End,Journey Into Nyx,Near Mint Foil,1184113,0.21,81
 1,Returned Reveler,Journey Into Nyx,Near Mint Foil,1184061,0.27,81
-1,Rapacious Dragon,Jumpstart 2022,Near Mint,6760585,0.18,81
-1,Thrashing Brontodon,Jumpstart 2022,Near Mint,6742037,0.22,81
 1,Mystic Monastery,Duel Decks: Speed vs. Cunning,Near Mint,1254536,0.31,81
 1,Nomad Outpost,Duel Decks: Speed vs. Cunning,Near Mint,1254521,0.55,81
-1,Mistfire Weaver,Khans of Tarkir,Near Mint,1258777,0.13,81
 5,Polluted Mire,Urza's Saga,Moderately Played,338218,0.18,81
 3,Slippery Karst,Urza's Saga,Moderately Played,338277,0.08,81
 2,Smoldering Crater,Urza's Saga,Moderately Played,338279,0.14,81
@@ -1299,12 +1186,10 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Abzan Charm,Commander 2016,Lightly Played,3245840,0.18,81
 1,Ghastly Conscription,Commander 2016,Lightly Played,3246520,0.24,81
 1,"Vorosh, the Hunter",Commander,Lightly Played,473562,0.61,81
-1,Mortify,Commander,Lightly Played,473782,0.22,81
 1,Firestorm - 1998 Brian Selden (WTH),World Championship Decks,Near Mint,3633258,0.0,81
 1,Mountain (571),Secret Lair Drop Series,Near Mint Foil,5282628,0.41,81
 1,Island (550),Secret Lair Drop Series,Near Mint Foil,5462576,1.14,81
 1,Cruel Celebrant,War of the Spark,Near Mint,3990117,0.84,0
-1,Trespasser's Curse,Amonkhet,Near Mint,3329386,0.42,0
 1,Sanctum of Tranquil Light,Core Set 2021,Near Mint,4461396,0.25,0
 1,Curse of the Forsaken,Commander 2013,Near Mint,1137155,0.21,0
 1,New Benalia,Commander 2018,Near Mint,3808963,0.17,0
@@ -1327,9 +1212,8 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Megantic Sliver,Prerelease Cards,Near Mint Foil,1133518,0.9,0
 1,Might Sliver,Time Spiral,Near Mint,25895,0.43,0
 1,Battering Sliver,Planar Chaos,Near Mint,26166,0.23,0
-1,Spined Sliver,Stronghold,Near Mint,18932,0.41,0
-2,Acidic Sliver,Stronghold,Near Mint,18819,0.54,0
-2,Hibernation Sliver,Stronghold,Near Mint,18868,1.98,0
+1,Acidic Sliver,Stronghold,Near Mint,18819,0.54,0
+1,Hibernation Sliver,Stronghold,Near Mint,18868,1.98,0
 1,Cautery Sliver,Planar Chaos,Near Mint,26178,0.35,0
 1,Mistform Sliver,Legions,Lightly Played,372378,0.09,0
 1,Hunter Sliver,Legions,Near Mint - Japanese,2243304,0.0,0
@@ -1338,7 +1222,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Victual Sliver,Stronghold,Near Mint,18948,0.41,0
 1,Quilled Sliver,Time Spiral,Near Mint - Russian,2003076,0.0,0
 1,Runed Stalactite,Modern Masters,Near Mint,1092735,0.13,0
-1,Throes of Chaos,Modern Horizons,Near Mint,4064221,0.16,0
 1,Venom Sliver,The List Reprints,Near Mint,4270093,1.0,0
 1,Groundshaker Sliver,Magic 2014 (M14),Near Mint,1090412,0.15,0
 1,Blur Sliver,Magic 2014 (M14),Near Mint,1090405,0.15,0
@@ -1356,11 +1239,7 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 4,Mistform Sliver,Legions,Near Mint - Japanese,2243257,0.0,0
 1,Telekinetic Sliver,Time Spiral,Near Mint,25991,1.0,0
 2,Necrotic Sliver,Time Spiral: Remastered,Near Mint,4821194,0.19,0
-1,Pristine Talisman,New Phyrexia,Near Mint,416757,0.15,0
-1,Llanowar Tribe,Modern Horizons,Near Mint,4065347,0.53,0
-1,Ring of Evos Isle,Magic 2013 (M13),Near Mint,936888,0.2,0
 1,Dragonwing Glider,Prerelease Cards,Near Mint Foil,6980521,0.39,0
-1,Explore,Modern Masters 2017,Near Mint,3318667,0.18,0
 1,Blood Mist,Eldritch Moon,Near Mint,3158511,0.21,0
 1,Audacious Swap,Commander: Streets of New Capenna,Near Mint,5533618,0.19,0
 4,Llanowar Elves - 1999 Matt Linde (6ED),World Championship Decks,Near Mint,3639133,0.0,0
@@ -1371,7 +1250,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Alpha Status,Scourge,Near Mint,23292,3.73,0
 1,Plated Sliver,Legions,Near Mint,23072,0.52,0
 1,Aphetto Dredging,Onslaught,Near Mint,22897,0.24,0
-1,Armillary Sphere,Planechase Anthology,Near Mint,3251940,0.25,0
 1,Reflex Sliver,Planar Chaos,Near Mint,26271,0.22,0
 1,Ward Sliver,Legions,Near Mint,23078,1.41,0
 1,Springleaf Drum,Lorwyn,Near Mint,4087,0.51,0
@@ -1381,7 +1259,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Teferi Theme Card,Jumpstart,Near Mint,4499262,0.24,0
 1,Release the Dogs,The List Reprints,Near Mint,4694508,0.28,0
 1,Angel of Mercy,The List Reprints,Near Mint,4266357,0.16,0
-1,Sentinel of Lost Lore,Wilds of Eldraine,Near Mint,7377541,0.12,82
 1,Gruff Triplets,Wilds of Eldraine,Near Mint,7383899,0.92,82
 1,Shatter the Oath Art Card,Art Series: Wilds of Eldraine,Near Mint,7407043,0.21,82
 2,The Irencrag Art Card,Art Series: Wilds of Eldraine,Near Mint,7407274,0.17,82
@@ -1399,10 +1276,9 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,"Neheb, the Eternal Art Card",Art Series: Commander Masters,Near Mint,7330970,0.58,82
 1,Bonescythe Sliver Art Card,Art Series: Commander Masters,Near Mint,7331140,0.45,82
 1,Picklock Prankster,Wilds of Eldraine,Near Mint,7382644,0.17,82
-2,Elusive Otter,Wilds of Eldraine,Near Mint,7384349,0.35,82
 1,Rowdy Research,Wilds of Eldraine,Near Mint,7386984,0.2,82
 1,"Obyra, Dreaming Duelist",Wilds of Eldraine,Near Mint Foil,7356942,0.25,82
-3,Plaxcaster Frogling,Commander 2021,Near Mint,4892132,0.29,82
+1,Plaxcaster Frogling,Commander 2021,Near Mint,4892132,0.29,82
 3,Pit Fight,Gatecrash,Near Mint,1067405,0.0,82
 2,"Lozhan, Dragons' Legacy",Commander Legends: Battle for Baldur's Gate,Near Mint,5603329,0.18,82
 1,Island (337),Odyssey,Near Mint,116629,0.93,82
@@ -1421,7 +1297,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Wizards of Thay,Commander Legends: Battle for Baldur's Gate,Near Mint,5611243,0.75,82
 1,Baleful Mastery,Strixhaven: School of Mages,Near Mint,4862465,1.74,82
 1,Erebos's Intervention,Theros Beyond Death,Near Mint,4297349,0.32,82
-1,Khorvath Brightflame,Battlebond,Near Mint,3749809,0.46,82
 1,Visions of Ruin,Commander: Innistrad: Midnight Hunt,Near Mint,5159636,0.42,82
 1,Steamflogger Boss,Unstable,Near Mint,3539962,0.34,82
 1,As Luck Would Have It,Unstable,Near Mint,3548037,0.26,82
@@ -1441,8 +1316,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Rain of Revelation,Modern Horizons,Near Mint Foil,4077039,0.38,82
 1,Ingenious Artillerist,Commander Legends: Battle for Baldur's Gate,Near Mint Foil,5634749,2.92,82
 1,Experiment One,Double Masters 2022,Near Mint Foil,5689743,0.18,82
-1,Jewel Thief,Streets of New Capenna,Near Mint Foil,5512192,0.23,82
-1,Experiment One,Double Masters 2022,Near Mint Foil,5689743,0.18,82
 1,Public Enemy,Streets of New Capenna,Near Mint Foil,5507527,0.15,82
 1,Swamp (340),Odyssey,Near Mint Foil,118159,4.91,82
 1,Plains (403) (Retro Frame),Dominaria Remastered,Near Mint Foil,6786854,1.28,82
@@ -1455,9 +1328,7 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 2,Reckless Abandon,Duel Decks: Speed vs. Cunning,Near Mint,1254431,0.2,82
 1,Wake Thrasher,Duel Decks: Merfolk vs. Goblins,Near Mint,3528352,0.45,82
 1,Tattered Mummy,Magic Game Night 2019,Near Mint,4258975,0.2,82
-1,Court of Embereth,Commander: Wilds of Eldraine,Near Mint,7388671,4.83,82
 1,Rampaging Brontodon,Commander Masters,Near Mint,7298119,0.26,82
-1,Enter the Dungeon,Unsanctioned,Near Mint,4338221,0.11,82
 1,Dogsnail Engine,Unstable,Near Mint,3541453,0.21,82
 1,Unexpected Windfall,Adventures in the Forgotten Realms,Near Mint,5075004,1.76,82
 1,Breathless Knight,Modern Horizons 2,Near Mint Foil,4998231,0.15,82
@@ -1465,9 +1336,7 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Treasure // Bird Illusion Double-Sided Token,Commander Masters,Near Mint,7342634,0.22,82
 1,Servo // Construct (0041) Double-Sided Token,Commander Masters,Near Mint,7341684,0.28,82
 1,Goblin Digging Team,The Dark,Near Mint,17562,0.23,82
-1,Cosmic Rebirth,March of the Machine: The Aftermath,Near Mint,7141557,0.15,82
 1,Cosmic Rebirth (Showcase),March of the Machine: The Aftermath,Near Mint,7147316,0.17,82
-1,Steward of Valeron,Shards of Alara,Near Mint,251616,0.16,82
 4,Tidehollow Strix,Shards of Alara,Near Mint,251562,0.15,82
 1,Tithe Drinker,Dragon's Maze,Near Mint,1077223,0.18,82
 2,Ulamog's Nullifier,Battle for Zendikar,Near Mint,2952842,0.14,82
@@ -1478,11 +1347,10 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Destructive Revelry,Theros,Near Mint,1130823,0.22,82
 1,Angrath's Rampage,War of the Spark,Near Mint,3997601,0.14,82
 1,Parcelbeast,Ikoria: Lair of Behemoths,Near Mint,4379294,0.26,82
-2,Tainted Sigil,Alara Reborn,Near Mint,262837,0.92,82
+1,Tainted Sigil,Alara Reborn,Near Mint,262837,0.92,82
 2,Veinfire Borderpost,Alara Reborn,Near Mint,262727,0.19,82
 7,Stormcaller's Boon,Alara Reborn,Near Mint,262725,0.14,82
 2,Sanctum Plowbeast,Alara Reborn,Near Mint,262822,0.22,82
-1,Thunderclap Wyvern,Magic Origins,Near Mint,2900756,0.14,82
 2,Gleam of Battle,Dragon's Maze,Near Mint,1077232,0.22,82
 1,Spiritmonger,Dominaria Remastered,Near Mint,6789905,0.02,82
 1,Flower // Flourish,Guilds of Ravnica,Near Mint,3850595,0.04,82
@@ -1497,9 +1365,8 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Knight of Malice,Dominaria,Near Mint,3613919,0.2,82
 1,Whisper of the Dross,Phyrexia: All Will Be One,Near Mint Foil,6964924,0.89,82
 1,Terror,Dominaria Remastered,Near Mint,6800754,0.03,82
-8,Phyrexian Ghoul,Dominaria Remastered,Near Mint,6810876,0.01,82
+7,Phyrexian Ghoul,Dominaria Remastered,Near Mint,6810876,0.01,82
 1,Sleeper's Guile,Urza's Legacy,Near Mint,19882,0.19,82
-1,"Aragorn, Company Leader",Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7211883,0.22,82
 1,Creeping Chill,Guilds of Ravnica,Near Mint,3850017,0.2,82
 1,Vampire Opportunist,War of the Spark,Near Mint,4006702,0.03,82
 1,Revenge of Ravens,Throne of Eldraine,Near Mint,4197290,0.48,82
@@ -1511,10 +1378,9 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Markov Baron,March of the Machine: The Aftermath,Near Mint,7142117,0.22,82
 1,Bump in the Night,Innistrad,Near Mint,505112,0.33,82
 1,Trespasser's Curse,Amonkhet,Near Mint,3329386,0.67,82
-1,Lord of the Accursed,Amonkhet,Near Mint,3327480,0.39,82
 1,Carrion Screecher,Hour of Devastation,Near Mint,3409987,0.03,82
 4,Fake Your Own Death,Streets of New Capenna,Near Mint,5523953,0.13,82
-2,Void Grafter,Oath of the Gatewatch,Near Mint,3043110,0.17,82
+1,Void Grafter,Oath of the Gatewatch,Near Mint,3043110,0.17,82
 1,Gruul Charm,Gatecrash,Near Mint,1067653,0.16,82
 1,Luxury Suite,Commander Legends: Battle for Baldur's Gate,Near Mint,5477224,9.66,83
 1,Grand Crescendo,Commander: Streets of New Capenna,Near Mint,5542943,6.56,83
@@ -1522,12 +1388,10 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Gallifrey Stands,Universes Beyond: Doctor Who,Near Mint Foil,7453499,0.44,83
 1,Canyon Slough (Extended Art),Universes Beyond: Doctor Who,Near Mint Foil,7470162,0.33,83
 1,"The Master, Gallifrey's End (Showcase)",Universes Beyond: Doctor Who,Near Mint Foil,7468270,0.22,83
-1,The Flood of Mars (Extended Art) (Surge Foil),Universes Beyond: Doctor Who,Near Mint Foil,7470809,1.42,83
 1,This Is How It Ends,Universes Beyond: Doctor Who,Near Mint Foil,7468510,0.79,83
 1,"Goldberry, River-Daughter",Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7194394,0.44,83
 1,The Battle of Bywater,Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7193844,0.77,83
 1,"Wrexial, the Risen Deep",Commander Anthology Volume II,Near Mint,3743986,1.86,83
-1,Quietus Spike,Commander: Streets of New Capenna,Near Mint,5552988,0.33,83
 1,Life Insurance,Commander: Streets of New Capenna,Near Mint,5549498,0.79,83
 1,Prosperous Partnership,Commander: Streets of New Capenna,Near Mint,5543393,0.38,83
 1,Creeping Tar Pit,Commander: Streets of New Capenna,Near Mint,5555903,0.23,83
@@ -1562,7 +1426,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Greedy Freebooter,The Lost Caverns of Ixalan,Near Mint,7548212,0.1,0
 1,Bitter Triumph,The Lost Caverns of Ixalan,Near Mint,7543437,1.44,0
 1,Mountain (0290),The Lost Caverns of Ixalan,Near Mint,7440448,0.53,0
-1,Dusk Rose Reliquary,The Lost Caverns of Ixalan,Near Mint,7518409,0.12,0
 1,Skeleton Pirate Token,The Lost Caverns of Ixalan,Near Mint,7576491,0.18,0
 1,The Everflowing Well,The Lost Caverns of Ixalan,Near Mint,7502254,0.31,0
 1,Warden of the Inner Sky,The Lost Caverns of Ixalan,Near Mint,7554437,1.45,0
@@ -1572,10 +1435,9 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Spelunking,The Lost Caverns of Ixalan,Near Mint,7509734,1.25,0
 1,Pugnacious Hammerskull,The Lost Caverns of Ixalan,Near Mint,7515674,0.83,0
 1,Echoing Deeps,The Lost Caverns of Ixalan,Near Mint,7523805,1.23,0
-2,Rancid Rats,Shadows over Innistrad,Near Mint,3103066,0.32,82
+1,Rancid Rats,Shadows over Innistrad,Near Mint,3103066,0.32,82
 4,Olivia's Bloodsworn,Shadows over Innistrad,Near Mint,3098951,0.15,82
 1,Ravenous Rats,10th Edition,Near Mint,6487,0.12,82
-1,Vampiric Rites,Battle for Zendikar,Near Mint,2957796,0.24,82
 1,Read the Bones,Magic Origins,Near Mint,2900416,0.19,82
 1,Hypnotic Specter,Fourth Edition,Damaged,317594,0.47,82
 1,Basal Thrull (P. Foglio),Fallen Empires,Near Mint,116366,0.21,82
@@ -1602,9 +1464,7 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Court of Garenbrig Art Card,Art Series: Wilds of Eldraine,Near Mint,7407339,0.15,82
 1,Intrepid Trufflesnout,Wilds of Eldraine,Near Mint Foil,7387679,0.17,82
 1,Dawnglow Infusion,Shadowmoor,Near Mint,116785,0.27,82
-1,Renegade Rallier,Aether Revolt,Near Mint,3258480,0.13,82
 2,Merfolk Mistbinder,Rivals of Ixalan,Near Mint,3568217,0.28,82
-1,Atzocan Seer,Rivals of Ixalan,Near Mint,3568117,0.45,82
 2,Eriette of the Charmed Apple Art Card,Art Series: Wilds of Eldraine,Near Mint,7407364,0.2,82
 1,Primal Vigor Art Card,Art Series: Wilds of Eldraine,Near Mint,7407521,0.24,82
 1,Beast Token Art Card,Art Series: Wilds of Eldraine,Near Mint,7407349,0.19,82
@@ -1612,7 +1472,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,The Irencrag Art Card,Art Series: Wilds of Eldraine,Near Mint,7407274,0.16,82
 1,Scalding Viper Art Card,Art Series: Wilds of Eldraine,Near Mint,7407244,0.25,82
 1,"Tegwyll, Duke of Splendor Art Card",Art Series: Wilds of Eldraine,Near Mint,7407299,0.23,82
-1,"Will, Scion of Peace Art Card",Art Series: Wilds of Eldraine,Near Mint,7407158,0.13,82
 1,Agatha's Champion Art Card,Art Series: Wilds of Eldraine,Near Mint,7407098,0.18,82
 1,"Totentanz, Swarm Piper Art Card",Art Series: Wilds of Eldraine,Near Mint,7407153,0.2,82
 1,Verdant Outrider Art Card,Art Series: Wilds of Eldraine,Near Mint,7407128,0.17,82
@@ -1620,15 +1479,12 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,"Neva, Stalked by Nightmares Art Card",Art Series: Wilds of Eldraine,Near Mint,7407138,0.18,82
 1,"Imodane, the Pyrohammer Art Card",Art Series: Wilds of Eldraine,Near Mint,7407073,0.15,82
 1,Shatter the Oath Art Card,Art Series: Wilds of Eldraine,Near Mint,7407043,0.2,82
-1,Into the Fae Court Art Card,Art Series: Wilds of Eldraine,Near Mint,7407008,0.15,82
 2,Sleep-Cursed Faerie Art Card,Art Series: Wilds of Eldraine,Near Mint,7407013,0.18,82
-1,Arvad the Cursed,Dominaria,Near Mint,3613549,0.21,82
 1,Mistmeadow Witch,Double Masters 2022,Near Mint,5701740,0.07,82
 2,Dralnu's Crusade,Dominaria Remastered,Near Mint,6790656,0.03,82
 2,Recoil,Dominaria Remastered,Near Mint,6793876,0.03,82
 1,Sawtooth Loon,Dominaria Remastered,Near Mint,6796286,0.01,82
 1,Enthusiastic Mechanaut,Kamigawa: Neon Dynasty,Near Mint,5375839,0.27,82
-1,Falkenrath Noble,Modern Masters 2017,Near Mint,3318687,0.27,82
 1,Ipnu Rivulet,Hour of Devastation,Near Mint,3411554,0.24,82
 2,Dread Statuary,Worldwake,Near Mint,382535,0.19,82
 3,Terramorphic Expanse,Time Spiral: Remastered,Near Mint,4822789,0.27,82
@@ -1647,11 +1503,9 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Thrasher Brute,Battlebond,Near Mint,3749592,0.24,82
 1,Sengir Vampire,Fourth Edition,Moderately Played,333469,0.17,82
 1,Price of Fame,Commander: Zendikar Rising,Near Mint,4585025,0.15,82
-1,Frogtosser Banneret,Commander: Zendikar Rising,Near Mint,4583845,0.15,82
 2,Pulse Tracker,Worldwake,Moderately Played,383378,0.22,82
 7,Grave Peril,Commander 2015,Near Mint,3005102,0.14,82
 3,Induce Despair,Duel Decks: Zendikar vs. Eldrazi,Near Mint,2949568,0.1,82
-1,Crypt Incursion,Dragon's Maze,Moderately Played,1077426,0.22,82
 2,Plague Stinger,Scars of Mirrodin,Lightly Played,393967,0.25,82
 6,Sibsig Host,Fate Reforged,Near Mint,1278815,0.18,82
 1,Read the Bones,Magic Origins,Near Mint,2900416,0.19,82
@@ -1664,11 +1518,10 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Exotic Curse,Invasion,Near Mint,20957,0.18,82
 4,Foul-Tongue Shriek,Dragons of Tarkir,Near Mint,2743489,0.22,82
 1,Crush the Weak,Kaldheim,Near Mint,4718491,0.03,82
-1,Cathartic Pyre,Innistrad: Midnight Hunt,Near Mint,5181322,0.29,82
 1,Young Blue Dragon,Commander Legends: Battle for Baldur's Gate,Near Mint Foil,5641749,0.21,82
 4,Absorb Identity,Kaldheim,Near Mint,4693422,0.15,82
 1,Mercurial Transformation,Strixhaven: School of Mages,Near Mint Foil,4870263,0.14,82
-4,Behold the Multiverse,Kaldheim,Near Mint,4706562,0.2,82
+2,Behold the Multiverse,Kaldheim,Near Mint,4706562,0.2,82
 1,Combat Research,Dominaria United,Near Mint,5776995,0.2,82
 1,Aquamorph Entity,Duel Decks: Speed vs. Cunning,Near Mint,1254296,0.16,82
 1,Faerie Impostor,Duel Decks: Speed vs. Cunning,Near Mint,1254616,0.21,82
@@ -1687,25 +1540,21 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Evolving Wilds,Innistrad: Crimson Vow,Near Mint Foil,5282878,0.18,82
 1,Evolving Wilds,The Brothers' War,Near Mint Foil,6717115,0.16,82
 2,Fertile Thicket,Battle for Zendikar,Near Mint,2955536,0.07,82
-1,Forsaken Sanctuary,Shadows over Innistrad,Near Mint,3095202,0.16,82
-7,"Vitu-Ghazi, the City-Tree",Commander: Adventures in the Forgotten Realms,Near Mint,5102494,0.12,82
+6,"Vitu-Ghazi, the City-Tree",Commander: Adventures in the Forgotten Realms,Near Mint,5102494,0.12,82
 1,Simic Growth Chamber,Commander: Adventures in the Forgotten Realms,Near Mint,5103444,0.22,82
 9,Mortuary Mire,Commander: Adventures in the Forgotten Realms,Near Mint,5101089,2.72,82
 3,Halimar Depths,Commander: Adventures in the Forgotten Realms,Near Mint,5104144,0.46,82
 4,Tranquil Thicket,Commander 2021,Near Mint,4894639,0.15,82
 5,Simic Growth Chamber,Commander 2021,Near Mint,4894539,0.27,82
 4,"Novijen, Heart of Progress",Commander 2021,Near Mint,4894089,0.29,82
-7,Myriad Landscape,Commander 2021,Near Mint,4888480,0.19,82
+6,Myriad Landscape,Commander 2021,Near Mint,4888480,0.19,82
 1,Mage-Ring Network,Commander 2021,Near Mint,4890709,0.11,82
 2,Izzet Boilerworks,Commander 2021,Near Mint,4890609,0.22,82
 1,Vampire's Kiss,Innistrad: Crimson Vow,Near Mint,5311186,0.13,82
 1,Undead Butler,Innistrad: Crimson Vow,Near Mint,5263230,0.28,82
-1,Restless Bloodseeker,Innistrad: Crimson Vow,Near Mint,5276827,0.15,82
 1,Thrull Parasite,Gatecrash,Near Mint,1067455,2.42,82
-1,Illness in the Ranks,Gatecrash,Near Mint,1067983,0.18,82
 1,Feign Death,Adventures in the Forgotten Realms,Near Mint,5059629,0.57,82
 1,Shambling Ghast,Adventures in the Forgotten Realms,Near Mint,5055208,0.35,82
-1,Tragic Slip,Dark Ascension,Near Mint,764488,0.28,82
 2,Tribute to Hunger,Innistrad,Near Mint,505849,0.14,82
 2,Falkenrath Noble,Innistrad,Near Mint,505869,0.32,82
 2,Curse of Shallow Graves,Commander 2013,Near Mint,1137205,0.82,82
@@ -1714,7 +1563,7 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 3,Bitterheart Witch,Innistrad,Near Mint,505864,0.34,82
 1,Altar's Reap,Innistrad,Near Mint,505955,0.09,82
 1,Morgue Theft,Odyssey,Near Mint,22228,0.19,82
-3,Grim Guardian,Journey Into Nyx,Near Mint,1184128,0.48,82
+2,Grim Guardian,Journey Into Nyx,Near Mint,1184128,0.48,82
 2,Felhide Petrifier,Journey Into Nyx,Near Mint,1184148,0.21,82
 3,Bloodrage Vampire,Magic 2012 (M12),Near Mint,470784,0.1,82
 1,Bloodthrone Vampire,Magic 2013 (M13),Near Mint,939193,0.16,82
@@ -1723,8 +1572,7 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 4,Liliana's Triumph,War of the Spark,Near Mint,3989972,0.2,82
 4,Sovereign's Bite,Core Set 2019,Near Mint,3760367,0.17,82
 3,Mindwrack Harpy,Theros Beyond Death,Near Mint,4303603,0.23,82
-6,Abnormal Endurance,Core Set 2019,Near Mint,3761323,0.12,82
-1,Faith of the Devoted,Commander 2019,Near Mint,4162191,0.22,82
+2,Abnormal Endurance,Core Set 2019,Near Mint,3761323,0.12,82
 4,Parasitic Impetus,Commander Legends: Battle for Baldur's Gate,Near Mint,5643714,0.16,82
 2,Spread the Sickness,Mirrodin Besieged,Near Mint,413837,0.11,82
 1,Mold Shambler,Zendikar,Near Mint,315358,0.16,82
@@ -1746,7 +1594,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Shiny Impetus,Commander Legends: Battle for Baldur's Gate,Near Mint Foil,5636749,0.14,82
 1,Arms Dealer,Magic 2013 (M13),Near Mint,939161,0.19,82
 1,Enigma Thief,Commander: Zendikar Rising,Near Mint,4578522,0.21,82
-1,Sentinel of Lost Lore,Wilds of Eldraine,Near Mint,7377541,0.08,82
 1,Electropotence,Zendikar,Near Mint,315277,0.2,82
 1,Fall of the Titans,Oath of the Gatewatch,Near Mint,3043160,0.23,82
 1,Shock,Onslaught,Moderately Played,340739,0.2,82
@@ -1767,21 +1614,18 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Goblins of the Flarg,The Dark,Near Mint,17567,0.27,82
 1,Cloud of Faeries,Urza's Legacy,Near Mint,19789,0.34,82
 1,Avalanche,Ice Age,Near Mint,18465,0.25,82
-1,Plaxcaster Frogling,Modern Masters 2015,Near Mint Foil,2880562,0.76,82
 1,Mystic Retrieval,Dark Ascension,Near Mint,764536,0.33,82
 2,Titan's Strength,Theros,Near Mint,1134363,0.13,82
-4,Ghirapur Aether Grid,Magic Origins,Lightly Played,2900547,0.27,82
+3,Ghirapur Aether Grid,Magic Origins,Lightly Played,2900547,0.27,82
 2,Expedite,Battlebond,Near Mint,3750949,0.18,82
 2,Temur Battle Rage,Fate Reforged,Near Mint,1279085,0.21,82
 1,Coal Stoker,Time Spiral,Near Mint,25791,0.23,82
-1,Rift Bolt,Time Spiral,Lightly Played,375509,0.31,82
 3,Blade-Tribe Berserkers,Scars of Mirrodin,Near Mint,395015,0.16,82
 1,Brassclaw Orcs (Horned Helm),Fallen Empires,Lightly Played,376982,0.1,82
 1,Incinerate,10th Edition,Near Mint,5727,0.21,82
 1,Spawning Breath,Rise of the Eldrazi,Near Mint,385379,0.27,82
-1,Reckless Charge,Odyssey,Near Mint,22292,0.15,82
 2,Panic,Ice Age,Near Mint,18698,0.19,82
-2,Fiery Cannonade,Ixalan,Near Mint,3470970,0.15,82
+1,Fiery Cannonade,Ixalan,Near Mint,3470970,0.15,82
 1,Spiteful Prankster,Jumpstart,Near Mint,4477972,0.26,82
 3,Temur Battle Rage,Fate Reforged,Near Mint,1279085,0.21,82
 1,Reckless Handling,March of the Machine: The Aftermath,Near Mint Foil,7140362,0.16,82
@@ -1790,46 +1634,38 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 2,Pirate's Pillage,Rivals of Ixalan,Near Mint,3568247,0.46,82
 2,Foray of Orcs (Borderless),Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7175640,0.1,82
 1,Twinferno,Dominaria United,Near Mint,5761762,0.17,82
-5,Warlord's Fury,Dominaria,Near Mint,3614149,0.18,82
 1,Wizard's Lightning,Dominaria,Near Mint,3614159,0.17,82
 8,Expedite,Battlebond,Near Mint,3750949,0.18,82
 8,Unlucky Witness,Streets of New Capenna,Near Mint,5496387,0.15,82
-7,Sticky Fingers,Streets of New Capenna,Near Mint,5523843,0.18,82
 2,Captain Lannery Storm,March of the Machine: Multiverse Legends,Near Mint,7047631,0.2,82
 1,Goblin Blast-Runner,The Brothers' War,Near Mint Foil,6704696,0.17,82
 2,Blazing Salvo,Odyssey,Near Mint,22255,0.16,82
-1,Enslaved Dwarf,Torment,Near Mint,22474,0.3,82
 4,Stingmoggie,Morningtide,Near Mint,115799,0.15,82
-1,Wrenn's Resolve,March of the Machine,Near Mint,7088943,1.16,82
 1,Empty the Warrens (Retro Frame),Dominaria Remastered,Near Mint,6799704,0.07,82
 2,Heartfire Immolator,Core Set 2021,Near Mint,4450106,0.03,82
 1,Swashbuckler Extraordinaire,Commander Legends: Battle for Baldur's Gate,Near Mint,5627847,0.16,82
 3,Patron of the Arts,Commander Legends: Battle for Baldur's Gate,Near Mint,5636144,0.14,82
 1,Reckless Barbarian,Commander Legends: Battle for Baldur's Gate,Near Mint,5636444,0.18,82
 1,Fiery Impulse,Magic Origins,Near Mint,2895907,0.32,82
-14,Sticky Fingers,Streets of New Capenna,Near Mint,5523843,0.18,82
+11,Sticky Fingers,Streets of New Capenna,Near Mint,5523843,0.18,82
 5,Unlucky Witness,Streets of New Capenna,Near Mint,5496387,0.15,82
 1,Faithless Looting (DDK),The List Reprints,Near Mint,5199443,0.42,82
 1,Last Chance (Retro Frame),Dominaria Remastered,Near Mint,6792446,1.1,82
 1,Tower Defense,Gatecrash,Near Mint,1067892,0.25,82
 1,Animist's Might,March of the Machine: The Aftermath,Near Mint Foil,7140042,0.1,82
-1,Seal of Primordium,Planar Chaos,Lightly Played,375848,0.28,82
 2,Rimehorn Aurochs,Coldsnap,Near Mint,25701,0.15,82
 4,Stampeding Rhino,Magic 2012 (M12),Near Mint,470779,0.2,82
 1,Sprouting Vines,Commander 2013,Near Mint,1140259,0.25,82
 1,Restore,Commander 2013,Near Mint,1137270,0.24,82
-1,Curse of Predation,Commander 2013,Near Mint,1137110,0.4,82
 1,Harmonize,Commander 2013,Near Mint,1139559,0.37,82
 1,Thelon's Curse,Fallen Empires,Near Mint,17722,0.47,82
 1,Thallid (Myrfors),Fallen Empires,Near Mint,116435,0.19,82
 1,Growth Spasm,Rise of the Eldrazi,Near Mint,385295,0.25,82
-2,Orochi Leafcaller,Champions of Kamigawa,Near Mint,24184,0.32,82
+1,Orochi Leafcaller,Champions of Kamigawa,Near Mint,24184,0.32,82
 3,Joyous Respite,Champions of Kamigawa,Near Mint,24103,0.15,82
 5,Golgari Brownscale,Ravnica: City of Guilds,Near Mint,25069,0.2,82
 1,Ulvenwald Bear,Dark Ascension,Near Mint,764571,0.2,82
-1,Obstinate Baloth,The Brothers' War,Near Mint,6686793,0.07,82
-1,Howlpack Resurgence,Shadows over Innistrad,Near Mint,3099984,0.45,82
-3,Trollhide,Magic 2012 (M12),Near Mint,470824,0.16,82
+2,Trollhide,Magic 2012 (M12),Near Mint,470824,0.16,82
 1,Might of Alara,Conflux,Near Mint,255431,0.16,82
 1,Skarrgan Pit-Skulk,Guildpact,Near Mint,25380,0.17,82
 1,Drover of the Mighty,Jumpstart,Near Mint,4476243,0.2,82
@@ -1844,42 +1680,33 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 2,Chatter of the Squirrel,Odyssey,Near Mint,22310,0.27,82
 2,Beast Attack,Odyssey,Near Mint,22307,0.16,82
 1,Sylvan Might,Odyssey,Near Mint,22354,0.15,82
-2,Roar of the Wurm,Odyssey,Near Mint,22343,0.24,82
-3,Whisperer of the Wilds,Fate Reforged,Near Mint,1278059,0.15,82
+2,Whisperer of the Wilds,Fate Reforged,Near Mint,1278059,0.15,82
 1,Fog,Magic 2013 (M13),Near Mint,939147,0.15,82
 3,Broodhunter Wurm,Battle for Zendikar,Near Mint,2956456,0.15,82
 2,Reclaim,Magic Origins,Near Mint,2900666,0.13,82
 1,Nissa's Pilgrimage,Magic Origins,Near Mint,2896779,0.33,82
 1,Gatecreeper Vine,Return to Ravnica,Lightly Played,1042874,0.19,82
 2,Oak Street Innkeeper,Return to Ravnica,Near Mint,1044002,0.15,82
-1,Experiment One,Gatecrash,Near Mint,1066734,0.13,82
 3,Forced Adaptation,Gatecrash,Near Mint,1067990,0.2,82
-1,"Mowu, Loyal Companion",War of the Spark,Near Mint,3990304,0.15,82
 1,Outland Liberator (Showcase),Innistrad: Midnight Hunt,Near Mint,5184957,0.23,82
-1,Hound Tamer (Showcase),Innistrad: Midnight Hunt,Near Mint,5179570,0.05,82
 1,Tiger-Tribe Hunter,Adventures in the Forgotten Realms,Near Mint,5055768,0.02,82
 1,Prosperous Innkeeper,Adventures in the Forgotten Realms,Near Mint,4948737,0.91,82
-3,"Wilson, Refined Grizzly",Commander Legends: Battle for Baldur's Gate,Near Mint,5610443,0.13,82
+2,"Wilson, Refined Grizzly",Commander Legends: Battle for Baldur's Gate,Near Mint,5610443,0.13,82
 6,Overwhelming Encounter,Commander Legends: Battle for Baldur's Gate,Near Mint,5637244,0.17,82
 4,Lurking Green Dragon,Commander Legends: Battle for Baldur's Gate,Near Mint,5636644,0.15,82
-1,"Halsin, Emerald Archdruid",Commander Legends: Battle for Baldur's Gate,Near Mint,5601229,0.11,82
-4,"Wilson, Refined Grizzly (Showcase)",Commander Legends: Battle for Baldur's Gate,Near Mint,5612733,0.07,82
+1,"Wilson, Refined Grizzly (Showcase)",Commander Legends: Battle for Baldur's Gate,Near Mint,5612733,0.07,82
 3,"Halsin, Emerald Archdruid (Showcase)",Commander Legends: Battle for Baldur's Gate,Near Mint,5601309,0.09,82
 4,Circle of Protection: Blue,Ice Age,Near Mint,18498,0.18,82
 2,Cloudchaser Eagle,Tempest,Near Mint,19007,0.16,82
 1,Combat Medic (Beard Jr.),Fallen Empires,Near Mint,17641,0.16,82
 2,Chaplain's Blessing,Shadows over Innistrad,Near Mint,3102306,0.21,82
-1,Congregate,Dominaria Remastered,Near Mint,6796446,0.06,82
 1,Femeref Archers,Mirage,Near Mint,12271,0.19,82
 3,Quirion Elves,Mirage,Near Mint,13231,0.21,82
 2,Mulch,Innistrad,Near Mint,505946,0.09,82
 3,Oran-Rief Recluse,Duel Decks: Jace vs. Vraska,Near Mint,1170491,0.22,82
-1,Gilt-Leaf Seer,Lorwyn,Near Mint,3039,0.15,82
 1,Elven Cache,Classic Sixth Edition,Near Mint,16648,0.24,82
 1,Foundation Breaker,Modern Horizons 2,Near Mint,4986392,0.25,82
-1,Watcher in the Web,Shadows over Innistrad,Near Mint,3103446,0.15,82
 2,Animist's Might,March of the Machine: The Aftermath,Near Mint Foil,7140042,0.1,82
-1,Open the Gates,Ravnica Allegiance,Near Mint,3957673,0.27,82
 2,Saruli Caretaker,Ravnica Allegiance,Near Mint,3958773,0.17,82
 4,Whisperer of the Wilds,Fate Reforged,Near Mint,1278059,0.15,82
 2,Aspect of Hydra,Born of the Gods,Lightly Played,1165887,0.16,82
@@ -1888,13 +1715,10 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Bonded Herdbeast,March of the Machine,Near Mint Foil,7100055,0.01,82
 1,Jungle Delver,Ixalan,Near Mint,3470410,0.05,82
 1,Nissa's Pilgrimage,Magic Origins,Near Mint,2896779,0.33,82
-2,Caustic Caterpillar,Magic Origins,Near Mint,2900606,0.26,82
 6,Broodhunter Wurm,Battle for Zendikar,Near Mint,2956456,0.15,82
 1,Glorious Anthem,Core Set 2021,Near Mint,4458066,0.26,82
 1,Death or Glory,Invasion,Lightly Played,370216,0.3,82
 1,Idol of Endurance,Core Set 2021,Near Mint,4448238,0.08,82
-1,Precursor Golem,Scars of Mirrodin,Near Mint,394621,0.24,82
-1,Forebear's Blade,Dominaria,Near Mint,3614799,0.23,82
 1,Bishop of Binding,Rivals of Ixalan,Near Mint,3568137,0.25,82
 1,Kytheon's Irregulars,Magic Origins,Near Mint,2896963,0.1,82
 1,Chain Reaction,Worldwake,Near Mint,382614,0.45,82
@@ -1908,36 +1732,28 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 2,Nessian Courser,Future Sight,Near Mint,26428,0.17,82
 1,Howl of the Night Pack,Shadowmoor,Near Mint,116847,0.25,82
 1,Overgrown Battlement,Rise of the Eldrazi,Near Mint,385286,0.24,82
-1,Lead the Stampede,Duel Decks: Ajani vs. Nicol Bolas,Near Mint,500396,0.79,82
 1,Scorned Villager,Dark Ascension,Near Mint,760214,0.26,82
 4,Fists of Ironwood,Modern Masters 2017,Near Mint,3318707,0.14,82
 2,The Ring Goes South,Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7189803,0.27,82
 1,Titania's Command,The Brothers' War,Near Mint,6711005,0.54,82
 1,Teething Wurmlet,The Brothers' War,Near Mint Foil,6709695,0.49,82
 1,Teething Wurmlet,The Brothers' War,Near Mint,6709690,0.45,82
-1,Polukranos Reborn,March of the Machine,Near Mint,7045191,0.31,82
 1,Oakhame Adversary,Throne of Eldraine,Near Mint,4203940,0.17,82
-1,Slip Through Space,Oath of the Gatewatch,Near Mint,3044566,0.26,82
 1,Outland Liberator,Innistrad: Midnight Hunt,Near Mint,5190067,0.4,82
 1,Dormant Grove,Innistrad: Crimson Vow,Near Mint,5257624,0.17,82
 1,Colossal Dreadmaw,Rivals of Ixalan,Near Mint,3569784,0.08,82
 2,Reclaim,Magic Origins,Near Mint,2900666,0.13,82
 1,Nissa's Pilgrimage,Magic Origins,Near Mint,2896779,0.35,82
 1,Elvish Visionary,Magic Origins,Near Mint,2894021,0.06,82
-1,Caustic Caterpillar,Magic Origins,Near Mint,2900606,0.27,82
 2,Axebane Guardian,Return to Ravnica,Near Mint,1042553,0.3,82
 1,Attune with Aether,Kaladesh,Near Mint,3202492,0.06,82
 3,Blessings of Nature,Avacyn Restored,Near Mint,871110,0.2,82
 4,Ley Weaver,Battlebond,Near Mint,3749849,0.3,82
 2,Veteran Explorer,Battlebond,Near Mint,3749748,0.25,82
-1,Unravel the Aether,Born of the Gods,Near Mint,1164400,0.23,82
-1,Tangled Florahedron,Zendikar Rising,Near Mint,4552787,0.25,82
 1,Saruli Caretaker,Ravnica Allegiance,Near Mint,3958773,0.16,82
 3,Fog,Magic 2014 (M14),Near Mint,1098264,0.15,82
 1,Kalonian Tusker,Magic 2014 (M14),Near Mint,1098404,0.16,82
 1,Reclamation Sage (248),Commander Legends,Near Mint,4654633,0.11,82
-1,"Numa, Joraga Chieftain",Commander Legends,Near Mint,4636276,0.08,82
-1,Prized Unicorn,Core Set 2020,Near Mint,4125615,1.46,82
 1,Oakenform,Core Set 2020,Near Mint,4125545,0.2,82
 1,Frilled Sandwalla,Core Set 2020,Near Mint,4125485,0.24,82
 3,Canopy Spider,Core Set 2020,Near Mint,4129215,0.33,82
@@ -1955,14 +1771,13 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Mirkwood Spider,Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7212523,0.07,82
 2,Galadhrim Guide,Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7213158,0.04,82
 1,Dunedain Rangers,Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7191299,0.03,82
-1,Peregrin Took (Showcase),Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7182226,0.1,82
 2,Ent's Fury,Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7165155,0.03,82
 1,Celeborn the Wise,Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7195337,0.04,82
 4,Brandywine Farmer,Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7213918,0.04,82
 4,Bag End Porter,Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7164035,0.02,82
 1,"Quickbeam, Upstart Ent",Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7169710,0.03,82
 1,Mirrormere Guardian,Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7221325,0.01,82
-2,Meriadoc Brandybuck,Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7167565,0.04,82
+1,Meriadoc Brandybuck,Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7167565,0.04,82
 3,Galadhrim Bow,Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7165735,0.04,82
 3,Meriadoc Brandybuck (Showcase),Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7182106,0.1,82
 3,Pippin's Bravery (Borderless),Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Near Mint,7174950,0.03,82
@@ -1973,21 +1788,16 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Nature's Lore,Commander Legends: Battle for Baldur's Gate,Near Mint,5637044,1.95,82
 2,Lurking Green Dragon,Commander Legends: Battle for Baldur's Gate,Near Mint,5636644,0.15,82
 1,"Halsin, Emerald Archdruid",Commander Legends: Battle for Baldur's Gate,Near Mint,5601229,0.11,82
-16,Keeper of Fables,Commander: Zendikar Rising,Near Mint,4588660,0.2,82
-14,Satyr Wayfinder,Commander: Zendikar Rising,Near Mint,4588715,0.15,82
-1,Retreat to Kazandu,Duel Decks: Zendikar vs. Eldrazi,Near Mint,2945572,0.23,82
+15,Keeper of Fables,Commander: Zendikar Rising,Near Mint,4588660,0.2,82
+13,Satyr Wayfinder,Commander: Zendikar Rising,Near Mint,4588715,0.15,82
 1,Bushwhack,The Brothers' War,Near Mint Foil,6718405,1.36,82
-6,Blanchwood Armor,The Brothers' War,Near Mint,6694886,0.07,82
 2,Evolving Adaptive,Phyrexia: All Will Be One,Near Mint,6957043,0.05,82
-2,Cankerbloom,Phyrexia: All Will Be One,Near Mint,6958773,1.02,82
 2,Tyvar's Stand,Phyrexia: All Will Be One,Near Mint,6945350,1.62,82
-3,Infectious Bite,Phyrexia: All Will Be One,Near Mint,6950319,0.39,82
-1,Armored Scrapgorger,Phyrexia: All Will Be One,Near Mint,6956235,0.23,82
-1,Unnatural Restoration,Phyrexia: All Will Be One,Near Mint,6942316,0.66,82
-2,"Grunn, the Lonely King",Dominaria,Near Mint,3614549,0.21,82
+2,Infectious Bite,Phyrexia: All Will Be One,Near Mint,6950319,0.39,82
+1,"Grunn, the Lonely King",Dominaria,Near Mint,3614549,0.21,82
 1,Grow from the Ashes,Dominaria,Near Mint,3637125,0.27,82
 1,Cultivate,Core Set 2021,Near Mint,4446622,0.68,82
-9,Jewel Thief,Streets of New Capenna,Near Mint,5512187,0.09,82
+7,Jewel Thief,Streets of New Capenna,Near Mint,5512187,0.09,82
 7,Courier's Briefcase,Streets of New Capenna,Near Mint,5487390,0.05,82
 2,Back from the Brink,Innistrad,Near Mint,505964,0.21,0
 3,Goldvein Pick,Kaldheim,Near Mint,4722074,0.14,0
@@ -1995,13 +1805,11 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Forest (296),Shadows over Innistrad,Near Mint,3099321,0.1,0
 1,Troll Warrior Token,Kaldheim,Near Mint,4763063,0.27,0
 1,Replicated Ring Token,Kaldheim,Near Mint,4763283,0.47,0
-1,Niko Aris (Borderless),Kaldheim,Near Mint,4705607,0.44,0
 1,Crush the Weak,The List Reprints,Near Mint,7180576,0.1,0
 1,Temple of Triumph,Commander: March of the Machine,Near Mint,7082439,0.19,0
 1,Calamity Bearer,Kaldheim,Near Mint,4708548,0.2,0
 1,Gallia of the Endless Dance,Theros Beyond Death,Near Mint,4287624,0.13,0
 1,Phyrexian Ingester,Commander 2014,Near Mint,1270745,0.21,0
-1,Essence Pulse,Commander 2021,Near Mint,4899949,0.22,0
 1,Phyrexian Rebirth,Mirrodin Besieged,Near Mint,413943,0.34,0
 1,Blood Scrivener,Dragon's Maze,Near Mint,1076585,0.22,0
 1,"Feldon, Ronom Excavator",The Brothers' War,Near Mint,6672069,0.37,0
@@ -2014,7 +1822,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 2,Devil Token,Streets of New Capenna,Near Mint,5552833,0.12,85
 1,Crush Contraband,Commander: Innistrad: Crimson Vow,Near Mint,5299648,0.21,85
 1,Azorius Chancery,Commander: Innistrad: Crimson Vow,Near Mint,5302168,0.15,85
-1,Hotshot Mechanic,Kamigawa: Neon Dynasty,Near Mint,5377425,0.12,85
 1,Reckoner's Bargain,Kamigawa: Neon Dynasty,Near Mint,5412958,0.41,85
 1,Reinforced Ronin,Kamigawa: Neon Dynasty,Near Mint,5417398,0.15,85
 1,Spell Pierce,Kamigawa: Neon Dynasty,Near Mint,5394319,0.24,85
@@ -2022,7 +1829,6 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 1,Make Disappear,Streets of New Capenna,Near Mint,5494605,0.96,85
 1,Skycloud Expanse,Commander: Innistrad: Crimson Vow,Near Mint,5301968,0.18,85
 1,Temple of Enlightenment,Commander: Innistrad: Crimson Vow,Near Mint,5302068,0.2,85
-1,Angel // Clue Double-sided Token,Commander: Innistrad: Crimson Vow,Near Mint,5313461,0.18,85
 4,Spirit (001) // Spirit (002) Double-sided Token,Commander: Innistrad: Crimson Vow,Near Mint,5315011,0.18,85
 3,Spirit (002) // Copy Double-sided Token,Innistrad: Crimson Vow,Near Mint,5314146,0.1,85
 1,Moorland Haunt,Commander: Innistrad: Crimson Vow,Near Mint,5301703,0.11,85
@@ -2067,16 +1873,12 @@ Quantity,Name,Set,Condition,SKU,Price Each,Lot
 2,Undercellar Myconid,Commander Legends: Battle for Baldur's Gate,Near Mint,5638544,0.15,85
 2,Navigation Orb,Commander Legends: Battle for Baldur's Gate,Near Mint,5640944,0.17,85
 1,Inspiring Leader,Commander Legends: Battle for Baldur's Gate,Near Mint,5634644,0.23,85
-1,Military Intelligence,Commander: Zendikar Rising,Near Mint,4585600,0.29,85
 1,Thrakkus the Butcher,Commander Legends: Battle for Baldur's Gate,Near Mint,5614503,0.19,85
-1,Decompose,Duel Decks: Sorin vs. Tibalt,Near Mint,1075616,0.04,85
 1,Miming Slime,Gatecrash,Near Mint,1067852,0.12,85
 1,Patriar's Seal,Commander Legends: Battle for Baldur's Gate,Near Mint,5630220,2.93,85
 1,Blur,Commander Legends: Battle for Baldur's Gate,Near Mint,5597664,0.15,85
 1,Breath Weapon,Commander Legends: Battle for Baldur's Gate,Near Mint,5632244,0.26,85
-1,Giant Ankheg,Commander Legends: Battle for Baldur's Gate,Near Mint,5636544,0.16,85
 1,Volo's Journal Token,Commander Legends: Battle for Baldur's Gate,Near Mint,5663174,0.18,85
-2,Greatsword of Tyr,Commander Legends: Battle for Baldur's Gate,Near Mint,5617651,0.19,85
 1,Githzerai Monk,Commander Legends: Battle for Baldur's Gate,Near Mint,5628057,0.2,85
 2,Sword Coast Serpent,Commander Legends: Battle for Baldur's Gate,Near Mint,5641244,0.18,85
 1,Wayfarer's Bauble,Commander Anthology Volume II,Near Mint,3744726,0.58,85
