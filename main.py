@@ -157,9 +157,7 @@ def sort_cards():
     file_path = get_file_path()
     df = pd.read_csv(file_path)
     df = df.drop(df.tail(1).index)
-    sets = df['Set']
-    sets = sets.drop_duplicates()
-    print(sets)
+    sets = df['Set'].drop_duplicates()
     df.Set = df.Set.astype("category")
     df.Set = df.Set.cat.set_categories(sets)
     df = df.sort_values(['Set', 'Product Name'])
@@ -180,3 +178,5 @@ commands = [
 ]
 
 InputLoop(commands, False)
+
+# sort_cards()
