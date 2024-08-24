@@ -1,4 +1,6 @@
 import pygame
+import tkinter
+from tkinter import filedialog
 
 # Example Command
 # commands = [
@@ -22,6 +24,12 @@ def InputLoop(commands, repeat = True):
         print('Action Completed: ' + commands[choice]['text'])
         loop = repeat
 
+def create_command(commands_dict):
+    commands = []
+    for text in commands_dict:
+
+        commands.append({'text': text, 'action': commands_dict[text]})
+    return commands
 
 class Game:
     def __init__(self):
@@ -63,3 +71,11 @@ COLORS = {
     "ORANGE": (255, 165, 0),
     "WHITE": (255, 255, 255)
 }
+
+# Create a file exporere window to select file then returns filepath for that file
+def get_file_path():
+    root = tkinter.Tk()
+    root.attributes("-topmost", True)
+    root.withdraw()
+    filePath = filedialog.askopenfilename()
+    return filePath
