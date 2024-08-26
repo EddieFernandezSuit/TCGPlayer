@@ -26,14 +26,12 @@ def get_file_matching_prefix(dir_path, file_name_prefix):
     return last_file
 
 def proccess_new_cards():
-    # pricing_file_path = get_file_path()
-    # pricing_df = pd.read_csv(pricing_file_path)
-    # pricing_df = pricing_df.rename(columns={'TCG Marketplace Price': 'Price Each', "Set Name": "Set", "Product Name": "Name"})
-
-
-    # email_cards_file_path = email_to_csv()
-    email_cards_file_path = 'data/email_cards.csv'
+    email_cards_file_path = email_to_csv()
+    # email_cards_file_path = config.PROJECT_DIRECTORY + 'data/email_cards.csv'
     new_cards_df = pd.read_csv(email_cards_file_path)
+
+    # new_cards_df = remove_cards_under_10_cents(df=new_cards_df)
+    # print(new_cards_df)
 
     def update_condition(row):
         condition = row['Condition']
@@ -42,14 +40,6 @@ def proccess_new_cards():
         if row['Language'] != 'English':
             condition = f"{condition} - {row['Language']}"
         return condition
-    
-    
-    def adjust_card_prices_1(row, flat_discount: float = 0.02, percentage: float = 2):
-        return max((row["Price Each"] * percentage) - flat_discount, 0.2)
-    
-    # new_cards_df = pd.merge(new_cards_df, pricing_df, on=['Name', 'Set', 'Condition'], how='left')
-
-    # print(new_cards_df)
 
     new_cards_df['Condition'] = new_cards_df.apply(update_condition, axis=1)
     new_cards_df["Price Each"] = new_cards_df["Price Each"].str.strip("$").astype(float)
@@ -58,10 +48,6 @@ def proccess_new_cards():
     new_cards_df['TCG Direct Low'] = .01
     new_cards_df['TCG Low Price'] = .01
     new_cards_df['Price Each'] = new_cards_df.apply(lambda row: calculate_price(row), axis=1)
-    # new_cards_df = new_cards_df.rename(columns={'TCG Market Price': 'Price Each'})
-
-    # print(new_cards_df)
-    # return
     new_cards_df = new_cards_df.drop('Printing', axis=1)
     new_cards_df = new_cards_df.drop('Language', axis=1)
     lot = input('Enter Lot number: ')
@@ -77,18 +63,27 @@ def proccess_new_cards():
     new_cards_df = new_cards_df.assign(**{"Product Line": "Magic"}, **{col: '' for col in new_cols})
 
     new_cards_df.to_csv(email_cards_file_path, index=False)
-
     merge_duplicates(email_cards_file_path)
     upload_tcgplayer_prices(email_cards_file_path)
 
-def update_inventory_and_sales(directory):
+def update_inventory_and_sales(directory, type='normal'):
     directory = DOWNLOADS_DIRECTORY
-    download_tcgplayer_files()
+    if type == 'normal':
+        download_tcgplayer_files()
 
-    prefixes = ["_TCGplayer_ShippingExport","TCGplayer_PullSheet","TCGplayer__MyPricing"]
-    shipping_file_path, pullsheet_file_path, pricing_file_path = [get_file_matching_prefix(directory, prefix) for prefix in prefixes]
+    if type == 'normal':
+        prefixes = ["_TCGplayer_ShippingExport","TCGplayer_PullSheet","TCGplayer__MyPricing"]
+    else:
+        prefixes = ["TCGplayer_PullSheet","TCGplayer__MyPricing"]
+    
+    paths = [get_file_matching_prefix(directory, prefix) for prefix in prefixes]
 
-    print_from_csv(shipping_file_path)
+    if type =='normal':
+        shipping_file_path, pullsheet_file_path, pricing_file_path = paths
+        print_from_csv(shipping_file_path)
+    else:
+        pullsheet_file_path, pricing_file_path = paths
+    
     inventory_file_path = config.PROJECT_DIRECTORY + "data/inventory.csv"
     sales_file_path = config.PROJECT_DIRECTORY + "data/sales.csv"
     file_paths = [pullsheet_file_path, pricing_file_path, sales_file_path, inventory_file_path]
@@ -124,9 +119,8 @@ def update_inventory_and_sales(directory):
     new_pullsheet_file_path = rearrange_pullsheet(pullsheet_file_path)
     sort_cards(new_pullsheet_file_path)
 
-    os.remove(shipping_file_path)
-    os.remove(pricing_file_path)
-    os.remove(pullsheet_file_path)
+    for path in paths:
+        os.remove(path)
 
 def rearrange_pullsheet(file_path):
     pullsheet_df = pd.read_csv(file_path)
@@ -136,12 +130,17 @@ def rearrange_pullsheet(file_path):
     pullsheet_df.to_csv(new_pullsheet_file_path, index=False)
     return new_pullsheet_file_path
 
-def remove_cards_under_10_cents():
-    cards_file_path = get_file_path()
-    df = pd.read_csv(cards_file_path)
+def remove_cards_under_10_cents(cards_file_path = '', df = pd.DataFrame()):
+    if df.empty:
+        if cards_file_path == '':
+            cards_file_path = get_file_path()
+        df = pd.read_csv(cards_file_path)
+    
     prices = df["Price Each"].str.strip('$').astype(float)
     df.drop(df[prices < 0.1].index, inplace=True)
-    df.to_csv(cards_file_path, index=False)
+    # df.to_csv(cards_file_path, index=False)
+    # print(df)
+    return df
 
 def find_matching_cards():
     inventory_file_path = config.PROJECT_DIRECTORY + "data/inventory.csv"
@@ -174,9 +173,9 @@ def get_revenue():
 def calculate_price(row, percentage = .95, flat_discount = .03):
     market_price = row['TCG Market Price']
     price = (market_price * percentage) - flat_discount
-    if market_price < 1:
-        price =  market_price
-    elif market_price < 3:
+    # if market_price < 1:
+    #     price =  market_price
+    if market_price < 3:
         price = market_price * 2
     elif market_price < 20:
         price = market_price + 1.27
@@ -185,7 +184,6 @@ def calculate_price(row, percentage = .95, flat_discount = .03):
     else:
         price = market_price + 7.5
     
-    # return max((row["TCG Market Price"] * percentage) - flat_discount, row["TCG Low Price"] - flat_discount, row['TCG Direct Low'] - flat_discount, .1)
     return max(price - flat_discount, row["TCG Low Price"] - flat_discount, row['TCG Direct Low'] - flat_discount, .2)
 
 def adjust_card_prices(prices_file_name = ''):
@@ -194,15 +192,6 @@ def adjust_card_prices(prices_file_name = ''):
         prices_file_name = get_file_path()
     
     df = pd.read_csv(prices_file_name)
-
-    # def update_market(row):
-    #     if row['TCG Market Price'] == '':
-    #         return max(row['TCG Low Price'], row['TCG Direct Low'])
-    #     return row['TCG Market Price']
-    
-    # def update_low(row):
-    #     if row['TCG Low Price'] == '':
-    #         return max(row[''])
 
     df['TCG Market Price'] = df['TCG Market Price'].fillna(0.01)
     df['TCG Low Price'] = df['TCG Low Price'].fillna(0.01)
@@ -232,8 +221,9 @@ def sort_cards(file_path = ''):
 DOWNLOADS_DIRECTORY = config.DOWNLOADS_DIRECTORY
 
 commands = [
-    {'text': 'Get cards from email then add to inventory then create email.csv', 'action': proccess_new_cards},
-    {'text': 'Find and Print TCGPlayer Sales', 'action': lambda: update_inventory_and_sales(DOWNLOADS_DIRECTORY)},
+    {'text': 'remove under 10 cents cards! Get cards from email then add to inventory then create email.csv', 'action': proccess_new_cards},
+    {'text': 'Find and Print TCGPlayer Sales Normal', 'action': lambda: update_inventory_and_sales(DOWNLOADS_DIRECTORY)},
+    {'text': 'Find and Print TCGPlayer Sales Direct', 'action': lambda: update_inventory_and_sales(DOWNLOADS_DIRECTORY, 'direct')},
     {'text': 'Remove cards worth less than $0.10 market price from a selected file','action': remove_cards_under_10_cents},
     {'text': 'Find cards that are in a selected file and in "data/inventory.csv"','action': find_matching_cards},
     {'text': 'Combine duplicate cards in a selected file','action': merge_duplicates},
