@@ -33,7 +33,8 @@ def upload_tcgplayer_prices(file_path):
     auto_web.go("https://store.tcgplayer.com/admin/pricing")
     auto_web.click(By.XPATH, '/html/body/div[4]/div/div[4]/div[2]/pricing-search/div[4]/pricing-actions/div[1]/div[1]/div/input[4]')
     file_input = auto_web.find_element(By.XPATH, '/html/body/div[4]/div/div[6]/pricing-dialog/div/div/div[2]/pricing-importer/div/div/div[1]/input')
-    file_input.send_keys(PROJECT_DIRECTORY + file_path)
+    # file_input.send_keys(PROJECT_DIRECTORY + file_path)
+    file_input.send_keys(file_path)
     auto_web.click(By.XPATH, '/html/body/div[4]/div/div[6]/pricing-dialog/div/div/div[2]/pricing-importer/div/div/div[2]/input')
     auto_web.click(By.XPATH, '/html/body/div[4]/div/div[6]/pricing-dialog/div/div/div[2]/pricing-importer/div/div/div/input[2]')  # continue button
     auto_web.click(By.XPATH, '/html/body/div[4]/div/div[6]/pricing-dialog/div/div/div[2]/pricing-importer/div/div/div/input[3]')  # move to live button
