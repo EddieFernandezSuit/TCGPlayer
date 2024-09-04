@@ -14,7 +14,7 @@ class AutoWeb():
             options.add_experimental_option("debuggerAddress", "localhost:9222")
         options.add_argument("--disable-notifications")
         self.driver = webdriver.Chrome(options=options)
-        self.driver.maximize_window()
+        # self.driver.maximize_window()
         self.wait_time = 10
         
     def find_element(self, type, identifier):
@@ -29,7 +29,7 @@ class AutoWeb():
     def quit(self):
         self.driver.quit()
 
-    def click(self, type, identifier):
+    def click(self, type=By.XPATH, identifier=""):
         WebDriverWait(self.driver, self.wait_time).until(EC.element_to_be_clickable((type, identifier))).click()
     
     def click_many(self, xpaths):
