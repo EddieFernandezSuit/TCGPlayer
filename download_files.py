@@ -43,18 +43,25 @@ def upload_prices(auto_web: AutoWeb, prices_file_path):
     auto_web.quit()
 
 def download_files_normal():
+    READY_TO_SHIP_BUTTON = '//*[@id="rightSide"]/div/div[4]/div/div[2]/div[1]/div[2]/div[2]/div[2]/button'
+    MARK_AS_SHIPPED_BUTTON = '//*[@id="search-results-buttons"]/button[4]'
+
     auto_web = TCGPlayer(isLocal=True)
     auto_web.handle_tcg_login()
     auto_web.download_pricing()
     auto_web.go("https://store.tcgplayer.com/admin/orders/orderlist")
     auto_web.set_items_per_page(500)
-    auto_web.click(By.XPATH, '//*[@id="rightSide"]/div/div[4]/div/div[2]/div[1]/div[2]/div[2]/div[2]/button')
+    time.sleep(2)
+    auto_web.click(By.XPATH, READY_TO_SHIP_BUTTON)
+    auto_web.click(By.XPATH, READY_TO_SHIP_BUTTON)
     time.sleep(2)
     auto_web.click_all_results()
     auto_web.click_pullsheet()
     auto_web.click(By.XPATH, '//*[@id="search-results-buttons"]/button[2]')
     auto_web.click(By.XPATH, '/html/body/div[4]/div/div[4]/div/span/div/div[2]/div/div[1]/div[1]/button')
     auto_web.find_element(By.XPATH, '//*[@id="search-results-buttons"]/div[1]/div[3]/div/a[1]').click()
+    auto_web.click(identifier=MARK_AS_SHIPPED_BUTTON)
+    # auto_web.driver.close()
     auto_web.quit()
 
 def download_files_direct():
@@ -77,3 +84,4 @@ def upload_tcgplayer_prices(file_path):
     input('Press Enter To Continue')
     auto_web.driver.switch_to.window(auto_web.driver.window_handles[-1])
     upload_prices(auto_web, file_path)
+

@@ -46,3 +46,4 @@ class AutoWeb():
     
     def new_tab(self):
         self.driver.switch_to.new_window('tab')
+    
