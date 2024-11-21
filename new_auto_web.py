@@ -21,11 +21,11 @@ import time
 
 class NewAutoWeb(webdriver.Chrome):
     def __init__(self, commands=None) -> None:
-        # options = Options()
-        # options.add_experimental_option("debuggerAddress", "localhost:9222")
-        # options.add_argument("--disable-notifications")
-        # super().__init__(options, None, True)
-        # subprocess.Popen('"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\selenum\ChromeProfile"', shell=True)
+        subprocess.Popen('"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\selenum\ChromeProfile"', shell=True)
+        options = Options()
+        options.add_experimental_option("debuggerAddress", "localhost:9222")
+        options.add_argument("--disable-notifications")
+        super().__init__(options=options, service=None, keep_alive=True)
         self.wait_time = 4
         time.sleep(2)
         if commands:
