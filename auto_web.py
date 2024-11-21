@@ -18,7 +18,16 @@ class AutoWeb():
         self.wait_time = 10
         
     def find_element(self, type, identifier):
-        return WebDriverWait(self.driver, self.wait_time).until(EC.presence_of_element_located((type, identifier)))
+        try:
+            wdw = WebDriverWait(self.driver, self.wait_time).until(EC.presence_of_element_located((type, identifier)))
+            return wdw
+        except:
+            # print('TimeoutError')
+            print(type)
+            print(identifier)
+            wdw = WebDriverWait(self.driver, self.wait_time).until(EC.presence_of_element_located((type, identifier)))
+            return wdw
+            
     
     def find_elements(self, type, identifier):
         return WebDriverWait(self.driver, self.wait_time).until(EC.presence_of_all_elements_located((type, identifier)))

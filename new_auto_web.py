@@ -20,13 +20,14 @@ import time
 # ]
 
 class NewAutoWeb(webdriver.Chrome):
-    def __init__(self, commands=None, options: Options = None, service: Service = None, keep_alive: bool = True) -> None:
-        options = Options()
-        subprocess.Popen('"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\selenum\ChromeProfile"', shell=True)
-        options.add_experimental_option("debuggerAddress", "localhost:9222")
-        options.add_argument("--disable-notifications")
-        super().__init__(options, service, keep_alive)
-        self.wait_time = 5
+    def __init__(self, commands=None) -> None:
+        # options = Options()
+        # options.add_experimental_option("debuggerAddress", "localhost:9222")
+        # options.add_argument("--disable-notifications")
+        # super().__init__(options, None, True)
+        # subprocess.Popen('"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\selenum\ChromeProfile"', shell=True)
+        self.wait_time = 4
+        time.sleep(2)
         if commands:
             self.execute_commands(commands)
 
@@ -40,6 +41,9 @@ class NewAutoWeb(webdriver.Chrome):
         self.sleep(1)
         WebDriverWait(self, self.wait_time).until(EC.element_to_be_clickable((type, identifier))).click()
     
+    def go(self, url):
+        self.get(url)
+
     def click_many(self, xpaths):
             for xpath in xpaths:
                 self.click(xpath)
@@ -71,6 +75,7 @@ class NewAutoWeb(webdriver.Chrome):
             args = command[1:] if len(command) > 1 else []
 
             if hasattr(self, action):
-                getattr(self, action)(*args)
+                execute = getattr(self, action)
+                execute(*args)
             else:
                 raise ValueError(f"Invalid action: {action}")

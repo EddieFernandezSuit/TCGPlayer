@@ -9,12 +9,16 @@ import datetime
 import pandas as pd
 import os
 from mtgsdk import Card
+import webbrowser
 
 # python -m PyInstaller main.py
 
+SALES_PATH = 'data/sales.csv'
+COST_PATH = 'data/other_costs.csv'
+
 def order_by_set():
     new_cards_file_path = get_file_path()
-    set_order_file_path = PROJECT_DIRECTORY + "data/set_order.csv.csv"
+    set_order_file_path = PROJECT_DIRECTORY + "data/set_order.csv"
     new_cards = pd.read_csv(new_cards_file_path)
     set_order = pd.read_csv(set_order_file_path)
     new_cards = pd.merge(new_cards, set_order, on='Set', how='left')
@@ -29,24 +33,21 @@ def get_file_matching_prefix(dir_path, file_name_prefix):
 
 def proccess_new_cards(filter=False):
     email_cards_file_path = email_to_csv()
-    # email_cards_file_path = config.PROJECT_DIRECTORY + 'data/email_cards.csv'
     new_cards_df = pd.read_csv(email_cards_file_path)
 
     if filter:
         new_cards_df = remove_cards_under(df=new_cards_df, price_line=.2)
-        print(new_cards_df)
 
     def update_condition(row):
         condition = row['Condition']
-        if row['Printing'] == 'Foil':
-            condition += ' Foil'
+        if row['Printing'] != 'Normal':
+            condition += ' ' +  row['Printing']
         if row['Language'] != 'English':
             condition = f"{condition} - {row['Language']}"
         return condition
 
     new_cards_df['Condition'] = new_cards_df.apply(update_condition, axis=1)
     new_cards_df["Price Each"] = new_cards_df["Price Each"].str.strip("$").astype(float)
-
     new_cards_df = new_cards_df.rename(columns={'Price Each': 'TCG Market Price'})
     new_cards_df['TCG Direct Low'] = .01
     new_cards_df['TCG Low Price'] = .01
@@ -55,7 +56,6 @@ def proccess_new_cards(filter=False):
     new_cards_df = new_cards_df.drop('Language', axis=1)
     lot = input('Enter Lot number: ')
     new_cards_df['Lot'] = lot
-
     inventory_filename = PROJECT_DIRECTORY + 'data/inventory.csv'
     inventory = pd.read_csv(inventory_filename)
     inventory = pd.concat([inventory, new_cards_df], ignore_index=True)
@@ -69,29 +69,37 @@ def proccess_new_cards(filter=False):
     merge_duplicates(email_cards_file_path)
     upload_tcgplayer_prices(email_cards_file_path)
 
-def proccess_sales(directory, type='normal'):
-    directory = DOWNLOADS_DIRECTORY
-
+def process_sales(type='normal'):
     if type == 'normal':
         download_files_normal()
-        prefixes = ["_TCGplayer_ShippingExport","TCGplayer_PullSheet","TCGplayer__MyPricing"]
-        paths = [get_file_matching_prefix(directory, prefix) for prefix in prefixes]
-        shipping_file_path, pullsheet_file_path, pricing_file_path = paths
-        print_from_csv(shipping_file_path)
-
+        shipping_prefix = "TCGplayer_ShippingExport"
+        shipping_path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, shipping_prefix)
+        print_from_csv(shipping_path)
+        pullsheet_prefix = "TCGplayer_PullSheet"
+        pullsheet_path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, pullsheet_prefix)
     else:
-        download_files_direct()
-        prefixes = ["TCGplayer_PullSheet","TCGplayer__MyPricing"]
-        paths = [get_file_matching_prefix(directory, prefix) for prefix in prefixes]
-        pullsheet_file_path, pricing_file_path = paths
-    
-    inventory_file_path = PROJECT_DIRECTORY + "data/inventory.csv"
+        # download_files_direct()
+        time.sleep(1)
+        pullsheet_prefix = 'R2024'
+        pullsheet_path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, pullsheet_prefix)
+        with open(pullsheet_path, 'r+') as fp:
+            lines = fp.readlines()
+            fp.seek(0)
+            fp.truncate()
+            fp.writelines(lines[1:])
+
+    pricing_prefix = "TCGplayer__MyPricing"
+    pricing_path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, pricing_prefix)
     sales_file_path = PROJECT_DIRECTORY + "data/sales.csv"
-    file_paths = [pullsheet_file_path, pricing_file_path, sales_file_path, inventory_file_path]
-    pullsheet_df, pricing_df, sales_df, inventory_df = [pd.read_csv(file_path) for file_path in file_paths]
+    inventory_file_path = PROJECT_DIRECTORY + "data/inventory.csv"
+    paths = [pullsheet_path, pricing_path, sales_file_path, inventory_file_path]
+    pullsheet_df, pricing_df, sales_df, inventory_df = [pd.read_csv(file_path) for file_path in paths]
     pricing_df = pricing_df.rename(columns={'TCG Marketplace Price': 'Price Each', "Set Name": "Set"})
     pullsheet_df = pullsheet_df[:-1]
     quantity_series = pullsheet_df["Quantity"]
+
+    if type =='direct':
+        pullsheet_df = pullsheet_df.rename(columns={'Card Name': 'Product Name', 'Set Name': 'Set'})
     pullsheet_df = pd.merge(pullsheet_df, pricing_df, on=['Product Name', 'Set', 'Condition'], how='left')
     pullsheet_df = pullsheet_df.drop(columns=[col for col in pullsheet_df.columns if col not in sales_df.columns])
     
@@ -118,14 +126,22 @@ def proccess_sales(directory, type='normal'):
     inventory_df.to_csv(inventory_file_path, index=False)
     sales_df.to_csv(sales_file_path, index=False)
 
-    new_pullsheet_file_path = rearrange_pullsheet(pullsheet_file_path)
-    sort_cards(new_pullsheet_file_path)
+    # new_pullsheet_file_path = fix_collumns(pullsheet_df)
+    # sort_cards(new_pullsheet_file_path)
 
-    for path in paths:
+    for path in [pullsheet_path, pricing_path]:
         os.remove(path)
+    
+    if type == 'normal':
+        packing_slip_path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, 'TCGplayer_PackingSlips')
+        webbrowser.open(packing_slip_path)
+        time.sleep(5)
+        os.remove(packing_slip_path)
 
-def rearrange_pullsheet(file_path):
-    pullsheet_df = pd.read_csv(file_path)
+def fix_collumns(file_path=None, pullsheet_df = None):
+    if file_path:
+        pullsheet_df = pd.read_csv(file_path)
+    
     first_cols = ['Set', 'Quantity', 'Product Name', 'Condition']
     pullsheet_df = pullsheet_df[first_cols + [col for col in pullsheet_df if col not in first_cols]]
     new_pullsheet_file_path = PROJECT_DIRECTORY + 'data/pullsheet.csv'
@@ -140,8 +156,6 @@ def remove_cards_under(cards_file_path = '', df = pd.DataFrame(), price_line=.2)
     
     prices = df["Price Each"].str.strip('$').astype(float)
     df.drop(df[prices < price_line].index, inplace=True)
-    # df.to_csv(cards_file_path, index=False)
-    # print(df)
     return df
 
 def find_matching_cards():
@@ -173,36 +187,30 @@ def get_revenue():
     revenue_df.to_csv(PROJECT_DIRECTORY + 'data/revenue.csv', header=True)
 
 def calculate_price(row):
-    percentage = 0.99
+    percentage = 1
     flat_discount = 0.01
     minimum = 0.1
 
-    market_price = row['TCG Market Price']
-    # price = (market_price * percentage) - flat_discount
-    if market_price < 1:
-        price =  market_price * percentage
-    elif market_price < 3:
-        price = market_price * 2
-    elif market_price < 20:
-        price = market_price + 1.27
-    elif market_price < 250:
-        price = market_price + 4.17
-    else:
-        price = market_price + 7.5
+    market_price = float(row['TCG Market Price'])
+    price = market_price * percentage
+    # if market_price < 1:
+    #     price =  market_price * percentage
+    # elif market_price < 3:
+    #     price = market_price * 2
+    # elif market_price < 20:
+    #     price = market_price + 1.27
+    # elif market_price < 250:
+    #     price = market_price + 4.17
+    # else:
+    #     price = market_price + 7.5
 
     price = max(price, row['TCG Low Price'], row["TCG Direct Low"]) - flat_discount
-    # price = price - flat_discount
     return max(price, minimum)
-    
-    # return max(price - flat_discount, row["TCG Low Price"] - flat_discount, row['TCG Direct Low'] - flat_discount, minimum)
 
 def adjust_card_prices(prices_file_name = ''):
     """Change the prices of the cards in the CSV file"""
-    # if prices_file_name == '':
     tcg = download_pricing()
     prices_file_name = get_file_matching_prefix(DOWNLOADS_DIRECTORY, 'TCGplayer__MyPricing')
-    # print(prices_file_name)
-    # return
     df = pd.read_csv(prices_file_name)
     df['TCG Market Price'] = df['TCG Market Price'].fillna(0.01)
     df['TCG Low Price'] = df['TCG Low Price'].fillna(0.01)
@@ -235,19 +243,6 @@ def create_shipping_label():
     PASSWORD_XPATH = '//*[@id="password"]'
     EMAIL = 'fernandezeddie54@gmail.com'
     LOGIN_XPATH = '//*[@id="btnLogin"]'
-
-    # autoweb.get(SHIPPING_LABEL_URL)
-    # input('Press Enter after logging in To Continue')
-
-    # if tcg.find_elements(By.XPATH, EMAIL_XPATH).size() > 0:
-    #     tcg.find_element(By.XPATH, EMAIL_XPATH).clear()
-    #     tcg.find_element(By.XPATH, EMAIL).clear()
-    #     tcg.fill(type=By.XPATH, identifier=EMAIL_XPATH, input_string=EMAIL)
-    #     tcg.fill(type=By.XPATH, identifier=PASSWORD_XPATH, input_string=PASSWORD)
-    #     tcg.click(identifier=LOGIN_XPATH)
-    #     input('Press Enter after logging in To Continue')
-    # else:
-    #     pass
     
     SHIPPING_LABEL_URL = 'https://www.paypal.com/shiplabel/create'
     CREATE_NEW_LABEL_XPATH = '//*[@id="__next"]/div/div[2]/div/div/div[2]/div/a'
@@ -261,9 +256,9 @@ def create_shipping_label():
     ZIP='//*[@id="postalCode"]'
     COMFIM_CONTINUE='//*[@id="confirm-address-modal-container"]/div[3]/div[1]/button/span'
 
-
-
     TCG_MAILING_ADDRESS = "TCGplayer: RI\n5640 E Taft Road #3267\nSyracuse, NY 13220"
+
+    PACKAGE_TYPE_XPATH = '//*[@id="headlessui-listbox-button-13"]'
 
     commands = [
         ['get', SHIPPING_LABEL_URL],
@@ -278,62 +273,148 @@ def create_shipping_label():
         ['fill', ZIP, '13220'],
         ['click', COMFIRM],
         ['click', COMFIM_CONTINUE],
+        ['click', PACKAGE_TYPE_XPATH],
     ]
 
     autoweb = NewAutoWeb(commands=commands)
 
+def price_set():
+    def filter(df):
+        cost_filter = 1
+        filter_sum = df.loc[df['TCG Market Price'] > cost_filter,'TCG Market Price'].sum()
+        filter_count = df.loc[df['TCG Market Price'] > cost_filter,'TCG Market Price'].count()
+        sum = df['TCG Market Price'].sum()
+        count = df['TCG Market Price'].count()
+        print('filter sum: ',filter_sum,', filter count: ',filter_count,', sum: ',sum,', count:',count)
+    
+    def change(row):
+        return max(.1, row['TCG Market Price'])
+    
+    file_name = get_file_matching_prefix(DOWNLOADS_DIRECTORY, 'TCGplayer')
+    df = pd.read_csv(file_name)
+    filter(df)
+
+def count_cards():
+    orders_path = None
+    pricing_path = None
+    while orders_path == None or pricing_path == None:
+        orders_path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, 'TCGplayer_PullSheet')
+        pricing_path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, 'TCGplayer__MyPricing')
+        if not orders_path or not pricing_path:
+            input('File not found. Print Enter to continue')
+    
+    orders_df = pd.read_csv(orders_path)
+    pricing_df = pd.read_csv(pricing_path)
+    # filtered_df = pricing_df[pricing_df['TCG Market Price'] < .1]
+    # print(filtered_df['Total Quantity'].sum())
+    # filtered_df.to_csv('S')
+    pricing_df = pricing_df.rename(columns={'Set Name': 'Set'})
+    df = pd.merge(orders_df, pricing_df, on=['Product Name', 'Condition', 'Set'])
+    df = df[df['TCG Market Price'] < .1]
+    count = df['Quantity'].sum()
+    print(df)
+    print(count)
+    df.to_csv('T')
+
+def enter_csv(amount, name, lot):
+    amount = float(amount)
+    date = datetime.date.today()
+
+    if amount < 0:
+        path = COST_PATH
+        new_row = {'Description': [name],'Value': [amount],'Date': [date]}
+
+    else:
+        new_row = {'Set': [''],'Condition': [''],'Product Name': [name],'Price Each':[amount],'Lot':[lot],'Date':[date],'ShipType':['']}
+        path = SALES_PATH
+
+    df = pd.read_csv(path)
+    new_row_df = pd.DataFrame(new_row)
+    df = pd.concat([df, new_row_df])
+    print(df)
+    df.to_csv(path, index=False)
+
+def enter_BECU(amount, transfer_type):
+    amount = float(amount)
+    # 1 is C to T 2 is T to C
+    BECU_TRANSFER_URL = 'https://onlinebanking.becu.org/BECUBankingWeb/Transfers/AddTransfer.aspx'
+    USERNAME_XPATH = '//*[@id="ctlSignon_txtUserID"]'
+    PASSWORD_XPATH = '//*[@id="ctlSignon_txtPassword"]'
+    LOGIN_XPATH = '//*[@id="ctlSignon_btnLogin"]'
+    FROM_XPATH = '//*[@id="ctlWorkflow_ddlAddFromAccount"]'
+    TO_XPATH = '//*[@id="ctlWorkflow_ddlAddToAccount"]'
+    CHECKING_VALUE = '1'
+    TCG_VALUE = '3'
+    AMOUNT_XPATH = '//*[@id="ctlWorkflow_txtAddTransferAmount"]'
+    CONTINUE_XPATH = '//*[@id="ctlWorkflow_btnAddNext"]'
+    COMFIRM_XPATH = '//*[@id="ctlWorkflow_btnAddVerifyAddTransfer"]'
+
+    from_value = CHECKING_VALUE if transfer_type == 1 else TCG_VALUE
+    to_value = TCG_VALUE if transfer_type == 1 else CHECKING_VALUE
+    amount = abs(amount)
+
+    commands = [
+        ['go', BECU_TRANSFER_URL],
+        ['fill', USERNAME_XPATH, BECU_USERNAME],
+        ['fill', PASSWORD_XPATH, BECU_PASSWORD],
+        ['click', LOGIN_XPATH],
+        ['select', FROM_XPATH, from_value ],
+        ['select', TO_XPATH, to_value],
+        ['fill', AMOUNT_XPATH, amount],
+        ['click', CONTINUE_XPATH],
+        ['click', COMFIRM_XPATH]
+    ]
+
+    NewAutoWeb(commands=commands)
+
+def manual_sale_cost():
+    amount = float(input('Enter amount: '))
+    transfer_type = 2 if amount < 0 else 1
+    name = input('Enter name: ')
+    lot = 0
+    if transfer_type == 1:
+        lot = input('Lot: ')
+    enter_BECU(amount, transfer_type)
+    enter_csv(amount, name, lot)
+
+def process_sales_combined():
+    process_sales()
+    process_sales('direct')
+
+def delete_files_not_ending_in_zero(folder_path):
+    for filename in os.listdir(folder_path):
+        file_path = os.path.join(folder_path, filename)
+        
+        if os.path.isfile(file_path) and not filename.endswith('_0.jpg'):
+            try:
+                os.remove(file_path)
+                print(f"Deleted: {filename}")
+            except Exception as e:
+                print(f"Error deleting {filename}: {e}")
+
 commands = [
     {'text': 'Process new cards', 'action': lambda: proccess_new_cards()},
     {'text': 'Process new cards; remove under', 'action': lambda: proccess_new_cards(filter=True)},
-    {'text': 'Process Sales Normal', 'action': lambda: proccess_sales(DOWNLOADS_DIRECTORY)},
-    {'text': 'Process Sales Direct', 'action': lambda: proccess_sales(DOWNLOADS_DIRECTORY, 'direct')},
-    {'text': 'Remove cards under','action': remove_cards_under},
-    {'text': 'Find cards that are in a selected file and in "data/inventory.csv"','action': find_matching_cards},
+    {'text': 'Process Sales Normal', 'action': lambda: process_sales()},
+    {'text': 'Process Sales Direct', 'action': lambda: process_sales( 'direct')},
+    {'text': 'Process Sales Combined', 'action': lambda: process_sales_combined()},
     {'text': 'Combine duplicate cards in a selected file','action': merge_duplicates},
     {'text': 'Create "data/revenue.csv"','action': get_revenue},
     {'text': 'Change Prices','action': adjust_card_prices},
     {'text': 'Analyze value change over time', 'action': inventory_value_change_over_time},
     {'text': 'Sort cards by set', 'action': sort_cards},
-    {'text': 'create shipping label', 'action': create_shipping_label}
+    {'text': 'create shipping label', 'action': create_shipping_label},
+    {'text': 'price set', 'action': price_set},
+    {'text': 'count cards', 'action': count_cards},
+    {'text': 'manual entry', 'action': manual_sale_cost}
 ]
 
 InputLoop(commands, False)
 
 
-def custom():
-    def filter():
-        cost_filter = .2
-        a = df.loc[df['TCG Market Price'] > cost_filter,'TCG Market Price'].sum()
-        print(a)
-        a = df.loc[df['TCG Market Price'] > cost_filter,'TCG Market Price'].count()
-        print(a)
-        a = df['TCG Market Price'].sum()
-        print(a)
-    
-    def change(row):
-        return max(.1, row['TCG Market Price'])
-    
-    
-    file_name = get_file_matching_prefix(PROJECT_DIRECTORY, 'TCGplayer')
-    df = pd.read_csv(file_name)
-    df['TCG Marketplace Price'] = df.apply(lambda row : change(row), axis=1)
-    df['Add To Quantity'] = 1
-    df.to_csv(file_name, index=False)
-
-# custom()
-
-
-def count_cards():
-    ORDERS_PATH = 'TCGplayer_PullSheet_20240913_170005.csv'
-    PRICING_PATH = 'TCGplayer__MyPricing_20240913_050048.csv'
-    orders_df = pd.read_csv(ORDERS_PATH)
-    pricing_df = pd.read_csv(PRICING_PATH)
-    pricing_df = pricing_df.rename(columns={'Set Name': 'Set'})
-    df = pd.merge(orders_df, pricing_df, on=['Product Name', 'Condition', 'Set'])
-    df = df[df['TCG Marketplace Price'] <= 1]
-    count = df.count()
-    df.to_csv('T')
-    print(df)
-    print(count)
-
-# count_cards()
+# path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, 'TCG')
+# df = pd.read_csv(path)
+# df['TCG Marketplace Price'] = df.apply(lambda row: calculate_price(row), axis=1)
+# df['Add to Quantity'] = 4
+# df = df[df['TCG Marketplace Price'] < .4]
+# df.to_csv(DOWNLOADS_DIRECTORY + '\\new.csv', index=False)

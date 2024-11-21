@@ -1,38 +1,139 @@
 Product Name,Set Name,Condition,TCGplayer Id,TCG Marketplace Price,Add to Quantity
-"Ayara, First of Locthwain",March of the Machine: Multiverse Legends,Lightly Played Foil,7092821,4.29,1
-"Bilbo, Retired Burglar (Borderless)",Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Lightly Played Foil,7151902,0.3563,1
-Blue Elemental Blast,Revised Edition,Lightly Played,364436,0.4651999999999999,1
-Boros Signet,Ravnica Remastered,Lightly Played,7601819,0.5048,1
-Butcher Ghoul,Avacyn Restored,Lightly Played,871860,0.1088,1
-Construct Token (003),Kaladesh,Lightly Played,3203553,0.1979,1
-Containment Construct,Kamigawa: Neon Dynasty,Lightly Played Foil,5423384,0.6730999999999999,1
-Counterspell,Tempest,Moderately Played,336779,2.97,1
-Crashing Footfalls,Modern Horizons,Lightly Played,4063082,0.4355,1
-Curse of Shallow Graves,Commander 2013,Lightly Played,1137206,0.5048,1
-Dark Deal,Fate Reforged,Lightly Played,1278675,5.790000000000001,1
-Devastation Tide,Commander 2018,Lightly Played,3810029,0.6137,1
-Dimir Signet,Ravnica Remastered,Lightly Played Foil,7627846,0.7127,1
-Doubling Season,Commander Masters,Lightly Played,7265982,49.07,1
-Elder Brain,Commander Legends: Battle for Baldur's Gate,Lightly Played Foil,5476430,0.5147,1
-Elvish Scrapper,Onslaught,Moderately Played,340787,0.1583,1
-"Ghalta, Stampede Tyrant (Borderless)",The Lost Caverns of Ixalan,Lightly Played Foil,7440134,15.08,1
-Heavenly Blademaster,Commander 2018,Lightly Played,3808043,0.3068,1
-Horn of Gondor,Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Lightly Played,7178837,2.03,1
-"Lae'zel, Vlaakith's Champion (Showcase)",Commander Legends: Battle for Baldur's Gate,Lightly Played Foil,5603585,0.9107,1
-Llanowar Elves,Magic 2011 (M11),Lightly Played,390201,0.2474,1
-Loyal Drake,Commander 2018,Damaged,3805883,0.1,1
-Magnetic Theft,Fifth Dawn,Lightly Played,373521,5.450000000000001,1
-"Malcolm, Alluring Scoundrel",The Lost Caverns of Ixalan,Lightly Played Foil,7500559,2.39,1
-Misdirection,Conspiracy,Lightly Played,1186450,4.98,1
-Mnemonic Deluge,Commander Legends,Lightly Played,4624851,5.57,1
-One Ring to Rule Them All,Universes Beyond: The Lord of the Rings: Tales of Middle-earth,Lightly Played Foil,7181942,2.1100000000000003,1
-Outland Liberator (Showcase),Innistrad: Midnight Hunt,Near Mint,5184957,0.1384999999999999,1
-Overburden,Prophecy,Lightly Played,370087,8.09,1
-Overrun,Magic 2010 (M10),Lightly Played,378770,0.3761,1
-Predatory Focus,Guildpact,Lightly Played,374922,0.3167,1
-Qasali Ambusher,Shards of Alara,Lightly Played,378246,0.5444,1
-Robe of Stars,Commander: Adventures in the Forgotten Realms,Damaged,5090433,8.47,1
-Spidersilk Net,Zendikar,Lightly Played,379061,0.1682,2
-Steelshaper's Gift,Fifth Dawn,Damaged,326286,3.99,1
-Tainted Strike,Scars of Mirrodin,Damaged,395424,0.9701,1
-Tempt with Vengeance,Commander 2013,Lightly Played,1137246,2.5700000000000003,1
+Aerial Predation,Iconic Masters,Near Mint,3468572,0.1,1
+Amass the Components,Iconic Masters,Near Mint,3467512,0.1,1
+Ancient Runes,Tempest,Lightly Played,368248,0.77,1
+Anoint,Tempest,Lightly Played,368251,0.1,1
+Aquastrand Spider,Modern Masters 2015,Near Mint,2880167,0.1,1
+Argothian Pixies,Chronicles,Lightly Played,366352,0.1,2
+Balustrade Spy,Iconic Masters,Near Mint,3467572,0.1,1
+Battle-Rattle Shaman,Iconic Masters,Near Mint,3467952,0.1,1
+Bewilder,Iconic Masters,Near Mint,3467522,0.1,1
+Blades of Velis Vel,Modern Masters 2015,Near Mint,2879887,0.1399999999999999,2
+Blinding Mage,Iconic Masters,Near Mint,3467112,0.1,1
+Blinding Souleater,Modern Masters 2015,Near Mint,2880647,0.1,1
+Blood Ogre,Modern Masters 2015,Near Mint,2879897,0.1,1
+Brothers of Fire,The Dark,Lightly Played,366475,0.42,2
+Brute Force,Modern Masters 2015,Near Mint,2879917,0.16,3
+Cat Warriors,Classic Sixth Edition,Lightly Played,365549,0.16,4
+Cave People,The Dark,Lightly Played,366477,0.3999999999999999,2
+Charging Rhino,Tempest,Lightly Played,368276,0.1,1
+Circle of Protection: Black,Tempest,Lightly Played,368280,0.11,1
+Clergy en-Vec,Tempest,Lightly Played,368286,0.11,1
+Cloud Elemental,Modern Masters 2015,Near Mint,2879407,0.1,1
+Cocoon,Chronicles,Lightly Played,366370,0.13,2
+Coiled Tinviper,Tempest,Lightly Played,368291,0.13,1
+Commune with Nature,Modern Masters 2015,Near Mint,2880187,0.1,1
+Conclave Phalanx,Modern Masters 2015,Near Mint,2879217,0.1,1
+Dark Banishing,Tempest,Lightly Played,368299,0.1,1
+Darkling Stalker,Tempest,Lightly Played,368301,0.1,1
+Dauthi Ghoul,Tempest,Lightly Played,368303,0.3999999999999999,1
+Dauthi Horror,Tempest,Lightly Played,368304,0.1999999999999999,1
+Dauthi Marauder,Tempest,Lightly Played,368305,0.15,1
+Dragon Bell Monk,Iconic Masters,Near Mint,3467188,0.1,2
+Dragon Egg,Iconic Masters,Near Mint,3468082,0.1,1
+Dragon Tempest,Iconic Masters,Near Mint,3468092,5.86,1
+Dragonloft Idol,Iconic Masters,Near Mint,3467822,0.1,1
+Dread Drone,Modern Masters 2015,Near Mint,2879707,0.1,2
+Earth Elemental,Iconic Masters,Near Mint,3468112,0.1,1
+Elvish Fury,Tempest,Lightly Played,368327,0.13,1
+Emerge Unscathed,Iconic Masters,Near Mint,3467202,0.1699999999999999,1
+Enlarge,Iconic Masters,Near Mint,3468622,0.1,1
+Eternal Thirst,Iconic Masters,Near Mint,3467802,0.16,1
+Fiery Fall,Modern Masters 2015,Near Mint,2879967,0.1,1
+Fissure,The Dark,Lightly Played,366500,0.16,1
+Frogmite,Modern Masters 2015,Near Mint,2880737,0.38,2
+Furnace Whelp,Iconic Masters,Near Mint,3468172,0.1,1
+Gabriel Angelfire,Chronicles,Lightly Played,366389,0.3399999999999999,1
+Giant Crab,Tempest,Lightly Played,368361,0.1,1
+Gnarlid Pack,Modern Masters 2015,Near Mint,2880207,0.1,1
+Goblin Digging Team,The Dark,Lightly Played,366508,0.18,8
+Goblin Hero,The Dark,Lightly Played,366509,0.18,8
+Goblin Rock Sled,The Dark,Lightly Played,366510,0.15,8
+Goblin Shrine,The Dark,Lightly Played,366511,0.1999999999999999,6
+Goblin War Paint,Modern Masters 2015,Near Mint,2879977,0.1,1
+Goblins of the Flarg,The Dark,Lightly Played,366513,0.1999999999999999,5
+Gravedigger,Tempest,Lightly Played,368364,0.13,1
+Greater Basilisk,Iconic Masters,Near Mint,3468642,0.1,1
+Grim Affliction,Modern Masters 2015,Near Mint,2879737,0.2299999999999999,2
+Gust-Skimmer,Modern Masters 2015,Near Mint,2880757,0.1,2
+Heartwood Dryad,Tempest,Lightly Played,368371,0.1,1
+Inner-Flame Igniter,Modern Masters 2015,Near Mint,2880027,0.1,1
+Instill Infection,Modern Masters 2015,Near Mint,2879747,0.1,2
+Iona's Judgment,Iconic Masters,Near Mint,3467272,0.1,1
+Jace's Phantasm,Iconic Masters,Near Mint,3466587,0.22,1
+Jhessian Thief,Iconic Masters,Near Mint,3466297,0.1,2
+Kami of Ancient Law,Modern Masters 2015,Near Mint,2879257,0.1,1
+Kiln Fiend,Iconic Masters,Near Mint,3468352,0.1,1
+Kitesail,Modern Masters 2015,Near Mint,2880767,0.1,1
+Knight of Dawn,Tempest,Lightly Played,368390,0.18,1
+Krakilin,Tempest,Lightly Played,368392,0.16,1
+Lightning Elemental,Tempest,Lightly Played,368398,0.11,1
+Mahamoti Djinn,Iconic Masters,Near Mint,3467702,0.1399999999999999,1
+Manakin,Iconic Masters,Near Mint,3466577,0.24,1
+Manakin,Tempest,Lightly Played,368407,0.3999999999999999,1
+Manta Riders,Tempest,Lightly Played,368408,0.1,1
+Mark of Mutiny,Iconic Masters,Near Mint,3468392,0.12,1
+Matca Rioters,Modern Masters 2015,Near Mint,2880237,0.1,1
+Metamorphosis,Chronicles,Lightly Played,366411,0.1,5
+Mighty Leap,Modern Masters 2015,Near Mint,2879667,0.1,1
+Mogg Cannon,Tempest,Lightly Played,368420,0.13,1
+Mogg Raider,Tempest,Lightly Played,368424,0.1999999999999999,3
+Moonlit Strider,Modern Masters 2015,Near Mint,2879277,0.1,1
+Narcolepsy,Modern Masters 2015,Near Mint,2879477,0.1,1
+Nebuchadnezzar,Chronicles,Lightly Played,366413,0.26,1
+Nurturing Licid,Tempest,Lightly Played,368434,0.1699999999999999,1
+Ojutai's Breath,Iconic Masters,Near Mint,3467742,0.1,1
+Palladia-Mors,Chronicles,Lightly Played,366416,0.57,1
+Palladium Myr,Iconic Masters,Near Mint,3466567,0.61,1
+Phantom Monster,Iconic Masters,Near Mint,3466557,0.1,2
+Plummet,Modern Masters 2015,Near Mint,2880287,0.1,1
+Prey's Vengeance,Iconic Masters,Near Mint,3468772,0.1,2
+Rabid Wombat,Chronicles,Lightly Played,366420,0.21,2
+Raise the Alarm,Modern Masters 2015,Near Mint,2879317,0.15,1
+Reave Soul,Iconic Masters,Near Mint,3466637,0.1,1
+Repeal,Iconic Masters,Near Mint,3467762,0.1,1
+Respite,Tempest,Lightly Played,368471,0.1999999999999999,3
+Rootwater Hunter,Tempest,Lightly Played,368478,0.15,2
+Rotfeaster Maggot,Iconic Masters,Near Mint,3468372,0.1,1
+Runed Servitor,Modern Masters 2015,Near Mint,2880837,0.1399999999999999,1
+Rusted Relic,Modern Masters 2015,Near Mint,2877349,0.1,1
+Scuttling Death,Modern Masters 2015,Near Mint,2879807,0.1,2
+Searing Touch,Tempest,Lightly Played,368496,0.2799999999999999,1
+Shatter,Tempest,Lightly Played,368504,0.1,1
+Sickleslicer,Modern Masters 2015,Near Mint,2880847,0.1,2
+Sivitri Scarzam,Chronicles,Lightly Played,366434,0.11,1
+Skyreach Manta,Modern Masters 2015,Near Mint,2880857,0.1,1
+Skyshroud Elf,Tempest,Lightly Played,368509,0.25,1
+Soltari Monk,Tempest,Lightly Played,368519,0.26,1
+Somber Hoverguard,Modern Masters 2015,Near Mint,2879527,0.1,1
+Spike Drone,Tempest,Lightly Played,368524,0.1,1
+Stalwart Aven,Iconic Masters,Near Mint,3467362,0.1,1
+Stoic Rebuttal,Modern Masters 2015,Near Mint,2879547,0.15,1
+Sultai Charm,Khans of Tarkir,Near Mint,1253782,0.1,1
+Sundering Vitae,Modern Masters 2015,Near Mint,2880347,0.1,1
+Sunspear Shikari,Modern Masters 2015,Near Mint,2879347,0.1,1
+Survival Cache,Iconic Masters,Near Mint,3467412,0.1,1
+Sustainer of the Realm,Iconic Masters,Near Mint,3467432,0.1,2
+Telling Time,Modern Masters 2015,Near Mint,2879567,0.27,1
+Thief of Hope,Modern Masters 2015,Near Mint,2878460,0.1,1
+Thrill-Kill Assassin,Iconic Masters,Near Mint,3468482,0.1,1
+Timberland Guide,Iconic Masters,Near Mint,3468827,0.1,1
+Time Ebb,Tempest,Lightly Played,368549,0.1,1
+Tor Wauki,Chronicles,Lightly Played,366443,0.1399999999999999,3
+Tormenting Voice,Iconic Masters,Near Mint,3468522,0.1,1
+Trained Armodon,Tempest,Lightly Played,368554,0.1,1
+Tranquility,Tempest,Lightly Played,368555,0.13,1
+Treasure Cruise,Khans of Tarkir,Near Mint,1258877,0.21,1
+Trumpet Blast,Iconic Masters,Near Mint,3468532,0.1,2
+Tukatongue Thallid,Modern Masters 2015,Near Mint,2880377,0.11,1
+Undercity Troll,Iconic Masters,Near Mint,3468837,0.1,1
+Vaevictis Asmadi,Chronicles,Lightly Played,366450,0.4599999999999999,1
+Verdigris,Tempest,Lightly Played,368561,0.1,1
+Vizkopa Guildmage,Iconic Masters,Near Mint,3468412,0.49,1
+Waking Nightmare,Modern Masters 2015,Near Mint,2879867,0.1,1
+Wall of Diffusion,Tempest,Lightly Played,368564,0.1,1
+Wall of Roots,Iconic Masters,Near Mint,3466737,0.22,1
+Waxmane Baku,Modern Masters 2015,Near Mint,2878450,0.1,1
+Wings of Velis Vel,Modern Masters 2015,Near Mint,2879637,0.12,1
+Wrench Mind,Iconic Masters,Near Mint,3466767,0.13,2
+Xira Arien,Chronicles,Lightly Played,366459,0.2799999999999999,1

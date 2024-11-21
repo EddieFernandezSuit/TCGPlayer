@@ -32,7 +32,7 @@ def csv_to_google_sheet(csv_file_path):
         csv_file_path (str): Path to the CSV file.
     """
     SPREADSHEET_ID = '145tGd66L_iCf1cDkNvRDNy2K5JkzaYEoOI3sRBYcfKk'
-
+    
     with open(csv_file_path, 'r') as csv_file:
         csv_contents = csv_file.read()
 
