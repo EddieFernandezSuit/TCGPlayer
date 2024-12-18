@@ -1,4 +1,3 @@
-import json
 from new_auto_web import NewAutoWeb
 from print_envelopes import print_from_csv
 from print_envelopes import email_to_csv
@@ -72,13 +71,15 @@ def proccess_new_cards(filter=False):
 def process_sales(type='normal'):
     if type == 'normal':
         download_files_normal()
-        shipping_prefix = "TCGplayer_ShippingExport"
+        shipping_prefix = "_TCGplayer_ShippingExport"
         shipping_path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, shipping_prefix)
+        time.sleep(1)
         print_from_csv(shipping_path)
+        # return
         pullsheet_prefix = "TCGplayer_PullSheet"
         pullsheet_path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, pullsheet_prefix)
     else:
-        # download_files_direct()
+        download_files_direct()
         time.sleep(1)
         pullsheet_prefix = 'R2024'
         pullsheet_path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, pullsheet_prefix)
@@ -134,9 +135,12 @@ def process_sales(type='normal'):
     
     if type == 'normal':
         packing_slip_path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, 'TCGplayer_PackingSlips')
-        webbrowser.open(packing_slip_path)
-        time.sleep(5)
-        os.remove(packing_slip_path)
+        if packing_slip_path:
+            webbrowser.open(packing_slip_path)
+            time.sleep(5)
+            os.remove(packing_slip_path)
+        else:
+            print('No Packing Slip')
 
 def fix_collumns(file_path=None, pullsheet_df = None):
     if file_path:
@@ -355,8 +359,8 @@ def enter_BECU(amount, transfer_type):
 
     commands = [
         ['go', BECU_TRANSFER_URL],
-        ['fill', USERNAME_XPATH, BECU_USERNAME],
-        ['fill', PASSWORD_XPATH, BECU_PASSWORD],
+        # ['fill', USERNAME_XPATH, BECU_USERNAME],
+        # ['fill', PASSWORD_XPATH, BECU_PASSWORD],
         ['click', LOGIN_XPATH],
         ['select', FROM_XPATH, from_value ],
         ['select', TO_XPATH, to_value],
@@ -392,6 +396,50 @@ def delete_files_not_ending_in_zero(folder_path):
             except Exception as e:
                 print(f"Error deleting {filename}: {e}")
 
+def schedule_pickup():
+    URL = 'https://tools.usps.com/schedule-pickup-steps.htm'
+    FIRST_NAME_XPATH = '//*[@id="firstName"]'
+    LAST_NAME_XPATH = '//*[@id="lastName"]'
+    STREET_ADDRESS_XPATH = '//*[@id="addressLineOne"]'
+    CITY_XPATH = '//*[@id="city"]'
+    STATE_XP = '//*[@id="state"]'
+    ZIP_CODE_XP = '//*[@id="zipCode"]'
+    PHONE_XP = '//*[@id="phoneNumber"]'
+    EMAIL_XP = '//*[@id="emailAddress"]'
+    CHECK_AV_XP = '//*[@id="webToolsAddressCheck"]'
+    IS_DOG_XP = '//*[@id="first-radio-verification"]'
+    LOCATION_PACKAGE_XP = '//*[@id="packageLocation"]'
+    TIME_XP = '//*[@id="pickup-regular-time"]'
+
+    FIRST_NAME = 'Eddie'
+    LAST_NAME = 'Fernandez'
+    STREET_ADDRESS = '19803 15th Ave E'
+    CITY = 'Spanaway'
+    STATE = 'WA'
+    ZIP_CODE = '98387'
+    PHONE = '253-507-3193'
+    EMAIL = 'fernandezeddie54@gmail.com'
+    LOCATION_PACKAGE = 'Knock'
+
+    commands = [
+        ['go', URL],
+        ['fill', FIRST_NAME_XPATH, FIRST_NAME],
+        ['fill', LAST_NAME_XPATH, LAST_NAME],
+        ['fill', STREET_ADDRESS_XPATH, STREET_ADDRESS],
+        ['fill', CITY_XPATH, CITY],
+        ['select', STATE_XP, STATE],
+        ['fill', ZIP_CODE_XP, ZIP_CODE],
+        ['fill', PHONE_XP, PHONE],
+        ['fill', EMAIL_XP, EMAIL],
+        ['click', CHECK_AV_XP],
+        ['click', IS_DOG_XP],
+        ['select', LOCATION_PACKAGE_XP, LOCATION_PACKAGE],
+        ['click', TIME_XP],
+        
+    ]
+
+    NewAutoWeb(commands)
+
 commands = [
     {'text': 'Process new cards', 'action': lambda: proccess_new_cards()},
     {'text': 'Process new cards; remove under', 'action': lambda: proccess_new_cards(filter=True)},
@@ -406,9 +454,16 @@ commands = [
     {'text': 'create shipping label', 'action': create_shipping_label},
     {'text': 'price set', 'action': price_set},
     {'text': 'count cards', 'action': count_cards},
-    {'text': 'manual entry', 'action': manual_sale_cost}
+    {'text': 'manual entry', 'action': manual_sale_cost},
+    {'text': 'schedule pickup', 'action': schedule_pickup}
 ]
 
+
+# path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, 'TCG')
+
+# df = pd.read_csv(path)
+# for index, row in df.iterrows():
+#     print('1', row['Product Name'], '[ISD]')
 InputLoop(commands, False)
 
 

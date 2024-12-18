@@ -5,21 +5,19 @@ import time
 from config import *
 
 class Tcg_web(NewAutoWeb):
+
     def handle_tcg_login(self):
         input('Press Enter after logging in to TCGPlayer To Continue')
-        # TCG_URL = 'https://store.tcgplayer.com/admin/pricing'
-        # self.go(TCG_URL)
+        TCGPLAYER_DASH_URL = 'https://store.tcgplayer.com/admin/Seller/Dashboard/4c622486'
+        # while self.current_url != TCGPLAYER_DASH_URL:
+        #     time.sleep(4)
         self.switch_to.window(self.window_handles[-1])
 
-    def set_items_per_page(self, items):
+    def set_items_per_page(self, num_item_per_page):
+        OLD_ITEMS_PER_PAGE = '//*[@id="table-page-counts"]/span[2]/select'
         # ROWS_PER_PAGE_XPATH = '//*[@id="tcg-input-198"]'
-        # number_of_orders_to_show = self.find(ROWS_PER_PAGE_XPATH)
-        # Select(number_of_orders_to_show).select_by_value(str(items))
-        # ROWS_PER_PAGE_XPATH = '//*[@id="single-spa-application:@tcgplayer/sellerportal-orders"]/div/div/div/div/div[4]/div/div/div[3]/div[1]/div/div/div/div/div[2]'
-        ROWS_PER_PAGE_XPATH = '//*[@id="single-spa-application:@tcgplayer/sellerportal-orders"]/div/div/div/div/div[4]/div/div/div[3]/div[1]/div/div/div'
-        MAX_LIST_XPATH = '//*[@id="tcg-base-dropdown-201-dropdown-item-4"]/span'
-        self.click(ROWS_PER_PAGE_XPATH)
-        self.click(MAX_LIST_XPATH)
+        items_per_page = self.find(OLD_ITEMS_PER_PAGE)
+        Select(items_per_page).select_by_value(str(num_item_per_page))
 
     def download_pricing(self):
         PRICING_BUTTON_XPATH = '//*[@id="pricing-search"]/pricing-search/div[4]/pricing-actions/div[1]/div[1]/div/input[1]'
@@ -42,45 +40,52 @@ def download_pricing():
     return tcg
 
 def upload_prices(auto_web: NewAutoWeb, prices_file_path):
+    CONTINUE_XPATH = '//*[@id="divImportButtonContainer"]/input'
+    CONTINUE_XPATH2 = '//*[@id="divImporterUploadContainer"]/div/input[2]'
     auto_web.go("https://store.tcgplayer.com/admin/pricing")
     time.sleep(1)
     auto_web.click('/html/body/div[4]/div/div[4]/div[2]/pricing-search/div[4]/pricing-actions/div[1]/div[1]/div/input[4]')
     file_input = auto_web.find('/html/body/div[4]/div/div[6]/pricing-dialog/div/div/div[2]/pricing-importer/div/div/div[1]/input')
     file_input.send_keys(prices_file_path)
-    auto_web.click( '/html/body/div[4]/div/div[6]/pricing-dialog/div/div/div[2]/pricing-importer/div/div/div[2]/input')
-    auto_web.click('/html/body/div[4]/div/div[6]/pricing-dialog/div/div/div[2]/pricing-importer/div/div/div/input[2]')  # continue button
-    auto_web.click('/html/body/div[4]/div/div[6]/pricing-dialog/div/div/div[2]/pricing-importer/div/div/div/input[3]')  # move to live button
-    # auto_web.click('/html/body/div[4]/div/div[6]/pricing-dialog/div/div/div[2]/pricing-move-to-live/div/div/div/input[2]')  # confirm move to live button
-    # auto_web.click('/html/body/div[4]/div/div[6]/pricing-dialog/div/div/div[2]/pricing-move-to-live/div/div/div[2]/input')  # close button
-    # auto_web.quit()
+    auto_web.click(CONTINUE_XPATH)  # continue button
+    auto_web.click(CONTINUE_XPATH2)  # continue button
 
 def download_files_normal():
     URL = "https://store.tcgplayer.com/admin/orders/orderlist"
-    READY_TO_SHIP_BUTTON = '//*[@id="OrderIndex_QuickFilters_RadioReadytoShip"]'
-    MARK_AS_SHIPPED_BUTTON = '//*[@id="single-spa-application:@tcgplayer/sellerportal-orders"]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[3]/span[2]'
-    EXPORT_SHIPPING_BUTTON = '//*[@id="single-spa-application:@tcgplayer/sellerportal-orders"]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[2]/span[2]'
-    PACKING_SLIP_XPATH = '//*[@id="single-spa-application:@tcgplayer/sellerportal-orders"]/div/div/div/div/div[4]/div/div/div[2]/div/div/div[1]/div[2]/div/button'
-    PACKING_SLIP_XPATH2 = '//*[@id="tcg-popover-2604-content"]/div/div[2]/button[1]'
+    OLD_UI = {
+        'READY_TO_SHIP':'//*[@id="rightSide"]/div/div[4]/div/div[2]/div[1]/div[2]/div[2]/div[2]/button',
+        'ALL_ORDERS':'//*[@id="rightSide"]/div/div[4]/div/span/div/div[3]/div/div[2]/table/thead/tr/th[1]/div/span[1]/div/label/span[1]',
+        'PULL_SHEET':'//*[@id="search-results-buttons"]/button[1]',
+        'PACKING_SLIP1':'//*[@id="search-results-buttons"]/div[1]/div[1]/button',
+        'PACKING_SLIP2':'//*[@id="search-results-buttons"]/div[1]/div[3]/div/a[1]',
+        'EXPORT_SHIPPING':'//*[@id="search-results-buttons"]/button[2]',
+        'MARK_AS_SHIPPED':'//*[@id="search-results-buttons"]/button[4]'
+
+    }
+    # READY_TO_SHIP_BUTTON = '//*[@id="OrderIndex_QuickFilters_RadioReadytoShip"]'
+    # MARK_AS_SHIPPED_BUTTON = '//*[@id="single-spa-application:@tcgplayer/sellerportal-orders"]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[3]/span[2]'
+    # EXPORT_SHIPPING_BUTTON = '//*[@id="single-spa-application:@tcgplayer/sellerportal-orders"]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[2]/span[2]'
+    # PACKING_SLIP_XPATH = '//*[@id="single-spa-application:@tcgplayer/sellerportal-orders"]/div/div/div/div/div[4]/div/div/div[2]/div/div/div[1]/div[2]/div/button'
+    # PACKING_SLIP_XPATH2 = '/html/body/div[7]/div[26]/div/div/div[2]/button[1]'
+    CHANGE_UI_XPATH = '//*[@id="tcg-input-14"]'
     
 
     tcg_web = Tcg_web()
     tcg_web.handle_tcg_login()
     tcg_web.download_pricing()
     tcg_web.go(URL)
-    # tcg_web.set_items_per_page(100)
+    tcg_web.click(CHANGE_UI_XPATH)
+    tcg_web.set_items_per_page(100)
     time.sleep(2)
-    tcg_web.click(READY_TO_SHIP_BUTTON)
+    tcg_web.click(OLD_UI['READY_TO_SHIP'])
     time.sleep(2)
-    tcg_web.click_all_results()
-    tcg_web.click_pullsheet()
-    tcg_web.click(PACKING_SLIP_XPATH)
-    tcg_web.click(PACKING_SLIP_XPATH2)
-    # tcg_web.click(PACKING_SLIP_XPATH2)
-    # tcg_web.click(PACKING_SLIP_XPATH2)
-    # tcg_web.click(PACKING_SLIP_XPATH2)
-    # tcg_web.wait(5)
-    tcg_web.click(EXPORT_SHIPPING_BUTTON)
-    tcg_web.click(identifier=MARK_AS_SHIPPED_BUTTON)
+    tcg_web.click(OLD_UI['ALL_ORDERS'])
+    tcg_web.click(OLD_UI['PULL_SHEET'])
+    tcg_web.click(OLD_UI['PACKING_SLIP1'])
+    tcg_web.click(OLD_UI['PACKING_SLIP2'])
+    tcg_web.click(OLD_UI['EXPORT_SHIPPING'])
+    tcg_web.click(OLD_UI['MARK_AS_SHIPPED'])
+    tcg_web.sleep(3)
     tcg_web.quit()
 
 def download_files_direct():
@@ -95,8 +100,9 @@ def download_files_direct():
 
 
 def upload_tcgplayer_prices(file_path):
-    auto_web = NewAutoWeb()
-    input('Press Enter To Continue')
-    auto_web.switch_to.window(auto_web.window_handles[-1])
+    auto_web = Tcg_web()
+    auto_web.handle_tcg_login()
+    # input('Press Enter To Continue')
+    # auto_web.switch_to.window(auto_web.window_handles[-1])
     upload_prices(auto_web, file_path)
 

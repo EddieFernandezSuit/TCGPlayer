@@ -20,14 +20,14 @@ import time
 # ]
 
 class NewAutoWeb(webdriver.Chrome):
-    def __init__(self, commands=None) -> None:
+    def __init__(self, commands=None, isOption = True) -> None:
         subprocess.Popen('"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\selenum\ChromeProfile"', shell=True)
         options = Options()
         options.add_experimental_option("debuggerAddress", "localhost:9222")
         options.add_argument("--disable-notifications")
         super().__init__(options=options, service=None, keep_alive=True)
-        self.wait_time = 4
-        time.sleep(2)
+        self.wait_time = 3
+        self.switch_to.window(self.window_handles[0])
         if commands:
             self.execute_commands(commands)
 
@@ -49,7 +49,7 @@ class NewAutoWeb(webdriver.Chrome):
                 self.click(xpath)
     
     def fill(self, identifier, input_string, type=By.XPATH):
-        self.sleep(1)
+        # self.sleep(1)
         self.find(identifier, type).send_keys(input_string)
 
     def select(self, identifier, value, type=By.XPATH):
