@@ -139,6 +139,8 @@ def process_sales(type='normal'):
             webbrowser.open(packing_slip_path)
             time.sleep(5)
             os.remove(packing_slip_path)
+            os.remove(shipping_path)
+            
         else:
             print('No Packing Slip')
 
@@ -208,7 +210,8 @@ def calculate_price(row):
     # else:
     #     price = market_price + 7.5
 
-    price = max(price, row['TCG Low Price'], row["TCG Direct Low"]) - flat_discount
+    # price = max(price, row['TCG Low Price'], row["TCG Direct Low"]) - flat_discount
+    price = max(price, row['TCG Low Price']) - flat_discount
     return max(price, minimum)
 
 def adjust_card_prices(prices_file_name = ''):
@@ -284,11 +287,18 @@ def create_shipping_label():
 
 def price_set():
     def filter(df):
-        cost_filter = 1
-        filter_sum = df.loc[df['TCG Market Price'] > cost_filter,'TCG Market Price'].sum()
-        filter_count = df.loc[df['TCG Market Price'] > cost_filter,'TCG Market Price'].count()
-        sum = df['TCG Market Price'].sum()
-        count = df['TCG Market Price'].count()
+        cost_filter = .2
+        filter_df = df[~df['Product Name'].str.contains('Borderless')]
+        filter_df = filter_df[~filter_df['Product Name'].str.contains('Showcase')]
+        filter_df = filter_df[~filter_df['Product Name'].str.contains('Extended Art')]
+        print(filter_df)
+
+        price_filter_df = filter_df.loc[filter_df['TCG Market Price'] > cost_filter,'TCG Market Price',]
+        filter_sum = price_filter_df.sum()
+        filter_count = price_filter_df.count()
+        
+        sum = filter_df['TCG Market Price'].sum()
+        count = filter_df['TCG Market Price'].count()
         print('filter sum: ',filter_sum,', filter count: ',filter_count,', sum: ',sum,', count:',count)
     
     def change(row):
@@ -473,3 +483,5 @@ InputLoop(commands, False)
 # df['Add to Quantity'] = 4
 # df = df[df['TCG Marketplace Price'] < .4]
 # df.to_csv(DOWNLOADS_DIRECTORY + '\\new.csv', index=False)
+
+
