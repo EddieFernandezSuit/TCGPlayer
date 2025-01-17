@@ -68,6 +68,47 @@ def proccess_new_cards(filter=False):
     merge_duplicates(email_cards_file_path)
     upload_tcgplayer_prices(email_cards_file_path)
 
+def proccess_new_cards_magic_sorter():
+    # email_cards_file_path = email_to_csv()
+    
+    new_cards_file_path = DOWNLOADS_DIRECTORY + 'results.csv'
+    new_cards_df = pd.read_csv(new_cards_file_path)
+
+    # if filter:
+    #     new_cards_df = remove_cards_under(df=new_cards_df, price_line=.2)
+
+    # def update_condition(row):
+    #     condition = row['Condition']
+    #     if row['Printing'] != 'Normal':
+    #         condition += ' ' +  row['Printing']
+    #     if row['Language'] != 'English':
+    #         condition = f"{condition} - {row['Language']}"
+    #     return condition
+
+    # new_cards_df['Condition'] = new_cards_df.apply(update_condition, axis=1)
+    # new_cards_df["Price Each"] = new_cards_df["Price Each"].str.strip("$").astype(float)
+    # new_cards_df = new_cards_df.rename(columns={'Price Each': 'TCG Market Price'})
+    # new_cards_df['TCG Direct Low'] = .01
+    # new_cards_df['TCG Low Price'] = .01
+    new_cards_df['Price Each'] = new_cards_df.apply(lambda row: calculate_price(row), axis=1)
+    # new_cards_df = new_cards_df.drop('Printing', axis=1)
+    # new_cards_df = new_cards_df.drop('Language', axis=1)
+    lot = input('Enter Lot number: ')
+    new_cards_df['Lot'] = lot
+    inventory_filename = PROJECT_DIRECTORY + 'data/inventory.csv'
+    inventory = pd.read_csv(inventory_filename)
+    inventory = pd.concat([inventory, new_cards_df], ignore_index=True)
+    inventory.to_csv(inventory_filename, index = False)
+
+    new_cards_df = new_cards_df.rename(columns={"Quantity":"Add to Quantity","Name":"Product Name","Set":"Set Name","SKU":"TCGplayer Id","Price Each":"TCG Marketplace Price"})    
+    new_cols = ["Title", "Number", "Rarity", "TCG Market Price","TCG Direct Low","TCG Low Price With Shipping","TCG Low Price","Total Quantity","Photo URL"]
+    new_cards_df = new_cards_df.assign(**{"Product Line": "Magic"}, **{col: '' for col in new_cols})
+
+    new_cards_df.to_csv(new_cards_file_path, index=False)
+    # merge_duplicates(email_cards_file_path)
+    upload_tcgplayer_prices(new_cards_file_path)
+    os.remove(new_cards_file_path)
+
 def process_sales(type='normal'):
     if type == 'normal':
         download_files_normal()
@@ -452,6 +493,7 @@ def schedule_pickup():
 
 commands = [
     {'text': 'Process new cards', 'action': lambda: proccess_new_cards()},
+    {'text': 'Process new cards magic sorter', 'action': lambda: proccess_new_cards_magic_sorter()},
     {'text': 'Process new cards; remove under', 'action': lambda: proccess_new_cards(filter=True)},
     {'text': 'Process Sales Normal', 'action': lambda: process_sales()},
     {'text': 'Process Sales Direct', 'action': lambda: process_sales( 'direct')},
