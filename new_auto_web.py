@@ -26,7 +26,7 @@ class NewAutoWeb(webdriver.Chrome):
         options.add_experimental_option("debuggerAddress", "localhost:9222")
         options.add_argument("--disable-notifications")
         super().__init__(options=options, service=None, keep_alive=True)
-        self.wait_time = 3
+        self.wait_time = 10
         self.switch_to.window(self.window_handles[0])
         if commands:
             self.execute_commands(commands)

@@ -1,14 +1,13 @@
 from new_auto_web import NewAutoWeb
-from print_envelopes import print_from_csv
-from print_envelopes import email_to_csv
+from print_envelopes import *
 from download_files import *
 from config import *
 from edlib import get_file_path, InputLoop
 import datetime
 import pandas as pd
 import os
-from mtgsdk import Card
 import webbrowser
+import packing_slip
 
 # python -m PyInstaller main.py
 
@@ -68,44 +67,26 @@ def proccess_new_cards(filter=False):
     merge_duplicates(email_cards_file_path)
     upload_tcgplayer_prices(email_cards_file_path)
 
+def handle_file_exist(file_name):
+    while not os.path.isfile(file_name):
+        input('File ' + file_name + ' does not exist')
+
 def proccess_new_cards_magic_sorter():
-    # email_cards_file_path = email_to_csv()
-    
+    download_results_gmail()
     new_cards_file_path = DOWNLOADS_DIRECTORY + 'results.csv'
+    handle_file_exist(new_cards_file_path)
     new_cards_df = pd.read_csv(new_cards_file_path)
-
-    # if filter:
-    #     new_cards_df = remove_cards_under(df=new_cards_df, price_line=.2)
-
-    # def update_condition(row):
-    #     condition = row['Condition']
-    #     if row['Printing'] != 'Normal':
-    #         condition += ' ' +  row['Printing']
-    #     if row['Language'] != 'English':
-    #         condition = f"{condition} - {row['Language']}"
-    #     return condition
-
-    # new_cards_df['Condition'] = new_cards_df.apply(update_condition, axis=1)
-    # new_cards_df["Price Each"] = new_cards_df["Price Each"].str.strip("$").astype(float)
-    # new_cards_df = new_cards_df.rename(columns={'Price Each': 'TCG Market Price'})
-    # new_cards_df['TCG Direct Low'] = .01
-    # new_cards_df['TCG Low Price'] = .01
     new_cards_df['Price Each'] = new_cards_df.apply(lambda row: calculate_price(row), axis=1)
-    # new_cards_df = new_cards_df.drop('Printing', axis=1)
-    # new_cards_df = new_cards_df.drop('Language', axis=1)
     lot = input('Enter Lot number: ')
     new_cards_df['Lot'] = lot
     inventory_filename = PROJECT_DIRECTORY + 'data/inventory.csv'
     inventory = pd.read_csv(inventory_filename)
     inventory = pd.concat([inventory, new_cards_df], ignore_index=True)
     inventory.to_csv(inventory_filename, index = False)
-
     new_cards_df = new_cards_df.rename(columns={"Quantity":"Add to Quantity","Name":"Product Name","Set":"Set Name","SKU":"TCGplayer Id","Price Each":"TCG Marketplace Price"})    
     new_cols = ["Title", "Number", "Rarity", "TCG Market Price","TCG Direct Low","TCG Low Price With Shipping","TCG Low Price","Total Quantity","Photo URL"]
     new_cards_df = new_cards_df.assign(**{"Product Line": "Magic"}, **{col: '' for col in new_cols})
-
     new_cards_df.to_csv(new_cards_file_path, index=False)
-    # merge_duplicates(email_cards_file_path)
     upload_tcgplayer_prices(new_cards_file_path)
     os.remove(new_cards_file_path)
 
@@ -113,11 +94,11 @@ def process_sales(type='normal'):
     if type == 'normal':
         download_files_normal()
         shipping_prefix = "_TCGplayer_ShippingExport"
+        pullsheet_prefix = "TCGplayer_PullSheet"
+        
         shipping_path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, shipping_prefix)
         time.sleep(1)
         print_from_csv(shipping_path)
-        # return
-        pullsheet_prefix = "TCGplayer_PullSheet"
         pullsheet_path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, pullsheet_prefix)
     else:
         download_files_direct()
@@ -176,6 +157,11 @@ def process_sales(type='normal'):
     
     if type == 'normal':
         packing_slip_path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, 'TCGplayer_PackingSlips')
+        orders = packing_slip.get_orders_from_pdf(packing_slip_path)
+        for order in orders:
+            order.print_order()
+            input('')
+
         if packing_slip_path:
             webbrowser.open(packing_slip_path)
             time.sleep(5)
@@ -184,6 +170,7 @@ def process_sales(type='normal'):
             
         else:
             print('No Packing Slip')
+    input('Press Enter')
 
 def fix_collumns(file_path=None, pullsheet_df = None):
     if file_path:
@@ -234,9 +221,9 @@ def get_revenue():
     revenue_df.to_csv(PROJECT_DIRECTORY + 'data/revenue.csv', header=True)
 
 def calculate_price(row):
-    percentage = 1
-    flat_discount = 0.01
-    minimum = 0.1
+    percentage = .97
+    flat_discount = 0
+    minimum = 0.02
 
     market_price = float(row['TCG Market Price'])
     price = market_price * percentage
@@ -259,6 +246,7 @@ def adjust_card_prices(prices_file_name = ''):
     """Change the prices of the cards in the CSV file"""
     tcg = download_pricing()
     prices_file_name = get_file_matching_prefix(DOWNLOADS_DIRECTORY, 'TCGplayer__MyPricing')
+    handle_file_exist(prices_file_name)
     df = pd.read_csv(prices_file_name)
     df['TCG Market Price'] = df['TCG Market Price'].fillna(0.01)
     df['TCG Low Price'] = df['TCG Low Price'].fillna(0.01)
@@ -461,6 +449,12 @@ def schedule_pickup():
     IS_DOG_XP = '//*[@id="first-radio-verification"]'
     LOCATION_PACKAGE_XP = '//*[@id="packageLocation"]'
     TIME_XP = '//*[@id="pickup-regular-time"]'
+    NEXT_DAY_CLASS = 'ui-datepicker-current-day'
+    USPS_GROUND_ADVANTAGE_XP = '//*[@id="countGroundAdvantage"]'
+    TOTAL_WEIGHT_XP = '//*[@id="totalPackageWeight"]'
+    DOES_NOT_CONTAIN_HAZARDOUS_XP = '//*[@id="hazmat-no"]'
+    I_HAVE_READ_THE_TERMS_XP = '/html/body/div[9]/div/div[3]/div/div[6]/label'
+    SCHEDULE_PICKUP_XP = '//*[@id="schedulePickupButton"]'
 
     FIRST_NAME = 'Eddie'
     LAST_NAME = 'Fernandez'
@@ -472,6 +466,8 @@ def schedule_pickup():
     EMAIL = 'fernandezeddie54@gmail.com'
     LOCATION_PACKAGE = 'Knock'
 
+    number_of_packages = input('How many USPS Ground Advantage packages? This will also be the total weight in lbs: ')
+    
     commands = [
         ['go', URL],
         ['fill', FIRST_NAME_XPATH, FIRST_NAME],
@@ -486,7 +482,12 @@ def schedule_pickup():
         ['click', IS_DOG_XP],
         ['select', LOCATION_PACKAGE_XP, LOCATION_PACKAGE],
         ['click', TIME_XP],
-        
+        ['click', NEXT_DAY_CLASS, By.CLASS_NAME],
+        ['fill', USPS_GROUND_ADVANTAGE_XP, number_of_packages],
+        ['fill', TOTAL_WEIGHT_XP, number_of_packages],
+        ['click', DOES_NOT_CONTAIN_HAZARDOUS_XP],
+        ['click', I_HAVE_READ_THE_TERMS_XP],
+        ['click', SCHEDULE_PICKUP_XP],
     ]
 
     NewAutoWeb(commands)
@@ -510,20 +511,4 @@ commands = [
     {'text': 'schedule pickup', 'action': schedule_pickup}
 ]
 
-
-# path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, 'TCG')
-
-# df = pd.read_csv(path)
-# for index, row in df.iterrows():
-#     print('1', row['Product Name'], '[ISD]')
 InputLoop(commands, False)
-
-
-# path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, 'TCG')
-# df = pd.read_csv(path)
-# df['TCG Marketplace Price'] = df.apply(lambda row: calculate_price(row), axis=1)
-# df['Add to Quantity'] = 4
-# df = df[df['TCG Marketplace Price'] < .4]
-# df.to_csv(DOWNLOADS_DIRECTORY + '\\new.csv', index=False)
-
-

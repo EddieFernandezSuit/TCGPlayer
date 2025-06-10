@@ -167,7 +167,6 @@ def rawFileDataToFile(rawFileData):
     return filePath
 
 def downloadGoogleDocAsWordFile(googleDocFileId):
-
     WORD_DOC = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
     request = DRIVE.files().export_media(fileId=googleDocFileId, mimeType=WORD_DOC)
     file = io.BytesIO()
@@ -222,11 +221,12 @@ def authenticate():
 def email_to_csv():
     GETFROMTHISEMAIL = 'Eddie Fernandez <fernandezeddie54@gmail.com>'
     EMAILCSVFILEPATH = config.PROJECT_DIRECTORY + 'data\\email_cards.csv'
+    USER_ID = 'me'
 
-    results = GMAIL.users().messages().list(userId='me', labelIds=['INBOX'], q="is:unread").execute()
+    results = GMAIL.users().messages().list(userId=USER_ID, labelIds=['INBOX'], q="is:unread").execute()
     messages = results.get('messages',[])
     for message in messages:
-        msg = GMAIL.users().messages().get(userId='me', id=message['id']).execute()
+        msg = GMAIL.users().messages().get(userId=USER_ID, id=message['id']).execute()
         email_data = msg['payload']['headers']
         from_name = next((value['value'] for value in email_data if value['name'] == 'From'), None)
         if from_name == GETFROMTHISEMAIL:
@@ -236,10 +236,36 @@ def email_to_csv():
             text = text.replace('<div>','').replace('</div>','').replace('&quot;','"').replace('&#39;','\'').replace('<br>','\n').replace('<div dir="ltr">','')
             with open(EMAILCSVFILEPATH, "w") as text_file:
                 text_file.write(text)
-            GMAIL.users().messages().trash(userId='me', id=message['id']).execute()
+            GMAIL.users().messages().trash(userId=USER_ID, id=message['id']).execute()
     
     return EMAILCSVFILEPATH
 
+
+def download_results_gmail():
+    service = GMAIL
+    USER_ID = 'me'
+    subject = "Magic Sorter scan results - Device: 2aaf4"
+    query = f'subject: "{subject}"'
+
+    messages = service.users().messages().list(userId=USER_ID, q=query).execute().get('messages',[])
+    if messages:
+        msg_id = messages[0]['id']
+        message = service.users().messages().get(userId=USER_ID, id=msg_id).execute()
+        for part in message.get("payload", {}).get("parts", []):
+            if part.get("filename"):
+                attachment_id = part["body"]["attachmentId"]
+                attachment = service.users().messages().attachments().get(
+                    userId=USER_ID, id=attachment_id,messageId=msg_id
+                ).execute()
+
+                file_data = base64.urlsafe_b64decode(attachment["data"])
+                # os.makedirs(save_dir, exist_ok=True)
+                file_path = os.path.join("C:\\Users\\ferna\\Downloads", part["filename"])
+
+                with open(file_path, "wb") as f:
+                    f.write(file_data)
+                print(f"Attachment saved: {file_path}")
+                GMAIL.users().messages().trash(userId=USER_ID, id=msg_id).execute()
 
 SHEETS = get_service('sheets')
 DRIVE = get_service('drive')
