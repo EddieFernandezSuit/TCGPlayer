@@ -160,7 +160,7 @@ def googleDocIdToRawFileData(googleDocFileId):
     return rawFileData
 
 def rawFileDataToFile(rawFileData):
-    filePath =  config.PRINT_ENVELOPES_DIRECTORY + 'Shipping_Envelopes.doc'
+    filePath =  config.PROJECT_DIRECTORY + 'Shipping_Envelopes.doc'
     print(filePath)
     with open(filePath, "wb") as binary_file:
         binary_file.write(rawFileData)
@@ -191,7 +191,7 @@ def print_from_csv(filePath):
     wordDocFilePath = rawFileDataToFile(rawFileData)
     # wordDocFilePath = rawFileDataToFile(documentID)
     printWordDocument(wordDocFilePath)
-    os.remove(wordDocFilePath)
+    # os.remove(wordDocFilePath)
 
     
 def authenticate():
@@ -201,8 +201,8 @@ def authenticate():
         'https://www.googleapis.com/auth/gmail.readonly',
         'https://www.googleapis.com/auth/gmail.modify']
     
-    TOKEN_FILEPATH = config.PRINT_ENVELOPES_DIRECTORY + 'token.json'
-    CREDENTIAL_FILEPATH = config.PRINT_ENVELOPES_DIRECTORY + 'credentials.json'
+    TOKEN_FILEPATH = config.PROJECT_DIRECTORY +'//.secrets//token.json'
+    CREDENTIAL_FILEPATH = config.PROJECT_DIRECTORY + '//.secrets//credentials.json'
 
     creds = None
     if os.path.exists(TOKEN_FILEPATH):

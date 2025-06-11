@@ -1,7 +1,7 @@
 from new_auto_web import NewAutoWeb
 from print_envelopes import *
 from download_files import *
-from config import *
+from config import PROJECT_DIRECTORY, DOWNLOADS_DIRECTORY
 from edlib import get_file_path, InputLoop
 import datetime
 import pandas as pd
