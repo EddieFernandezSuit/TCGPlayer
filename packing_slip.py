@@ -31,11 +31,11 @@ class Order:
         # print(order.shipping_address)
         print(self.name)
         for card in self.cards:
-            print(card.quantity + ' ' + card.set_name + '   ' + card.name + ' ' + card.condition + ' ' + card.price)
+            print(card.quantity + ' ' + card.set_name + '   ' + card.name + ' ' + card.condition + ' ' + card.language + ' ' + card.price)
         print()
 
 class Card:
-    def __init__(self, quantity, tcg_name, set_name, name, number, rarity,condition, price, total_price):
+    def __init__(self, quantity, tcg_name, set_name, name, number, rarity,condition, price, total_price, language='English'):
         self.quantity = quantity
         self.tcg_name = tcg_name
         self.set_name = set_name
@@ -45,6 +45,7 @@ class Card:
         self.condition = condition
         self.price = price
         self.total_price = total_price
+        self.language = language
         
 
 def get_between(text, before_string, after_string):
@@ -83,8 +84,19 @@ def get_orders_from_pdf(filepath):
                 name, raw_card = raw_card.split('-',maxsplit=1)
             else:
                 name, raw_card = raw_card
-                number, rarity, raw_card = raw_card.split('-')
-            condition, price, total_price = raw_card.split('$')
+                raw_card = raw_card.strip()
+                raw_card = raw_card.split('-', maxsplit=2)
+                number, rarity, raw_card = raw_card
+            raw_card = raw_card.split('-')
+            if len(raw_card) == 1:
+                condition, price, total_price = raw_card[0].split('$')
+                language = 'English'
+            elif len(raw_card) == 2:
+                token, raw_card = raw_card
+                condition, price, total_price = raw_card.split('$')
+            else:
+                condition, language, raw_card = raw_card
+                _, price, total_price = raw_card.split('$')
 
             set_name = set_name.strip()
             name = name.strip()
@@ -92,7 +104,7 @@ def get_orders_from_pdf(filepath):
             condition = condition.strip()
             price = price.strip()
             
-            card = Card(quantity, tcg_name, set_name, name, number, rarity, condition, price, total_price)
+            card = Card(quantity, tcg_name, set_name, name, number, rarity, condition, price, total_price, language)
             cards.append(card)
 
         order = Order(shipping_address, cards)
@@ -106,9 +118,9 @@ def get_orders_from_pdf(filepath):
 
     return orders
 
-# orders = get_orders_from_pdf("C:\\Users\\ferna\\Downloads\\TCGplayer_PackingSlips_20250509_145736.pdf")
-# for order in orders:
-#     order.print_order()
-#     input('')
+orders = get_orders_from_pdf(r"C:\Users\ferna\Downloads\TCGplayer_PackingSlips_20250615_232405.pdf")
+for order in orders:
+    order.print_order()
+    input('')
 
 
