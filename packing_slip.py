@@ -118,9 +118,9 @@ def get_orders_from_pdf(filepath):
 
     return orders
 
-orders = get_orders_from_pdf(r"C:\Users\ferna\Downloads\TCGplayer_PackingSlips_20250615_232405.pdf")
-for order in orders:
-    order.print_order()
-    input('')
+# orders = get_orders_from_pdf(r"C:\Users\ferna\Downloads\TCGplayer_PackingSlips_20250615_232405.pdf")
+# for order in orders:
+#     order.print_order()
+#     input('')
 
 
