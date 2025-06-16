@@ -108,7 +108,7 @@ def get_orders_from_pdf(filepath):
             cards.append(card)
 
         order = Order(shipping_address, cards)
-        if not shipping_address:
+        if shipping_address.startswith('Quantity'):
             orders[-1].cards += cards
         else:
             orders.append(order)
