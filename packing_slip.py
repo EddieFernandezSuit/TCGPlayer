@@ -3,7 +3,6 @@ import re
 from collections import OrderedDict
 from pprint import pprint
 
-
 class Order:
     def __init__(self, shipping_address, cards):
         self.shipping_address = shipping_address
