@@ -201,7 +201,7 @@ def authenticate():
         'https://www.googleapis.com/auth/gmail.readonly',
         'https://www.googleapis.com/auth/gmail.modify']
     
-    TOKEN_FILEPATH = config.PROJECT_DIRECTORY +'//.secrets//token.json'
+    TOKEN_FILEPATH = os.path.join(config.PROJECT_DIRECTORY, '.secrets', 'token.json')
     CREDENTIAL_FILEPATH = config.PROJECT_DIRECTORY + '//.secrets//credentials.json'
 
     creds = None
