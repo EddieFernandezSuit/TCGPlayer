@@ -31,7 +31,10 @@ def get_file_matching_prefix(dir_path, file_name_prefix):
 
 def proccess_new_cards(filter=False):
     email_cards_file_path = email_to_csv()
+    # email_cards_file_path = 'C:\\Users\\ferna\\Downloads\\TCGPlayer\\data\\email_cards.csv'
     new_cards_df = pd.read_csv(email_cards_file_path)
+    print(new_cards_df[['Set', 'Name']])
+    # print(new_cards_df[['Set Name', 'Product Name']])
 
     if filter:
         new_cards_df = remove_cards_under(df=new_cards_df, price_line=.2)
@@ -62,7 +65,6 @@ def proccess_new_cards(filter=False):
     new_cards_df = new_cards_df.rename(columns={"Quantity":"Add to Quantity","Name":"Product Name","Set":"Set Name","SKU":"TCGplayer Id","Price Each":"TCG Marketplace Price"})    
     new_cols = ["Title", "Number", "Rarity", "TCG Market Price","TCG Direct Low","TCG Low Price With Shipping","TCG Low Price","Total Quantity","Photo URL"]
     new_cards_df = new_cards_df.assign(**{"Product Line": "Magic"}, **{col: '' for col in new_cols})
-
     new_cards_df.to_csv(email_cards_file_path, index=False)
     merge_duplicates(email_cards_file_path)
     upload_tcgplayer_prices(email_cards_file_path)
@@ -76,6 +78,7 @@ def proccess_new_cards_magic_sorter():
     new_cards_file_path = DOWNLOADS_DIRECTORY + 'results.csv'
     handle_file_exist(new_cards_file_path)
     new_cards_df = pd.read_csv(new_cards_file_path)
+    print(new_cards_df[['Set Name', 'Product Name', 'Condition']])
     new_cards_df['Price Each'] = new_cards_df.apply(lambda row: calculate_price(row), axis=1)
     lot = input('Enter Lot number: ')
     new_cards_df['Lot'] = lot
@@ -93,13 +96,13 @@ def proccess_new_cards_magic_sorter():
 def process_sales(type='normal'):
     if type == 'normal':
         download_files_normal()
+        time.sleep(1)
         shipping_prefix = "_TCGplayer_ShippingExport"
         pullsheet_prefix = "TCGplayer_PullSheet"
         
         shipping_path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, shipping_prefix)
-        time.sleep(1)
-        print_from_csv(shipping_path)
         pullsheet_path = get_file_matching_prefix(DOWNLOADS_DIRECTORY, pullsheet_prefix)
+        print_from_csv(shipping_path)
     else:
         download_files_direct()
         time.sleep(1)
@@ -222,11 +225,11 @@ def get_revenue():
 
 def calculate_price(row):
     percentage = .97
-    flat_discount = 0
-    minimum = 0.02
+    flat_discount = 0.01
+    minimum = 0.01
 
     market_price = float(row['TCG Market Price'])
-    price = market_price * percentage
+    price = round(market_price * percentage - flat_discount, 2)
     # if market_price < 1:
     #     price =  market_price * percentage
     # elif market_price < 3:
@@ -239,8 +242,8 @@ def calculate_price(row):
     #     price = market_price + 7.5
 
     # price = max(price, row['TCG Low Price'], row["TCG Direct Low"]) - flat_discount
-    price = max(price, row['TCG Low Price']) - flat_discount
-    return max(price, minimum)
+    price = max(price, row['TCG Low Price'] - .01, minimum)
+    return price
 
 def adjust_card_prices(prices_file_name = ''):
     """Change the prices of the cards in the CSV file"""

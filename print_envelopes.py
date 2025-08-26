@@ -78,6 +78,7 @@ def printWordDocument(filename):
 # creates an envelope in google docs and google drive then returns its document id
 def create_envelope_doc():
     template_document_id = '1oGpzkpwi9GKWGZvz2qM0pEPblE2wEBUWR54YAU31vH0'
+    template_document_id = '1frdPkn8EHFJbWVA3BvBulirSgcMgolEh3TsylQ6bk34'
     google_sheets_id = '145tGd66L_iCf1cDkNvRDNy2K5JkzaYEoOI3sRBYcfKk'
     folder_id = '1uf7tP99QxoHhaXJOppqIEU1C9qdwzAFM'
     worksheet_name = 'Sheet1'
