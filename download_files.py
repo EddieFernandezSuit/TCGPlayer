@@ -44,16 +44,28 @@ def download_pricing():
 def upload_prices(auto_web: NewAutoWeb, prices_file_path):
     CONTINUE_XPATH = '//*[@id="divImportButtonContainer"]/input'
     CONTINUE_XPATH2 = '//*[@id="divImporterUploadContainer"]/div/input[2]'
+    IMPORT_TO_STAGED_XPATH = '//*[@id="pricing-search"]/pricing-search/div[4]/pricing-actions/div[1]/div[1]/div/input[4]'
+    UPLOAD_XPATH = '//*[@id="divImporterUploadContainer"]/div[1]/input'
+    MOVE_TO_LIVE_XPATH = '//*[@id="divImporterUploadContainer"]/div/input[3]'
+    COMFIRM_MOVE_TO_LIVE_XPATH = '//*[@id="pricing-dialog"]/pricing-dialog/div/div/div[2]/pricing-move-to-live/div/div/div/input[2]'
+    CLOSE_XPATH = '//*[@id="pricing-dialog"]/pricing-dialog/div/div/div[2]/pricing-move-to-live/div/div/div[2]/input'
     cont = True
     while cont:
         try:
             auto_web.go("https://store.tcgplayer.com/admin/pricing")
             time.sleep(1)
-            auto_web.click('/html/body/div[4]/div/div[4]/div[2]/pricing-search/div[4]/pricing-actions/div[1]/div[1]/div/input[4]')
-            file_input = auto_web.find('/html/body/div[4]/div/div[6]/pricing-dialog/div/div/div[2]/pricing-importer/div/div/div[1]/input')
+            auto_web.click(IMPORT_TO_STAGED_XPATH)
+            file_input = auto_web.find(UPLOAD_XPATH)
             file_input.send_keys(prices_file_path)
             auto_web.click(CONTINUE_XPATH)  # continue button
             auto_web.click(CONTINUE_XPATH2)  # continue button
+            auto_web.click(MOVE_TO_LIVE_XPATH)
+            auto_web.click(COMFIRM_MOVE_TO_LIVE_XPATH)
+            auto_web.click(CLOSE_XPATH)
+            auto_web.close()
+            auto_web.switch_to.window(auto_web.window_handles[-1])
+            auto_web.close()
+            auto_web.quit()
             cont = False
         except Exception as e:
             print(e)
@@ -61,7 +73,6 @@ def upload_prices(auto_web: NewAutoWeb, prices_file_path):
 
 
 def download_files_normal():
-    
     while True:
         try:
             URL = "https://store.tcgplayer.com/admin/orders/orderlist"
