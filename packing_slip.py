@@ -77,14 +77,16 @@ def get_orders_from_pdf(filepath):
             quantity, tcg_name, raw_card = raw_card.split(maxsplit=2)
             _, raw_card = raw_card.split('-',maxsplit=1)
             set_name, raw_card = raw_card.split(':',maxsplit=1)
+            print(raw_card)
             raw_card = raw_card.split('#', maxsplit=1)
+            print(raw_card)
             if len(raw_card) == 1:
                 raw_card = raw_card[0]
-                name, raw_card = raw_card.split('-',maxsplit=1)
+                name, raw_card = raw_card.split('- ',maxsplit=1)
             else:
                 name, raw_card = raw_card
                 raw_card = raw_card.strip()
-                raw_card = raw_card.split('-', maxsplit=2)
+                raw_card = raw_card.split('- ', maxsplit=2)
                 number, rarity, raw_card = raw_card
             raw_card = raw_card.split('-')
             if len(raw_card) == 1:
