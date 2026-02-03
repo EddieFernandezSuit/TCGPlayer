@@ -7,6 +7,7 @@ import base64
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
+from constants import *
 import config
 import time
 import os
@@ -115,15 +116,17 @@ def create_envelope_doc():
         }
         REQUESTS['requests'].append({
             'insertText': {
-                'text': "Eddie Fernandez\n19803 15th Ave E\nSpanaway, WA 98387\n\n\n\n			{} {}\n			{} {}\n			{}, {} {}".format(
-                    SHIPPING_ADDRESS['firstName'],
-                    SHIPPING_ADDRESS['lastName'],
-                    SHIPPING_ADDRESS['address1'],
-                    SHIPPING_ADDRESS['address2'],
-                    SHIPPING_ADDRESS['city'],
-                    SHIPPING_ADDRESS['state'],
-                    SHIPPING_ADDRESS['postalCode'],
-                ),
+                # 'text': "Eddie Fernandez\n19803 15th Ave E\nSpanaway, WA 98387\n\n\n\n			{} {}\n			{} {}\n			{}, {} {}".format(
+                # 'text': "Eddie Fernandez\n5009 S State St\Tacoma, WA 98409\n\n\n\n			{} {}\n			{} {}\n			{}, {} {}".format(
+                #     SHIPPING_ADDRESS['firstName'],
+                #     SHIPPING_ADDRESS['lastName'],
+                #     SHIPPING_ADDRESS['address1'],
+                #     SHIPPING_ADDRESS['address2'],
+                #     SHIPPING_ADDRESS['city'],
+                #     SHIPPING_ADDRESS['state'],
+                #     SHIPPING_ADDRESS['postalCode'],
+                # ),
+                'text': f"{FIRST_NAME} {LAST_NAME}\n{STREET_ADDRESS}\n{CITY}, {STATE} {ZIP_CODE}\n\n\n\n			{SHIPPING_ADDRESS['firstName']} {SHIPPING_ADDRESS['lastName']}\n			{SHIPPING_ADDRESS['address1']} {SHIPPING_ADDRESS['address2']}\n			{SHIPPING_ADDRESS['city']}, {SHIPPING_ADDRESS['state']} {SHIPPING_ADDRESS['postalCode']}",
                 'endOfSegmentLocation': {
                     'segmentId': '',
                 }
@@ -238,6 +241,7 @@ def email_to_csv():
             with open(EMAILCSVFILEPATH, "w") as text_file:
                 text_file.write(text)
             GMAIL.users().messages().trash(userId=USER_ID, id=message['id']).execute()
+            return EMAILCSVFILEPATH
     
     return EMAILCSVFILEPATH
 

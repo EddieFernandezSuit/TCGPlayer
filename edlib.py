@@ -7,14 +7,16 @@ from tkinter import filedialog
 #     { 'text': 'Run Crypto Bela Strategy', 'action': CryptoBelaStrategyV2 },
 #     { 'text': 'Cancel All Open Orders', 'action': lambda: client.cancel_open_orders('BTCUSDT') },
 # ]
-
-def InputLoop(commands, repeat = True):
+def InputLoop(commands, repeat = True, command=None):
     commands.append({'text': 'Exit', 'action': ''})
     loop = True
     while loop:
         for i in range(len(commands)):
             print(f'{i}: {commands[i]["text"]}')
-        choice = int(input('Enter Choice: '))
+        if command is not None:
+            choice = command
+        else:
+            choice = int(input('Enter Choice: '))
 
         if choice >= len(commands) - 1:
             print('Goodbye')
