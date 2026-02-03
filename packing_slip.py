@@ -1,7 +1,6 @@
 from PyPDF2 import PdfReader
 import re
 from collections import OrderedDict
-from pprint import pprint
 
 class Order:
     def __init__(self, shipping_address, cards):
@@ -11,26 +10,19 @@ class Order:
         else:
             self.name = None
         self.cards = cards
-        # for card in cards:
-        #     print(card.__dict__)
-        # self.sort_cards_by_first_seen_set_order()
-        # for card in cards: print(card.__dict__)
     
     def sort_cards(self):
-        # Capture the order of first appearance of each set_name
         set_order = OrderedDict()
         for card in self.cards:
             if card.set_name not in set_order:
                 set_order[card.set_name] = len(set_order)
         
-        # Sort cards using the index of their set_name in set_order
-        self.cards.sort(key=lambda card: set_order[card.set_name])
+        self.cards.sort(key=lambda card: (set_order[card.set_name], card.name))
     
     def print_order(self):
-        # print(order.shipping_address)
         print(self.name)
         for card in self.cards:
-            print(card.quantity + ' ' + card.set_name + '   ' + card.name + ' ' + card.condition + ' ' + card.language + ' ' + card.price)
+            print(f'{"\033[1m" if "foil" in card.condition else ""}{card.set_name} {card.quantity if card.quantity > 1 else ""} {card.name} {card.condition if card.condition != "Near Mint" else ""} {card.language if card.language != "English" else ""} ${card.price} {"\033[0m" if "foil" in card.condition else ""}')
         print()
 
 class Card:
@@ -59,35 +51,34 @@ def get_between(text, before_string, after_string):
 def get_orders_from_pdf(filepath):
     orders = []
     reader = PdfReader(filepath)
-    number_of_pages = len(reader.pages)
     for page in reader.pages:
         text = page.extract_text()
         shipping_address = text.split('\nShip To',maxsplit=1)[0]
-        # shipping_address = get_between(text, 'Ship To:\n', '\nOrder Number:')
         raw_cards = get_between(text, 'Total Price\n', '\nTotal')
-        # raw_cards = raw_cards[:-1]
         if not raw_cards:
             continue
         raw_cards = re.split(r'\n(?=\d)', raw_cards)
-        # if 'Total' in raw_cards[-1]:
         raw_cards = raw_cards[:-1]
         cards = []
 
         for raw_card in raw_cards:
+            number = 0
             quantity, tcg_name, raw_card = raw_card.split(maxsplit=2)
             _, raw_card = raw_card.split('-',maxsplit=1)
             set_name, raw_card = raw_card.split(':',maxsplit=1)
-            print(raw_card)
+            # print(raw_card)
             raw_card = raw_card.split('#', maxsplit=1)
-            print(raw_card)
+            # print(raw_card)
             if len(raw_card) == 1:
                 raw_card = raw_card[0]
-                name, raw_card = raw_card.split('- ',maxsplit=1)
+                name, rarity, raw_card = raw_card.split('- ',maxsplit=2)
+                
             else:
                 name, raw_card = raw_card
                 raw_card = raw_card.strip()
                 raw_card = raw_card.split('- ', maxsplit=2)
                 number, rarity, raw_card = raw_card
+                number = number.strip()
             raw_card = raw_card.split('-')
             if len(raw_card) == 1:
                 condition, price, total_price = raw_card[0].split('$')
@@ -101,7 +92,6 @@ def get_orders_from_pdf(filepath):
 
             set_name = set_name.strip()
             name = name.strip()
-            number = number.strip()
             condition = condition.strip()
             price = price.strip()
             
@@ -118,10 +108,4 @@ def get_orders_from_pdf(filepath):
         order.sort_cards()
 
     return orders
-
-# orders = get_orders_from_pdf(r"C:\Users\ferna\Downloads\TCGplayer_PackingSlips_20250615_232405.pdf")
-# for order in orders:
-#     order.print_order()
-#     input('')
-
 

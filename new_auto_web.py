@@ -18,7 +18,6 @@ import time
 #     ['click', DOWNLOAD_BUTTON_XPATH],
 #     ['wait', 20],
 # ]
-
 class NewAutoWeb(webdriver.Chrome):
     def __init__(self, commands=None, isOption = True) -> None:
         subprocess.Popen('"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\selenum\ChromeProfile"', shell=True)
@@ -33,6 +32,7 @@ class NewAutoWeb(webdriver.Chrome):
 
     def find(self, identifier, type=By.XPATH):
         return WebDriverWait(self, self.wait_time).until(EC.presence_of_element_located((type, identifier)))
+        # return WebDriverWait(self, self.wait_time).until(EC.element_to_be_clickable((type, identifier)))
     
     def finds(self, identifier, type=By.XPATH):
         return WebDriverWait(self, self.wait_time).until(EC.presence_of_all_elements_located((type, identifier)))

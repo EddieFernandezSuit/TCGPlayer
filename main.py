@@ -1,13 +1,18 @@
+import csv
 from new_auto_web import NewAutoWeb
 from print_envelopes import *
 from download_files import *
 from config import PROJECT_DIRECTORY, DOWNLOADS_DIRECTORY
 from edlib import get_file_path, InputLoop
+from constants import *
 import datetime
 import pandas as pd
 import os
 import webbrowser
 import packing_slip
+import json
+import sys
+import shutil
 
 # python -m PyInstaller main.py
 
@@ -24,50 +29,57 @@ def order_by_set():
     new_cards = new_cards.drop('Order', axis=1)
     new_cards.to_csv(new_cards_file_path, index=False)
 
-def get_file_matching_prefix(dir_path, file_name_prefix):
+def get_file_matching_prefix(dir_path: str, file_name_prefix: str) -> str:
     matching_files = [file for file in os.listdir(dir_path) if file.startswith(file_name_prefix)]
-    last_file = os.path.join(dir_path, max(matching_files)) if matching_files else None 
-    return last_file
+    last_filename = os.path.join(dir_path, max(matching_files)) if matching_files else None 
+    return last_filename
 
 def proccess_new_cards(filter=False):
-    email_cards_file_path = email_to_csv()
     # email_cards_file_path = 'C:\\Users\\ferna\\Downloads\\TCGPlayer\\data\\email_cards.csv'
+    email_cards_file_path = email_to_csv()
     new_cards_df = pd.read_csv(email_cards_file_path)
-    print(new_cards_df[['Set', 'Name']])
-    # print(new_cards_df[['Set Name', 'Product Name']])
 
     if filter:
         new_cards_df = remove_cards_under(df=new_cards_df, price_line=.2)
 
-    def update_condition(row):
-        condition = row['Condition']
-        if row['Printing'] != 'Normal':
-            condition += ' ' +  row['Printing']
-        if row['Language'] != 'English':
-            condition = f"{condition} - {row['Language']}"
-        return condition
+    # def update_condition(row):
+    #     condition = row['Condition']
+    #     if 'printing' in row and row['Printing'] != 'Normal':
+    #         condition += ' ' +  row['Printing']
+    #     if 'printing' in row and row['Language'] != 'English':
+    #         condition = f"{condition} - {row['Language']}"
+    #     return condition
 
-    new_cards_df['Condition'] = new_cards_df.apply(update_condition, axis=1)
-    new_cards_df["Price Each"] = new_cards_df["Price Each"].str.strip("$").astype(float)
-    new_cards_df = new_cards_df.rename(columns={'Price Each': 'TCG Market Price'})
+    # new_cards_df['Condition'] = new_cards_df.apply(update_condition, axis=1)
+    # if 'Price Each' in new_cards_df:
+        # new_cards_df["Price Each"] = new_cards_df["Price Each"].str.strip("$").astype(float)
+        # new_cards_df = new_cards_df.rename(columns={'Price Each': 'TCG Market Price'})
+
     new_cards_df['TCG Direct Low'] = .01
     new_cards_df['TCG Low Price'] = .01
-    new_cards_df['Price Each'] = new_cards_df.apply(lambda row: calculate_price(row), axis=1)
-    new_cards_df = new_cards_df.drop('Printing', axis=1)
-    new_cards_df = new_cards_df.drop('Language', axis=1)
-    lot = input('Enter Lot number: ')
-    new_cards_df['Lot'] = lot
+    # new_cards_df['Price Each'] = new_cards_df.apply(lambda row: calculate_price(row), axis=1)
+    # if 'Printing' in new_cards_df:
+        # new_cards_df = new_cards_df.drop('Printing', axis=1)
+    # if 'Language' in new_cards_df:
+        # new_cards_df = new_cards_df.drop('Language', axis=1)
+    # lot = input('Enter Lot number: ')
+    new_cards_df['Lot'] = AUTO_LOT
     inventory_filename = PROJECT_DIRECTORY + 'data/inventory.csv'
     inventory = pd.read_csv(inventory_filename)
     inventory = pd.concat([inventory, new_cards_df], ignore_index=True)
     inventory.to_csv(inventory_filename, index = False)
 
-    new_cards_df = new_cards_df.rename(columns={"Quantity":"Add to Quantity","Name":"Product Name","Set":"Set Name","SKU":"TCGplayer Id","Price Each":"TCG Marketplace Price"})    
-    new_cols = ["Title", "Number", "Rarity", "TCG Market Price","TCG Direct Low","TCG Low Price With Shipping","TCG Low Price","Total Quantity","Photo URL"]
-    new_cards_df = new_cards_df.assign(**{"Product Line": "Magic"}, **{col: '' for col in new_cols})
+    # new_cards_df = new_cards_df.rename(columns={"Quantity":"Add to Quantity","Name":"Product Name","Set":"Set Name","SKU":"TCGplayer Id","Price Each":"TCG Marketplace Price"})    
+    # new_cols = ["Title", "Number", "Rarity", "TCG Market Price","TCG Direct Low","TCG Low Price With Shipping","TCG Low Price","Total Quantity","Photo URL"]
+    # new_cards_df = new_cards_df.assign(**{"Product Line": "Magic"}, **{col: '' for col in new_cols})
+    new_cards_df['Product Line'] = 'Magic'
+    new_cards_df['TCG Marketplace Price'] = new_cards_df['TCG Market Price']
+    new_cards_df['TCG Marketplace Price'] = new_cards_df.apply(lambda row: calculate_price(row), axis=1)
+    
     new_cards_df.to_csv(email_cards_file_path, index=False)
-    merge_duplicates(email_cards_file_path)
-    upload_tcgplayer_prices(email_cards_file_path)
+    # merge_duplicates(email_cards_file_path)
+    tcg = Tcg_web()
+    tcg.upload_prices(email_cards_file_path)
 
 def handle_file_exist(file_name):
     while not os.path.isfile(file_name):
@@ -78,24 +90,52 @@ def proccess_new_cards_magic_sorter():
     new_cards_file_path = DOWNLOADS_DIRECTORY + 'results.csv'
     handle_file_exist(new_cards_file_path)
     new_cards_df = pd.read_csv(new_cards_file_path)
-    print(new_cards_df[['Set Name', 'Product Name', 'Condition']])
+    print(new_cards_df[['Add to Quantity', 'Set Name', 'Product Name', 'Condition']])
+    input('Press Enter to continue if listed cards are correct')
     new_cards_df['Price Each'] = new_cards_df.apply(lambda row: calculate_price(row), axis=1)
-    lot = input('Enter Lot number: ')
-    new_cards_df['Lot'] = lot
+    new_cards_df['Lot'] = AUTO_LOT
+
     inventory_filename = PROJECT_DIRECTORY + 'data/inventory.csv'
     inventory = pd.read_csv(inventory_filename)
     inventory = pd.concat([inventory, new_cards_df], ignore_index=True)
     inventory.to_csv(inventory_filename, index = False)
-    new_cards_df = new_cards_df.rename(columns={"Quantity":"Add to Quantity","Name":"Product Name","Set":"Set Name","SKU":"TCGplayer Id","Price Each":"TCG Marketplace Price"})    
-    new_cols = ["Title", "Number", "Rarity", "TCG Market Price","TCG Direct Low","TCG Low Price With Shipping","TCG Low Price","Total Quantity","Photo URL"]
-    new_cards_df = new_cards_df.assign(**{"Product Line": "Magic"}, **{col: '' for col in new_cols})
     new_cards_df.to_csv(new_cards_file_path, index=False)
-    upload_tcgplayer_prices(new_cards_file_path)
+    tcg = Tcg_web()
+    tcg.upload_prices(new_cards_file_path)
+
+    pricing = get_file_matching_prefix(DOWNLOADS_DIRECTORY, 'TCGplayer__MyPricing')
+    create_sorter_inventory_csv(pricing)
+    
+    os.remove(pricing)
     os.remove(new_cards_file_path)
 
 def process_sales(type='normal'):
+    ANALYSIS_FILE_PATH = PROJECT_DIRECTORY + "data/analysis_data.csv"
     if type == 'normal':
-        download_files_normal()
+        number_of_orders = download_files_normal()
+        # number_of_orders = 46
+        df = pd.read_csv(ANALYSIS_FILE_PATH)
+        LAST_DATE = pd.to_datetime(df.iloc[-1]['date'])
+        TODAY = datetime.datetime.now()
+
+        date_diff = (TODAY - LAST_DATE).days
+        if date_diff == 0:
+            date_diff = 3
+
+        new_row = {
+            "date": TODAY,
+            "orders": number_of_orders,
+            "min": 0.02,
+            "%": .97,
+            "minus": 0.02,
+            "day": TODAY.strftime("%A"),
+            "days": date_diff,
+            "orders/day": round(number_of_orders / date_diff, 2),
+        }
+
+        df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
+        df.to_csv(ANALYSIS_FILE_PATH, index=False)
+
         time.sleep(1)
         shipping_prefix = "_TCGplayer_ShippingExport"
         pullsheet_prefix = "TCGplayer_PullSheet"
@@ -140,10 +180,8 @@ def process_sales(type='normal'):
             
             if not matching_inventory.empty:
                 jindex = matching_inventory.index[0]
-                pullsheet_df.at[index, 'Lot'] = inventory_df.at[jindex, "Lot"]
-
+                pullsheet_df.at[index, 'Lot'] = int(float(inventory_df.at[jindex, "Lot"]))
                 inventory_df.at[jindex, "Quantity"] -= 1
-
                 if inventory_df.at[jindex, "Quantity"] == 0:
                     inventory_df = inventory_df.drop([jindex])
 
@@ -166,14 +204,14 @@ def process_sales(type='normal'):
             input('')
 
         if packing_slip_path:
-            webbrowser.open(packing_slip_path)
-            time.sleep(5)
+            # webbrowser.open(packing_slip_path)
+            # time.sleep(5)
             os.remove(packing_slip_path)
             os.remove(shipping_path)
             
         else:
             print('No Packing Slip')
-    input('Press Enter')
+    schedule_pickup()
 
 def fix_collumns(file_path=None, pullsheet_df = None):
     if file_path:
@@ -224,12 +262,13 @@ def get_revenue():
     revenue_df.to_csv(PROJECT_DIRECTORY + 'data/revenue.csv', header=True)
 
 def calculate_price(row):
-    percentage = .97
-    flat_discount = 0.01
-    minimum = 0.01
+    PERCENT = .98
+    FLAT_DISCOUNT = 0.00
+    MIN = 0.03
 
     market_price = float(row['TCG Market Price'])
-    price = round(market_price * percentage - flat_discount, 2)
+    price = round(market_price * PERCENT - FLAT_DISCOUNT, 2)
+
     # if market_price < 1:
     #     price =  market_price * percentage
     # elif market_price < 3:
@@ -241,13 +280,13 @@ def calculate_price(row):
     # else:
     #     price = market_price + 7.5
 
-    # price = max(price, row['TCG Low Price'], row["TCG Direct Low"]) - flat_discount
-    price = max(price, row['TCG Low Price'] - .01, minimum)
+    price = max(price, row['TCG Low Price'] - .01, MIN)
     return price
 
 def adjust_card_prices(prices_file_name = ''):
     """Change the prices of the cards in the CSV file"""
-    tcg = download_pricing()
+    tcg = Tcg_web()
+    tcg.download_pricing()
     prices_file_name = get_file_matching_prefix(DOWNLOADS_DIRECTORY, 'TCGplayer__MyPricing')
     handle_file_exist(prices_file_name)
     df = pd.read_csv(prices_file_name)
@@ -256,7 +295,7 @@ def adjust_card_prices(prices_file_name = ''):
     df['TCG Direct Low'] = df['TCG Direct Low'].fillna(0.01)
     df['TCG Marketplace Price'] = df.apply(lambda row: calculate_price(row), axis=1)
     df.to_csv(prices_file_name, index=False)
-    upload_prices(tcg, prices_file_name)
+    tcg.upload_prices(prices_file_name)
 
 def inventory_value_change_over_time():
     inventory_file_paths = [get_file_path(), get_file_path()]
@@ -438,7 +477,7 @@ def delete_files_not_ending_in_zero(folder_path):
             except Exception as e:
                 print(f"Error deleting {filename}: {e}")
 
-def schedule_pickup():
+def schedule_pickup(naw=None):
     URL = 'https://tools.usps.com/schedule-pickup-steps.htm'
     FIRST_NAME_XPATH = '//*[@id="firstName"]'
     LAST_NAME_XPATH = '//*[@id="lastName"]'
@@ -459,12 +498,6 @@ def schedule_pickup():
     I_HAVE_READ_THE_TERMS_XP = '/html/body/div[9]/div/div[3]/div/div[6]/label'
     SCHEDULE_PICKUP_XP = '//*[@id="schedulePickupButton"]'
 
-    FIRST_NAME = 'Eddie'
-    LAST_NAME = 'Fernandez'
-    STREET_ADDRESS = '19803 15th Ave E'
-    CITY = 'Spanaway'
-    STATE = 'WA'
-    ZIP_CODE = '98387'
     PHONE = '253-507-3193'
     EMAIL = 'fernandezeddie54@gmail.com'
     LOCATION_PACKAGE = 'Knock'
@@ -493,7 +526,46 @@ def schedule_pickup():
         ['click', SCHEDULE_PICKUP_XP],
     ]
 
-    NewAutoWeb(commands)
+    if naw is None:
+        NewAutoWeb(commands)
+    else:
+        naw.execute_commands(commands)
+
+def create_sorter_inventory_csv(filepath=''):
+    input_file = filepath
+    output_file = r'\\magic-sorter-2aaf4\\Public\\interesting.csv'
+
+    with open(input_file, mode='r', encoding='utf-8-sig') as infile, \
+        open(output_file, mode='w', newline='', encoding='utf-8') as outfile:
+
+        reader = csv.DictReader(infile)
+        writer = csv.writer(outfile)
+        writer.writerow(['set', 'title', 'num'])
+
+        for row in reader:
+            set_code = '*'
+            title = row.get('Product Name', '').strip()
+            number = '*'
+            total_quantity = int(row.get('Total Quantity', ''))
+
+            if title and total_quantity > 0:
+                writer.writerow([set_code, title, number])
+
+    print(f"Converted file saved as: {output_file}")
+    return output_file
+
+def prepare_magic_sorter():
+    tcg = Tcg_web()
+    tcg.download_pricing()
+    inventory_filename = get_file_matching_prefix(DOWNLOADS_DIRECTORY, 'TCGplayer__MyPricing')
+    create_sorter_inventory_csv(inventory_filename)
+    os.remove(inventory_filename)
+
+with open(PROJECT_DIRECTORY + '/data/settings.json', 'r') as f:
+    data = json.load(f)
+
+AUTO_LOT = data['lot']
+print('Current Lot: ', AUTO_LOT)
 
 commands = [
     {'text': 'Process new cards', 'action': lambda: proccess_new_cards()},
@@ -511,7 +583,15 @@ commands = [
     {'text': 'price set', 'action': price_set},
     {'text': 'count cards', 'action': count_cards},
     {'text': 'manual entry', 'action': manual_sale_cost},
-    {'text': 'schedule pickup', 'action': schedule_pickup}
+    {'text': 'schedule pickup', 'action': schedule_pickup},
+    {'text': 'prepare magic sorter', 'action': prepare_magic_sorter},
 ]
 
-InputLoop(commands, False)
+if len(sys.argv) > 1:
+    command = int(sys.argv[1])
+else:
+    command = None
+
+InputLoop(commands, False, command)
+
+input('Press Enter to exit')
