@@ -4,5 +4,6 @@ google-api-python-client
 google-auth-oauthlib
 pypiwin32
 pandas
-pygame
+pygame-ce
 Pypdf2
+pyautogui

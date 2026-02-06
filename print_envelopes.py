@@ -12,6 +12,7 @@ import config
 import time
 import os
 import io
+from config import *
 
 def get_service(service_name):
     SERVICE_VERSIONS = {
@@ -265,7 +266,7 @@ def download_results_gmail():
 
                 file_data = base64.urlsafe_b64decode(attachment["data"])
                 # os.makedirs(save_dir, exist_ok=True)
-                file_path = os.path.join("C:\\Users\\ferna\\Downloads", part["filename"])
+                file_path = os.path.join(DOWNLOADS_DIRECTORY, part["filename"])
 
                 with open(file_path, "wb") as f:
                     f.write(file_data)
