@@ -8,11 +8,9 @@ from constants import *
 import datetime
 import pandas as pd
 import os
-import webbrowser
 import packing_slip
 import json
 import sys
-import shutil
 
 # python -m PyInstaller main.py
 
@@ -107,7 +105,7 @@ def proccess_new_cards_magic_sorter():
     create_sorter_inventory_csv(pricing)
     
     os.remove(pricing)
-    os.remove(new_cards_file_path)
+    # os.remove(new_cards_file_path)
 
 def process_sales(type='normal'):
     ANALYSIS_FILE_PATH = PROJECT_DIRECTORY + "data/analysis_data.csv"
@@ -534,6 +532,7 @@ def schedule_pickup(naw=None):
 def create_sorter_inventory_csv(filepath=''):
     input_file = filepath
     output_file = r'\\magic-sorter-2aaf4\\Public\\interesting.csv'
+    # output_file = DOWNLOADS_DIRECTORY + '\\cards to go machine'
 
     with open(input_file, mode='r', encoding='utf-8-sig') as infile, \
         open(output_file, mode='w', newline='', encoding='utf-8') as outfile:

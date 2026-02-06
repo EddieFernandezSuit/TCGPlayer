@@ -1,2 +1,3 @@
-PROJECT_DIRECTORY="C:\\Users\\ferna\\Downloads\\Software\\TCGPlayer\\"
-DOWNLOADS_DIRECTORY="C:\\Users\\ferna\\Downloads\\"
+USER_DIRECTORY="C:\\Users\\efernandez1\\"
+DOWNLOADS_DIRECTORY=USER_DIRECTORY + "Downloads\\"
+PROJECT_DIRECTORY=USER_DIRECTORY + "Downloads\\TCGPlayer\\"
