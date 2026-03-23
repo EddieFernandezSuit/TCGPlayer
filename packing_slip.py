@@ -22,7 +22,7 @@ class Order:
     def print_order(self):
         print(self.name)
         for card in self.cards:
-            print(f'{"\033[1m" if "foil" in card.condition else ""}{card.set_name} {card.quantity if card.quantity > 1 else ""} {card.name} {card.condition if card.condition != "Near Mint" else ""} {card.language if card.language != "English" else ""} ${card.price} {"\033[0m" if "foil" in card.condition else ""}')
+            print(f'{"\033[1m" if "foil" in card.condition else ""}{card.set_name} {card.quantity if int(card.quantity) > 1 else ""} {card.name} {card.condition if card.condition != "Near Mint" else ""} {card.language if card.language != "English" else ""} ${card.price} {"\033[0m" if "foil" in card.condition else ""}')
         print()
 
 class Card:
@@ -62,41 +62,44 @@ def get_orders_from_pdf(filepath):
         cards = []
 
         for raw_card in raw_cards:
-            number = 0
-            quantity, tcg_name, raw_card = raw_card.split(maxsplit=2)
-            _, raw_card = raw_card.split('-',maxsplit=1)
-            set_name, raw_card = raw_card.split(':',maxsplit=1)
-            # print(raw_card)
-            raw_card = raw_card.split('#', maxsplit=1)
-            # print(raw_card)
-            if len(raw_card) == 1:
-                raw_card = raw_card[0]
-                name, rarity, raw_card = raw_card.split('- ',maxsplit=2)
-                
-            else:
-                name, raw_card = raw_card
-                raw_card = raw_card.strip()
-                raw_card = raw_card.split('- ', maxsplit=2)
-                number, rarity, raw_card = raw_card
-                number = number.strip()
-            raw_card = raw_card.split('-')
-            if len(raw_card) == 1:
-                condition, price, total_price = raw_card[0].split('$')
-                language = 'English'
-            elif len(raw_card) == 2:
-                token, raw_card = raw_card
-                condition, price, total_price = raw_card.split('$')
-            else:
-                condition, language, raw_card = raw_card
-                _, price, total_price = raw_card.split('$')
+            number, rarity = '', ''
+            try:
+                number = 0
+                quantity, tcg_name, raw_card = raw_card.split(maxsplit=2)
+                _, raw_card = raw_card.split('-',maxsplit=1)
+                set_name, raw_card = raw_card.split(':',maxsplit=1)
+                raw_card = raw_card.split('#', maxsplit=1)
+                if len(raw_card) == 1:
+                    raw_card = raw_card[0]
+                    name, rarity, raw_card = raw_card.split('- ',maxsplit=2)
+                    
+                else:
+                    name, raw_card = raw_card
+                    raw_card = raw_card.strip()
+                    raw_card = raw_card.split('- ', maxsplit=2)
+                    number, rarity, raw_card = raw_card
+                    number = number.strip()
+                raw_card = raw_card.split('-')
+                if len(raw_card) == 1:
+                    condition, price, total_price = raw_card[0].split('$')
+                    language = 'English'
+                elif len(raw_card) == 2:
+                    token, raw_card = raw_card
+                    condition, price, total_price = raw_card.split('$')
+                else:
+                    condition, language, raw_card = raw_card
+                    _, price, total_price = raw_card.split('$')
 
-            set_name = set_name.strip()
-            name = name.strip()
-            condition = condition.strip()
-            price = price.strip()
-            
-            card = Card(quantity, tcg_name, set_name, name, number, rarity, condition, price, total_price, language)
-            cards.append(card)
+                set_name = set_name.strip()
+                name = name.strip()
+                condition = condition.strip()
+                price = price.strip()
+                
+                card = Card(quantity, tcg_name, set_name, name, number, rarity, condition, price, total_price, language)
+                cards.append(card)
+            except Exception as e:
+                print(e)
+                print(f'Raw Card: {raw_card}, Number: {number}, Rarity: {rarity}')
 
         order = Order(shipping_address, cards)
         if shipping_address.startswith('Quantity'):
@@ -109,3 +112,12 @@ def get_orders_from_pdf(filepath):
 
     return orders
 
+# combines all cards from all orders into one order and prints it, sorted by set and then name
+def all_cards(orders: list[Order]):
+    cards = []
+    for order in orders:
+        cards.extend(order.cards)
+    
+    order = Order('All Cards', cards)
+    order.sort_cards()
+    order.print_order()
