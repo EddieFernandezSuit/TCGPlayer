@@ -2,34 +2,41 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from new_auto_web import NewAutoWeb
 from selenium.webdriver.common.keys import Keys
+from constants import *
 import time
-from config import *
-from config import *
 import pyautogui
 
+def rewrite(coords: tuple, text: str):
+    pyautogui.click(coords) 
+    pyautogui.hotkey('ctrl', 'a')
+    pyautogui.press('backspace')
+    pyautogui.write(text)
+
 class Tcg_web(NewAutoWeb):
-    def __init__(self, commands=None, isOption=True):
+    def __init__(self, commands=None, isOption=True, email:str=EMAIL):
         super().__init__(commands, isOption)
-        self.handle_tcg_login()
+        self.email = email
+        self.password = PASSWORD
         self.PRICING_URL = "https://store.tcgplayer.com/admin/pricing"
+        self.handle_tcg_login()
 
     def handle_tcg_login(self):
-        ACCOUNT_BUTTON_COORDS = (680,550)
-        NEWT_TAB_BUTTON_COORDS = (340,30)
-        TCG_SHORTCUT_COORDS = (1100,120)
-        SIGN_IN_BUTTON_COORDS = (960,600)
-        pyautogui.click(ACCOUNT_BUTTON_COORDS)
-        time.sleep(2)
-        pyautogui.click(NEWT_TAB_BUTTON_COORDS)
-        pyautogui.click(TCG_SHORTCUT_COORDS)
-        time.sleep(3)
-        pyautogui.click(SIGN_IN_BUTTON_COORDS)
-        time.sleep(10)
+        EMAIL_COORDS = pyautogui.Point(952,413)
+        PASSWORD_COORDS = pyautogui.Point(1141,523)
+        LOGIN_PAGE_BUTTON_COORDS = (500, 570)
+        LOGIN_BUTTON_COORDS = (960, 590)
+
+        time.sleep(1)
+        pyautogui.click(LOGIN_PAGE_BUTTON_COORDS)
+        time.sleep(1)
+        pyautogui.click(EMAIL_COORDS)
+        rewrite(EMAIL_COORDS, self.email)
+        rewrite(PASSWORD_COORDS, self.password)
+        pyautogui.click(LOGIN_BUTTON_COORDS)
         self.switch_to.window(self.window_handles[-1])
 
     def set_items_per_page(self, num_item_per_page):
         OLD_ITEMS_PER_PAGE = '//*[@id="table-page-counts"]/span[2]/select'
-        # ROWS_PER_PAGE_XPATH = '//*[@id="tcg-input-198"]'
         items_per_page = self.find(OLD_ITEMS_PER_PAGE)
         Select(items_per_page).select_by_value(str(num_item_per_page))
 
@@ -62,16 +69,13 @@ class Tcg_web(NewAutoWeb):
                 self.click(MOVE_TO_LIVE_XPATH)
                 self.click(COMFIRM_MOVE_TO_LIVE_XPATH)
                 self.click(CLOSE_XPATH)
-                # auto_web.switch_to.window(auto_web.window_handles[-1])
-                # auto_web.close()
-                # auto_web.quit()
                 cont = False
             except Exception as e:
                 print(e)
                 input('Error Press Enter to Contrinue')
 
 
-def download_files_normal():
+def download_files_normal(download_pricing:bool=True, email:str=''):
     while True:
         try:
             URL = "https://store.tcgplayer.com/admin/orders/orderlist"
@@ -85,16 +89,12 @@ def download_files_normal():
                 'MARK_AS_SHIPPED':'//*[@id="search-results-buttons"]/button[4]'
 
             }
-            # READY_TO_SHIP_BUTTON = '//*[@id="OrderIndex_QuickFilters_RadioReadytoShip"]'
-            # MARK_AS_SHIPPED_BUTTON = '//*[@id="single-spa-application:@tcgplayer/sellerportal-orders"]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[3]/span[2]'
-            # EXPORT_SHIPPING_BUTTON = '//*[@id="single-spa-application:@tcgplayer/sellerportal-orders"]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[2]/span[2]'
-            # PACKING_SLIP_XPATH = '//*[@id="single-spa-application:@tcgplayer/sellerportal-orders"]/div/div/div/div/div[4]/div/div/div[2]/div/div/div[1]/div[2]/div/button'
-            # PACKING_SLIP_XPATH2 = '/html/body/div[7]/div[26]/div/div/div[2]/button[1]'
             CHANGE_UI_XPATH = '//*[@id="tcg-input-12"]'
 
-            tcg_web = Tcg_web()
+            tcg_web = Tcg_web(email=email)
             number_of_orders = int(input("Enter number of orders: "))
-            tcg_web.download_pricing()
+            if download_pricing:
+                tcg_web.download_pricing()
             tcg_web.go(URL)
             tcg_web.click(CHANGE_UI_XPATH)
             tcg_web.set_items_per_page(100)

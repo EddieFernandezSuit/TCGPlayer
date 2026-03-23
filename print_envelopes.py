@@ -1,18 +1,16 @@
 from __future__ import print_function
+from google.auth.transport.requests import Request
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
-from win32com import client
-import os.path
-import base64
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
 from constants import *
-import config
+from win32com import client
 import time
 import os
 import io
-from config import *
+import os.path
+import base64
 
 def get_service(service_name):
     SERVICE_VERSIONS = {
@@ -117,16 +115,6 @@ def create_envelope_doc():
         }
         REQUESTS['requests'].append({
             'insertText': {
-                # 'text': "Eddie Fernandez\n19803 15th Ave E\nSpanaway, WA 98387\n\n\n\n			{} {}\n			{} {}\n			{}, {} {}".format(
-                # 'text': "Eddie Fernandez\n5009 S State St\Tacoma, WA 98409\n\n\n\n			{} {}\n			{} {}\n			{}, {} {}".format(
-                #     SHIPPING_ADDRESS['firstName'],
-                #     SHIPPING_ADDRESS['lastName'],
-                #     SHIPPING_ADDRESS['address1'],
-                #     SHIPPING_ADDRESS['address2'],
-                #     SHIPPING_ADDRESS['city'],
-                #     SHIPPING_ADDRESS['state'],
-                #     SHIPPING_ADDRESS['postalCode'],
-                # ),
                 'text': f"{FIRST_NAME} {LAST_NAME}\n{STREET_ADDRESS}\n{CITY}, {STATE} {ZIP_CODE}\n\n\n\n			{SHIPPING_ADDRESS['firstName']} {SHIPPING_ADDRESS['lastName']}\n			{SHIPPING_ADDRESS['address1']} {SHIPPING_ADDRESS['address2']}\n			{SHIPPING_ADDRESS['city']}, {SHIPPING_ADDRESS['state']} {SHIPPING_ADDRESS['postalCode']}",
                 'endOfSegmentLocation': {
                     'segmentId': '',
@@ -165,7 +153,7 @@ def googleDocIdToRawFileData(googleDocFileId):
     return rawFileData
 
 def rawFileDataToFile(rawFileData):
-    filePath =  config.PROJECT_DIRECTORY + 'Shipping_Envelopes.doc'
+    filePath =  PROJECT_DIRECTORY + 'Shipping_Envelopes.doc'
     print(filePath)
     with open(filePath, "wb") as binary_file:
         binary_file.write(rawFileData)
@@ -183,7 +171,7 @@ def downloadGoogleDocAsWordFile(googleDocFileId):
     rawFileData = file.getvalue()
     DRIVE.files().delete(fileId=googleDocFileId).execute()
     
-    filePath =  config.DOWNLOADS_DIRECTORY + 'Shipping_Envelopes.doc'
+    filePath =  DOWNLOADS_DIRECTORY + 'Shipping_Envelopes.doc'
     print(filePath)
     with open(filePath, "wb") as binary_file:
         binary_file.write(rawFileData)
@@ -194,9 +182,7 @@ def print_from_csv(filePath):
     documentID = create_envelope_doc()
     rawFileData = googleDocIdToRawFileData(documentID)
     wordDocFilePath = rawFileDataToFile(rawFileData)
-    # wordDocFilePath = rawFileDataToFile(documentID)
     printWordDocument(wordDocFilePath)
-    # os.remove(wordDocFilePath)
 
     
 def authenticate():
@@ -206,8 +192,8 @@ def authenticate():
         'https://www.googleapis.com/auth/gmail.readonly',
         'https://www.googleapis.com/auth/gmail.modify']
     
-    TOKEN_FILEPATH = os.path.join(config.PROJECT_DIRECTORY, '.secrets', 'token.json')
-    CREDENTIAL_FILEPATH = config.PROJECT_DIRECTORY + '//.secrets//credentials.json'
+    TOKEN_FILEPATH = os.path.join(PROJECT_DIRECTORY, '.secrets', 'token.json')
+    CREDENTIAL_FILEPATH = PROJECT_DIRECTORY + '//.secrets//credentials.json'
 
     creds = None
     if os.path.exists(TOKEN_FILEPATH):
@@ -225,7 +211,7 @@ def authenticate():
 
 def email_to_csv():
     GETFROMTHISEMAIL = 'Eddie Fernandez <fernandezeddie54@gmail.com>'
-    EMAILCSVFILEPATH = config.PROJECT_DIRECTORY + 'data\\email_cards.csv'
+    EMAILCSVFILEPATH = PROJECT_DIRECTORY + 'data\\email_cards.csv'
     USER_ID = 'me'
 
     results = GMAIL.users().messages().list(userId=USER_ID, labelIds=['INBOX'], q="is:unread").execute()
@@ -265,7 +251,6 @@ def download_results_gmail():
                 ).execute()
 
                 file_data = base64.urlsafe_b64decode(attachment["data"])
-                # os.makedirs(save_dir, exist_ok=True)
                 file_path = os.path.join(DOWNLOADS_DIRECTORY, part["filename"])
 
                 with open(file_path, "wb") as f:
