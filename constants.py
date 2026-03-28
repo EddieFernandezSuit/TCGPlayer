@@ -9,6 +9,8 @@ CITY = 'Tacoma'
 STATE = 'WA'
 ZIP_CODE = '98409'
 
+PHONE_NUMBER = '253-507-3193'
+
 EMAIL = "fernandezeddie54@gmail.com"
 PASSWORD = "Blastblast22@"
 
