@@ -246,9 +246,11 @@ def get_revenue():
 def calculate_price(row):
     PERCENT = 1
     FLAT_DISCOUNT = -0.03
-    MIN = 0.03
+    MIN = 0.01
 
-    if pd.isna(row['TCG Market Price']) or pd.isna(row['TCG Low Price']):
+    TOTAL_QUANTITY = row['Total Quantity'] if 'Total Quantity' in row else row['Quantity']
+
+    if pd.isna(row['TCG Market Price']) and pd.isna(row['TCG Low Price']):
         price = 100
     else:  
         price = max(float(row['TCG Market Price']), float(row['TCG Low Price']))
@@ -266,7 +268,9 @@ def calculate_price(row):
             price = price + 7.5
 
     # price = max(round(MARKET_PRICE * PERCENT - FLAT_DISCOUNT, 2), row['TCG Low Price'] - .01, MIN)
-    price = round(max((price * PERCENT) - FLAT_DISCOUNT, MIN),2)
+    price = (price * PERCENT) - FLAT_DISCOUNT - (TOTAL_QUANTITY * 0.0025)
+    price = max(price, MIN)
+    price = round(price, 2)
     return price
 
 def adjust_card_prices(prices_file_name = ''):
@@ -482,16 +486,7 @@ def schedule_pickup(naw=None):
     DOES_NOT_CONTAIN_HAZARDOUS_XP = '//*[@id="hazmat-no"]'
     I_HAVE_READ_THE_TERMS_XP = '/html/body/div[9]/div/div[3]/div/div[6]/label'
     SCHEDULE_PICKUP_XP = '//*[@id="schedulePickupButton"]'
-
-    PHONE = '253-507-3193'
-    # EMAIL = 'fernandezeddie54@gmail.com
     LOCATION_PACKAGE = 'Knock'
-
-
-    # number_of_packages = input('How many USPS Ground Advantage packages? This will also be the total weight in lbs: ')
-
-    # if number_of_packages == '':
-    #     number_of_packages = '1'
 
     number_of_packages = '1'
     
@@ -503,7 +498,7 @@ def schedule_pickup(naw=None):
         ['fill', CITY_XPATH, CITY],
         ['select', STATE_XP, STATE],
         ['fill', ZIP_CODE_XP, ZIP_CODE],
-        ['fill', PHONE_XP, PHONE],
+        ['fill', PHONE_XP, PHONE_NUMBER],
         ['fill', EMAIL_XP, EMAIL],
         ['click', CHECK_AV_XP],
         ['click', IS_DOG_XP],
