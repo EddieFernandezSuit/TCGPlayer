@@ -78,12 +78,13 @@ def proccess_new_cards_magic_sorter():
     new_cards_df.to_csv(new_cards_file_path, index=False)
     tcg = Tcg_web()
     tcg.upload_prices(new_cards_file_path)
-
+    tcg.download_pricing()
     pricing = get_file_matching_prefix(DOWNLOADS_DIRECTORY, PRICING_PREFIX)
     create_magic_sorter_inventory_file(pricing)
     
-    os.remove(pricing)
-    # os.remove(new_cards_file_path)
+    os.rename(pricing, DOWNLOADS_DIRECTORY + 'MeasureTCG//' + datetime.datetime.now().strftime("%Y-%m-%d") + '.csv')
+    # os.remove(pricing)
+
 
 def process_sales(type='normal', download_pricing=True, email:str=''):
     ANALYSIS_FILE_PATH = PROJECT_DIRECTORY + "data/analysis_data.csv"
@@ -247,6 +248,7 @@ def calculate_price(row):
     PERCENT = 1
     FLAT_DISCOUNT = -0.03
     MIN = 0.01
+    NUMBER_OF_CARDS_DISCOUNT = 0.005
 
     TOTAL_QUANTITY = row['Total Quantity'] if 'Total Quantity' in row else row['Quantity']
 
@@ -268,7 +270,7 @@ def calculate_price(row):
             price = price + 7.5
 
     # price = max(round(MARKET_PRICE * PERCENT - FLAT_DISCOUNT, 2), row['TCG Low Price'] - .01, MIN)
-    price = (price * PERCENT) - FLAT_DISCOUNT - (TOTAL_QUANTITY * 0.0025)
+    price = (price * PERCENT) - FLAT_DISCOUNT - (TOTAL_QUANTITY * NUMBER_OF_CARDS_DISCOUNT)
     price = max(price, MIN)
     price = round(price, 2)
     return price
@@ -563,12 +565,6 @@ def new_process():
     process_sales(email=EMAIL)
     input('Press Enter after switiching logins')
     process_sales(download_pricing=False, email=EMAIL2)
-    # shipping_filename = get_file_matching_prefix(DOWNLOADS_DIRECTORY, SHIPPING_PREFIX)
-    # pullsheet_filename = get_file_matching_prefix(DOWNLOADS_DIRECTORY, PULLSHEET_PREFIX)
-    # create_sorter_inventory_csv(filepath=pullsheet_filename, remove_last_row=True)
-    # print_from_csv(shipping_filename)
-    # os.remove(pullsheet_filename)
-    # os.remove(shipping_filename)
     
 
 with open(PROJECT_DIRECTORY + '/data/settings.json', 'r') as f:
