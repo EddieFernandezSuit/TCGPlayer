@@ -21,10 +21,10 @@ class Tcg_web(NewAutoWeb):
         self.handle_tcg_login()
 
     def handle_tcg_login(self):
+        LOGIN_PAGE_BUTTON_COORDS = (84, 123)
         EMAIL_COORDS = pyautogui.Point(952,413)
         PASSWORD_COORDS = pyautogui.Point(1141,523)
-        LOGIN_PAGE_BUTTON_COORDS = (500, 570)
-        LOGIN_BUTTON_COORDS = (960, 590)
+        LOGIN_BUTTON_COORDS = (960, 650)
 
         time.sleep(1)
         pyautogui.click(LOGIN_PAGE_BUTTON_COORDS)
@@ -34,7 +34,6 @@ class Tcg_web(NewAutoWeb):
         rewrite(PASSWORD_COORDS, self.password)
         pyautogui.click(LOGIN_BUTTON_COORDS)
         time.sleep(1)
-        # self.switch_to.window(self.window_handles[-1])
 
     def set_items_per_page(self, num_item_per_page):
         OLD_ITEMS_PER_PAGE = '//*[@id="table-page-counts"]/span[2]/select'
@@ -75,41 +74,52 @@ class Tcg_web(NewAutoWeb):
             except Exception as e:
                 print(e)
                 input('Error Press Enter to Contrinue')
+            
+    def download_files_normal(self, download_pricing:bool=True):
+        URL = "https://store.tcgplayer.com/admin/orders/orderlist"
+        OLD_UI = {
+            'READY_TO_SHIP':'//*[@id="rightSide"]/div/div[4]/div/div[2]/div[1]/div[2]/div[2]/div[2]/button',
+            'ALL_ORDERS':'//*[@id="rightSide"]/div/div[4]/div/span/div/div[3]/div/div[2]/table/thead/tr/th[1]/div/span[1]/div/label/span[1]',
+            'PULL_SHEET':'//*[@id="search-results-buttons"]/button[1]',
+            'PACKING_SLIP1':'//*[@id="search-results-buttons"]/div[1]/div[1]/button',
+            'PACKING_SLIP2':'//*[@id="search-results-buttons"]/div[1]/div[3]/div/a[1]',
+            'EXPORT_SHIPPING':'//*[@id="search-results-buttons"]/button[2]',
+            'MARK_AS_SHIPPED':'//*[@id="search-results-buttons"]/button[4]'
 
+        }
+        
+        CHANGE_UI_XPATH = '//*[@id="tcg-input-12"]'
+        NUMBER_OF_ORDERS_XPATH = '//*[@id="sellerportal-navigation-app"]/header/div/div/nav/ul/li[4]/a/span[2]'
+        NUMBER_OF_ORDERS_XPATH = '#sellerportal-navigation-app > header > div > div > nav > ul > li:nth-child(4) > a > span.tcg-badge--default.tcg-badge--lg.tcg-badge--color-default.is-inline.tcg-badge'
+        # NUMBER_OF_ORDERS_XPATH = '/div/header/div/div/nav/ul/li[4]/a/span[2]'
 
-def download_files_normal(download_pricing:bool=True, email:str=''):
-    URL = "https://store.tcgplayer.com/admin/orders/orderlist"
-    OLD_UI = {
-        'READY_TO_SHIP':'//*[@id="rightSide"]/div/div[4]/div/div[2]/div[1]/div[2]/div[2]/div[2]/button',
-        'ALL_ORDERS':'//*[@id="rightSide"]/div/div[4]/div/span/div/div[3]/div/div[2]/table/thead/tr/th[1]/div/span[1]/div/label/span[1]',
-        'PULL_SHEET':'//*[@id="search-results-buttons"]/button[1]',
-        'PACKING_SLIP1':'//*[@id="search-results-buttons"]/div[1]/div[1]/button',
-        'PACKING_SLIP2':'//*[@id="search-results-buttons"]/div[1]/div[3]/div/a[1]',
-        'EXPORT_SHIPPING':'//*[@id="search-results-buttons"]/button[2]',
-        'MARK_AS_SHIPPED':'//*[@id="search-results-buttons"]/button[4]'
+        # tcg_web = Tcg_web(email=email)
+        tcg_web = self
+        time.sleep(10)
+        
+        shadow_element = tcg_web.find("sellerportal-navigation-app-container", By.ID)
+        shadow_root = shadow_element.shadow_root
+        number_of_orders = shadow_root.find_element(By.CSS_SELECTOR, NUMBER_OF_ORDERS_XPATH).text
+        number_of_orders = int(number_of_orders)
+        print('Number of Orders: ', number_of_orders)
 
-    }
-    CHANGE_UI_XPATH = '//*[@id="tcg-input-12"]'
-
-    tcg_web = Tcg_web(email=email)
-    number_of_orders = int(input("Enter number of orders: "))
-    if download_pricing:
-        tcg_web.download_pricing()
-    tcg_web.go(URL)
-    tcg_web.click(CHANGE_UI_XPATH)
-    tcg_web.set_items_per_page(100)
-    time.sleep(2)
-    tcg_web.click(OLD_UI['READY_TO_SHIP'])
-    time.sleep(2)
-    tcg_web.click(OLD_UI['ALL_ORDERS'])
-    tcg_web.click(OLD_UI['PULL_SHEET'])
-    tcg_web.click(OLD_UI['PACKING_SLIP1'])
-    tcg_web.click(OLD_UI['PACKING_SLIP2'])
-    tcg_web.click(OLD_UI['EXPORT_SHIPPING'])
-    tcg_web.click(OLD_UI['MARK_AS_SHIPPED'])
-    tcg_web.sleep(3)
-    tcg_web.quit()
-    return number_of_orders
+        if download_pricing:
+            tcg_web.download_pricing()
+        tcg_web.go(URL)
+        tcg_web.click(CHANGE_UI_XPATH)
+        tcg_web.set_items_per_page(100)
+        time.sleep(2)
+        tcg_web.click(OLD_UI['READY_TO_SHIP'])
+        time.sleep(2)
+        tcg_web.click(OLD_UI['ALL_ORDERS'])
+        tcg_web.click(OLD_UI['PULL_SHEET'])
+        tcg_web.click(OLD_UI['PACKING_SLIP1'])
+        tcg_web.click(OLD_UI['PACKING_SLIP2'])
+        tcg_web.click(OLD_UI['EXPORT_SHIPPING'])
+        tcg_web.click(OLD_UI['MARK_AS_SHIPPED'])
+        tcg_web.sleep(3)
+        tcg_web.quit()
+        return number_of_orders
 
 def download_files_direct():
     auto_web = Tcg_web()

@@ -86,10 +86,12 @@ def proccess_new_cards_magic_sorter():
     # os.remove(pricing)
 
 
-def process_sales(type='normal', download_pricing=True, email:str=''):
+def process_sales(type='normal', download_pricing=True, email:str='', tcg_web:Tcg_web=None):
     ANALYSIS_FILE_PATH = PROJECT_DIRECTORY + "data/analysis_data.csv"
     if type == 'normal':
-        number_of_orders = download_files_normal(download_pricing=download_pricing, email=email)
+        if tcg_web is None:
+            tcg_web = Tcg_web(email=email)
+        number_of_orders = tcg_web.download_files_normal(download_pricing=download_pricing)
         time.sleep(1)
 
         DF = pd.read_csv(ANALYSIS_FILE_PATH)
@@ -171,9 +173,6 @@ def process_sales(type='normal', download_pricing=True, email:str=''):
     inventory_df.to_csv(INVENTORY_FILEPATH, index=False)
     sales_df.to_csv(SALES_FILEPATH, index=False)
 
-    # new_pullsheet_file_path = fix_collumns(pullsheet_df)
-    # sort_cards(new_pullsheet_file_path)
-
     for path in [PULLSHEET_PATH]:
         os.remove(path)
     
@@ -185,14 +184,13 @@ def process_sales(type='normal', download_pricing=True, email:str=''):
             order.print_order()
             input('')
 
+        webbrowser.open(PACKING_SLIP_PATH)
+        time.sleep(5)
+        os.remove(PACKING_SLIP_PATH)
         os.remove(SHIPPING_PATH)
-        if PACKING_SLIP_PATH:
-            webbrowser.open(PACKING_SLIP_PATH)
-            time.sleep(5)
-            os.remove(PACKING_SLIP_PATH)
             
-        else:
-            print('No Packing Slip')
+        # else:
+        #     print('No Packing Slip')
 
     schedule_pickup()
 
@@ -246,9 +244,9 @@ def get_revenue():
 
 def calculate_price(row):
     PERCENT = 1
-    FLAT_DISCOUNT = -0.03
+    FLAT_DISCOUNT = -0.04
     MIN = 0.01
-    NUMBER_OF_CARDS_DISCOUNT = 0.005
+    NUM_CARD_DISCOUNT_WEIGHT = 0.01
 
     TOTAL_QUANTITY = row['Total Quantity'] if 'Total Quantity' in row else row['Quantity']
 
@@ -269,8 +267,7 @@ def calculate_price(row):
         else:
             price = price + 7.5
 
-    # price = max(round(MARKET_PRICE * PERCENT - FLAT_DISCOUNT, 2), row['TCG Low Price'] - .01, MIN)
-    price = (price * PERCENT) - FLAT_DISCOUNT - (TOTAL_QUANTITY * NUMBER_OF_CARDS_DISCOUNT)
+    price = (price * PERCENT) - FLAT_DISCOUNT - (TOTAL_QUANTITY * NUM_CARD_DISCOUNT_WEIGHT)
     price = max(price, MIN)
     price = round(price, 2)
     return price
@@ -562,10 +559,11 @@ def prepare_magic_sorter():
     os.remove(inventory_filename)
 
 def new_process():
-    process_sales(email=EMAIL)
-    input('Press Enter after switiching logins')
-    process_sales(download_pricing=False, email=EMAIL2)
-    
+    tcg_web = Tcg_web(email=EMAIL)
+    process_sales(tcg_web=tcg_web)
+    tcg_web.email = EMAIL2
+    tcg_web.handle_tcg_login()
+    process_sales(download_pricing=False, tcg_web=tcg_web)
 
 with open(PROJECT_DIRECTORY + '/data/settings.json', 'r') as f:
     data = json.load(f)
@@ -576,19 +574,12 @@ print('Current Lot: ', AUTO_LOT)
 commands = [
     {'text': 'Process new cards', 'action': lambda: proccess_new_cards()},
     {'text': 'Process new cards magic sorter', 'action': lambda: proccess_new_cards_magic_sorter()},
-    # {'text': 'Process new cards; remove under', 'action': lambda: proccess_new_cards(filter=True)},
     {'text': 'Process Sales Normal', 'action': lambda: process_sales(email=EMAIL)},
-    # {'text': 'Process Sales Direct', 'action': lambda: process_sales( 'direct')},
-    # {'text': 'Process Sales Normal and Direct', 'action': lambda: process_sales_combined()},
     {'text': 'Combine duplicate cards in a selected file','action': merge_duplicates},
     {'text': 'Create "data/revenue.csv"','action': get_revenue},
     {'text': 'Change Prices','action': adjust_card_prices},
     {'text': 'Analyze value change over time', 'action': inventory_value_change_over_time},
-    # {'text': 'Sort cards by set', 'action': sort_cards},
     {'text': 'create shipping label', 'action': create_shipping_label},
-    # {'text': 'price set', 'action': price_set},
-    # {'text': 'count cards', 'action': count_cards},
-    # {'text': 'manual entry', 'action': manual_sale_cost},
     {'text': 'schedule pickup', 'action': schedule_pickup},
     {'text': 'prepare magic sorter', 'action': prepare_magic_sorter},
     {'text': 'new process', 'action': new_process},
