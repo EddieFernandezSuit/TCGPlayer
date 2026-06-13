@@ -22,7 +22,7 @@ class Order:
     def print_order(self):
         print(self.name)
         for card in self.cards:
-            print(f'{"\033[1m" if "foil" in card.condition else ""}{card.set_name} {card.quantity if int(card.quantity) > 1 else ""} {card.name} {card.condition if card.condition != "Near Mint" else ""} {card.language if card.language != "English" else ""} ${card.price} {"\033[0m" if "foil" in card.condition else ""}')
+            print(f'{"\033[1m" if "foil" in card.condition else ""}{card.set_name}: {card.quantity if int(card.quantity) > 1 else ""} {card.name} {card.condition if card.condition != "Near Mint" else ""} {card.language if card.language != "English" else ""} {'$' + card.price if float(card.price) > .1 else ""} {"\033[0m" if "foil" in card.condition else ""}')
         print()
 
 class Card:

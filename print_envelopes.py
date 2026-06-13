@@ -238,6 +238,7 @@ def download_results_gmail():
     USER_ID = 'me'
     subject = "Magic Sorter scan results - Device: 2aaf4"
     query = f'subject: "{subject}"'
+    results_filepaths = []
 
     messages = service.users().messages().list(userId=USER_ID, q=query).execute().get('messages',[])
     if messages:
@@ -256,7 +257,13 @@ def download_results_gmail():
                 with open(file_path, "wb") as f:
                     f.write(file_data)
                 print(f"Attachment saved: {file_path}")
+                results_filepaths.append(file_path)
                 GMAIL.users().messages().trash(userId=USER_ID, id=msg_id).execute()
+
+    if len(results_filepaths) > 0:
+        return results_filepaths[0]
+    else:
+        return ''
 
 SHEETS = get_service('sheets')
 DRIVE = get_service('drive')

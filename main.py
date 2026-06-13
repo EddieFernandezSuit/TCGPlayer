@@ -62,14 +62,13 @@ def handle_file_exist(file_name):
         input('File ' + file_name + ' does not exist')
 
 def proccess_new_cards_magic_sorter():
-    download_results_gmail()
-    new_cards_file_path = DOWNLOADS_DIRECTORY + 'results.csv'
+    new_cards_file_path = download_results_gmail()
     handle_file_exist(new_cards_file_path)
     new_cards_df = pd.read_csv(new_cards_file_path)
-    print(new_cards_df[['Add to Quantity', 'Set Name', 'Product Name', 'Condition']])
+    print(new_cards_df[['Add to Quantity', 'Set Name', 'Product Name']])
     input('Press Enter to continue if listed cards are correct')
     new_cards_df['Price Each'] = new_cards_df.apply(lambda row: calculate_price(row), axis=1)
-    new_cards_df['Lot'] = AUTO_LOT
+    new_cards_df['Lot'] = input('What LOT?')
 
     inventory_filename = PROJECT_DIRECTORY + 'data/inventory.csv'
     inventory = pd.read_csv(inventory_filename)
@@ -82,9 +81,12 @@ def proccess_new_cards_magic_sorter():
     pricing = get_file_matching_prefix(DOWNLOADS_DIRECTORY, PRICING_PREFIX)
     create_magic_sorter_inventory_file(pricing)
     
-    os.rename(pricing, DOWNLOADS_DIRECTORY + 'MeasureTCG//' + datetime.datetime.now().strftime("%Y-%m-%d") + '.csv')
-    # os.remove(pricing)
+    MEASURE_TCG_DIRECTORY = DOWNLOADS_DIRECTORY + 'MeasureTCG//'
+    if not os.path.exists(MEASURE_TCG_DIRECTORY):
+        os.makedirs(MEASURE_TCG_DIRECTORY)
 
+    os.rename(pricing, MEASURE_TCG_DIRECTORY + datetime.datetime.now().strftime("%Y-%m-%d") + '.csv')
+    os.remove(pricing)
 
 def process_sales(type='normal', download_pricing=True, email:str='', tcg_web:Tcg_web=None):
     ANALYSIS_FILE_PATH = PROJECT_DIRECTORY + "data/analysis_data.csv"
@@ -163,7 +165,15 @@ def process_sales(type='normal', download_pricing=True, email:str='', tcg_web:Tc
             
             if not matching_inventory.empty:
                 jindex = matching_inventory.index[0]
-                pullsheet_df.at[index, 'Lot'] = int(float(inventory_df.at[jindex, "Lot"]))
+                # Inventory 'Lot' can contain non-numeric strings (ex: "0\\"), so sanitize before converting.
+                lot_raw = inventory_df.at[jindex, "Lot"]
+                lot_str = str(lot_raw).strip()
+                # Remove stray backslashes that sometimes appear in the CSV.
+                lot_str = lot_str.replace('\\\\', '').replace('\\', '')
+                # If it's something like "123.0", keep only the integer portion.
+                lot_str = lot_str.split('.')[0]
+                pullsheet_df.at[index, 'Lot'] = int(lot_str) if lot_str not in ('', 'nan', 'NaN') else 0
+                # pullsheet_df.at[index, 'Lot'] = int(float(inventory_df.at[jindex, "Lot"]))
                 inventory_df.at[jindex, "Quantity"] -= 1
                 if inventory_df.at[jindex, "Quantity"] == 0:
                     inventory_df = inventory_df.drop([jindex])
@@ -244,10 +254,9 @@ def get_revenue():
 
 def calculate_price(row):
     PERCENT = 1
-    FLAT_DISCOUNT = -0.04
+    FLAT_DISCOUNT = -0.06
     MIN = 0.01
     NUM_CARD_DISCOUNT_WEIGHT = 0.01
-
     TOTAL_QUANTITY = row['Total Quantity'] if 'Total Quantity' in row else row['Quantity']
 
     if pd.isna(row['TCG Market Price']) and pd.isna(row['TCG Low Price']):
@@ -255,17 +264,13 @@ def calculate_price(row):
     else:  
         price = max(float(row['TCG Market Price']), float(row['TCG Low Price']))
     
-    DIRECT = False
+    IS_DIRECT = False
 
-    if DIRECT:
+    if IS_DIRECT:
         if price < 3:
             price = price * 2
-        elif price < 20:
-            price = price + 1.27
-        elif price < 250:
-            price = price + 4.17
         else:
-            price = price + 7.5
+            price = price + 1.27
 
     price = (price * PERCENT) - FLAT_DISCOUNT - (TOTAL_QUANTITY * NUM_CARD_DISCOUNT_WEIGHT)
     price = max(price, MIN)

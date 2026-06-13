@@ -21,7 +21,7 @@ class Tcg_web(NewAutoWeb):
         self.handle_tcg_login()
 
     def handle_tcg_login(self):
-        LOGIN_PAGE_BUTTON_COORDS = (84, 123)
+        LOGIN_PAGE_BUTTON_COORDS = (84, 113)
         EMAIL_COORDS = pyautogui.Point(952,413)
         PASSWORD_COORDS = pyautogui.Point(1141,523)
         LOGIN_BUTTON_COORDS = (960, 650)
