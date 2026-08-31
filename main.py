@@ -253,28 +253,28 @@ def get_revenue():
     revenue_df.to_csv(PROJECT_DIRECTORY + 'data/revenue.csv', header=True)
 
 def calculate_price(row):
-    PERCENT = 1
-    FLAT_DISCOUNT = -0.06
-    MIN = 0.01
-    NUM_CARD_DISCOUNT_WEIGHT = 0.01
+    ADJUST_PERCENT = 1
+    ADJUST_FLAT = -0.01
+    ADJUST_FLAT_PER_CARD = -0.01
+    MIN = 0.02
     TOTAL_QUANTITY = row['Total Quantity'] if 'Total Quantity' in row else row['Quantity']
+    IS_DIRECT = False
 
     if pd.isna(row['TCG Market Price']) and pd.isna(row['TCG Low Price']):
         price = 100
-    else:  
-        price = max(float(row['TCG Market Price']), float(row['TCG Low Price']))
+    else: 
+        MARKET_PRICE = 0.01 if pd.isna(row['TCG Market Price']) else float(row['TCG Market Price'])
+        LOW_PRICE =  0.01 if pd.isna(row['TCG Low Price']) else float(row['TCG Low Price'])
+        price = max(MARKET_PRICE, LOW_PRICE)
     
-    IS_DIRECT = False
-
     if IS_DIRECT:
-        if price < 3:
-            price = price * 2
-        else:
-            price = price + 1.27
+        price = price * 2 if price < 3 else price + 1.27
 
-    price = (price * PERCENT) - FLAT_DISCOUNT - (TOTAL_QUANTITY * NUM_CARD_DISCOUNT_WEIGHT)
-    price = max(price, MIN)
-    price = round(price, 2)
+    if price == 0.01:
+        price = 0.01
+    else:
+        price = (price * ADJUST_PERCENT) + ADJUST_FLAT + (TOTAL_QUANTITY * ADJUST_FLAT_PER_CARD)
+        price = round(max(price, MIN),2)
     return price
 
 def adjust_card_prices(prices_file_name = ''):
@@ -284,9 +284,6 @@ def adjust_card_prices(prices_file_name = ''):
     prices_file_name = get_file_matching_prefix(DOWNLOADS_DIRECTORY, PRICING_PREFIX)
     handle_file_exist(prices_file_name)
     df = pd.read_csv(prices_file_name)
-    df['TCG Market Price'] = df['TCG Market Price'].fillna(0.01)
-    df['TCG Low Price'] = df['TCG Low Price'].fillna(0.01)
-    df['TCG Direct Low'] = df['TCG Direct Low'].fillna(0.01)
     df['TCG Marketplace Price'] = df.apply(lambda row: calculate_price(row), axis=1)
     df.to_csv(prices_file_name, index=False)
     tcg.upload_prices(prices_file_name)
