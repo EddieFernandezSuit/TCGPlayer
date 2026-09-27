@@ -38,8 +38,13 @@ class NewAutoWeb(webdriver.Chrome):
         return WebDriverWait(self, self.wait_time).until(EC.presence_of_all_elements_located((type, identifier)))
     
     def click(self, identifier="", type=By.XPATH):
-        self.sleep(1)
-        WebDriverWait(self, self.wait_time).until(EC.element_to_be_clickable((type, identifier))).click()
+        try:
+            self.sleep(1)
+            WebDriverWait(self, self.wait_time).until(EC.element_to_be_clickable((type, identifier))).click()
+            self.sleep(2)
+        except Exception as e:
+            print(f"Couldn't click {identifier}: {e}")
+            input('Click on the element the press enter when ready')
     
     def go(self, url):
         self.get(url)
@@ -67,7 +72,7 @@ class NewAutoWeb(webdriver.Chrome):
         input('Press Enter')
     
     def sleep(self, t=2):
-        time.sleep(2)
+        time.sleep(t)
 
     def execute_commands(self, commands):
         for command in commands:

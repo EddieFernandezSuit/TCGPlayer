@@ -7,3 +7,5 @@ pandas
 pygame-ce
 Pypdf2
 pyautogui
+screeninfo
+pytest

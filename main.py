@@ -5,12 +5,17 @@ from print_envelopes import *
 from download_files import *
 from edlib import get_file_path, InputLoop
 from constants import *
+from packing_slip import *
 import datetime
 import pandas as pd
 import os
 import packing_slip
 import json
 import sys
+
+MIN_PRICE = 0.04
+ADJUST_PERCENT_PRICE = 1
+ADJSUT_FLAT_PRICE = -0.02
 
 # python -m PyInstaller main.py
 SHIPPING_PREFIX = "_TCGplayer_ShippingExport"
@@ -34,6 +39,7 @@ def order_by_set():
 def get_file_matching_prefix(dir_path: str = DOWNLOADS_DIRECTORY, file_name_prefix: str ='') -> str:
     matching_files = [file for file in os.listdir(dir_path) if file.startswith(file_name_prefix)]
     last_filename = os.path.join(dir_path, max(matching_files)) if matching_files else None 
+    handle_file_exists(last_filename)
     return last_filename
 
 def proccess_new_cards(filter=False):
@@ -57,13 +63,13 @@ def proccess_new_cards(filter=False):
     tcg = Tcg_web()
     tcg.upload_prices(email_cards_file_path)
 
-def handle_file_exist(file_name):
+def handle_file_exists(file_name):
     while not os.path.isfile(file_name):
         input('File ' + file_name + ' does not exist')
 
 def proccess_new_cards_magic_sorter():
     new_cards_file_path = download_results_gmail()
-    handle_file_exist(new_cards_file_path)
+    handle_file_exists(new_cards_file_path)
     new_cards_df = pd.read_csv(new_cards_file_path)
     print(new_cards_df[['Add to Quantity', 'Set Name', 'Product Name']])
     input('Press Enter to continue if listed cards are correct')
@@ -86,13 +92,14 @@ def proccess_new_cards_magic_sorter():
         os.makedirs(MEASURE_TCG_DIRECTORY)
 
     os.rename(pricing, MEASURE_TCG_DIRECTORY + datetime.datetime.now().strftime("%Y-%m-%d") + '.csv')
-    os.remove(pricing)
+    # os.remove(pricing)
 
 def process_sales(type='normal', download_pricing=True, email:str='', tcg_web:Tcg_web=None):
     ANALYSIS_FILE_PATH = PROJECT_DIRECTORY + "data/analysis_data.csv"
+    if tcg_web is None:
+        tcg_web = Tcg_web(email=email)
+
     if type == 'normal':
-        if tcg_web is None:
-            tcg_web = Tcg_web(email=email)
         number_of_orders = tcg_web.download_files_normal(download_pricing=download_pricing)
         time.sleep(1)
 
@@ -107,9 +114,9 @@ def process_sales(type='normal', download_pricing=True, email:str='', tcg_web:Tc
         new_row = {
             "date": TODAY,
             "orders": number_of_orders,
-            "min": 0.02,
-            "%": .97,
-            "minus": 0.02,
+            "min": MIN_PRICE,
+            "%": ADJUST_PERCENT_PRICE,
+            "minus": ADJSUT_FLAT_PRICE,
             "day": TODAY.strftime("%A"),
             "days": date_diff,
             "orders/day": round(number_of_orders / date_diff, 2),
@@ -123,8 +130,7 @@ def process_sales(type='normal', download_pricing=True, email:str='', tcg_web:Tc
         PACKING_SLIP_PATH = get_file_matching_prefix(DOWNLOADS_DIRECTORY, PACKING_SLIP_PREFIX)
         print_from_csv(SHIPPING_PATH)
     else:
-        download_files_direct()
-        time.sleep(1)
+        tcg_web.download_files_direct()
         pullsheet_prefix = 'R2024'
         PULLSHEET_PATH = get_file_matching_prefix(DOWNLOADS_DIRECTORY, pullsheet_prefix)
         with open(PULLSHEET_PATH, 'r+') as fp:
@@ -187,8 +193,8 @@ def process_sales(type='normal', download_pricing=True, email:str='', tcg_web:Tc
         os.remove(path)
     
     if type == 'normal':
-        orders = packing_slip.get_orders_from_pdf(PACKING_SLIP_PATH)
-        packing_slip.all_cards(orders)
+        orders = get_orders_from_pdf(PACKING_SLIP_PATH)
+        all_cards(orders)
         
         for order in orders:
             order.print_order()
@@ -199,8 +205,6 @@ def process_sales(type='normal', download_pricing=True, email:str='', tcg_web:Tc
         os.remove(PACKING_SLIP_PATH)
         os.remove(SHIPPING_PATH)
             
-        # else:
-        #     print('No Packing Slip')
 
     schedule_pickup()
 
@@ -253,10 +257,7 @@ def get_revenue():
     revenue_df.to_csv(PROJECT_DIRECTORY + 'data/revenue.csv', header=True)
 
 def calculate_price(row):
-    ADJUST_PERCENT = 1
-    ADJUST_FLAT = -0.01
     ADJUST_FLAT_PER_CARD = -0.01
-    MIN = 0.02
     TOTAL_QUANTITY = row['Total Quantity'] if 'Total Quantity' in row else row['Quantity']
     IS_DIRECT = False
 
@@ -270,19 +271,19 @@ def calculate_price(row):
     if IS_DIRECT:
         price = price * 2 if price < 3 else price + 1.27
 
-    if price == 0.01:
-        price = 0.01
-    else:
-        price = (price * ADJUST_PERCENT) + ADJUST_FLAT + (TOTAL_QUANTITY * ADJUST_FLAT_PER_CARD)
-        price = round(max(price, MIN),2)
+    # if price == 0.01:
+    #     price = 0.01
+    #     return price
+    
+    price = (price * ADJUST_PERCENT_PRICE) + ADJSUT_FLAT_PRICE + (TOTAL_QUANTITY * ADJUST_FLAT_PER_CARD)
+    price = round(max(price, MIN_PRICE),2)
     return price
 
-def adjust_card_prices(prices_file_name = ''):
+def change_prices(prices_file_name = ''):
     """Change the prices of the cards in the CSV file"""
     tcg = Tcg_web()
     tcg.download_pricing()
     prices_file_name = get_file_matching_prefix(DOWNLOADS_DIRECTORY, PRICING_PREFIX)
-    handle_file_exist(prices_file_name)
     df = pd.read_csv(prices_file_name)
     df['TCG Marketplace Price'] = df.apply(lambda row: calculate_price(row), axis=1)
     df.to_csv(prices_file_name, index=False)
@@ -560,7 +561,7 @@ def prepare_magic_sorter():
     create_magic_sorter_inventory_file(filepath=inventory_filename)
     os.remove(inventory_filename)
 
-def new_process():
+def process_sales_both_tcg_stores():
     tcg_web = Tcg_web(email=EMAIL)
     process_sales(tcg_web=tcg_web)
     tcg_web.email = EMAIL2
@@ -579,12 +580,12 @@ commands = [
     {'text': 'Process Sales Normal', 'action': lambda: process_sales(email=EMAIL)},
     {'text': 'Combine duplicate cards in a selected file','action': merge_duplicates},
     {'text': 'Create "data/revenue.csv"','action': get_revenue},
-    {'text': 'Change Prices','action': adjust_card_prices},
+    {'text': 'Change Prices','action': change_prices},
     {'text': 'Analyze value change over time', 'action': inventory_value_change_over_time},
     {'text': 'create shipping label', 'action': create_shipping_label},
     {'text': 'schedule pickup', 'action': schedule_pickup},
     {'text': 'prepare magic sorter', 'action': prepare_magic_sorter},
-    {'text': 'new process', 'action': new_process},
+    {'text': 'new process', 'action': process_sales_both_tcg_stores},
 ]
 
 if len(sys.argv) > 1:

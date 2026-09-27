@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from constants import *
 import time
 import pyautogui
+import screeninfo
 
 def rewrite(coords: tuple, text: str):
     pyautogui.click(coords) 
@@ -21,10 +22,16 @@ class Tcg_web(NewAutoWeb):
         self.handle_tcg_login()
 
     def handle_tcg_login(self):
+        monitor_count = len(screeninfo.get_monitors())
         LOGIN_PAGE_BUTTON_COORDS = (84, 113)
-        EMAIL_COORDS = pyautogui.Point(952,413)
-        PASSWORD_COORDS = pyautogui.Point(1141,523)
-        LOGIN_BUTTON_COORDS = (960, 650)
+        if monitor_count == 1:
+            EMAIL_COORDS = pyautogui.Point(952,413)
+            PASSWORD_COORDS = pyautogui.Point(1141,523)
+            LOGIN_BUTTON_COORDS = (960, 650)
+        else:
+            EMAIL_COORDS = pyautogui.Point(958,367)
+            PASSWORD_COORDS = pyautogui.Point(1100,448)
+            LOGIN_BUTTON_COORDS = (970,512)
 
         time.sleep(1)
         pyautogui.click(LOGIN_PAGE_BUTTON_COORDS)
@@ -42,11 +49,9 @@ class Tcg_web(NewAutoWeb):
 
     def download_pricing(self):
         PRICING_BUTTON_XPATH = '//*[@id="pricing-search"]/pricing-search/div[4]/pricing-actions/div[1]/div[1]/div/input[1]'
-        time.sleep(2)
         self.get(self.PRICING_URL)
         time.sleep(1)
         self.click(PRICING_BUTTON_XPATH)
-        time.sleep(2)
 
     def upload_prices(self, prices_file_path):
         CONTINUE_XPATH = '//*[@id="divImportButtonContainer"]/input'
@@ -60,7 +65,6 @@ class Tcg_web(NewAutoWeb):
         while cont:
             try:    
                 self.go(self.PRICING_URL)
-                # self.download_pricing()
                 time.sleep(1)
                 self.click(IMPORT_TO_STAGED_XPATH)
                 file_input = self.find(UPLOAD_XPATH)
@@ -78,25 +82,23 @@ class Tcg_web(NewAutoWeb):
     def download_files_normal(self, download_pricing:bool=True):
         URL = "https://store.tcgplayer.com/admin/orders/orderlist"
         OLD_UI = {
-            'READY_TO_SHIP':'//*[@id="rightSide"]/div/div[4]/div/div[2]/div[1]/div[2]/div[2]/div[2]/button',
-            'ALL_ORDERS':'//*[@id="rightSide"]/div/div[4]/div/span/div/div[3]/div/div[2]/table/thead/tr/th[1]/div/span[1]/div/label/span[1]',
+            'READY_TO_SHIP':'//*[@id="rightSide"]/div/div[5]/div/div[2]/div[1]/div[2]/div[2]/div[2]/button',
+            'ALL_ORDERS':'//*[@id="rightSide"]/div/div[5]/div/span/div/div[3]/div/div[2]/table/thead/tr/th[1]/div/span[1]/div/label/span[1]',
             'PULL_SHEET':'//*[@id="search-results-buttons"]/button[1]',
             'PACKING_SLIP1':'//*[@id="search-results-buttons"]/div[1]/div[1]/button',
             'PACKING_SLIP2':'//*[@id="search-results-buttons"]/div[1]/div[3]/div/a[1]',
             'EXPORT_SHIPPING':'//*[@id="search-results-buttons"]/button[2]',
             'MARK_AS_SHIPPED':'//*[@id="search-results-buttons"]/button[4]'
-
         }
         
         CHANGE_UI_XPATH = '//*[@id="tcg-input-12"]'
+        CHANGE_UI_XPATH = '/html/body/div[1]/div[2]/aside/div/div/div/div[2]/div/span/input'
         NUMBER_OF_ORDERS_XPATH = '//*[@id="sellerportal-navigation-app"]/header/div/div/nav/ul/li[4]/a/span[2]'
         NUMBER_OF_ORDERS_XPATH = '#sellerportal-navigation-app > header > div > div > nav > ul > li:nth-child(4) > a > span.tcg-badge--default.tcg-badge--lg.tcg-badge--color-default.is-inline.tcg-badge'
         # NUMBER_OF_ORDERS_XPATH = '/div/header/div/div/nav/ul/li[4]/a/span[2]'
-
         # tcg_web = Tcg_web(email=email)
         tcg_web = self
         time.sleep(10)
-        
         shadow_element = tcg_web.find("sellerportal-navigation-app-container", By.ID)
         shadow_root = shadow_element.shadow_root
         number_of_orders = shadow_root.find_element(By.CSS_SELECTOR, NUMBER_OF_ORDERS_XPATH).text
@@ -106,7 +108,7 @@ class Tcg_web(NewAutoWeb):
         if download_pricing:
             tcg_web.download_pricing()
         tcg_web.go(URL)
-        tcg_web.click(CHANGE_UI_XPATH)
+        # tcg_web.click(CHANGE_UI_XPATH)
         tcg_web.set_items_per_page(100)
         time.sleep(2)
         tcg_web.click(OLD_UI['READY_TO_SHIP'])
@@ -120,13 +122,12 @@ class Tcg_web(NewAutoWeb):
         tcg_web.sleep(3)
         tcg_web.quit()
         return number_of_orders
+    
+    def download_files_direct(self):
+        self.download_pricing()
+        self.go("https://store.tcgplayer.com/admin/ro")
+        self.click("/html/body/div[4]/div/div[6]/div[2]/table/tbody/tr[1]/td[1]/a")
+        self.click('//*[@id="btnPackingSlip"]')
+        self.click('//*[@id="btnPackingSlipCSV"]')
 
-def download_files_direct():
-    auto_web = Tcg_web()
-    auto_web.download_pricing()
-    auto_web.go("https://store.tcgplayer.com/admin/ro")
-    auto_web.click(identifier="/html/body/div[4]/div/div[6]/div[2]/table/tbody/tr[1]/td[1]/a")
-    auto_web.click(identifier='//*[@id="btnPackingSlip"]')
-    auto_web.click(identifier='//*[@id="btnPackingSlipCSV"]')
-    auto_web.quit()
 

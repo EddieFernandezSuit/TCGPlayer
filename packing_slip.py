@@ -37,6 +37,9 @@ class Card:
         self.price = price
         self.total_price = total_price
         self.language = language
+
+    def key(self):
+        return (self.set_name, self.name, self.condition, self.language)
         
 
 def get_between(text, before_string, after_string):
@@ -112,12 +115,20 @@ def get_orders_from_pdf(filepath):
 
     return orders
 
-# combines all cards from all orders into one order and prints it, sorted by set and then name
+# combines all cards from all orders into one order, merging duplicates by summing quantity,
+# and prints it, sorted by set and then name
 def all_cards(orders: list[Order]):
-    cards = []
+    merged = OrderedDict()
     for order in orders:
-        cards.extend(order.cards)
-    
-    order = Order('All Cards', cards)
+        for card in order.cards:
+            key = card.key()
+            if key not in merged:
+                merged[key] = Card(card.quantity, card.tcg_name, card.set_name, card.name, card.number, card.rarity, card.condition, card.price, card.total_price, card.language)
+            else:
+                quantity = int(merged[key].quantity) + int(card.quantity)
+                merged[key].quantity = str(quantity)
+                merged[key].total_price = f'{quantity * float(merged[key].price):.2f}'
+
+    order = Order('All Cards', list(merged.values()))
     order.sort_cards()
     order.print_order()
