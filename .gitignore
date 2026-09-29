@@ -1,4 +1,6 @@
 .secrets
 /.secrets
 constants.py
-/__pycache__
+__pycache__/
+*.py[cod]
+.pytest_cache/

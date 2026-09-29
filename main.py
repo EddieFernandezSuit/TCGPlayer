@@ -75,7 +75,6 @@ def proccess_new_cards_magic_sorter():
     input('Press Enter to continue if listed cards are correct')
     new_cards_df['Price Each'] = new_cards_df.apply(lambda row: calculate_price(row), axis=1)
     new_cards_df['Lot'] = input('What LOT?')
-
     inventory_filename = PROJECT_DIRECTORY + 'data/inventory.csv'
     inventory = pd.read_csv(inventory_filename)
     inventory = pd.concat([inventory, new_cards_df], ignore_index=True)

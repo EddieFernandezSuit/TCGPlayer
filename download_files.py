@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from new_auto_web import NewAutoWeb
 from selenium.webdriver.common.keys import Keys
 from constants import *
@@ -61,23 +63,18 @@ class Tcg_web(NewAutoWeb):
         MOVE_TO_LIVE_XPATH = '//*[@id="divImporterUploadContainer"]/div/input[3]'
         COMFIRM_MOVE_TO_LIVE_XPATH = '//*[@id="pricing-dialog"]/pricing-dialog/div/div/div[2]/pricing-move-to-live/div/div/div/input[2]'
         CLOSE_XPATH = '//*[@id="pricing-dialog"]/pricing-dialog/div/div/div[2]/pricing-move-to-live/div/div/div[2]/input'
-        cont = True
-        while cont:
-            try:    
-                self.go(self.PRICING_URL)
-                time.sleep(1)
-                self.click(IMPORT_TO_STAGED_XPATH)
-                file_input = self.find(UPLOAD_XPATH)
-                file_input.send_keys(prices_file_path)
-                self.click(CONTINUE_XPATH)
-                self.click(CONTINUE_XPATH2) 
-                self.click(MOVE_TO_LIVE_XPATH)
-                self.click(COMFIRM_MOVE_TO_LIVE_XPATH)
-                self.click(CLOSE_XPATH)
-                cont = False
-            except Exception as e:
-                print(e)
-                input('Error Press Enter to Contrinue')
+
+        self.go(self.PRICING_URL)
+        print(self.current_url)
+        print(self.current_window_handle)
+        self.click(IMPORT_TO_STAGED_XPATH)
+        file_input = self.find(UPLOAD_XPATH)
+        file_input.send_keys(prices_file_path)
+        self.click(CONTINUE_XPATH)
+        self.click(CONTINUE_XPATH2) 
+        self.click(MOVE_TO_LIVE_XPATH)
+        self.click(COMFIRM_MOVE_TO_LIVE_XPATH)
+        self.click(CLOSE_XPATH)
             
     def download_files_normal(self, download_pricing:bool=True):
         URL = "https://store.tcgplayer.com/admin/orders/orderlist"
@@ -120,7 +117,6 @@ class Tcg_web(NewAutoWeb):
         tcg_web.click(OLD_UI['EXPORT_SHIPPING'])
         tcg_web.click(OLD_UI['MARK_AS_SHIPPED'])
         tcg_web.sleep(3)
-        tcg_web.quit()
         return number_of_orders
     
     def download_files_direct(self):

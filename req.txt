@@ -9,3 +9,4 @@ Pypdf2
 pyautogui
 screeninfo
 pytest
+varname

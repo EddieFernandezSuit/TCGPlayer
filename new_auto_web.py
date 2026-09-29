@@ -4,8 +4,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
 from selenium import webdriver
 import subprocess
+import json
+import urllib.request
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from varnam import nameof
 import time
 # example
 # commands = [
@@ -18,15 +21,30 @@ import time
 #     ['click', DOWNLOAD_BUTTON_XPATH],
 #     ['wait', 20],
 # ]
+def _debugger_is_up(port: int = 9222) -> bool:
+    try:
+        with urllib.request.urlopen(f'http://localhost:{port}/json/version', timeout=1) as r:
+            json.load(r)
+        return True
+    except Exception:
+        return False
+
+
 class NewAutoWeb(webdriver.Chrome):
     def __init__(self, commands=None, isOption = True) -> None:
-        subprocess.Popen('"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\selenum\ChromeProfile"', shell=True)
+        if not _debugger_is_up():
+            subprocess.Popen('"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\selenium\ChromeProfile"', shell=True)
+            for _ in range(50):
+                if _debugger_is_up():
+                    break
+                time.sleep(0.2)
         options = Options()
         options.add_experimental_option("debuggerAddress", "localhost:9222")
         options.add_argument("--disable-notifications")
         super().__init__(options=options, service=None, keep_alive=True)
         self.wait_time = 10
-        self.switch_to.window(self.window_handles[0])
+        self.switch_to.new_window('tab')
+        self.switch_to.window(self.window_handles[-1])
         if commands:
             self.execute_commands(commands)
 
@@ -39,11 +57,11 @@ class NewAutoWeb(webdriver.Chrome):
     
     def click(self, identifier="", type=By.XPATH):
         try:
-            self.sleep(1)
             WebDriverWait(self, self.wait_time).until(EC.element_to_be_clickable((type, identifier))).click()
-            self.sleep(2)
+            self.sleep(1)
         except Exception as e:
             print(f"Couldn't click {identifier}: {e}")
+            # print(nameof())
             input('Click on the element the press enter when ready')
     
     def go(self, url):
