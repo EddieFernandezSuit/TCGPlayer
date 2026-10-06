@@ -87,8 +87,9 @@ class Tcg_web(NewAutoWeb):
             'EXPORT_SHIPPING':'//*[@id="search-results-buttons"]/button[2]',
             'MARK_AS_SHIPPED':'//*[@id="search-results-buttons"]/button[4]'
         }
-        
-        CHANGE_UI_XPATH = '//*[@id="tcg-input-12"]'
+        OLD_ITEMS_PER_PAGE = '//*[@id="table-page-counts"]/span[2]/select'
+
+        # CHANGE_UI_XPATH = '//*[@id="tcg-input-12"]'
         CHANGE_UI_XPATH = '/html/body/div[1]/div[2]/aside/div/div/div/div[2]/div/span/input'
         NUMBER_OF_ORDERS_XPATH = '//*[@id="sellerportal-navigation-app"]/header/div/div/nav/ul/li[4]/a/span[2]'
         NUMBER_OF_ORDERS_XPATH = '#sellerportal-navigation-app > header > div > div > nav > ul > li:nth-child(4) > a > span.tcg-badge--default.tcg-badge--lg.tcg-badge--color-default.is-inline.tcg-badge'
@@ -106,7 +107,8 @@ class Tcg_web(NewAutoWeb):
             tcg_web.download_pricing()
         tcg_web.go(URL)
         # tcg_web.click(CHANGE_UI_XPATH)
-        tcg_web.set_items_per_page(100)
+        # tcg_web.set_items_per_page(100)
+        tcg_web.select(OLD_ITEMS_PER_PAGE, 100)
         time.sleep(2)
         tcg_web.click(OLD_UI['READY_TO_SHIP'])
         time.sleep(2)

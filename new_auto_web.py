@@ -8,7 +8,7 @@ import json
 import urllib.request
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from varnam import nameof
+# from varnam import nameof
 import time
 # example
 # commands = [
@@ -32,24 +32,29 @@ def _debugger_is_up(port: int = 9222) -> bool:
 
 class NewAutoWeb(webdriver.Chrome):
     def __init__(self, commands=None, isOption = True) -> None:
-        if not _debugger_is_up():
-            subprocess.Popen('"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\selenium\ChromeProfile"', shell=True)
-            for _ in range(50):
-                if _debugger_is_up():
-                    break
-                time.sleep(0.2)
+        # if not _debugger_is_up():
+        subprocess.Popen('"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\selenium\ChromeProfile"', shell=True)
+            # for _ in range(50):
+            #     if _debugger_is_up():
+            #         break
+            #     time.sleep(0.2)
         options = Options()
         options.add_experimental_option("debuggerAddress", "localhost:9222")
         options.add_argument("--disable-notifications")
         super().__init__(options=options, service=None, keep_alive=True)
         self.wait_time = 10
-        self.switch_to.new_window('tab')
-        self.switch_to.window(self.window_handles[-1])
+        # self.switch_to.new_window('tab')
+        self.switch_to.window(self.window_handles[0])
         if commands:
             self.execute_commands(commands)
 
     def find(self, identifier, type=By.XPATH):
-        return WebDriverWait(self, self.wait_time).until(EC.presence_of_element_located((type, identifier)))
+        try:
+            return WebDriverWait(self, self.wait_time).until(EC.presence_of_element_located((type, identifier)))
+        except Exception as e:
+            print(f"Coulnt find {identifier}: {e}")
+            identifier = input('Enter Correct Identifier: ')
+            return WebDriverWait(self, self.wait_time).until(EC.presence_of_element_located((type, identifier)))
         # return WebDriverWait(self, self.wait_time).until(EC.element_to_be_clickable((type, identifier)))
     
     def finds(self, identifier, type=By.XPATH):
@@ -75,10 +80,10 @@ class NewAutoWeb(webdriver.Chrome):
         # self.sleep(1)
         self.find(identifier, type).send_keys(input_string)
 
-    def select(self, identifier, value, type=By.XPATH):
-        dropdown_menu = self.find(identifier, type)
+    def select(self, identifier, value, i_type=By.XPATH):
+        dropdown_menu = self.find(identifier, type=i_type)
         select = Select(dropdown_menu)
-        select.select_by_value(value)
+        select.select_by_value(str(value))
     
     def new_tab(self):
         self.switch_to.new_window('tab')
