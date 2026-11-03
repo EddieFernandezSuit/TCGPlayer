@@ -51,8 +51,12 @@ class Tcg_web(NewAutoWeb):
 
     def download_pricing(self):
         PRICING_BUTTON_XPATH = '//*[@id="pricing-search"]/pricing-search/div[4]/pricing-actions/div[1]/div[1]/div/input[1]'
+        self.sleep(1)
         self.get(self.PRICING_URL)
         time.sleep(1)
+        if not self.current_url == self.PRICING_URL:
+            input('Wrong URL go to pricing url. Then press enter')
+
         self.click(PRICING_BUTTON_XPATH)
 
     def upload_prices(self, prices_file_path):
@@ -64,7 +68,10 @@ class Tcg_web(NewAutoWeb):
         COMFIRM_MOVE_TO_LIVE_XPATH = '//*[@id="pricing-dialog"]/pricing-dialog/div/div/div[2]/pricing-move-to-live/div/div/div/input[2]'
         CLOSE_XPATH = '//*[@id="pricing-dialog"]/pricing-dialog/div/div/div[2]/pricing-move-to-live/div/div/div[2]/input'
 
+        self.sleep(1)
         self.go(self.PRICING_URL)
+        if not self.current_url == self.PRICING_URL:
+            input('Wrong URL go to pricing url. Then press enter')
         print(self.current_url)
         print(self.current_window_handle)
         self.click(IMPORT_TO_STAGED_XPATH)

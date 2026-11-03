@@ -15,7 +15,7 @@ import sys
 
 MIN_PRICE = 0.04
 ADJUST_PERCENT_PRICE = 1
-ADJSUT_FLAT_PRICE = -0.02
+ADJSUT_FLAT_PRICE = -0.04
 
 # python -m PyInstaller main.py
 SHIPPING_PREFIX = "_TCGplayer_ShippingExport"
@@ -37,8 +37,14 @@ def order_by_set():
     new_cards.to_csv(new_cards_file_path, index=False)
 
 def get_file_matching_prefix(dir_path: str = DOWNLOADS_DIRECTORY, file_name_prefix: str ='') -> str:
-    matching_files = [file for file in os.listdir(dir_path) if file.startswith(file_name_prefix)]
-    last_filename = os.path.join(dir_path, max(matching_files)) if matching_files else None 
+    try:
+        matching_files = [file for file in os.listdir(dir_path) if file.startswith(file_name_prefix)]
+    except Exception:
+        matching_files = []
+    if not matching_files:
+        last_filename = None
+    else:
+        last_filename = os.path.join(dir_path, max(matching_files))
     handle_file_exists(last_filename)
     return last_filename
 
@@ -64,8 +70,13 @@ def proccess_new_cards(filter=False):
     tcg.upload_prices(email_cards_file_path)
 
 def handle_file_exists(file_name):
+    if not file_name:
+        return
     while not os.path.isfile(file_name):
-        input('File ' + file_name + ' does not exist')
+        try:
+            input('File ' + str(file_name) + ' does not exist')
+        except Exception:
+            break
 
 def proccess_new_cards_magic_sorter():
     new_cards_file_path = download_results_gmail()
@@ -196,8 +207,14 @@ def process_sales(type='normal', download_pricing=True, email:str='', tcg_web:Tc
         all_cards(orders)
         
         for order in orders:
-            order.print_order()
-            input('')
+            try:
+                order.print_order(interactive=True)
+            except Exception:
+                order.print_order()
+            try:
+                pass
+            except EOFError:
+                break
 
         webbrowser.open(PACKING_SLIP_PATH)
         time.sleep(5)
@@ -256,7 +273,7 @@ def get_revenue():
     revenue_df.to_csv(PROJECT_DIRECTORY + 'data/revenue.csv', header=True)
 
 def calculate_price(row):
-    ADJUST_FLAT_PER_CARD = -0.01
+    ADJUST_FLAT_PER_CARD = -0.006
     TOTAL_QUANTITY = row['Total Quantity'] if 'Total Quantity' in row else row['Quantity']
     IS_DIRECT = False
 
@@ -275,7 +292,7 @@ def calculate_price(row):
     #     return price
     
     price = (price * ADJUST_PERCENT_PRICE) + ADJSUT_FLAT_PRICE + (TOTAL_QUANTITY * ADJUST_FLAT_PER_CARD)
-    price = round(max(price, MIN_PRICE),2)
+    price = round(max(price, MIN_PRICE), 2)
     return price
 
 def change_prices(prices_file_name = ''):

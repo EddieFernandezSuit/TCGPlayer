@@ -19,14 +19,96 @@ class Order:
         
         self.cards.sort(key=lambda card: (set_order[card.set_name], card.name))
     
-    def print_order(self):
+    def print_order(self, open_urls=False, interactive=False, open_by_index=False, open_card_names=False):
+        import sys
+        import os
+        if webbrowser is None:
+            import webbrowser as _wb
+            webbrowser_mod = _wb
+        else:
+            webbrowser_mod = webbrowser
+
+        def open_card_url(card):
+            try:
+                if webbrowser_mod:
+                    webbrowser_mod.open(card.get_tcgplayer_url())
+            except Exception:
+                pass
+
+        def make_hyperlink(text, url):
+            try:
+                if os.environ.get('NO_HYPERLINKS') or os.environ.get('PACKING_SLIP_NO_FORMAT'):
+                    return text
+                return f'\033]8;;{url}\033\\{text}\033]8;;\033\\'
+            except Exception:
+                return text
+
         print(self.name)
-        for card in self.cards:
-            print(f'{"\033[1m" if "foil" in card.condition else ""}{card.set_name}: {card.quantity if int(card.quantity) > 1 else ""} {card.name.replace("-","")} {card.condition if card.condition != "Near Mint" else ""} {card.language if card.language != "English" else ""} {'$' + card.price if float(card.price) > .1 else ""} {"\033[0m" if "foil" in card.condition else ""}')
+        for i, card in enumerate(self.cards, 1):
+            name_text = card.name.replace("-", "")
+            name_display = make_hyperlink(name_text, card.get_tcgplayer_url()) if not open_card_names else name_text
+            try:
+                qty_float = float(card.quantity) if card.quantity is not None else 0
+                qty_int = int(qty_float) if qty_float.is_integer() else qty_float
+                quantity_str = str(qty_int)
+            except Exception:
+                try:
+                    qty_float = 0
+                    quantity_str = str(card.quantity) if card.quantity is not None else ''
+                except Exception:
+                    qty_float = 0
+                    quantity_str = ''
+            if qty_float > 1:
+                qty_display = quantity_str + ' '
+            else:
+                qty_display = ' '
+            line = f'{"\033[1m" if "foil" in card.condition else ""}{card.set_name}: {qty_display}{name_display} {card.condition if card.condition != "Near Mint" else ""} {card.language if card.language != "English" else ""} {"$" + card.price if float(card.price) > .1 else ""} {"\033[0m" if "foil" in card.condition else ""}'
+            if interactive:
+                try:
+                    print(line, end='', flush=True)
+                    response = input('')
+                    r = response.strip()
+                    rl = r.lower()
+                    if rl == 'q':
+                        print()
+                        return
+                    if rl == 'o' or rl == '':
+                        if rl == 'o':
+                            open_card_url(card)
+                        print()
+                    elif r.isdigit():
+                        idx = int(r) - 1
+                        if 0 <= idx < len(self.cards):
+                            open_card_url(self.cards[idx])
+                        print()
+                    else:
+                        print()
+                except (EOFError, KeyboardInterrupt):
+                    print()
+                    break
+            else:
+                print(line)
+                if open_urls:
+                    open_card_url(card)
+        if open_by_index:
+            try:
+                response = input('Enter index to open (blank to skip): ')
+                if response.strip().isdigit():
+                    idx = int(response.strip()) - 1
+                    if 0 <= idx < len(self.cards):
+                        open_card_url(self.cards[idx])
+            except (EOFError, KeyboardInterrupt):
+                pass
         print()
 
+import re
+try:
+    import webbrowser
+except Exception:
+    webbrowser = None
+
 class Card:
-    def __init__(self, quantity, tcg_name, set_name, name, number, rarity,condition, price, total_price, language='English'):
+    def __init__(self, quantity, tcg_name, set_name, name, number, rarity,condition, price, total_price, language='English', tcgplayer_id=None, product_id=None, photo_url=None):
         self.quantity = quantity
         self.tcg_name = tcg_name
         self.set_name = set_name
@@ -37,6 +119,40 @@ class Card:
         self.price = price
         self.total_price = total_price
         self.language = language
+        self.tcgplayer_id = tcgplayer_id
+        self.product_id = product_id
+        self.photo_url = photo_url
+        if not self.product_id and self.photo_url:
+            m = re.search(r'/product/(\d+)', str(self.photo_url))
+            if m:
+                self.product_id = m.group(1)
+        if not self.tcgplayer_id and self.product_id:
+            try:
+                self.tcgplayer_id = int(self.product_id)
+            except Exception:
+                pass
+
+    def get_tcgplayer_url(self):
+        from urllib.parse import quote
+        base = 'https://store.tcgplayer.com/admin/product/manage'
+        if self.product_id:
+            base = f'{base}/{self.product_id}'
+        elif self.tcgplayer_id:
+            base = f'{base}/{self.tcgplayer_id}'
+        return f'{base}?OnlyMyInventory=false&SearchValue={quote(self.name)}&CategoryId=0&SetNameId=0&Rarity=0&DidSearch=true'
+
+    def open_url(self):
+        if webbrowser is None:
+            try:
+                import webbrowser as _wb
+                _wb.open(self.get_tcgplayer_url())
+                return
+            except Exception:
+                pass
+        try:
+            webbrowser.open(self.get_tcgplayer_url())
+        except Exception:
+            pass
 
     def key(self):
         return (self.set_name, self.name, self.condition, self.language)
