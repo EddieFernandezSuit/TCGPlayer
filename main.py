@@ -204,7 +204,20 @@ def process_sales(type='normal', download_pricing=True, email:str='', tcg_web:Tc
     
     if type == 'normal':
         orders = get_orders_from_pdf(PACKING_SLIP_PATH)
+        try:
+            resolve_product_ids(orders)
+        except Exception as error:
+            print(f'Could not resolve TCGplayer product links: {error}')
         all_cards(orders)
+
+        total_cards = 0
+        for order in orders:
+            for card in order.cards:
+                try:
+                    total_cards += int(float(card.quantity))
+                except (TypeError, ValueError):
+                    pass
+        print(f'Total cards in all orders: {total_cards}')
         
         for order in orders:
             try:

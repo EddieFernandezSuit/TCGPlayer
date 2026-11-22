@@ -12,10 +12,12 @@ The block exercised in test_main_flow_... is copied verbatim from main.py:
 get_orders_from_pdf is monkeypatched because it needs a real TCGPlayer PDF.
 """
 
+import csv
+
 import pytest
 
 import packing_slip
-from packing_slip import Card, Order
+from packing_slip import Card, Order, ProductIdResolver, resolve_product_ids
 
 
 def make_card(quantity, set_name, name, condition='Near Mint', language='English', price='0.25'):
@@ -158,3 +160,252 @@ def test_merged_cards_keep_set_first_appearance_order_and_sort_names(capsys):
     sets = [line.split(':')[0] for line in out.splitlines() if ':' in line]
     assert sets == ['Zendikar', 'Zendikar', 'Alpha']
     assert out.index('Ambush') < out.index('Bolt')
+
+
+def test_get_orders_from_pdf_keeps_full_set_names_and_clean_card_names(monkeypatch):
+    page_text = """Ship To:
+Sample Buyer
+1001 Example St
+Quantity
+Description
+Price
+Total Price
+1
+Pokemon - SV: Black Bolt: Genesect ex - #067/086 - Double Rare - 
+Near Mint Holofoil
+$1.02
+$1.02
+1
+Magic - The Hobbit: Eternal-Legal: Galadriel's Dismissal 
+(Borderless) - #16 - R - Near Mint Foil
+$40.24
+$40.24
+1
+Total
+$41.26
+"""
+
+    class Page:
+        def extract_text(self):
+            return page_text
+
+    class Reader:
+        def __init__(self, filepath):
+            self.pages = [Page()]
+
+    monkeypatch.setattr(packing_slip, 'PdfReader', Reader)
+
+    orders = packing_slip.get_orders_from_pdf('packing-slip.pdf')
+
+    assert len(orders) == 1
+    genesect, galadriel = orders[0].cards
+    assert (genesect.set_name, genesect.name, genesect.number) == (
+        'SV: Black Bolt', 'Genesect ex', '067/086'
+    )
+    assert (galadriel.set_name, galadriel.name, galadriel.number) == (
+        'The Hobbit: Eternal-Legal', "Galadriel's Dismissal (Borderless)", '16'
+    )
+
+
+def make_pokemon_card(product_id=None, **kwargs):
+    return Card(
+        '1', 'Pokemon', 'SV: Black Bolt', 'Genesect ex', '067/086', 'Double Rare',
+        'Near Mint Holofoil', '0.65', '0.65', product_id=product_id, **kwargs
+    )
+
+
+def test_direct_product_url_has_no_search_query():
+    card = make_pokemon_card(product_id='642518')
+
+    assert card.get_tcgplayer_url() == (
+        'https://store.tcgplayer.com/admin/product/manage/642518'
+    )
+
+
+def test_product_id_from_photo_url_is_used_for_direct_url():
+    card = make_pokemon_card(
+        photo_url='https://tcgplayer-cdn.tcgplayer.com/product/559647_in_200x200.jpg'
+    )
+
+    assert card.product_id == '559647'
+    assert card.get_tcgplayer_url() == (
+        'https://store.tcgplayer.com/admin/product/manage/559647'
+    )
+
+
+def test_url_falls_back_to_search_when_no_product_id_is_known():
+    card = make_pokemon_card()
+
+    url = card.get_tcgplayer_url()
+
+    assert url.startswith('https://store.tcgplayer.com/admin/product/manage?')
+    assert 'SearchValue=Genesect%20ex' in url
+
+
+def test_all_cards_keeps_product_id_when_merging(capsys):
+    orders = [
+        make_order('Alice', [make_pokemon_card(product_id='642518')]),
+        make_order('Bob', [make_pokemon_card(product_id='642518')]),
+    ]
+
+    packing_slip.all_cards(orders)
+
+    out = capsys.readouterr().out
+    assert '2 Genesect ex' in out
+
+
+def search_result(product_id, number='067/086', rarity='Double Rare'):
+    return {
+        'productId': float(product_id),
+        'productName': 'Genesect ex',
+        'setName': 'SV: Black Bolt',
+        'rarityName': rarity,
+        'customAttributes': {'number': number},
+    }
+
+
+def test_resolver_chooses_the_matching_number(tmp_path):
+    calls = []
+
+    def search(card):
+        calls.append(card)
+        return [
+            search_result('111111', number='001/086'),
+            search_result('642518', number='067/086'),
+        ]
+
+    resolver = ProductIdResolver(cache_path=str(tmp_path / 'ids.csv'), search=search)
+
+    assert resolver.resolve_card(make_pokemon_card()) == '642518'
+    assert len(calls) == 1
+
+
+def test_resolver_retries_alternate_set_name_splits_for_colon_names(tmp_path):
+    card = Card(
+        '1', 'Magic', 'Ice Age: Circle of Protection', 'Red', '1', 'Common',
+        'Near Mint', '0.25', '0.25',
+        description='Ice Age: Circle of Protection: Red',
+    )
+
+    def search(candidate):
+        if (candidate.set_name, candidate.name) != ('Ice Age', 'Circle of Protection: Red'):
+            return []
+        return [{
+            'productId': float('1687'),
+            'productName': 'Circle of Protection: Red',
+            'setName': 'Ice Age',
+            'rarityName': 'Common',
+            'customAttributes': {'number': '1'},
+        }]
+
+    resolver = ProductIdResolver(cache_path=str(tmp_path / 'ids.csv'), search=search)
+
+    assert resolver.resolve_card(card) == '1687'
+    assert (card.set_name, card.name) == ('Ice Age', 'Circle of Protection: Red')
+
+
+def test_resolver_returns_none_when_results_are_ambiguous(tmp_path):
+    def search(card):
+        return [
+            search_result('111111', number='067/086'),
+            search_result('222222', number='067/086'),
+        ]
+
+    resolver = ProductIdResolver(cache_path=str(tmp_path / 'ids.csv'), search=search)
+
+    assert resolver.resolve_card(make_pokemon_card()) is None
+
+
+def test_resolver_returns_none_when_search_fails(tmp_path):
+    def search(card):
+        raise OSError('offline')
+
+    resolver = ProductIdResolver(cache_path=str(tmp_path / 'ids.csv'), search=search)
+
+    assert resolver.resolve_card(make_pokemon_card()) is None
+
+
+def test_resolver_reads_and_writes_the_cache(tmp_path):
+    cache_path = tmp_path / 'ids.csv'
+    resolver = ProductIdResolver(
+        cache_path=str(cache_path),
+        search=lambda card: [search_result('642518')],
+    )
+    assert resolver.resolve_card(make_pokemon_card()) == '642518'
+
+    with open(cache_path, newline='', encoding='utf-8') as f:
+        rows = list(csv.DictReader(f))
+    assert rows == [{
+        'name': 'genesect ex',
+        'set_name': 'sv black bolt',
+        'number': '67/86',
+        'rarity': 'double rare',
+        'product_id': '642518',
+    }]
+
+    second_resolver = ProductIdResolver(
+        cache_path=str(cache_path),
+        search=lambda card: pytest.fail('cache should be used instead of searching'),
+    )
+    assert second_resolver.resolve_card(make_pokemon_card()) == '642518'
+
+
+def test_resolve_product_ids_updates_every_card(tmp_path):
+    orders = [
+        make_order('Alice', [make_pokemon_card(), make_pokemon_card()]),
+    ]
+    resolver = ProductIdResolver(
+        cache_path=str(tmp_path / 'ids.csv'),
+        search=lambda card: [search_result('642518')],
+    )
+
+    assert resolve_product_ids(orders, resolver=resolver) == 2
+    for card in orders[0].cards:
+        assert card.product_id == '642518'
+        assert card.tcgplayer_id == 642518
+
+
+def test_print_order_omits_hyperlinks_when_output_is_not_a_terminal(monkeypatch, capsys):
+    order = make_order('Alice', [make_pokemon_card(product_id='642518')])
+    original_stdout = packing_slip.sys.stdout
+
+    class NotATerminal:
+        def isatty(self):
+            return False
+
+        def write(self, text):
+            return original_stdout.write(text)
+
+        def flush(self):
+            return original_stdout.flush()
+
+    monkeypatch.setattr(packing_slip.sys, 'stdout', NotATerminal())
+    order.print_order()
+
+    out = capsys.readouterr().out
+    assert 'Genesect ex' in out
+    assert '\033]8;;' not in out
+
+
+def test_print_order_emits_hyperlinks_on_a_terminal(monkeypatch):
+    order = make_order('Alice', [make_pokemon_card(product_id='642518')])
+    output = []
+
+    class Terminal:
+        def isatty(self):
+            return True
+
+        def write(self, text):
+            output.append(text)
+
+        def flush(self):
+            return None
+
+    monkeypatch.setattr(packing_slip.sys, 'stdout', Terminal())
+    order.print_order()
+
+    printed = ''.join(output)
+    assert (
+        '\033]8;;https://store.tcgplayer.com/admin/product/manage/642518\033\\'
+        in printed
+    )

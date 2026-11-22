@@ -4,3 +4,4 @@ constants.py
 __pycache__/
 *.py[cod]
 .pytest_cache/
+data/product_ids.csv
