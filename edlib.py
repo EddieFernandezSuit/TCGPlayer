@@ -1,4 +1,5 @@
 import pygame
+import time
 import tkinter
 from tkinter import filedialog
 
@@ -22,8 +23,11 @@ def InputLoop(commands, repeat = True, command=None):
             print('Goodbye')
             break
 
+        start_time = time.perf_counter()
         commands[choice]['action']()
+        elapsed_time = time.perf_counter() - start_time
         print('Action Completed: ' + commands[choice]['text'])
+        print(f'Time taken: {elapsed_time:.2f} seconds')
         loop = repeat
 
 def create_command(commands_dict):
