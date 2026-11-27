@@ -142,8 +142,8 @@ def test_cards_without_duplicates_pass_through_unchanged(capsys):
     out = capsys.readouterr().out
     assert [line for line in out.splitlines() if line.strip()] == [
         'All Cards',
-        'Sword & Shield:  Darkrai   $0.25 ',
-        'Tempest:  Bolt   $0.25 ',
+        'Sword & Shield:  Darkrai   $0.25  -> #1',
+        f'Tempest:  Bolt   $0.25  -> #1   {packing_slip._check_mark()} #1 complete',
     ]
 
 
@@ -409,3 +409,74 @@ def test_print_order_emits_hyperlinks_on_a_terminal(monkeypatch):
         '\033]8;;https://store.tcgplayer.com/admin/product/manage/642518\033\\'
         in printed
     )
+
+
+def test_pick_list_shows_order_slots(capsys):
+    orders = [
+        make_order('Alice', [make_card('1', 'Sword & Shield', 'Darkrai')]),
+        make_order('Bob', [make_card('2', 'Sword & Shield', 'Darkrai'),
+                           make_card('1', 'Sword & Shield', 'Pikachu')]),
+        make_order('Cara', [make_card('1', 'Sword & Shield', 'Darkrai')]),
+    ]
+
+    packing_slip.all_cards(orders)
+
+    out = capsys.readouterr().out
+    darkrai = next(line for line in out.splitlines() if 'Darkrai' in line)
+    pikachu = next(line for line in out.splitlines() if 'Pikachu' in line)
+    assert '-> #1, #2 x2, #3 ' in darkrai
+    assert '-> #2 ' in pikachu
+    assert [order.number for order in orders] == [1, 2, 3]
+
+
+def test_per_order_header_uses_slot_number(capsys):
+    orders = [make_order('Alice', [make_card('1', 'Sword & Shield', 'Darkrai')]),
+              make_order('Bob', [make_card('1', 'Sword & Shield', 'Pikachu')])]
+    packing_slip.all_cards(orders)
+    capsys.readouterr()
+
+    orders[1].print_order()
+
+    out = capsys.readouterr().out
+    assert out.startswith('#2 Bob')
+    assert '->' not in out
+
+
+def test_pick_list_follows_shelf_set_order(capsys):
+    orders = [make_order('Alice', [make_card('1', 'Unknown Set', 'Zed'),
+                                   make_card('1', 'Set B', 'Bee'),
+                                   make_card('1', 'Set A', 'Ace')])]
+
+    packing_slip.all_cards(orders, set_order={'Set A': 1, 'Set B': 2})
+
+    lines = [line for line in capsys.readouterr().out.splitlines() if '->' in line]
+    assert [line.split(':')[0] for line in lines] == ['Set A', 'Set B', 'Unknown Set']
+
+
+def test_load_set_order_reads_csv(tmp_path):
+    path = tmp_path / 'set_order.csv'
+    path.write_text('Set,Order\nSet A,5\nSet B,2\nBad,\n', encoding='utf-8')
+
+    assert packing_slip.load_set_order(str(path)) == {'Set A': 5.0, 'Set B': 2.0}
+    assert packing_slip.load_set_order(str(tmp_path / 'missing.csv')) == {}
+
+
+def test_pick_list_marks_line_where_order_is_complete(capsys):
+    orders = [
+        make_order('Alice', [make_card('1', 'Sword & Shield', 'Darkrai')]),
+        make_order('Bob', [make_card('1', 'Sword & Shield', 'Darkrai'),
+                           make_card('1', 'Sword & Shield', 'Pikachu')]),
+        make_order('Cara', [make_card('1', 'Sword & Shield', 'Darkrai')]),
+    ]
+
+    packing_slip.all_cards(orders)
+
+    lines = capsys.readouterr().out.splitlines()
+    darkrai = next(line for line in lines if 'Darkrai' in line)
+    pikachu = next(line for line in lines if 'Pikachu' in line)
+    mark = packing_slip._check_mark()
+    assert darkrai.endswith(f'{mark} #1, #3 complete')
+    assert pikachu.endswith(f'{mark} #2 complete')
+
+    orders[1].print_order()
+    assert 'complete' not in capsys.readouterr().out

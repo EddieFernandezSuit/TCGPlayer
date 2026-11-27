@@ -208,6 +208,7 @@ def process_sales(type='normal', download_pricing=True, email:str='', tcg_web:Tc
             resolve_product_ids(orders)
         except Exception as error:
             print(f'Could not resolve TCGplayer product links: {error}')
+        # Each pick-list line says which numbered order slot(s) the card drops into.
         all_cards(orders)
 
         total_cards = 0

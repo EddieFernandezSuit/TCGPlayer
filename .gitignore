@@ -5,3 +5,4 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 data/product_ids.csv
+pick_list_*.txt

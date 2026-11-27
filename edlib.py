@@ -27,7 +27,7 @@ def InputLoop(commands, repeat = True, command=None):
         commands[choice]['action']()
         elapsed_time = time.perf_counter() - start_time
         print('Action Completed: ' + commands[choice]['text'])
-        print(f'Time taken: {elapsed_time:.2f} seconds')
+        print(f'Time taken: {elapsed_time / 60:.1f} minutes')
         loop = repeat
 
 def create_command(commands_dict):

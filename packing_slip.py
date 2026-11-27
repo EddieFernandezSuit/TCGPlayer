@@ -16,14 +16,26 @@ class Order:
         else:
             self.name = None
         self.cards = cards
-    
-    def sort_cards(self):
-        set_order = OrderedDict()
+        self.number = None
+
+    def sort_cards(self, set_order=None):
+        """Sort by set, then card name.
+
+        With set_order ({set name: shelf position}) sets follow the shelf;
+        sets missing from it go last, in the order they first appear.
+        """
+        set_order = set_order or {}
+        first_seen = OrderedDict()
         for card in self.cards:
-            if card.set_name not in set_order:
-                set_order[card.set_name] = len(set_order)
-        
-        self.cards.sort(key=lambda card: (set_order[card.set_name], card.name))
+            if card.set_name not in first_seen:
+                first_seen[card.set_name] = len(first_seen)
+
+        def set_key(card):
+            if card.set_name in set_order:
+                return (0, set_order[card.set_name])
+            return (1, first_seen[card.set_name])
+
+        self.cards.sort(key=lambda card: (set_key(card), card.name))
     
     def print_order(self, open_urls=False, interactive=False, open_by_index=False, open_card_names=False):
         import sys
@@ -53,7 +65,10 @@ class Order:
             except Exception:
                 return text
 
-        print(self.name)
+        if self.number is not None:
+            print(f'#{self.number} {self.name}')
+        else:
+            print(self.name)
         for i, card in enumerate(self.cards, 1):
             name_text = card.name.replace("-", "")
             name_display = make_hyperlink(name_text, card.get_tcgplayer_url()) if not open_card_names else name_text
@@ -73,6 +88,13 @@ class Order:
             else:
                 qty_display = ' '
             line = f'{"\033[1m" if "foil" in card.condition else ""}{card.set_name}: {qty_display}{name_display} {card.condition if card.condition != "Near Mint" else ""} {card.language if card.language != "English" else ""} {"$" + card.price if float(card.price) > .1 else ""} {"\033[0m" if "foil" in card.condition else ""}'
+            slots = getattr(card, 'slots', None)
+            if slots:
+                line = f'{line} -> {format_slots(slots)}'
+            completes = getattr(card, 'completes', None)
+            if completes:
+                done = ', '.join(f'#{number}' for number in completes)
+                line = f'{line}   {_check_mark()} {done} complete'
             if interactive:
                 try:
                     print(line, end='', flush=True)
@@ -529,11 +551,75 @@ def get_orders_from_pdf(filepath):
 
 # combines all cards from all orders into one order, merging duplicates by summing quantity,
 # and prints it, sorted by set and then name
-def all_cards(orders: list[Order]):
+DEFAULT_SET_ORDER_PATH = os.path.join(BASE_DIR, 'data', 'set_order.csv')
+
+
+def load_set_order(path=DEFAULT_SET_ORDER_PATH):
+    """Map set name -> shelf position from data/set_order.csv (columns: Set, Order).
+
+    Returns an empty dict if the file is missing so the pick list still prints.
+    """
+    set_order = {}
+    try:
+        with open(path, newline='', encoding='utf-8') as fp:
+            for row in csv.DictReader(fp):
+                name = (row.get('Set') or '').strip()
+                try:
+                    position = float(row.get('Order'))
+                except (TypeError, ValueError):
+                    continue
+                if name and name not in set_order:
+                    set_order[name] = position
+    except OSError:
+        pass
+    return set_order
+
+
+def format_slots(slots):
+    """[(3, 1), (2, 2), (7, 1)] -> '#2 x2, #3, #7'"""
+    totals = OrderedDict()
+    for order_number, quantity in sorted(slots):
+        totals[order_number] = totals.get(order_number, 0) + quantity
+    parts = []
+    for order_number, quantity in totals.items():
+        parts.append(f'#{order_number} x{quantity}' if quantity > 1 else f'#{order_number}')
+    return ', '.join(parts)
+
+
+def _check_mark():
+    """Return a check mark, or [x] when the output can't encode one (e.g. cp1252 redirect)."""
+    mark = '✓'
+    try:
+        mark.encode(sys.stdout.encoding or 'ascii')
+        return mark
+    except (UnicodeEncodeError, LookupError):
+        return '[x]'
+
+
+def _quantity_int(quantity):
+    try:
+        return int(float(quantity))
+    except (TypeError, ValueError):
+        return 1
+
+
+def all_cards(orders: list[Order], set_order=None):
+    """Print one pick list for every order, merged and sorted by set.
+
+    Each order is numbered 1..N (packing slip order) and every pick-list line
+    ends with the order slot(s) the card goes to, so cards can be dropped into
+    numbered piles while pulling instead of re-sorted afterwards.
+
+    set_order: optional {set name: shelf position}; sets not in it go last.
+    """
+    for number, order in enumerate(orders, 1):
+        order.number = number
+
     merged = OrderedDict()
     for order in orders:
         for card in order.cards:
             key = card.key()
+            slot = (order.number, _quantity_int(card.quantity))
             if key not in merged:
                 merged[key] = Card(
                     card.quantity, card.tcg_name, card.set_name, card.name, card.number,
@@ -541,7 +627,9 @@ def all_cards(orders: list[Order]):
                     tcgplayer_id=card.tcgplayer_id, product_id=card.product_id,
                     photo_url=card.photo_url, description=card.description,
                 )
+                merged[key].slots = [slot]
             else:
+                merged[key].slots.append(slot)
                 quantity = int(merged[key].quantity) + int(card.quantity)
                 merged[key].quantity = str(quantity)
                 merged[key].total_price = f'{quantity * float(merged[key].price):.2f}'
@@ -551,5 +639,15 @@ def all_cards(orders: list[Order]):
                     merged[key].tcgplayer_id = card.tcgplayer_id
 
     order = Order('All Cards', list(merged.values()))
-    order.sort_cards()
+    order.sort_cards(set_order)
+
+    # Mark the line where each order's last card gets pulled: that order is complete.
+    last_line = {}
+    for index, card in enumerate(order.cards):
+        card.completes = []
+        for order_number, _ in card.slots:
+            last_line[order_number] = index
+    for order_number, index in sorted(last_line.items()):
+        order.cards[index].completes.append(order_number)
+
     order.print_order()
